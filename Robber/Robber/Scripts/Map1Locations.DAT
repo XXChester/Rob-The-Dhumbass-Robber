@@ -1,0 +1,5 @@
+﻿//Format of IDENTIFIER|X,Y
+Player|2,2
+Guard|17,15
+Guard|19,15
+GuardEntry|18, 17

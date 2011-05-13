@@ -1,0 +1,57 @@
+﻿============================
+	Objectives
+============================
+Entry into my first ever dev competition and it is the GameDev.net community weekend challenge starting May 12th at noon to May 16th at Noon. My plan is to get something in a playable
+state by the end of the competition. I do not intend to place but rather just use this as a learning opportunity.
+
+
+============================
+	Core(Phase 1)
+============================
+Raw version of the game functional with programmer art
+[*]Planning
+[*]Placeholder art
+[*]Model objects
+[]Make important models script accessible
+[*]Render the board
+[*]Render the player
+[*]Make the player movable
+[]Change the image based on the direction the player is moving in
+[]Render the treasure
+[]Make the player able to catch the treasure
+[]Render guards
+[]Put collision detection in with the walls
+[]Make guards patrol the halls
+[]Make the guards chase the player if he is seen
+[]Implement flow mechanism
+[]Render main menu screen
+[]Render in game menu screen
+
+
+============================
+	Polish(Phase 2)
+============================
+Replace the programmer art with real art and make the game not only maintain its functionality but also add a nice playable environment and add additional functionality
+[]Screen fades in and out
+[]Robber and guard sprites
+[]Upgrade tile graphics
+[]Add in garbage cans to hide in and clear agro**
+[]Add in random sneezing if you stand within the same tile too long
+[]Add in emote system when guards are chasing etc
+[]Sfx
+
+============================
+		Time
+============================
+Planning:2hour: 
+
+Programming:		4:30pm-
+core:				
+polish:				
+
+Art:
+	3:30pm-4:30pm
+Sound:
+	
+Total Time:
+	

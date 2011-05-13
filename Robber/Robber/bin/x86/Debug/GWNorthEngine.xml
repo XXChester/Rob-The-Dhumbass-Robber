@@ -1,0 +1,1455 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GWNorthEngine</name>
+    </assembly>
+    <members>
+        <member name="T:GWNorthEngine.Model.Base2DSpriteDrawable">
+            <summary>
+            Models the basis of every SpriteBatch drawable object
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Model.Base2DSpriteDrawable.position">
+            <summary>
+            Position of the sprite
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Model.Base2DSpriteDrawable.origin">
+            <summary>
+            Sprites origin used for rotation
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Model.Base2DSpriteDrawable.scale">
+            <summary>
+            Scale of the sprite
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Model.Base2DSpriteDrawable.rotation">
+            <summary>
+            Rotation of the sprite
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Model.Base2DSpriteDrawable.layer">
+            <summary>
+            Layer the sprite is to be rendered at
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Model.Base2DSpriteDrawable.lightColour">
+            <summary>
+            Colour to render the sprite in
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Model.Base2DSpriteDrawable.spriteEffect">
+            <summary>
+            SpriteEffects to render the sprite with
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Model.Base2DSpriteDrawable.#ctor(GWNorthEngine.Model.Params.Base2DSpriteDrawableParams)">
+            <summary>
+            Builds a basic SpriteBatch drawable item
+            </summary>
+            <param name="parms">BaseSpriteDrawableParams object</param>
+        </member>
+        <member name="M:GWNorthEngine.Model.Base2DSpriteDrawable.update(System.Single)">
+            <summary>
+            Abstract method that forces the children objects to implement update
+            </summary>
+            <param name="elapsed">Time elapsed sense the last call</param>
+        </member>
+        <member name="M:GWNorthEngine.Model.Base2DSpriteDrawable.render(Microsoft.Xna.Framework.Graphics.SpriteBatch)">
+            <summary>
+            Abstract method that forces the children objects to implement render
+            </summary>
+            <param name="spriteBatch">SpriteBatch object</param>
+        </member>
+        <member name="P:GWNorthEngine.Model.Base2DSpriteDrawable.Rotation">
+            <summary>
+            Gets or sets the rotational value for the sprite
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Base2DSpriteDrawable.Position">
+            <summary>
+            Gets or sets the position of the sprite
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Base2DSpriteDrawable.Scale">
+            <summary>
+            Gets or sets the scale of the sprite
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Base2DSpriteDrawable.LightColour">
+            <summary>
+            Gets or sets the Colour in which the sprite is to be rendered in
+            </summary>
+        </member>
+        <member name="T:GWNorthEngine.Model.Line2D">
+            <summary>
+            Line class that simply draws a line to the screen
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Model.Line2D.endPosition">
+            <summary>
+            Ending position of the Line
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Model.Line2D.texture">
+            <summary>
+            Texture used to draw the line
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Model.Line2D.#ctor(GWNorthEngine.Model.Params.Line2DParams)">
+            <summary>
+            Actual building of the line
+            </summary>
+            <param name="parms">Line2DParams object containing the data required to build the line</param>
+        </member>
+        <member name="M:GWNorthEngine.Model.Line2D.recalculateRotation">
+            <summary>
+            Recalculates the rotation based on the current starting and end positions of the line
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Model.Line2D.recalculateScale">
+            <summary>
+            Recalculates the scale based on the current starting and end positions of the line
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Model.Line2D.update(System.Single)">
+            <summary>
+            NOT IMPLEMENTED
+            </summary>
+            <param name="elapsed">Time passed sense the last time the method was called</param>
+        </member>
+        <member name="M:GWNorthEngine.Model.Line2D.render(Microsoft.Xna.Framework.Graphics.SpriteBatch)">
+            <summary>
+            Rendering of the line
+            </summary>
+            <param name="spriteBatch">SpriteBatch object</param>
+        </member>
+        <member name="M:GWNorthEngine.Model.Line2D.dispose">
+            <summary>
+            Disposes the texture used to draw the line
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Line2D.Position">
+            <summary>
+            Gets or sets the starting position of the line
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Line2D.EndPosition">
+            <summary>
+            Gets or sets the end position of the line
+            </summary>
+        </member>
+        <member name="T:GWNorthEngine.Model.Params.BaseButtonParams">
+            <summary>
+            Base class modeling the common data required for a button
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Params.BaseButtonParams.StartX">
+            <summary>
+            Gets or sets the starting x positon of the button
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Params.BaseButtonParams.StartY">
+            <summary>
+            Gets or sets the starting y position of the button
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Params.BaseButtonParams.Width">
+            <summary>
+            Gets or sets the width of the button
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Params.BaseButtonParams.Height">
+            <summary>
+            Gets or sets the height of the button
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Params.BaseButtonParams.ID">
+            <summary>
+            Buttons ID used for determining if a button was clicked
+            </summary>
+        </member>
+        <member name="T:GWNorthEngine.Utils.TransitionUtils">
+            <summary>
+            Helper methods for screen and object transitions
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Utils.TransitionUtils.fadeOut(Microsoft.Xna.Framework.Color,System.Single,System.Single)">
+            <summary>
+            Fades out a colour over time
+            </summary>
+            <param name="colour">The constant colour of the object is rendered in</param>
+            <param name="TOTAL_TIME_TO_TRANSITION">Constant value of the total transition time</param>
+            <param name="elapsedTransitionTime">Time that has elapsed sense the transition started</param>
+            <returns>Newly created colour to assign to the object for its next rendering pass</returns>
+        </member>
+        <member name="M:GWNorthEngine.Utils.TransitionUtils.fadeIn(Microsoft.Xna.Framework.Color,System.Single,System.Single)">
+            <summary>
+            Fades in a colour over time
+            </summary>
+            <param name="colour">The constant colour of the object is rendered in</param>
+            <param name="TOTAL_TIME_TO_TRANSITION">Constant value of the total transition time</param>
+            <param name="elapsedTransitionTime">Time that has elapsed sense the transition started</param>
+            <returns>Newly created colour to assign to the object for its next rendering pass</returns>
+        </member>
+        <member name="T:GWNorthEngine.Scripting.Utils.ObjectTranslator">
+            <summary>
+            Translates a string to the specified object
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Scripting.Utils.ObjectTranslator.translate(System.Type,System.String)">
+            <summary>
+            Translates a specific value to the specified data type
+            </summary>
+            <param name="translationType">type to translate to</param>
+            <param name="value">string version of the data</param>
+            <returns>Object translated to</returns>
+        </member>
+        <member name="T:GWNorthEngine.Model.Params.ColouredButtonParams">
+            <summary>
+            Params object containing the data required to build a coloured button
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Params.ColouredButtonParams.LinesTexture">
+            <summary>
+            Gets or sets the lines texture
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Params.ColouredButtonParams.RegularColour">
+            <summary>
+            Gets or sets the regular light colour
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Params.ColouredButtonParams.MouseOverColour">
+            <summary>
+            Gets or sets the mouse over light colour
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Params.ColouredButtonParams.Font">
+            <summary>
+            Gets or sets the SpriteFont object
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Params.ColouredButtonParams.Text">
+            <summary>
+            Gets or sets the text to be written inside the button
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Params.ColouredButtonParams.TextsPosition">
+            <summary>
+            Gets or sets the Texts position
+            </summary>
+        </member>
+        <member name="T:GWNorthEngine.Scripting.ScriptManager">
+            <summary>
+            Singleton class that handles the recieving of input and disbatching it to the proper registered objects
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Scripting.ScriptManager.COMMAND_IDENTIFIER">
+            <summary>
+            Character used to describe what identifies a registered objects method such as test.help
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Scripting.ScriptManager.#ctor">
+            <summary>
+            Default constructor which just alpha sorts the high level commands
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Scripting.ScriptManager.getInstance">
+            <summary>
+            Retrieves the singleton instance variable
+            </summary>
+            <returns>Singleton of ScriptManager</returns>
+        </member>
+        <member name="M:GWNorthEngine.Scripting.ScriptManager.help">
+            <summary>
+            Displays general help such as the command identifier, high level commands, and registered objects
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Scripting.ScriptManager.log(System.String)">
+            <summary>
+            Logs a message from the console to the specified log file
+            </summary>
+            <param name="message">Message to log to the log file</param>
+        </member>
+        <member name="M:GWNorthEngine.Scripting.ScriptManager.lockOn(System.String)">
+            <summary>
+            Enables the ability to lock onto an object and move it around the screen with the mouse for map building purposes
+            </summary>
+            <param name="input">String representation of a boolean value</param>
+        </member>
+        <member name="M:GWNorthEngine.Scripting.ScriptManager.handleMouseMovement(Microsoft.Xna.Framework.Vector2)">
+            <summary>
+            Moves the locked onto object around the screen based on the mouses position
+            </summary>
+            <param name="mousePosition">Vector2 of the mouse position</param>
+        </member>
+        <member name="M:GWNorthEngine.Scripting.ScriptManager.handleMouseClick(Microsoft.Xna.Framework.Vector2)">
+            <summary>
+            Handles the locking on and off of an object
+            </summary>
+            <param name="mousePosition">Vector2 of the mouse position used to find the object</param>
+        </member>
+        <member name="M:GWNorthEngine.Scripting.ScriptManager.getValue(System.Object)">
+            <summary>
+            Outputs the toString() of an object
+            </summary>
+            <param name="value">Object to execute the toString against</param>
+        </member>
+        <member name="M:GWNorthEngine.Scripting.ScriptManager.findAndExecute(System.String,System.Object@)">
+            <summary>
+            Finds the registered object and the method/property to execute
+            </summary>
+            <param name="input">Input from the console</param>
+            <param name="output">Outputs the resulting object if a method/property returns one</param>
+            <returns>true if we found a registered object and a method within that object</returns>
+        </member>
+        <member name="M:GWNorthEngine.Scripting.ScriptManager.findObject(System.String,System.Object@)">
+            <summary>
+            Finds a registered object based on the reference name provided
+            </summary>
+            <param name="referenceName">Objects reference name to look up</param>
+            <param name="output">Outputs the found RegisteredObject</param>
+            <returns>true if we found a registered object, otherwise false</returns>
+        </member>
+        <member name="M:GWNorthEngine.Scripting.ScriptManager.registerObject(System.Object,System.String)">
+            <summary>
+            Registers an object to be accessible via script from the console
+            </summary>
+            <param name="itemToRegister">Object to register available</param>
+            <param name="referenceName">Name you want to use to access this object</param>
+        </member>
+        <member name="M:GWNorthEngine.Scripting.ScriptManager.handleInput(System.String)">
+            <summary>
+            Handles the input received from the console window
+            </summary>
+            <param name="input">Input read in from the console window</param>
+        </member>
+        <member name="P:GWNorthEngine.Scripting.ScriptManager.LogFile">
+            <summary>
+             File that the script console will log too undet the "Log" command
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Scripting.ScriptManager.LockOnEnabled">
+            <summary>
+            Gets whether or not locking on is enabled
+            </summary>
+        </member>
+        <member name="T:GWNorthEngine.Engine.FrameRate">
+            <summary>
+            Frames per second class
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Engine.FrameRate.getInstance">
+            <summary>
+            Retrieves the singleton instance variable
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:GWNorthEngine.Engine.FrameRate.calculateFrameRate(Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            Calculates and returns the frames per second
+            </summary>
+            <param name="gameTime">GameTime object</param>
+            <returns>Current frames per second (FPS)</returns>
+        </member>
+        <member name="T:GWNorthEngine.Model.BaseParticle2D">
+            <summary>
+            Models the basis of every particle
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Model.BaseParticle2D.timeAlive">
+            <summary>
+            Time the particle is alive
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Model.BaseParticle2D.timeToLive">
+            <summary>
+            Time the particle dies at
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Model.BaseParticle2D.position">
+            <summary>
+            Position of the particle
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Model.BaseParticle2D.scale">
+            <summary>
+            Scale of the particle
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Model.BaseParticle2D.origin">
+            <summary>
+            Sprites origin used for rotation
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Model.BaseParticle2D.originalPosition">
+            <summary>
+            Original position of the particle
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Model.BaseParticle2D.acceleration">
+            <summary>
+            Acceleration of the particle
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Model.BaseParticle2D.direction">
+            <summary>
+            Direction the particle is headed in
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Model.BaseParticle2D.lightColour">
+            <summary>
+            Colour to render the particle in
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Model.BaseParticle2D.layer">
+            <summary>
+            Layer the particle is to be rendered at
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Model.BaseParticle2D.texture">
+            <summary>
+            Texture of the particle
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Model.BaseParticle2D.#ctor(GWNorthEngine.Model.Params.BaseParticle2DParams)">
+            <summary>
+            Builds the base particle
+            </summary>
+            <param name="parms">BaseParticle2DParams object containing the data required to build the particle</param>
+        </member>
+        <member name="M:GWNorthEngine.Model.BaseParticle2D.fadeOutAsLifeProgresses">
+            <summary>
+            Fades the particle out over its life time to eventually invisible
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Model.BaseParticle2D.update(System.Single)">
+            <summary>
+            Updates the particle. Be default it just updates the particles life
+            </summary>
+            <param name="elapsed">Time since the last time the method was called</param>
+        </member>
+        <member name="M:GWNorthEngine.Model.BaseParticle2D.render(Microsoft.Xna.Framework.Graphics.SpriteBatch)">
+            <summary>
+            Renders the particle to screen
+            </summary>
+            <param name="spriteBatch">SpriteBatch object used to render the particle</param>
+        </member>
+        <member name="P:GWNorthEngine.Model.BaseParticle2D.TimeAlive">
+            <summary>
+            Gets or sets the time the particle is alive
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.BaseParticle2D.TimeToLive">
+            <summary>
+            Gets or sets the maximum time the particle can live for
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.BaseParticle2D.OriginalPosition">
+            <summary>
+            Gets or sets the original position of the particle
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.BaseParticle2D.Acceleration">
+            <summary>
+            Gets or sets the acceleration of the particle
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.BaseParticle2D.Direction">
+            <summary>
+            Gets or sets the directional value of the particle
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.BaseParticle2D.Position">
+            <summary>
+            Gets or sets the position of the sprite
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.BaseParticle2D.Scale">
+            <summary>
+            Gets or sets the scale of the sprite
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.BaseParticle2D.LightColour">
+            <summary>
+            Gets or sets the Colour in which the sprite is to be rendered in
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.BaseParticle2D.Texture">
+            <summary>
+            Gets or sets the texture for the particle
+            </summary>
+        </member>
+        <member name="T:GWNorthEngine.Utils.PickingUtils">
+            <summary>
+            Class containg usefull methods for picking different types of objects
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Utils.PickingUtils.pickRectangle(Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Rectangle)">
+            <summary>
+            Picks a rectangle based on its coordinates vs the actors position
+            </summary>
+            <param name="actorsPosition">Actors position. Could be mouse position, XBox controllers stick position etc</param>
+            <param name="buttonsRectangle">rectangle to check for collision</param>
+            <returns></returns>
+        </member>
+        <member name="T:GWNorthEngine.Model.Params.TexturedButtonParams">
+            <summary>
+            Params object containing the data required to build a TexturedButton object
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Params.TexturedButtonParams.Content">
+            <summary>
+            Gets or sets the ContentManager object used for loading textures
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Params.TexturedButtonParams.RegularTextureFileName">
+            <summary>
+            Gets or sets the regular texture's file name for the button
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Params.TexturedButtonParams.MouseOverTextureFileName">
+            <summary>
+            Gets or sets the buttons mouse over texture file name
+            </summary>
+        </member>
+        <member name="T:GWNorthEngine.Model.Animated2DSprite">
+            <summary>
+            Sprite class that can be either animated or not
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Model.Animated2DSprite.texture">
+            <summary>
+            Texture used to render the sprite
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Model.Animated2DSprite.animationManager">
+            <summary>
+            Aninmation manager for the sprite
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Model.Animated2DSprite.frames">
+            <summary>
+            All the frames from the sprite sheet for the sprite
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Model.Animated2DSprite.#ctor(GWNorthEngine.Model.Params.Animated2DSpriteParams)">
+            <summary>
+            Builds a sprite based off of the parms specified
+            </summary>
+            <param name="parms">SpriteParams object containing all of the data to how this sprite is loaded, its position, colour, etc,etc</param>
+        </member>
+        <member name="M:GWNorthEngine.Model.Animated2DSprite.initSprite(Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Vector2,System.Single,Microsoft.Xna.Framework.Vector2,System.Single,Microsoft.Xna.Framework.Graphics.Texture2D,System.Int32,System.Single,Microsoft.Xna.Framework.Color,GWNorthEngine.Model.AnimationManager.AnimationState,GWNorthEngine.Model.Animated2DSprite.LoadingType,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Actual building of the sprite
+            </summary>
+            <param name="position">Starting position of the sprite</param>
+            <param name="origin">Sprites orign; important for rotating the sprite</param>
+            <param name="rotation">Rotation of  the sprite</param>
+            <param name="scale">X,Y scale of the sprite</param>
+            <param name="depth">Layer to draw the sprite at</param>
+            <param name="texture">Texture2D use to render the sprite</param>
+            <param name="totalFrameCount">Total number of frames the sprite has</param>
+            <param name="frameRate">Rate at which we animate the sprite</param>
+            <param name="lightColour">Colour to render to the sprite in</param>
+            <param name="animationState">Animation state to start the sprite in</param>
+            <param name="loadingType">Way to load the sprite</param>
+            <param name="framesStartWidth">Starting x point of the sprite in the sprite sheet</param>
+            <param name="framesStartHeight">Starting y point of the sprite in the sprite sheet</param>
+            <param name="frameWidth">X size of a sprites single frame</param>
+            <param name="frameHeight">Y size of a sprites single frame</param>
+            <param name="spaceBetweenFrames">Space between the frames in the sprite sheet</param>
+        </member>
+        <member name="M:GWNorthEngine.Model.Animated2DSprite.reset">
+            <summary>
+            Resets the sprite
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Model.Animated2DSprite.update(System.Single)">
+            <summary>
+            Updates the sprite, by default only the animation
+            </summary>
+            <param name="elapsed"></param>
+        </member>
+        <member name="M:GWNorthEngine.Model.Animated2DSprite.render(Microsoft.Xna.Framework.Graphics.SpriteBatch)">
+            <summary>
+            Renders the sprite to the screen
+            </summary>
+            <param name="spriteBatch">SpriteBatch object used to render the sprite</param>
+        </member>
+        <member name="M:GWNorthEngine.Model.Animated2DSprite.render(Microsoft.Xna.Framework.Graphics.SpriteBatch,System.Int32)">
+            <summary>
+            Renders the sprite to the screen at a specific frame
+            </summary>
+            <param name="spriteBatch">SpriteBatch object used to render the sprite</param>
+            <param name="frame">Specific frame to render the sprite at</param>
+        </member>
+        <member name="M:GWNorthEngine.Model.Animated2DSprite.dispose">
+            <summary>
+            Releases the portions of the sprite that cause memory leaks
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Animated2DSprite.AnimationManager">
+            <summary>
+            Gets or sets the animation manager for the sprite
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Animated2DSprite.Texture">
+            <summary>
+            Gets or sets the texture of an animated sprite
+            </summary>
+        </member>
+        <member name="T:GWNorthEngine.Model.Animated2DSprite.LoadingType">
+            <summary>
+            Determines how the sprite sheet is loaded
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Model.Animated2DSprite.LoadingType.WholeSheetReadFramesFromFile">
+            <summary>
+            Loads the entire sprite sheet and determines the frames based on the Textures width / the total frames passed in
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Model.Animated2DSprite.LoadingType.CustomizedSheetDefineFrames">
+            <summary>
+            Loads the sprite sheet based on the framesStartWidth, framesStartHeight, framesHeight, framesWidth, and the space between the frames
+            </summary>
+        </member>
+        <member name="T:GWNorthEngine.Engine.RunningMode">
+            <summary>
+            Enum used to tell the Engine DLL what mode the front end application is running in
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Engine.RunningMode.Release">
+            <summary>
+            Front end application is in release mode
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Engine.RunningMode.Debug">
+            <summary>
+            Front end application is in debug mode
+            </summary>
+        </member>
+        <member name="T:GWNorthEngine.Utils.TextureUtils">
+            <summary>
+            Utility class to perform operations on texures or involving textures
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Utils.TextureUtils.create2DColouredTexture(Microsoft.Xna.Framework.Graphics.GraphicsDevice,System.Int32,System.Int32,Microsoft.Xna.Framework.Color)">
+            <summary>
+            Creates a 2D coloured texture
+            </summary>
+            <param name="device">GraphicsDevice object</param>
+            <param name="width">Width of the texture</param>
+            <param name="height">Height of the texture</param>
+            <param name="colour">Colour of the texture</param>
+            <returns>Newly created Texture2D object</returns>
+        </member>
+        <member name="M:GWNorthEngine.Utils.TextureUtils.create2DRingTexture(Microsoft.Xna.Framework.Graphics.GraphicsDevice,System.Int32)">
+            <summary>
+            Creates a 2D coloured ring texture
+            </summary>
+            <param name="device">GraphicsDevice object</param>
+            <param name="radius">Radius of the circle</param>
+            <returns>Newly created Texture2D object</returns>
+        </member>
+        <member name="T:GWNorthEngine.Utils.DebugUtils">
+            <summary>
+            Helpful methods for debugging
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Utils.DebugUtils.#ctor">
+            <summary>
+            Builds a debug utils object
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Utils.DebugUtils.#ctor(Microsoft.Xna.Framework.Graphics.Texture2D)">
+            <summary>
+            Builds a debug utils object for outlining objects
+            </summary>
+            <param name="lineTexture">Line texture used to draw lines around objects such as bounding boxes</param>
+        </member>
+        <member name="M:GWNorthEngine.Utils.DebugUtils.drawBoundingBox(Microsoft.Xna.Framework.Graphics.SpriteBatch,Microsoft.Xna.Framework.BoundingBox,Microsoft.Xna.Framework.Color)">
+            <summary>
+            Draws a bounding box using Line2D's
+            </summary>
+            <param name="spriteBatch">SpriteBatch object used to draw the bounding box</param>
+            <param name="boundingBox">BoundingBox object to draw</param>
+            <param name="debugColour">Colour to draw the box in</param>
+        </member>
+        <member name="M:GWNorthEngine.Utils.DebugUtils.drawBoundingBox(Microsoft.Xna.Framework.Graphics.SpriteBatch,Microsoft.Xna.Framework.BoundingBox,Microsoft.Xna.Framework.Color,Microsoft.Xna.Framework.Graphics.Texture2D)">
+            <summary>
+            Draws a bounding box using Line2D's
+            </summary>
+            <param name="spriteBatch">SpriteBatch object used to draw the bounding box</param>
+            <param name="boundingBox">BoundingBox object to draw</param>
+            <param name="debugColour">Colour to draw the box in</param>
+            <param name="lineTexture">Texture2D used for drawing the bounding box</param>
+        </member>
+        <member name="M:GWNorthEngine.Utils.DebugUtils.drawRectangle(Microsoft.Xna.Framework.Graphics.SpriteBatch,Microsoft.Xna.Framework.Rectangle,Microsoft.Xna.Framework.Color,Microsoft.Xna.Framework.Graphics.Texture2D)">
+            <summary>
+            Draws a rectangle using Line2D's
+            </summary>
+            <param name="spriteBatch">SpriteBatch object used to draw the bounding box</param>
+            <param name="rectangle">Rectable object to draw</param>
+            <param name="debugColour">Colour to draw the rectangle in</param>
+            <param name="lineTexture">Texture2D used for drawing the rectangle</param>
+        </member>
+        <member name="M:GWNorthEngine.Utils.DebugUtils.drawVector3s(Microsoft.Xna.Framework.Graphics.SpriteBatch,Microsoft.Xna.Framework.Vector3,Microsoft.Xna.Framework.Vector3,Microsoft.Xna.Framework.Color,Microsoft.Xna.Framework.Graphics.Texture2D)">
+            <summary>
+            Draws a set of vector 3s
+            </summary>
+            <param name="spriteBatch">SpriteBatch object used to draw the vectors</param>
+            <param name="max">Max position to draw</param>
+            <param name="min">Min position to draw</param>
+            <param name="debugColour">Colour to draw the Vectors in</param>
+            <param name="lineTexture">Texture2D used for drawing the vectors</param>
+        </member>
+        <member name="T:GWNorthEngine.Model.Text2D">
+            <summary>
+            Text class for writing text to the screen
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Model.Text2D.font">
+            <summary>
+            SpriteFont object
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Model.Text2D.writtenText">
+            <summary>
+            Text written to the screen
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Model.Text2D.#ctor(GWNorthEngine.Model.Params.Text2DParams)">
+            <summary>
+            Builds an object that can write text to the screen
+            </summary>
+            <param name="parms">TextParams object</param>
+        </member>
+        <member name="M:GWNorthEngine.Model.Text2D.update(System.Single)">
+            <summary>
+            Updates the text
+            </summary>
+            <param name="elapsed">time elapsed sense the last method call</param>
+        </member>
+        <member name="M:GWNorthEngine.Model.Text2D.render(Microsoft.Xna.Framework.Graphics.SpriteBatch)">
+            <summary>
+            Renders the text to the screen
+            </summary>
+            <param name="spriteBatch">SpriteBatch object used to render the text</param>
+        </member>
+        <member name="P:GWNorthEngine.Model.Text2D.WrittenText">
+            <summary>
+            Gets or sets text to be written to the screen
+            </summary>
+        </member>
+        <member name="T:GWNorthEngine.Model.Params.StaticDrawable2DParams">
+            <summary>
+            Models the data required to draw a static texture to the screen
+            </summary>
+        </member>
+        <member name="T:GWNorthEngine.Model.Params.Base2DSpriteDrawableParams">
+            <summary>
+            Object containing the required data for the basis to build any SpriteBatch drawable object
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Model.Params.Base2DSpriteDrawableParams.#ctor">
+            <summary>
+            Defines a new Base2DSpriteDrawableParams object with the defaults set. The defaults are listed below;
+            LightColour:	Colour.White
+            Origin:			Vector2(0f,0f)
+            Scale:			Vector2(1f,1f)
+            Rotation:		0f
+            Layer:			0f
+            SpriteEffect:	None
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Params.Base2DSpriteDrawableParams.Position">
+            <summary>
+            Gets or sets the starting position of the sprite
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Params.Base2DSpriteDrawableParams.Origin">
+            <summary>
+            Gets or sets the starting origin of the sprite
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Params.Base2DSpriteDrawableParams.Scale">
+            <summary>
+            Gets or Sets the startign scale of the sprite
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Params.Base2DSpriteDrawableParams.Rotation">
+            <summary>
+            Gets or sets the starting rotation of the sprite
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Params.Base2DSpriteDrawableParams.Layer">
+            <summary>
+            Gets or sets the starting layer to render the sprite at
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Params.Base2DSpriteDrawableParams.LightColour">
+            <summary>
+            Gets or sets the starting colour in which to render the sprite in
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Params.Base2DSpriteDrawableParams.SpriteEffect">
+            <summary>
+            Gets or sets the SpriteEffect technique used for rendering the sprite
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Params.StaticDrawable2DParams.Texture">
+            <summary>
+            Gets or sets the texture to be drawn to the screen
+            </summary>
+        </member>
+        <member name="T:GWNorthEngine.Scripting.Model.RegisteredObject">
+            <summary>
+            Models the data required to use an object via scripting
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Scripting.Model.RegisteredObject.#ctor(System.Object@,System.String,System.Reflection.MethodInfo[],System.Reflection.PropertyInfo[])">
+            <summary>
+            Builds a new RegisteredObject
+            </summary>
+            <param name="reference">Object reference</param>
+            <param name="referenceName">Reference name to access the object</param>
+            <param name="methods">MethodInfo object array of methods you want accessible to the script, by default it is everything</param>
+            <param name="properties">PropertyInfo object array of properties you want accessible to the script, by default it is everything</param>
+        </member>
+        <member name="M:GWNorthEngine.Scripting.Model.RegisteredObject.runMethod(System.String)">
+            <summary>
+            Runs a specific method, parses the input for its parameter etc
+            </summary>
+            <param name="input">Input to execute</param>
+            <returns>True if a method was found to execute, otherwise false</returns>
+        </member>
+        <member name="M:GWNorthEngine.Scripting.Model.RegisteredObject.runProperty(System.String,System.Object@)">
+            <summary>
+            Runs a property based on the input, parses the parameters etc
+            </summary>
+            <param name="input">Input to execute</param>
+            <param name="result">outputs the return object of a getter</param>
+            <returns>True if a property was found, otherwise false</returns>
+        </member>
+        <member name="M:GWNorthEngine.Scripting.Model.RegisteredObject.runProperty(System.Reflection.MethodInfo[],System.Object[])">
+            <summary>
+            Executes a specific properties methods
+            </summary>
+            <param name="methods">Methods avaialble</param>
+            <param name="values">values to assign the property if we are doing a set</param>
+            <returns>Get object if that is the property we are executing</returns>
+        </member>
+        <member name="M:GWNorthEngine.Scripting.Model.RegisteredObject.getCommand(System.String)">
+            <summary>
+            Retrieves a command based on the input
+            </summary>
+            <param name="input">Input to parse</param>
+            <returns>Command retrieved from the parsed input</returns>
+        </member>
+        <member name="M:GWNorthEngine.Scripting.Model.RegisteredObject.getParameters(System.Reflection.MethodInfo,System.String)">
+            <summary>
+            Retrieves the object parameters for a method
+            </summary>
+            <param name="method">Method we are retrieving the parameters for</param>
+            <param name="input">Console input to parse</param>
+            <returns>object[] of the parameters</returns>
+        </member>
+        <member name="M:GWNorthEngine.Scripting.Model.RegisteredObject.listMethods">
+            <summary>
+            Lists the script accessible methods
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Scripting.Model.RegisteredObject.listProperties">
+            <summary>
+            Lists the script accessible properties
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Scripting.Model.RegisteredObject.help">
+            <summary>
+            Displays help information for the registered object such as script accessible methods and properties
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Scripting.Model.RegisteredObject.runCommand(System.String)">
+            <summary>
+            Runs a command against the registered object
+            </summary>
+            <param name="command">Command to execute</param>
+            <returns>Object based on a properties return type</returns>
+        </member>
+        <member name="P:GWNorthEngine.Scripting.Model.RegisteredObject.ReferenceName">
+            <summary>
+            Gets the reference name of the registered object
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Scripting.Model.RegisteredObject.Reference">
+            <summary>
+            Gets the actual reference object of the registered object
+            </summary>
+        </member>
+        <member name="T:GWNorthEngine.Model.Params.Line2DParams">
+            <summary>
+            Object containing the data required to build a 2D line
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Params.Line2DParams.StartPosition">
+            <summary>
+            Gets or sets the starting position of the line
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Params.Line2DParams.EndPosition">
+            <summary>
+            Gets or sets the ending position of the line
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Params.Line2DParams.Texture">
+            <summary>
+            Gets or sets the texture for the line
+            </summary>
+        </member>
+        <member name="T:GWNorthEngine.Model.ColouredButton">
+            <summary>
+            Coloured button
+            </summary>
+        </member>
+        <member name="T:GWNorthEngine.Model.Button">
+            <summary>
+            Abstract button class containing the basis for every button
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Model.Button.renderingRectangle">
+            <summary>
+            Rectangle used to render the button
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Model.Button.#ctor(GWNorthEngine.Model.Params.BaseButtonParams)">
+            <summary>
+            Builds the base of the button
+            </summary>
+            <param name="parms">BaseButtonParams object to create the button from</param>
+        </member>
+        <member name="M:GWNorthEngine.Model.Button.render(Microsoft.Xna.Framework.Graphics.SpriteBatch)">
+            <summary>
+            abstract rendering of the base button
+            </summary>
+            <param name="spriteBatch">SpriteBatch object used to render the sprite</param>
+        </member>
+        <member name="M:GWNorthEngine.Model.Button.processActorsMovement(Microsoft.Xna.Framework.Vector2)">
+            <summary>
+            Processes the actors movment
+            </summary>
+            <param name="actorsPosition">Actors current position</param>
+        </member>
+        <member name="M:GWNorthEngine.Model.Button.isActorOver(Microsoft.Xna.Framework.Vector2)">
+            <summary>
+            Determines if the actor is over the button
+            </summary>
+            <param name="actorsPosition">Actors current position</param>
+            <returns>boolean based on whether the actor is over the button</returns>
+        </member>
+        <member name="M:GWNorthEngine.Model.Button.dispose">
+            <summary>
+            abstract disposal of the base button
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Button.ID">
+            <summary>
+            Gets or sets the ID of the button
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Model.ColouredButton.#ctor(GWNorthEngine.Model.Params.ColouredButtonParams)">
+            <summary>
+            Building of a coloured button
+            </summary>
+            <param name="parms"></param>
+        </member>
+        <member name="M:GWNorthEngine.Model.ColouredButton.processActorsMovement(Microsoft.Xna.Framework.Vector2)">
+            <summary>
+            Processes the movement of the actor (Mouse/XBox Controller etc)
+            </summary>
+            <param name="actorsPosition">Actors current position</param>
+        </member>
+        <member name="M:GWNorthEngine.Model.ColouredButton.updateColours(Microsoft.Xna.Framework.Color)">
+            <summary>
+            Updates both the Line and text's colour to the colour passed in
+            </summary>
+            <param name="newColour">Colour to assign to the Text2D and Lin2D objects</param>
+        </member>
+        <member name="M:GWNorthEngine.Model.ColouredButton.render(Microsoft.Xna.Framework.Graphics.SpriteBatch)">
+            <summary>
+            Rendering of the button
+            </summary>
+            <param name="spriteBatch">SpriteBatch object to render the button</param>
+        </member>
+        <member name="M:GWNorthEngine.Model.ColouredButton.dispose">
+            <summary>
+            Releases the portions of the button that cause memory leaks
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.ColouredButton.Text">
+            <summary>
+            Gets or sets the Text2D object used by the button
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.ColouredButton.Lines">
+            <summary>
+            Gets or sets the Line2D object used by the button
+            </summary>
+        </member>
+        <member name="T:GWNorthEngine.Model.Params.Animated2DSpriteParams">
+            <summary>
+            Object containing the data required to build a sprite
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Model.Params.Animated2DSpriteParams.#ctor">
+            <summary>
+            Defines a new SpriteParams object with the defaults set. The defaults are listed below;
+            AnimationState: AnimationState.Paused
+            LoadingType:	LoadingType.WholeSheetReadFramesFromFile (Internal loaded sprite)
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Params.Animated2DSpriteParams.Content">
+            <summary>
+            Gets or sets the ContentManager used when loading a sprites texture internally
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Params.Animated2DSpriteParams.TexturesName">
+            <summary>
+            Gets or sets the textures name to load for an internal loading sprite
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Params.Animated2DSpriteParams.Texture2D">
+            <summary>
+            Gets or sets the texture for a sprite for externally loaded sprites
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Params.Animated2DSpriteParams.FrameRate">
+            <summary>
+            Gets or sets the starting frame rate in which the sprite is to be animated at
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Params.Animated2DSpriteParams.TotalFrameCount">
+            <summary>
+            Gets or sets the total numebr of frames for the sprite
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Params.Animated2DSpriteParams.AnimationState">
+            <summary>
+            Gets or sets the starting animation state of the sprite
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Params.Animated2DSpriteParams.LoadingType">
+            <summary>
+            Gets or sets the loading type of the sprite
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Params.Animated2DSpriteParams.FramesStartWidth">
+            <summary>
+            Gets or sets where in the sprite sheet the starting width is. ***NOT REQUIRED FOR INTERNALLY LOADED SPRITES***
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Params.Animated2DSpriteParams.FramesStartHeight">
+            <summary>
+            Gets or sets where in the sprite sheet the starting height is. ***NOT REQUIRED FOR INTERNALLY LOADED SPRITES***
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Params.Animated2DSpriteParams.FramesWidth">
+            <summary>
+            Gets or sets the sprites width for the frame loading. ***NOT REQUIRED FOR INTERNALLY LOADED SPRITES***
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Params.Animated2DSpriteParams.FramesHeight">
+            <summary>
+            Gets or sets the sprites height for the frame loading. ***NOT REQUIRED FOR INTERNALLY LOADED SPRITES***
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Params.Animated2DSpriteParams.SpaceBetweenFrames">
+            <summary>
+            Gets or Sets the distance between the frames in the sprite sheet to load.  ***NOT REQUIRED FOR INTERNALLY LOADED SPRITES***
+            </summary>
+        </member>
+        <member name="T:GWNorthEngine.Model.TexturedButton">
+            <summary>
+            Textured button
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Model.TexturedButton.#ctor(GWNorthEngine.Model.Params.TexturedButtonParams)">
+            <summary>
+            Building of a textured button
+            </summary>
+            <param name="parms">TexturedButtonParams object containing the data required to build the TexturedButton</param>
+        </member>
+        <member name="M:GWNorthEngine.Model.TexturedButton.processActorsMovement(Microsoft.Xna.Framework.Vector2)">
+            <summary>
+            Processes the movement of the actor (Mouse/XBox Controller etc)
+            </summary>
+            <param name="actorsPosition">Actors current position</param>
+        </member>
+        <member name="M:GWNorthEngine.Model.TexturedButton.render(Microsoft.Xna.Framework.Graphics.SpriteBatch)">
+            <summary>
+            Rendering of the button
+            </summary>
+            <param name="spriteBatch">SpriteBatch object to render the button</param>
+        </member>
+        <member name="M:GWNorthEngine.Model.TexturedButton.dispose">
+            <summary>
+            Releases the portions of the button that cause memory leaks
+            </summary>
+        </member>
+        <member name="T:GWNorthEngine.Utils.EnumUtils">
+            <summary>
+            Helpful methods for performing operations on enums
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Utils.EnumUtils.numberToEnum``1(System.Int32)">
+            <summary>
+            Gets a Enum value based on the int provided
+            </summary>
+            <typeparam name="T">Type of enum to lookup</typeparam>
+            <param name="number">Number we are looking the value up for</param>
+            <returns>Enum representation of the number</returns>
+        </member>
+        <member name="M:GWNorthEngine.Utils.EnumUtils.inverseValue``1(``0)">
+            <summary>
+            Inverses the value of the passed in enum and returns the enum version of its result
+            </summary>
+            <typeparam name="T">Enum type</typeparam>
+            <param name="value">Value to invert</param>
+            <returns>Inverted version of the enum value passed in</returns>
+        </member>
+        <member name="T:GWNorthEngine.Model.Params.BaseParticle2DParams">
+            <summary>
+            Object containing the data required to build a base 2D particle
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Model.Params.BaseParticle2DParams.#ctor">
+            <summary>
+            Defines a new SpriteParams object with the defaults set. The defaults are listed below;
+            LightColour:	Colour.White
+            Scale:			Vector2(1f,1f)
+            Layer:			0f
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Params.BaseParticle2DParams.TimeToLive">
+            <summary>
+            Gets or sets the maximum time the particle can live for
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Params.BaseParticle2DParams.Acceleration">
+            <summary>
+            Gets or sets the acceleration of the particle
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Params.BaseParticle2DParams.Direction">
+            <summary>
+            Gets or sets the directional value of the particle
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Params.BaseParticle2DParams.Origin">
+            <summary>
+            Gets or sets the starting origin of the particle
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Params.BaseParticle2DParams.Position">
+            <summary>
+            Gets or sets the starting position of the sprite
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Params.BaseParticle2DParams.Scale">
+            <summary>
+            Gets or Sets the startign scale of the sprite
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Params.BaseParticle2DParams.Layer">
+            <summary>
+            Gets or sets the starting layer to render the sprite at
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Params.BaseParticle2DParams.LightColour">
+            <summary>
+            Gets or sets the starting colour in which to render the sprite in
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Params.BaseParticle2DParams.Texture">
+            <summary>
+            Gets or sets the texture for the particle
+            </summary>
+        </member>
+        <member name="T:GWNorthEngine.Engine.BaseRenderer">
+             <summary>
+            Base renderer for an XNA based applicaton
+             </summary>
+        </member>
+        <member name="F:GWNorthEngine.Engine.BaseRenderer.graphics">
+            <summary>
+            GraphicsDeviceManager object
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Engine.BaseRenderer.spriteBatch">
+            <summary>
+            SpriteBatch object
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Engine.BaseRenderer.runningMode">
+            <summary>
+            RunningMode enum
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Engine.BaseRenderer.initialize(GWNorthEngine.Model.Params.BaseRendererParams)">
+            <summary>
+            Initializes variables based on the parms object
+            </summary>
+            <param name="parms">BaseRendererParms object</param>
+        </member>
+        <member name="M:GWNorthEngine.Engine.BaseRenderer.Initialize">
+            <summary>
+            Allows the game to perform any initialization it needs to before starting to run.
+            This is where it can query for any required services and load any non-graphic
+            related content.  Calling base.Initialize will enumerate through any components
+            and initialize them as well.
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Engine.BaseRenderer.Update(Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            Allows the games scripting component to run and lock on to objects for mapping purposes
+            </summary>
+            <param name="gameTime">Provides a snapshot of timing values.</param>
+        </member>
+        <member name="M:GWNorthEngine.Engine.BaseRenderer.UnloadContent">
+            <summary>
+            UnloadContent will be called once per game and is the place to unload all content
+            </summary>
+        </member>
+        <member name="T:GWNorthEngine.Scripting.Utils.ScriptUtils">
+            <summary>
+            Helpful methods for scripting
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Scripting.Utils.ScriptUtils.getMethodParameterInfo(System.Reflection.ParameterInfo[],System.Text.StringBuilder@)">
+            <summary>
+            Retrieves the parameter information for a method used for displaying help
+            </summary>
+            <param name="paramInfos">ParameterInfo object array of the parameter for the methods</param>
+            <param name="stringBuilder">StringBuilder object reference that we add to for output</param>
+        </member>
+        <member name="M:GWNorthEngine.Scripting.Utils.ScriptUtils.getPropertyParameterInfo(System.Reflection.ParameterInfo[],System.Text.StringBuilder@)">
+            <summary>
+            Retrieves the parameter information for a property used for displaying help
+            </summary>
+            <param name="paramInfos">ParameterInfo object array of the parameter for the methods</param>
+            <param name="stringBuilder">StringBuilder object reference that we add to for output</param>
+        </member>
+        <member name="M:GWNorthEngine.Scripting.Utils.ScriptUtils.scrubStringParameter(System.String,System.Type)">
+            <summary>
+            Scrubs the excess crap off of a value such as the data type, and opening and closing braces
+            </summary>
+            <param name="value">Value to scrub</param>
+            <param name="paramType">Type of the value</param>
+            <returns>Clean parameter</returns>
+        </member>
+        <member name="T:GWNorthEngine.Scripting.Model.ScriptException">
+            <summary>
+            Used to handle exceptions thrown within the script management
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Scripting.Model.ScriptException.#ctor(System.String)">
+            <summary>
+            Constructor to create a new ScriptException
+            </summary>
+            <param name="message">Message to send to the console</param>
+        </member>
+        <member name="T:GWNorthEngine.Model.Params.Text2DParams">
+            <summary>
+            Object containing the data required to write text to the screen
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Params.Text2DParams.Font">
+            <summary>
+            Gets or sets the font to write with
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Params.Text2DParams.WrittenText">
+            <summary>
+            Gets or sets the text to be written
+            </summary>
+        </member>
+        <member name="T:GWNorthEngine.Model.Params.BaseRendererParams">
+            <summary>
+            Object containing the data required to build the BaseRenderer
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Model.Params.BaseRendererParams.#ctor">
+            <summary>
+            Builds the default settings for setting up the the BaseRenderer. The default settings are below;
+            ScreenHeight:			600
+            ScreenWidth:			800
+            MouseVisiblity:			true
+            FullScreen:				false
+            ContentRootDirectory:	"Content"
+            WindowText:				"PLEASE FILL ME IN!"
+            RunningMOdeL			Release
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Params.BaseRendererParams.ScreenWidth">
+            <summary>
+            Gets or sets the initial screen width for the game
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Params.BaseRendererParams.ScreenHeight">
+            <summary>
+            Gets or sets the initial screen height for the game
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Params.BaseRendererParams.ContentRootDirectory">
+            <summary>
+            Gets or sets the content root directory for the game
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Params.BaseRendererParams.WindowsText">
+            <summary>
+            Gets or sets the windows text for the game
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Params.BaseRendererParams.MouseVisible">
+            <summary>
+            Gets or sets whether the mouse is visible in the application
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Params.BaseRendererParams.FullScreen">
+            <summary>
+            Gets or sets whether the game will be run in full screen mode or note
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Params.BaseRendererParams.RunningMode">
+            <summary>
+            Gets or sets whether the game is running in Release or Debug mode
+            </summary>
+        </member>
+        <member name="T:GWNorthEngine.Model.AnimationManager">
+            <summary>
+            Animation manager class which handles the animation steps for anything animated
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Model.AnimationManager.frameRate">
+            <summary>
+            Frame rate at which the object is animated
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Model.AnimationManager.totalElapsed">
+            <summary>
+            Time elapsed sense we last animated the object
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Model.AnimationManager.currentFrame">
+            <summary>
+            Current frame we are at in the animation line
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Model.AnimationManager.#ctor(GWNorthEngine.Model.AnimationManager.AnimationState,System.Single,System.Int32)">
+            <summary>
+            Builds an AnimationManager based on the animation state
+            </summary>
+            <param name="animationState">Start animation state of the object</param>
+            <param name="frameRate">Starting frame rate of the object</param>
+            <param name="maxFrameCount">Used in reverse playing scenarios; it sets the first frame to the end</param>
+        </member>
+        <member name="M:GWNorthEngine.Model.AnimationManager.setNextFrame(System.Int32)">
+            <summary>
+            Handles incrementing the animation steps
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Model.AnimationManager.resetAnimation(System.Int32)">
+            <summary>
+            Resets the animation sequence that the AnimationManager is controlling
+            </summary>
+            <param name="maxFrameCount">Max frames used to reset reverse sprites</param>
+        </member>
+        <member name="M:GWNorthEngine.Model.AnimationManager.update(System.Single,System.Int32)">
+            <summary>
+            Handles whether it is time to update the animation step or not
+            </summary>
+            <param name="elapsed">Time elapsed sense the last call</param>
+            <param name="maxFrameCount">Maximum frames of the object</param>
+        </member>
+        <member name="P:GWNorthEngine.Model.AnimationManager.State">
+            <summary>
+            Gets or sets the animation state for the animation manager
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.AnimationManager.TotalElapsed">
+            <summary>
+            Gets or sets the total elapsed time
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.AnimationManager.FrameRate">
+            <summary>
+            Gets or sets the frame rate in which the sprite animates
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.AnimationManager.CurrentFrame">
+            <summary>
+            Gets the current frame of the object
+            </summary>
+        </member>
+        <member name="T:GWNorthEngine.Model.AnimationManager.AnimationState">
+            <summary>
+            Animation state of the object
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Model.AnimationManager.AnimationState.Paused">
+            <summary>
+            Animation is paused
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Model.AnimationManager.AnimationState.PlayForward">
+            <summary>
+            Animation is playing forawrd
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Model.AnimationManager.AnimationState.PlayReversed">
+            <summary>
+            Animation is playing in reverse
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Model.AnimationManager.AnimationState.PlayForwardOnce">
+            <summary>
+            Animation plays through forward 1 time
+            </summary>
+        </member>
+        <member name="T:GWNorthEngine.Model.StaticDrawable2D">
+            <summary>
+            Text class for writing text to the screen
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Model.StaticDrawable2D.texture">
+            <summary>
+            Texture2D object
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Model.StaticDrawable2D.#ctor(GWNorthEngine.Model.Params.StaticDrawable2DParams)">
+            <summary>
+            Builds an object that can draw a texture to the screen
+            </summary>
+            <param name="parms">StaticDrawable2DParams object</param>
+        </member>
+        <member name="M:GWNorthEngine.Model.StaticDrawable2D.update(System.Single)">
+            <summary>
+            Updates the texture
+            </summary>
+            <param name="elapsed">time elapsed sense the last method call</param>
+        </member>
+        <member name="M:GWNorthEngine.Model.StaticDrawable2D.render(Microsoft.Xna.Framework.Graphics.SpriteBatch)">
+            <summary>
+            Renders the texture to the screen
+            </summary>
+            <param name="spriteBatch">SpriteBatch object used to render the etxture</param>
+        </member>
+        <member name="M:GWNorthEngine.Model.StaticDrawable2D.dispose">
+            <summary>
+            Disposes the texture that was being drawn
+            </summary>
+        </member>
+    </members>
+</doc>
