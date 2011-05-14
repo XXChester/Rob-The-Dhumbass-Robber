@@ -136,13 +136,15 @@ namespace Robber {
 				this.Placement = new Placement(Placement.getIndex(this.activeSprite.Position));
 				this.BoundingBox = Helper.getBBox(this.Placement.worldPosition);
 			}
-			if (this.updateAI) {
-				if (this.previousPlacement.index != this.Placement.index) {
-					AIManager.getInstane().Board[this.previousPlacement.index.Y, this.previousPlacement.index.X] = this.previousTypeOfSpace;
-					this.previousTypeOfSpace = AIManager.getInstane().Board[this.Placement.index.Y, this.Placement.index.X];
+			if (this.previousPlacement.index != this.Placement.index) {
+				AIManager.getInstane().Board[this.previousPlacement.index.Y, this.previousPlacement.index.X] = this.previousTypeOfSpace;
+				this.previousTypeOfSpace = AIManager.getInstane().Board[this.Placement.index.Y, this.Placement.index.X];
+				if (this.updateAI && AIManager.getInstane().PlayerDetected) {
+					// if we have been detected we need to tell the AI where we are
+					AIManager.getInstane().Board[this.Placement.index.Y, this.Placement.index.X] = PathFinder.TypeOfSpace.End;
+				} else {
+					AIManager.getInstane().Board[this.Placement.index.Y, this.Placement.index.X] = PathFinder.TypeOfSpace.Unwalkable;
 				}
-				// if we have been detected we need to tell the AI where we are
-				AIManager.getInstane().updatePlayerPosition(this.Placement.index);
 			}
 			this.previousDirection = this.direction;
 			this.previousKeyBoardState = this.currentKeyBoardState;

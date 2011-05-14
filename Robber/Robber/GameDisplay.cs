@@ -11,8 +11,11 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using Robber.Interfaces;
+using GWNorthEngine.Model;
+using GWNorthEngine.Model.Params;
 using GWNorthEngine.Utils;
 using GWNorthEngine.AI.AStar;
+using GWNorthEngine.Scripting;
 namespace Robber {
 	public class GameDisplay : Display{
 		#region Class variables
@@ -21,6 +24,10 @@ namespace Robber {
 		private Person[] guards;
 		private Treasure[] treasures;
 		private Color wallColour;
+		private ColouredButton replayButton;
+		private GraphicsDevice device;
+		private ContentManager content;
+		private string mapInformation;
 		private DebugUtils debugUtils;
 		private Texture2D debugChip;
 		#endregion Class variables
@@ -30,9 +37,47 @@ namespace Robber {
 		#endregion Class properties
 
 		#region Constructor
-		public GameDisplay(GraphicsDevice device, ContentManager content, string mapInfomarion) {
+		public GameDisplay(GraphicsDevice device, ContentManager content, string mapInformation) {
+			this.device = device;
+			this.content = content;
+			this.mapInformation = mapInformation;
 			CollisionManager.getInstance().MapBoundingBoxes = new List<BoundingBox>();
-			StreamReader reader = new StreamReader(mapInfomarion + "Locations.dat");
+
+			// load our map
+			this.wallColour = Color.Black;
+			this.map = MapLoader.load(content, mapInformation + ".dat", this.wallColour);
+			reset(device, content, mapInformation, false);
+
+			// replay button
+			ColouredButtonParams buttonParms = new ColouredButtonParams();
+			buttonParms.Font = ResourceManager.getInstance().Font;
+			buttonParms.Height = 50;
+			buttonParms.LinesTexture = ResourceManager.getInstance().ButtonLineTexture;
+			buttonParms.MouseOverColour = ResourceManager.MOUSE_OVER_COLOUR;
+			buttonParms.RegularColour = ResourceManager.TEXT_COLOUR;
+			buttonParms.StartX = 275;
+			buttonParms.StartY = 267;
+			buttonParms.Text = "Replay";
+			buttonParms.TextsPosition = new Vector2(293f, 278f);
+			buttonParms.Width = 100;
+			this.replayButton = new ColouredButton(buttonParms);
+#if WINDOWS
+#if DEBUG
+			this.debugUtils = new DebugUtils(TextureUtils.create2DColouredTexture(device, 2, 2, Color.White));
+			this.debugChip = TextureUtils.create2DColouredTexture(device, 32, 32, Color.White);
+#endif
+#endif
+		}
+		#endregion Constructor
+
+		#region Support methods
+		private void reset(GraphicsDevice device, ContentManager content, string mapInformation, bool cleanUp) {
+			if (cleanUp) {
+				foreach (Guard guard in this.guards) {
+					guard.RunAIThread = false;
+				}
+			}
+			StreamReader reader = new StreamReader(mapInformation + "Locations.dat");
 			Point playersLocation = new Point();
 			List<Point> guardLocations = new List<Point>();
 			List<string> guardDirectins = new List<string>();
@@ -74,9 +119,6 @@ namespace Robber {
 			// let our AI manager know about the maps way points
 			AIManager.getInstane().WayPoints = wayPoints;
 
-			// load our map
-			this.wallColour = Color.Black;
-			this.map = MapLoader.load(content, mapInfomarion + ".dat", this.wallColour);
 			List<BoundingBox> mapBoundingBoxes = new List<BoundingBox>();
 			for (int i = 0; i < boundingBoxPoints.Count; i += 2) {
 				//mapBoundingBoxes.Add(Helper.getBBox(boundingBoxPoints[i], boundingBoxPoints[i + 1]));
@@ -103,21 +145,31 @@ namespace Robber {
 			for (int i = 0; i < guardSize; i++) {
 				this.guards[i] = new Guard(device, content, new Placement(guardLocations[i]), guardStates[i], guardDirectins[i]);
 			}
-#if DEBUG
-			this.debugUtils = new DebugUtils(TextureUtils.create2DColouredTexture(device, 2, 2, Color.White));
-			this.debugChip = TextureUtils.create2DColouredTexture(device, 32, 32, Color.White);
-#endif
-
 		}
-		#endregion Constructor
 
-		#region Support methods
 		public override void update(float elapsed) {
 			base.currentKeyBoardState = Keyboard.GetState();
+			base.currentMouseState = Mouse.GetState();
 			this.map.update(elapsed);
-			this.player.update(elapsed);
-			foreach (Guard guard in this.guards) {
-				guard.update(elapsed);
+			if (StateManager.getInstance().CurrentGameState == StateManager.GameState.Active) {
+				this.player.update(elapsed);
+				foreach (Guard guard in this.guards) {
+					guard.update(elapsed);
+					if (guard.BoundingBox.Intersects(this.player.BoundingBox)) {
+						StateManager.getInstance().CurrentGameState = StateManager.GameState.GameOver;
+						break;
+					}
+				}
+			} else if (StateManager.getInstance().CurrentGameState == StateManager.GameState.GameOver) {
+				Vector2 mousePos = new Vector2(base.currentMouseState.X, base.currentMouseState.Y);
+				this.replayButton.processActorsMovement(mousePos);
+				if (base.currentMouseState.LeftButton == ButtonState.Pressed && base.prevousMouseState.LeftButton == ButtonState.Released) {
+					if (this.replayButton.isActorOver(mousePos)) {
+						StateManager.getInstance().CurrentGameState = StateManager.GameState.Active;
+						reset(this.device, this.content, this.mapInformation, true);
+						Console.WriteLine("Reset");
+					}
+				}
 			}
 			foreach (Treasure treasure in this.treasures) {
 				if (treasure.BoundingBox.Intersects(this.player.BoundingBox)) {
@@ -141,9 +193,13 @@ namespace Robber {
 			foreach (Treasure treasure in this.treasures) {
 				treasure.render(spriteBatch);
 			}
-			this.player.render(spriteBatch);
-			foreach (Guard guard in this.guards) {
-				guard.render(spriteBatch);
+			if (StateManager.getInstance().CurrentGameState == StateManager.GameState.Active) {
+				this.player.render(spriteBatch);
+				foreach (Guard guard in this.guards) {
+					guard.render(spriteBatch);
+				}
+			} else if (StateManager.getInstance().CurrentGameState == StateManager.GameState.GameOver) {
+				this.replayButton.render(spriteBatch);
 			}
 #if DEBUG
 			if (this.ShowAI) {
@@ -177,6 +233,9 @@ namespace Robber {
 				foreach (Treasure treasure in this.treasures) {
 					treasure.dispose();
 				}
+			}
+			if (this.replayButton != null) {
+				this.replayButton.dispose();
 			}
 #if DEBUG
 			this.debugChip.Dispose();

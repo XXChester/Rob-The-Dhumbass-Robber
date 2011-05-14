@@ -96,7 +96,7 @@ namespace Robber {
 						}
 					} else if (this.currentState == State.Chase) {
 						// chase should regenerate the waypoint all the time
-						if (this.closestsPoint == base.Placement.index) {
+						if (this.closestsPoint == base.Placement.index) {//TODO: This can cause the AI to get stuck
 							this.path = new Stack<Point>(AIManager.getInstane().findPath(base.Placement.index));
 							if (this.path.Count >= 1) {
 								this.closestsPoint = path.Pop();

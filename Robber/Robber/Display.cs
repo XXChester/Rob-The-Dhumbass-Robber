@@ -10,6 +10,8 @@ namespace Robber {
 		#region Class variables
 		protected KeyboardState currentKeyBoardState;
 		protected KeyboardState previousKeyBoardState;
+		protected MouseState currentMouseState;
+		protected MouseState prevousMouseState;
 		#endregion Class variables
 
 		#region Class propeties
@@ -22,7 +24,7 @@ namespace Robber {
 
 		#region Support methods
 		public virtual void update(float elapsed) {
-
+			this.prevousMouseState = Mouse.GetState();
 			this.previousKeyBoardState = this.currentKeyBoardState;
 		}
 

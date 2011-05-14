@@ -5,11 +5,16 @@ using System.Text;
 using Microsoft.Xna.Framework;
 namespace Robber {
 	public class CollisionManager {
+		#region Class variables
 		// singleton instance
 		private static CollisionManager instance = new CollisionManager();
+		#endregion Class variables
 
+		#region Class properties
 		public List<BoundingBox> MapBoundingBoxes{ get; set; }
+		#endregion Class properties
 
+		#region Support methods
 		public static CollisionManager getInstance() {
 			return instance;
 		}
@@ -24,5 +29,6 @@ namespace Robber {
 			}
 			return collision;
 		}
+		#endregion Support methods
 	}
 }

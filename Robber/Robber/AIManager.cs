@@ -25,14 +25,7 @@ namespace Robber {
 
 		public void init(int height, int width) {
 			this.pathFinder = new MazeSolver(height, width);
-			this.PlayerDetected = true;
-		}
-
-		public void updatePlayerPosition(Point newPosition) {
-			// If I was detected I need to update where I am
-			if (this.PlayerDetected == true) {
-				this.Board[newPosition.Y, newPosition.X] = PathFinder.TypeOfSpace.End;
-			}
+			this.PlayerDetected = false;
 		}
 
 		public Point getNextWayPoint(Point currentWayPoint, Guard.MovementDirection movementDirection) {

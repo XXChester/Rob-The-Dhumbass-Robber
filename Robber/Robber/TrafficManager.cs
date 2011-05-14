@@ -39,6 +39,7 @@ namespace Robber {
 		/// </summary>
 		protected override void LoadContent() {
 			ScriptManager.getInstance().LogFile = "Log.log";
+			ResourceManager.getInstance().init(GraphicsDevice, Content);
 			string MAP_INFORMATION =  Directory.GetCurrentDirectory() +  "\\Scripts\\Map1";
 			this.gameDisplay = new GameDisplay(GraphicsDevice, Content, MAP_INFORMATION);
 			this.activeDisplay = this.gameDisplay;
