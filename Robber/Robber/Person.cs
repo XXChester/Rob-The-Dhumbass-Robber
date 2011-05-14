@@ -105,50 +105,49 @@ namespace Robber {
 				if (this.direction != this.previousDirection) {
 					updateSprite = true;
 				}
+				Vector2 newPos;
 				if (this.direction == Direction.Up) {
 					if (updateSprite) {
 						this.upSprite.Position = this.activeSprite.Position;
 						this.activeSprite = this.upSprite;
 					}
-					this.activeSprite.Position = new Vector2(this.activeSprite.Position.X, this.activeSprite.Position.Y - moveDistance);
+					newPos = new Vector2(this.activeSprite.Position.X, this.activeSprite.Position.Y - moveDistance);
+					if (!CollisionManager.getInstance().collisionFound(Helper.getBBox(newPos))) {
+						this.activeSprite.Position = new Vector2(this.activeSprite.Position.X, this.activeSprite.Position.Y - moveDistance);
+					}
 				} else if (this.direction == Direction.Right) {
 					if (updateSprite) {
 						this.rightSprite.Position = this.activeSprite.Position;
 						this.activeSprite = this.rightSprite;
 					}
-					this.activeSprite.Position = new Vector2(this.activeSprite.Position.X + moveDistance, this.activeSprite.Position.Y);
+					newPos = new Vector2(this.activeSprite.Position.X + moveDistance, this.activeSprite.Position.Y);
+					if (!CollisionManager.getInstance().collisionFound(Helper.getBBox(newPos))) {
+						this.activeSprite.Position = new Vector2(this.activeSprite.Position.X + moveDistance, this.activeSprite.Position.Y);
+					}
 				} else if (this.direction == Direction.Down) {
 					if (updateSprite) {
 						this.downSprite.Position = this.activeSprite.Position;
 						this.activeSprite = this.downSprite;
 					}
-					this.activeSprite.Position = new Vector2(this.activeSprite.Position.X, this.activeSprite.Position.Y + moveDistance);
+					newPos = new Vector2(this.activeSprite.Position.X, this.activeSprite.Position.Y + moveDistance);
+					if (!CollisionManager.getInstance().collisionFound(Helper.getBBox(newPos))) {
+						this.activeSprite.Position = new Vector2(this.activeSprite.Position.X, this.activeSprite.Position.Y + moveDistance);
+					}
 				} else if (this.direction == Direction.Left) {
 					if (updateSprite) {
 						this.leftSprite.Position = this.activeSprite.Position;
 						this.activeSprite = this.leftSprite;
 					}
-					this.activeSprite.Position = new Vector2(this.activeSprite.Position.X - moveDistance, this.activeSprite.Position.Y);
+					newPos = new Vector2(this.activeSprite.Position.X - moveDistance, this.activeSprite.Position.Y);
+					if (!CollisionManager.getInstance().collisionFound(Helper.getBBox(newPos))) {
+						this.activeSprite.Position = new Vector2(this.activeSprite.Position.X - moveDistance, this.activeSprite.Position.Y);
+					}
 				}
-				this.activeSprite.Position = new Vector2(MathHelper.Clamp(this.activeSprite.Position.X, 0f, 671), MathHelper.Clamp(this.activeSprite.Position.Y, 0, 575));
 			}
 			// update our placement and bounding box
 			this.Placement = new Placement(Placement.getIndex(this.activeSprite.Position));
 			this.BoundingBox = Helper.getBBox(this.activeSprite.Position);
 			//this.BoundingSphere = Helper.getBSphere(this.activeSprite.Position);
-			// if there was a collision we cannot move there
-			/*if (AIManager.getInstane().Board[this.Placement.index.Y, this.Placement.index.X] == PathFinder.TypeOfSpace.Unwalkable) {
-				this.activeSprite.Position = this.previousPlacement.worldPosition;
-				this.Placement = new Placement(Placement.getIndex(this.activeSprite.Position));
-				this.BoundingSphere = Helper.getBSphere(this.activeSprite.Position);
-			}*/
-			//if (CollisionManager.getInstance().collisionFound(this.BoundingSphere)) {
-			if (CollisionManager.getInstance().collisionFound(this.BoundingBox)) {
-				this.activeSprite.Position = this.previousPlacement.worldPosition;
-				this.Placement = new Placement(Placement.getIndex(this.activeSprite.Position));
-				this.BoundingBox = Helper.getBBox(this.activeSprite.Position);
-				//this.BoundingSphere = Helper.getBSphere(this.activeSprite.Position);
-			}
 			if (this.previousPlacement.index != this.Placement.index) {
 				AIManager.getInstane().Board[this.previousPlacement.index.Y, this.previousPlacement.index.X] = this.previousTypeOfSpace;
 				this.previousTypeOfSpace = AIManager.getInstane().Board[this.Placement.index.Y, this.Placement.index.X];
