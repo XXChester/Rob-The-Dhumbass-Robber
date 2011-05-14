@@ -18,7 +18,7 @@ Raw version of the game functional with programmer art
 [*]Make the player movable
 [*]Change the image based on the direction the player is moving in
 [*]Render the treasure
-[*]Make the player able to catch the treasure				NEEDS WORK IT IS A LITTLE BUGGY
+[*]Make the player able to catch the treasure
 [*]Render guards
 []Put collision detection in with the walls		Wasted a mountain of time here trying to figure out a way to generate the bounding boxes on the fly
 [*]Make guards patrol the halls

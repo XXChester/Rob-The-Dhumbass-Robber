@@ -646,12 +646,13 @@
             <param name="colour">Colour of the texture</param>
             <returns>Newly created Texture2D object</returns>
         </member>
-        <member name="M:GWNorthEngine.Utils.TextureUtils.create2DRingTexture(Microsoft.Xna.Framework.Graphics.GraphicsDevice,System.Int32)">
+        <member name="M:GWNorthEngine.Utils.TextureUtils.create2DRingTexture(Microsoft.Xna.Framework.Graphics.GraphicsDevice,System.Int32,Microsoft.Xna.Framework.Color)">
             <summary>
             Creates a 2D coloured ring texture
             </summary>
             <param name="device">GraphicsDevice object</param>
             <param name="radius">Radius of the circle</param>
+            /// <param name="colour">Colour of the texture</param>
             <returns>Newly created Texture2D object</returns>
         </member>
         <member name="T:GWNorthEngine.Utils.DebugUtils">

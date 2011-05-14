@@ -8,6 +8,10 @@ namespace Robber {
 		public static BoundingBox getBBox(Vector2 pos) {
 			return new BoundingBox(new Vector3(pos, 0f), new Vector3(addTileSize(pos), 0f));
 		}
+		
+		public static BoundingSphere getBSphere(Vector2 pos) {
+			return new BoundingSphere(new Vector3(pos, 0f), (float)(ResourceManager.TILE_SIZE / 2));
+		}
 
 		public static BoundingBox getBBox(Point pos1, Point pos2) {
 			Vector2 min = new Vector2(Math.Min(pos1.X, pos2.X), Math.Min(pos1.Y, pos2.Y));

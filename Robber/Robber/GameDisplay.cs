@@ -30,6 +30,7 @@ namespace Robber {
 		private string mapInformation;
 		private DebugUtils debugUtils;
 		private Texture2D debugChip;
+		private Texture2D debugRing;
 		#endregion Class variables
 
 		#region Class propeties
@@ -65,6 +66,7 @@ namespace Robber {
 #if DEBUG
 			this.debugUtils = new DebugUtils(TextureUtils.create2DColouredTexture(device, 2, 2, Color.White));
 			this.debugChip = TextureUtils.create2DColouredTexture(device, 32, 32, Color.White);
+			this.debugRing = TextureUtils.create2DRingTexture(device, 16, Color.White);
 #endif
 #endif
 		}
@@ -142,8 +144,10 @@ namespace Robber {
 			// load guard(s) at starting points
 			int guardSize = guardLocations.Count;
 			this.guards = new Person[guardSize];
+			Placement placement;
 			for (int i = 0; i < guardSize; i++) {
-				this.guards[i] = new Guard(device, content, new Placement(guardLocations[i]), guardStates[i], guardDirectins[i]);
+				placement = new Placement(guardLocations[i]);
+				this.guards[i] = new Guard(device, content, placement, guardStates[i], guardDirectins[i]);
 			}
 		}
 
@@ -155,7 +159,7 @@ namespace Robber {
 				this.player.update(elapsed);
 				foreach (Guard guard in this.guards) {
 					guard.update(elapsed);
-					if (guard.BoundingBox.Intersects(this.player.BoundingBox)) {
+					if (guard.BoundingSphere.Intersects(this.player.BoundingSphere)) {
 						StateManager.getInstance().CurrentGameState = StateManager.GameState.GameOver;
 						break;
 					}
@@ -172,7 +176,7 @@ namespace Robber {
 				}
 			}
 			foreach (Treasure treasure in this.treasures) {
-				if (treasure.BoundingBox.Intersects(this.player.BoundingBox)) {
+				if (treasure.BoundingBox.Intersects(this.player.BoundingSphere)) {
 					treasure.PickedUp = true;
 					this.player.CapturedTreasures++;
 					break;
@@ -203,14 +207,19 @@ namespace Robber {
 			}
 #if DEBUG
 			if (this.ShowAI) {
-				this.debugUtils.drawBoundingBox(spriteBatch, this.player.BoundingBox, Color.Green);
-				for (int y = 0; y < 18; y++) {
+				DebugUtils.drawBoundingSphere(spriteBatch, this.player.BoundingSphere, Color.Green, this.debugRing);
+				//this.debugUtils.drawBoundingBox(spriteBatch, this.player.BoundingBox, Color.Green);
+				foreach (Guard guard in this.guards) {
+					//this.debugUtils.drawBoundingBox(spriteBatch, guard.BoundingBox, Color.Green);
+					DebugUtils.drawBoundingSphere(spriteBatch, guard.BoundingSphere, Color.Green, this.debugRing);
+				}
+				/*for (int y = 0; y < 18; y++) {
 					for (int x = 0; x < 22; x++) {
 						if (AIManager.getInstane().Board[y, x] == PathFinder.TypeOfSpace.Unwalkable) {
 							spriteBatch.Draw(this.debugChip, new Placement(new Point(x, y)).worldPosition, Color.Red);
 						}
 					}
-				}
+				}*/
 			}
 #endif
 		}
@@ -239,6 +248,7 @@ namespace Robber {
 			}
 #if DEBUG
 			this.debugChip.Dispose();
+			this.debugRing.Dispose();
 #endif
 		}
 		#endregion Destructor

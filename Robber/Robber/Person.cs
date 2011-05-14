@@ -44,7 +44,8 @@ namespace Robber {
 		public Texture2D ActiveTexture { get { return this.activeSprite.Texture; } }
 		public Color LightColour { get { return this.activeSprite.LightColour; } }
 		public Placement Placement { get; set; }
-		public BoundingBox BoundingBox { get; set; }
+		//public BoundingBox BoundingBox { get; set; }
+		public BoundingSphere BoundingSphere { get; set; }
 		#endregion Class properties
 
 		#region Constructor
@@ -53,8 +54,8 @@ namespace Robber {
 			Animated2DSpriteParams parms = new Animated2DSpriteParams();
 			parms.AnimationState = AnimationManager.AnimationState.PlayForward;
 			parms.Content = content;
-			parms.Origin = new Vector2(16f, 16f);
 			parms.FrameRate = 200f;
+			parms.Origin = new Vector2(16f, 16f);
 			parms.LoadingType = Animated2DSprite.LoadingType.WholeSheetReadFramesFromFile;
 			parms.TexturesName = fileName;
 			parms.TotalFrameCount = 1;
@@ -75,7 +76,8 @@ namespace Robber {
 			this.Placement = startingLocation;
 			this.direction = Direction.None;
 			this.movementSpeed = movementSpeed;
-			this.BoundingBox = Helper.getBBox(this.Placement.worldPosition);
+			//this.BoundingBox = Helper.getBBox(this.Placement.worldPosition);
+			this.BoundingSphere = Helper.getBSphere(this.Placement.worldPosition);
 			this.activeSprite = this.rightSprite;
 			this.updateAI = updateAI;
 			this.previousTypeOfSpace = AIManager.getInstane().Board[this.Placement.index.Y, this.Placement.index.X];
@@ -92,6 +94,9 @@ namespace Robber {
 			}
 			updateMove();
 
+			if (Keyboard.GetState().IsKeyDown(Keys.R)) {
+				this.activeSprite.Rotation += (5f / 1000f) * elapsed;
+			}
 			if (this.direction != Direction.None) {
 				float moveDistance = (movementSpeed * elapsed);
 				// we are moving
@@ -129,13 +134,15 @@ namespace Robber {
 			}
 			// update our placement and bounding box
 			this.Placement = new Placement(Placement.getIndex(this.activeSprite.Position));
-			this.BoundingBox = Helper.getBBox(this.Placement.worldPosition);
+			//this.BoundingBox = Helper.getBBox(this.Placement.worldPosition);
+			this.BoundingSphere = Helper.getBSphere(this.activeSprite.Position);
 			// if there was a collision we cannot move there
-			if (CollisionManager.getInstance().collisionFound(this.BoundingBox)) {
+			/*if (CollisionManager.getInstance().collisionFound(this.BoundingBox)) {
 				this.activeSprite.Position = this.previousPlacement.worldPosition;
 				this.Placement = new Placement(Placement.getIndex(this.activeSprite.Position));
-				this.BoundingBox = Helper.getBBox(this.Placement.worldPosition);
-			}
+				//this.BoundingBox = Helper.getBBox(this.Placement.worldPosition);
+				this.BoundingSphere = Helper.getBSphere(this.Placement.worldPosition);
+			}*/
 			if (this.previousPlacement.index != this.Placement.index) {
 				AIManager.getInstane().Board[this.previousPlacement.index.Y, this.previousPlacement.index.X] = this.previousTypeOfSpace;
 				this.previousTypeOfSpace = AIManager.getInstane().Board[this.Placement.index.Y, this.Placement.index.X];
