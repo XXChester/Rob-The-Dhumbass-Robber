@@ -29,6 +29,17 @@ namespace Robber {
 			}
 			return collision;
 		}
+		
+		public bool collisionFound(BoundingSphere bphere) {
+			bool collision = false;
+			foreach (BoundingBox box in this.MapBoundingBoxes) {
+				if (box.Intersects(bphere)) {
+					collision = true;
+					break;
+				}
+			}
+			return collision;
+		}
 		#endregion Support methods
 	}
 }

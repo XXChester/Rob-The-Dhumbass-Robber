@@ -30,7 +30,7 @@ namespace Robber {
 			parms.Position = startingPlacement.worldPosition;
 			this.image = new StaticDrawable2D(parms);
 			this.placement = startingPlacement;
-			this.BoundingBox = Helper.getBBox(this.placement.worldPosition);
+			this.BoundingBox = Helper.getTilePaddedBBox(this.placement.worldPosition);
 		}
 		#endregion Constructor
 

@@ -6,6 +6,12 @@ using Microsoft.Xna.Framework;
 namespace Robber {
 	public static class Helper {
 		public static BoundingBox getBBox(Vector2 pos) {
+			Vector2 min = new Vector2(pos.X - ResourceManager.TILE_SIZE / 3, pos.Y - ResourceManager.TILE_SIZE / 3);;
+			Vector2 max = new Vector2(pos.X + ResourceManager.TILE_SIZE / 3, pos.Y + ResourceManager.TILE_SIZE / 3); ;
+			return new BoundingBox(new Vector3(min, 0f), new Vector3(max, 0f));
+		}
+
+		public static BoundingBox getTilePaddedBBox(Vector2 pos) {
 			return new BoundingBox(new Vector3(pos, 0f), new Vector3(addTileSize(pos), 0f));
 		}
 		

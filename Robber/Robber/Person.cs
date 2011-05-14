@@ -44,8 +44,8 @@ namespace Robber {
 		public Texture2D ActiveTexture { get { return this.activeSprite.Texture; } }
 		public Color LightColour { get { return this.activeSprite.LightColour; } }
 		public Placement Placement { get; set; }
-		//public BoundingBox BoundingBox { get; set; }
-		public BoundingSphere BoundingSphere { get; set; }
+		public BoundingBox BoundingBox { get; set; }
+		//public BoundingSphere BoundingSphere { get; set; }
 		#endregion Class properties
 
 		#region Constructor
@@ -55,7 +55,7 @@ namespace Robber {
 			parms.AnimationState = AnimationManager.AnimationState.PlayForward;
 			parms.Content = content;
 			parms.FrameRate = 200f;
-			parms.Origin = new Vector2(16f, 16f);
+			parms.Origin = new Vector2(ResourceManager.TILE_SIZE / 2, ResourceManager.TILE_SIZE / 2);
 			parms.LoadingType = Animated2DSprite.LoadingType.WholeSheetReadFramesFromFile;
 			parms.TexturesName = fileName;
 			parms.TotalFrameCount = 1;
@@ -76,8 +76,8 @@ namespace Robber {
 			this.Placement = startingLocation;
 			this.direction = Direction.None;
 			this.movementSpeed = movementSpeed;
-			//this.BoundingBox = Helper.getBBox(this.Placement.worldPosition);
-			this.BoundingSphere = Helper.getBSphere(this.Placement.worldPosition);
+			this.BoundingBox = Helper.getBBox(this.Placement.worldPosition);
+			//this.BoundingSphere = Helper.getBSphere(this.Placement.worldPosition);
 			this.activeSprite = this.rightSprite;
 			this.updateAI = updateAI;
 			this.previousTypeOfSpace = AIManager.getInstane().Board[this.Placement.index.Y, this.Placement.index.X];
@@ -134,15 +134,21 @@ namespace Robber {
 			}
 			// update our placement and bounding box
 			this.Placement = new Placement(Placement.getIndex(this.activeSprite.Position));
-			//this.BoundingBox = Helper.getBBox(this.Placement.worldPosition);
-			this.BoundingSphere = Helper.getBSphere(this.activeSprite.Position);
+			this.BoundingBox = Helper.getBBox(this.activeSprite.Position);
+			//this.BoundingSphere = Helper.getBSphere(this.activeSprite.Position);
 			// if there was a collision we cannot move there
-			/*if (CollisionManager.getInstance().collisionFound(this.BoundingBox)) {
+			/*if (AIManager.getInstane().Board[this.Placement.index.Y, this.Placement.index.X] == PathFinder.TypeOfSpace.Unwalkable) {
 				this.activeSprite.Position = this.previousPlacement.worldPosition;
 				this.Placement = new Placement(Placement.getIndex(this.activeSprite.Position));
-				//this.BoundingBox = Helper.getBBox(this.Placement.worldPosition);
-				this.BoundingSphere = Helper.getBSphere(this.Placement.worldPosition);
+				this.BoundingSphere = Helper.getBSphere(this.activeSprite.Position);
 			}*/
+			//if (CollisionManager.getInstance().collisionFound(this.BoundingSphere)) {
+			if (CollisionManager.getInstance().collisionFound(this.BoundingBox)) {
+				this.activeSprite.Position = this.previousPlacement.worldPosition;
+				this.Placement = new Placement(Placement.getIndex(this.activeSprite.Position));
+				this.BoundingBox = Helper.getBBox(this.activeSprite.Position);
+				//this.BoundingSphere = Helper.getBSphere(this.activeSprite.Position);
+			}
 			if (this.previousPlacement.index != this.Placement.index) {
 				AIManager.getInstane().Board[this.previousPlacement.index.Y, this.previousPlacement.index.X] = this.previousTypeOfSpace;
 				this.previousTypeOfSpace = AIManager.getInstane().Board[this.Placement.index.Y, this.Placement.index.X];

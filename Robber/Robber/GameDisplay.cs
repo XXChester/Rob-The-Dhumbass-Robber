@@ -123,7 +123,7 @@ namespace Robber {
 
 			List<BoundingBox> mapBoundingBoxes = new List<BoundingBox>();
 			for (int i = 0; i < boundingBoxPoints.Count; i += 2) {
-				//mapBoundingBoxes.Add(Helper.getBBox(boundingBoxPoints[i], boundingBoxPoints[i + 1]));
+				mapBoundingBoxes.Add(Helper.getBBox(boundingBoxPoints[i], boundingBoxPoints[i + 1]));
 
 			}
 			CollisionManager.getInstance().MapBoundingBoxes.AddRange(mapBoundingBoxes);
@@ -159,7 +159,8 @@ namespace Robber {
 				this.player.update(elapsed);
 				foreach (Guard guard in this.guards) {
 					guard.update(elapsed);
-					if (guard.BoundingSphere.Intersects(this.player.BoundingSphere)) {
+					//if (guard.BoundingSphere.Intersects(this.player.BoundingSphere)) {
+					if (guard.BoundingBox.Intersects(this.player.BoundingBox)) {
 						StateManager.getInstance().CurrentGameState = StateManager.GameState.GameOver;
 						break;
 					}
@@ -176,7 +177,8 @@ namespace Robber {
 				}
 			}
 			foreach (Treasure treasure in this.treasures) {
-				if (treasure.BoundingBox.Intersects(this.player.BoundingSphere)) {
+				//if (treasure.BoundingBox.Intersects(this.player.BoundingSphere)) {
+				if (treasure.BoundingBox.Intersects(this.player.BoundingBox)) {
 					treasure.PickedUp = true;
 					this.player.CapturedTreasures++;
 					break;
@@ -207,11 +209,18 @@ namespace Robber {
 			}
 #if DEBUG
 			if (this.ShowAI) {
-				DebugUtils.drawBoundingSphere(spriteBatch, this.player.BoundingSphere, Color.Green, this.debugRing);
-				//this.debugUtils.drawBoundingBox(spriteBatch, this.player.BoundingBox, Color.Green);
+				Color debugColour = Color.Green;
+				//DebugUtils.drawBoundingSphere(spriteBatch, this.player.BoundingSphere, debugColour, this.debugRing);
+				this.debugUtils.drawBoundingBox(spriteBatch, this.player.BoundingBox, debugColour);
 				foreach (Guard guard in this.guards) {
-					//this.debugUtils.drawBoundingBox(spriteBatch, guard.BoundingBox, Color.Green);
-					DebugUtils.drawBoundingSphere(spriteBatch, guard.BoundingSphere, Color.Green, this.debugRing);
+					this.debugUtils.drawBoundingBox(spriteBatch, guard.BoundingBox,debugColour);
+					//DebugUtils.drawBoundingSphere(spriteBatch, guard.BoundingSphere, debugColour, this.debugRing);
+				}
+				foreach (BoundingBox box in CollisionManager.getInstance().MapBoundingBoxes) {
+					this.debugUtils.drawBoundingBox(spriteBatch, box, debugColour);
+				}
+				foreach (Treasure treasure in this.treasures) {
+					this.debugUtils.drawBoundingBox(spriteBatch, treasure.BoundingBox, debugColour);
 				}
 				/*for (int y = 0; y < 18; y++) {
 					for (int x = 0; x < 22; x++) {

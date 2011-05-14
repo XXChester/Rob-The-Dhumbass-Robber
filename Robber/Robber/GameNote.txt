@@ -20,12 +20,14 @@ Raw version of the game functional with programmer art
 [*]Render the treasure
 [*]Make the player able to catch the treasure
 [*]Render guards
-[]Put collision detection in with the walls		Wasted a mountain of time here trying to figure out a way to generate the bounding boxes on the fly
+[*]Put collision detection in with the walls		Wasted a mountain of time here trying to figure out a way to generate the bounding boxes on the fly
 [*]Make guards patrol the halls
 [*]Make the guards chase the player if he is seen
 [*]Major bug with the AI walking through Non-walkable spaces
 [*]Put in collision detection with each of the guards so they don't stack
 [*]Put in collision detection with the player
+[]Clean up AI so that it always walks down the middle of the square not the edge
+[]Clean up collision detection so that it doesn't bounch you around...instead you just don't move if it will result in a collision
 []Make a HUD
 []Implement flow mechanism
 []Render main menu screen

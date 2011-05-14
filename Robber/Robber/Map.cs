@@ -44,11 +44,11 @@ namespace Robber {
 		private MouseState previous;
 		public void update(float elapsed) {
 #if DEBUG
-			if (Mouse.GetState().LeftButton == ButtonState.Pressed && this.previous.LeftButton == ButtonState.Released) {
+			if (Mouse.GetState().LeftButton == ButtonState.Pressed && this.previous.LeftButton == ButtonState.Released && Mouse.GetState().Y > 0 && Mouse.GetState().X > 0) {
 				//Console.WriteLine(Placement.getIndex(new Vector2(Mouse.GetState().X, Mouse.GetState().Y)));
-				//string message = "BBox|" + Mouse.GetState().X + "," + Mouse.GetState().Y;
-				string message = "WayPoint|" + Placement.getIndex(new Vector2(Mouse.GetState().X, Mouse.GetState().Y)).X + ","  +
-					Placement.getIndex(new Vector2(Mouse.GetState().X, Mouse.GetState().Y)).Y;
+				string message = "BBox|" + Mouse.GetState().X + "," + Mouse.GetState().Y;
+				//string message = "WayPoint|" + Placement.getIndex(new Vector2(Mouse.GetState().X, Mouse.GetState().Y)).X + ","  +
+				//	Placement.getIndex(new Vector2(Mouse.GetState().X, Mouse.GetState().Y)).Y;
 				//ScriptManager.getInstance().log(message);
 			}
 			this.previous = Mouse.GetState();
