@@ -28,7 +28,7 @@ namespace Robber {
 		private State currentState;
 		private Point destinationWayPoint;
 		private Point closestsPoint;
-		private Queue<Point> path;
+		private Stack<Point> path;
 		private Thread AIThread;
 		private MovementDirection movementDirection;
 		private const float MOVEMENT_SPEED_WALK = 60f / 1000f;
@@ -64,9 +64,11 @@ namespace Robber {
 
 			if (this.currentState == State.Patrol || AIManager.getInstane().PlayerDetected) {
 				this.destinationWayPoint = AIManager.getInstane().getNextWayPoint(base.Placement.index, this.movementDirection);
-				this.path = new Queue<Point>(AIManager.getInstane().findPath(base.Placement.index, this.destinationWayPoint));
-				this.closestsPoint = this.path.Dequeue();
+				this.path = new Stack<Point>(AIManager.getInstane().findPath(base.Placement.index, this.destinationWayPoint));
+				this.closestsPoint = this.path.Pop();
 			}
+			base.previousDirection = Direction.None;
+			updateDirection();
 			this.chipTexture = TextureUtils.create2DColouredTexture(device, 32, 32, Color.White);
 			this.RunAIThread = true;
 			this.AIThread= new Thread(new ThreadStart(generateMoves));
@@ -86,17 +88,17 @@ namespace Robber {
 					if (this.currentState == State.Patrol) {
 						if (base.Placement.index == this.destinationWayPoint) {
 							this.destinationWayPoint = AIManager.getInstane().getNextWayPoint(base.Placement.index, this.movementDirection);
-							this.path = new Queue<Point>(AIManager.getInstane().findPath(base.Placement.index, this.destinationWayPoint));
+							this.path = new Stack<Point>(AIManager.getInstane().findPath(base.Placement.index, this.destinationWayPoint));
 						} else if (base.Placement.index == this.closestsPoint) {
 							if (this.path.Count >= 1) {
-								this.closestsPoint = path.Dequeue();
+								this.closestsPoint = path.Pop();
 							}
 						}
 					} else if (this.currentState == State.Chase) {
 						// chase should regenerate the waypoint all the time
-						this.path = new Queue<Point>(AIManager.getInstane().findPath(base.Placement.index));
+						this.path = new Stack<Point>(AIManager.getInstane().findPath(base.Placement.index));
 						if (this.path.Count >= 1) {
-							this.closestsPoint = path.Dequeue();
+							this.closestsPoint = path.Pop();
 						}
 					}
 				}
@@ -118,8 +120,8 @@ namespace Robber {
 		}
 
 		private void updateDirection() {
-			// figure out what direction our next waypoint is
-			Point temp = new Point(base.Placement.index.X - closestsPoint.X, base.Placement.index.Y - closestsPoint.Y);
+			// figure out what direction our closests point is
+			Point temp = new Point(base.Placement.index.X - this.closestsPoint.X, base.Placement.index.Y - this.closestsPoint.Y);
 			if (temp.X <= -1) {
 				base.direction = Direction.Right;
 			} else if (temp.X >= 1) {
@@ -137,9 +139,9 @@ namespace Robber {
 			updateDirection();
 		}
 
-		public void render(SpriteBatch spriteBatch) {
+		public new void render(SpriteBatch spriteBatch) {
 #if DEBUG
-			spriteBatch.Draw(this.chipTexture, new Placement(this.closestsPoint).worldPosition, Color.Green);
+			spriteBatch.Draw(this.chipTexture, new Placement(this.destinationWayPoint).worldPosition, Color.Green);
 #endif
 			
 			base.render(spriteBatch);

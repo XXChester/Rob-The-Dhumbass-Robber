@@ -51,7 +51,7 @@ namespace Robber {
 			Animated2DSpriteParams parms = new Animated2DSpriteParams();
 			parms.AnimationState = AnimationManager.AnimationState.PlayForward;
 			parms.Content = content;
-			parms.Origin = new Vector2(16f, 0f);
+			parms.Origin = new Vector2(16f, 16f);
 			parms.FrameRate = 200f;
 			parms.LoadingType = Animated2DSprite.LoadingType.WholeSheetReadFramesFromFile;
 			parms.TexturesName = fileName;

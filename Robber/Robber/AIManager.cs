@@ -25,7 +25,7 @@ namespace Robber {
 
 		public void init(int height, int width) {
 			this.pathFinder = new MazeSolver(height, width);
-			this.PlayerDetected = true;
+			this.PlayerDetected = false;
 		}
 
 		public void updatePlayerPosition(Point oldPosition, Point newPosition) {
@@ -42,7 +42,6 @@ namespace Robber {
 			if (index == -1) {
 				// send him to a random waypoint
 				index = new Random().Next(this.WayPoints.Count);
-				//index = 5;		//This will make the AI walk through certain walls
 			}
 			if (movementDirection == Guard.MovementDirection.Clockwise) {
 				if (index == this.WayPoints.Count - 1) {
@@ -82,9 +81,9 @@ namespace Robber {
 			this.Board[end.Y, end.X] = PathFinder.TypeOfSpace.End;
 			List<Point> path = new List<Point>();
 			this.pathFinder.findPath(this.Board);
-			if (this.pathFinder.End == end) {
+			//if (this.pathFinder.End == end) {
 				path = this.pathFinder.Path;
-			}
+			//}
 			// reset our pieces back
 			this.Board[start.Y, start.X] = previousStartSpot;
 			this.Board[end.Y, end.X] = previousEndSpot;

@@ -68,7 +68,7 @@ namespace Robber {
 							y = 0;
 						}
 						pieceIndex = new Point(x, y);
-						tileSpaces[y,x] = EnumUtils.numberToEnum<PathFinder.TypeOfSpace>(int.Parse(components[2]));
+						tileSpaces[y, x] = EnumUtils.numberToEnum<PathFinder.TypeOfSpace>(int.Parse(components[2]));
 						mapPiece = new Tile(texture, pieceIndex, renderColour);
 						mapPieces[pieceIndex.Y, pieceIndex.X] = mapPiece;
 					}
