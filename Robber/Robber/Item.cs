@@ -13,31 +13,26 @@ using Robber.Interfaces;
 using GWNorthEngine.Model;
 using GWNorthEngine.Model.Params;
 namespace Robber {
-	public class Item : IRenderable {
+	public class Item {
 		#region Class variables
-		private StaticDrawable2D image;
+		protected StaticDrawable2D image;
 		private Placement placement;
 		#endregion Class variables
 
 		#region Class propeties
-
+		public BoundingBox BoundingBox { get; set; }
 		#endregion Class properties
 
 		#region Constructor
-		public Item() {
-
+		public Item(ContentManager content, string textureName, Placement startingPlacement) {
+			StaticDrawable2DParams parms = new StaticDrawable2DParams();
+			parms.Texture = content.Load<Texture2D>(textureName);
+			parms.Position = startingPlacement.worldPosition;
+			this.image = new StaticDrawable2D(parms);
+			this.placement = startingPlacement;
+			this.BoundingBox = Helper.getBBox(this.placement.worldPosition);
 		}
 		#endregion Constructor
-
-		#region Support methods
-		public void update(float elapsed) {
-
-		}
-
-		public void render(SpriteBatch spriteBatch) {
-
-		}
-		#endregion Support methods
 
 		#region Destructor
 		public void dispose() {

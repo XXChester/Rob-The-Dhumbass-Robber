@@ -16,13 +16,14 @@ Raw version of the game functional with programmer art
 [*]Render the board
 [*]Render the player
 [*]Make the player movable
-[]Change the image based on the direction the player is moving in
-[]Render the treasure
-[]Make the player able to catch the treasure
-[]Render guards
+[*]Change the image based on the direction the player is moving in
+[*]Render the treasure
+[*]Make the player able to catch the treasure				NEEDS WORK IT IS A LITTLE BUGGY
+[*]Render guards
 []Put collision detection in with the walls
 []Make guards patrol the halls
 []Make the guards chase the player if he is seen
+[]Make a HUD
 []Implement flow mechanism
 []Render main menu screen
 []Render in game menu screen
@@ -45,12 +46,12 @@ Replace the programmer art with real art and make the game not only maintain its
 ============================
 Planning:2hour: 
 
-Programming:		4:30pm-
+Programming:		4:30pm-7:18pm	7:30pm-
 core:				
 polish:				
 
 Art:
-	3:30pm-4:30pm
+	3:30pm-4:30pm	7:18pm-7:30pm
 Sound:
 	
 Total Time:

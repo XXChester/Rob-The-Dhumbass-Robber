@@ -13,6 +13,7 @@ namespace Robber {
 		public const string PLAYER_IDENTIFIER = "Player";
 		public const string GUARD_IDENTIFIER = "Guard";
 		public const string GUARD_ENTRY_IDENTIFIER = "GuardEntry";
+		public const string TREASURE_IDENTIFIER = "Treasure";
 		#endregion Class variables
 
 		#region Class properties

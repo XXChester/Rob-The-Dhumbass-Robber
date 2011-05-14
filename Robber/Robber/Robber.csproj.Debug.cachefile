@@ -11,5 +11,11 @@ Content\PlayerDown.xnb
 Content\PlayerLeft.xnb
 Content\PlayerRight.xnb
 Content\PlayerUp.xnb
+Content\Treasure1.xnb
+Content\Treasure2.xnb
+Content\GuardDown.xnb
+Content\GuardLeft.xnb
+Content\GuardRight.xnb
+Content\GuardUp.xnb
 Scripts\Map1.DAT
 Scripts\Map1Locations.DAT

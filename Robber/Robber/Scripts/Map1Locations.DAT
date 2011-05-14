@@ -1,5 +1,9 @@
-﻿//Format of IDENTIFIER|X,Y
+﻿//REQUIRED Format of IDENTIFIER|X,Y
 Player|2,2
 Guard|17,15
 Guard|19,15
-GuardEntry|18, 17
+GuardEntry|18,17
+Treasure|13,0
+Treasure|12,0
+Treasure|13,1
+Treasure|12,1

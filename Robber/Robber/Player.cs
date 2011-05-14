@@ -16,7 +16,7 @@ namespace Robber {
 		#endregion Class variables
 
 		#region Class propeties
-
+		public int CapturedTreasures { get; set; }
 		#endregion Class properties
 
 		#region Constructor

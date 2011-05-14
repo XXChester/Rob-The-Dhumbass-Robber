@@ -117,6 +117,7 @@
     <Compile Include="Floor.cs" />
     <Compile Include="GameDisplay.cs" />
     <Compile Include="Guard.cs" />
+    <Compile Include="Helper.cs" />
     <Compile Include="Interfaces\IRenderable.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="Map.cs" />

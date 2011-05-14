@@ -9,8 +9,9 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using Robber.Interfaces;
 namespace Robber {
-	public class Treasure : Item {
+	public class Treasure : Item, IRenderable {
 		#region Class variables
 
 		#endregion Class variables
@@ -20,14 +21,22 @@ namespace Robber {
 		#endregion Class properties
 
 		#region Constructor
-		public Treasure()
-			: base() {
-
+		public Treasure(ContentManager content, string textureName, Placement startingPlacement)
+			: base(content, textureName, startingPlacement) {
+				this.PickedUp = false;
 		}
 		#endregion Constructor
 
 		#region Support methods
+		public void update(float elapsed) {
 
+		}
+
+		public void render(SpriteBatch spriteBatch) {
+			if (!this.PickedUp) {
+				base.image.render(spriteBatch);
+			}
+		}
 		#endregion Support methods
 
 		#region Destructor

@@ -15,8 +15,9 @@ namespace Robber {
 	public class GameDisplay : Display{
 		#region Class variables
 		private Map map;
-		private Person player;
+		private Player player;
 		private Person[] guards;
+		private Treasure[] treasures;
 		#endregion Class variables
 
 		#region Class propeties
@@ -31,6 +32,7 @@ namespace Robber {
 			Point playersLocation = new Point();
 			List<Point> guardLocations = new List<Point>();
 			List<Point> guardEntryPoints = new List<Point>();
+			List<Point> treasureLocations = new List<Point>();
 			try {
 				string[] components = null;
 				string[] indexes = null;
@@ -41,11 +43,13 @@ namespace Robber {
 						components = line.Split(ResourceManager.SEPARATOR);
 						indexes = components[1].Split(',');
 						if (components[0] == ResourceManager.PLAYER_IDENTIFIER) {
-							playersLocation = new Point(int.Parse(indexes[1]), int.Parse(indexes[0]));
+							playersLocation = new Point(int.Parse(indexes[0]), int.Parse(indexes[1]));
 						} else if (components[0] == ResourceManager.GUARD_IDENTIFIER) {
-							guardLocations.Add(new Point(int.Parse(indexes[1]), int.Parse(indexes[0])));
-						} else if (components[1] == ResourceManager.GUARD_ENTRY_IDENTIFIER) {
-							guardEntryPoints.Add(new Point(int.Parse(indexes[1]), int.Parse(indexes[0])));
+							guardLocations.Add(new Point(int.Parse(indexes[0]), int.Parse(indexes[1])));
+						} else if (components[0] == ResourceManager.GUARD_ENTRY_IDENTIFIER) {
+							guardEntryPoints.Add(new Point(int.Parse(indexes[0]), int.Parse(indexes[1])));
+						} else if (components[0] == ResourceManager.TREASURE_IDENTIFIER) {
+							treasureLocations.Add(new Point(int.Parse(indexes[0]), int.Parse(indexes[1])));
 						}
 					}
 				}
@@ -53,7 +57,25 @@ namespace Robber {
 				reader.Close();
 				reader.Dispose();
 			}
+			// load player at starting point
 			this.player = new Player(content, new Placement(playersLocation));
+
+			// load treasure at starting points
+			int treasureSize = treasureLocations.Count;
+			this.treasures = new Treasure[treasureSize];
+			string treasureFileName;
+			Random random = new Random();
+			for (int i = 0; i < treasureSize; i++) {
+				treasureFileName = "Treasure" + random.Next(1, 3);
+				this.treasures[i] = new Treasure(content, treasureFileName, new Placement(treasureLocations[i]));
+			}
+
+			// load guard(s) at starting points
+			int guardSize = guardLocations.Count;
+			this.guards = new Person[guardSize];
+			for (int i = 0; i < guardSize; i++) {
+				this.guards[i] = new Guard(content, new Placement(guardLocations[i]), Guard.State.Standing);
+			}
 		}
 		#endregion Constructor
 
@@ -61,11 +83,27 @@ namespace Robber {
 		public override void update(float elapsed) {
 			this.map.update(elapsed);
 			this.player.update(elapsed);
+			foreach (Guard guard in this.guards) {
+				guard.update(elapsed);
+			}
+			foreach (Treasure treasure in this.treasures) {
+				if (treasure.BoundingBox.Intersects(this.player.BoundingBox)) {
+					treasure.PickedUp = true;
+					this.player.CapturedTreasures++;
+					break;
+				}
+			}
 		}
 
 		public override void render(SpriteBatch spriteBatch) {
 			this.map.render(spriteBatch);
+			foreach (Treasure treasure in this.treasures) {
+				treasure.render(spriteBatch);
+			}
 			this.player.render(spriteBatch);
+			foreach (Guard guard in this.guards) {
+				guard.render(spriteBatch);
+			}
 		}
 		#endregion Support methods
 
@@ -80,6 +118,11 @@ namespace Robber {
 			if (this.guards != null) {
 				foreach (Person guard in this.guards) {
 					guard.dispose();
+				}
+			}
+			if (this.treasures != null) {
+				foreach (Treasure treasure in this.treasures) {
+					treasure.dispose();
 				}
 			}
 		}

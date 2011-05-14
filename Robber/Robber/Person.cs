@@ -37,6 +37,7 @@ namespace Robber {
 
 		#region Class propeties
 		public Placement Placement { get; set; }
+		public BoundingBox BoundingBox { get; set; }
 		#endregion Class properties
 
 		#region Constructor
@@ -53,17 +54,21 @@ namespace Robber {
 			this.rightSprite = new Animated2DSprite(parms);
 			fileName = fileStartsWith + "Left";
 			parms.TexturesName = fileName;
+			parms.Texture2D = null;
 			this.leftSprite = new Animated2DSprite(parms);
 			fileName = fileStartsWith + "Down";
 			parms.TexturesName = fileName;
+			parms.Texture2D = null;
 			this.downSprite = new Animated2DSprite(parms);
 			fileName = fileStartsWith + "Up";
 			parms.TexturesName = fileName;
+			parms.Texture2D = null;
 			this.upSprite = new Animated2DSprite(parms);
-			this.activeSprite = rightSprite;
 			this.Placement = startingLocation;
 			this.direction = Direction.None;
 			this.movementSpeed = movementSpeed;
+			this.BoundingBox = Helper.getBBox(this.Placement.worldPosition);
+			this.activeSprite = this.rightSprite;
 		}
 		#endregion Constructor
 
@@ -96,11 +101,11 @@ namespace Robber {
 						this.activeSprite = this.rightSprite;
 					}
 					this.activeSprite.Position = new Vector2(this.activeSprite.Position.X + moveDistance, this.activeSprite.Position.Y);
+				} else if (this.direction == Direction.Down) {
 					if (updateSprite) {
 						this.downSprite.Position = this.activeSprite.Position;
 						this.activeSprite = this.downSprite;
 					}
-				} else if (this.direction == Direction.Down) {
 					this.activeSprite.Position = new Vector2(this.activeSprite.Position.X, this.activeSprite.Position.Y + moveDistance);
 				} else if (this.direction == Direction.Left) {
 					if (updateSprite) {
@@ -110,6 +115,8 @@ namespace Robber {
 					this.activeSprite.Position = new Vector2(this.activeSprite.Position.X - moveDistance, this.activeSprite.Position.Y);
 				}
 			}
+			this.Placement = new Placement(Placement.getIndex(this.activeSprite.Position));
+			this.BoundingBox = Helper.getBBox(this.Placement.worldPosition);
 			this.previousDirection = this.direction;
 			this.previousKeyBoardState = this.currentKeyBoardState;
 		}
