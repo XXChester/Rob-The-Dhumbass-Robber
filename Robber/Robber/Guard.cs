@@ -96,9 +96,11 @@ namespace Robber {
 						}
 					} else if (this.currentState == State.Chase) {
 						// chase should regenerate the waypoint all the time
-						this.path = new Stack<Point>(AIManager.getInstane().findPath(base.Placement.index));
-						if (this.path.Count >= 1) {
-							this.closestsPoint = path.Pop();
+						if (this.closestsPoint == base.Placement.index) {
+							this.path = new Stack<Point>(AIManager.getInstane().findPath(base.Placement.index));
+							if (this.path.Count >= 1) {
+								this.closestsPoint = path.Pop();
+							}
 						}
 					}
 				}
