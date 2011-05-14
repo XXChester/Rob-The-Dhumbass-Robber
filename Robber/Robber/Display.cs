@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
 using Robber.Interfaces;
 namespace Robber {
 	public abstract class Display {
 		#region Class variables
-
+		protected KeyboardState currentKeyBoardState;
+		protected KeyboardState previousKeyBoardState;
 		#endregion Class variables
 
 		#region Class propeties
@@ -19,7 +21,11 @@ namespace Robber {
 		#endregion Constructor
 
 		#region Support methods
-		public abstract void update(float elapsed);
+		public virtual void update(float elapsed) {
+
+			this.previousKeyBoardState = this.currentKeyBoardState;
+		}
+
 		public abstract void render(SpriteBatch spriteBatch);
 		#endregion Support methods
 

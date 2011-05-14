@@ -13,6 +13,7 @@ using Robber.Interfaces;
 using GWNorthEngine.Model;
 using GWNorthEngine.Model.Params;
 using GWNorthEngine.Scripting;
+using GWNorthEngine.Utils;
 namespace Robber {
 	public abstract class Person : IRenderable {
 		protected enum Direction {
@@ -36,6 +37,8 @@ namespace Robber {
 		#endregion Class variables
 
 		#region Class propeties
+		public Texture2D ActiveTexture { get { return this.activeSprite.Texture; } }
+		public Color LightColour { get { return this.activeSprite.LightColour; } }
 		public Placement Placement { get; set; }
 		public BoundingBox BoundingBox { get; set; }
 		#endregion Class properties
@@ -46,6 +49,7 @@ namespace Robber {
 			Animated2DSpriteParams parms = new Animated2DSpriteParams();
 			parms.AnimationState = AnimationManager.AnimationState.PlayForward;
 			parms.Content = content;
+			parms.Origin = new Vector2(16f, 0f);
 			parms.FrameRate = 200f;
 			parms.LoadingType = Animated2DSprite.LoadingType.WholeSheetReadFramesFromFile;
 			parms.TexturesName = fileName;
@@ -81,6 +85,7 @@ namespace Robber {
 				this.activeSprite.update(elapsed);
 			}
 			updateMove();
+			Vector2 preChangePosition = this.activeSprite.Position;
 			if (this.direction != Direction.None) {
 				float moveDistance = (movementSpeed * elapsed);
 				// we are moving
@@ -114,9 +119,15 @@ namespace Robber {
 					}
 					this.activeSprite.Position = new Vector2(this.activeSprite.Position.X - moveDistance, this.activeSprite.Position.Y);
 				}
+				this.activeSprite.Position = new Vector2(MathHelper.Clamp(this.activeSprite.Position.X, 0f, 671), MathHelper.Clamp(this.activeSprite.Position.Y, 0, 575));
 			}
 			this.Placement = new Placement(Placement.getIndex(this.activeSprite.Position));
 			this.BoundingBox = Helper.getBBox(this.Placement.worldPosition);
+			if (CollisionManager.getInstance().collisionFound(this.BoundingBox)) {
+				this.activeSprite.Position = preChangePosition;
+				this.Placement = new Placement(Placement.getIndex(this.activeSprite.Position));
+				this.BoundingBox = Helper.getBBox(this.Placement.worldPosition);
+			}
 			this.previousDirection = this.direction;
 			this.previousKeyBoardState = this.currentKeyBoardState;
 		}

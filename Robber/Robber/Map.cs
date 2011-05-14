@@ -10,6 +10,9 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using Robber.Interfaces;
+using GWNorthEngine.Utils;
+using GWNorthEngine.Scripting;
+using GWNorthEngine.AI.AStar;
 namespace Robber {
 	public class Map : IRenderable {
 		#region Class variables
@@ -20,25 +23,35 @@ namespace Robber {
 		#endregion Class variables
 
 		#region Class propeties
-
+		public Tile[,] Tiles { get { return this.tiles; } }
 		#endregion Class properties
 
 		#region Constructor
-		public Map(ContentManager content, Tile[,] tiles, int height, int width) {
+		public Map( ContentManager content, Tile[,] tiles, int height, int width) {
 			this.tiles = tiles;
 			this.HEIGHT = height;
 			this.WIDTH = width;
 			Texture2D floorTexture = content.Load<Texture2D>("BasicTile");
 			this.floor = new Floor(ref HEIGHT, ref WIDTH, floorTexture, Color.White);
+			/*this.boundingBoxes.Add(Helper.getBBox(new Vector2(0f, 0f), new Vector2(671f, 0f)));
+			this.boundingBoxes.Add(Helper.getBBox(new Vector2(671f, 0f), new Vector2(671f, 575f)));
+			this.boundingBoxes.Add(Helper.getBBox(new Vector2(671f,575f), new Vector2(0f, 575f)));
+			this.boundingBoxes.Add(Helper.getBBox(new Vector2(0f,575f), new Vector2(0f,0f)));*/
 		}
 		#endregion Constructor
 
 		#region Support methods
+		private MouseState previous;
 		public void update(float elapsed) {
 #if DEBUG
-			if (Mouse.GetState().LeftButton == ButtonState.Pressed) {
-				Console.WriteLine(Placement.getIndex(new Vector2(Mouse.GetState().X, Mouse.GetState().Y)));
+			if (Mouse.GetState().LeftButton == ButtonState.Pressed && this.previous.LeftButton == ButtonState.Released) {
+				//Console.WriteLine(Placement.getIndex(new Vector2(Mouse.GetState().X, Mouse.GetState().Y)));
+				//string message = "BBox|" + Mouse.GetState().X + "," + Mouse.GetState().Y;
+				string message = "WayPoint|" + Placement.getIndex(new Vector2(Mouse.GetState().X, Mouse.GetState().Y)).X + ","  +
+					Placement.getIndex(new Vector2(Mouse.GetState().X, Mouse.GetState().Y)).Y;
+				ScriptManager.getInstance().log(message);
 			}
+			this.previous = Mouse.GetState();
 #endif
 		}
 

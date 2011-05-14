@@ -113,6 +113,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AIManager.cs" />
+    <Compile Include="CollisionManager.cs" />
     <Compile Include="Display.cs" />
     <Compile Include="Floor.cs" />
     <Compile Include="GameDisplay.cs" />

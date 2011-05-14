@@ -12,14 +12,16 @@ using Microsoft.Xna.Framework.Media;
 using Robber.Interfaces;
 using GWNorthEngine.Model;
 using GWNorthEngine.Model.Params;
+using GWNorthEngine.AI.AStar;
 namespace Robber {
 	public class Tile : IRenderable {
 		#region Class variables
-		private StaticDrawable2D image;
 		private Placement placement;
 		#endregion Class variables
 
 		#region Class propeties
+		public BoundingBox[] BoundingBoxes { get; set; }
+		public StaticDrawable2D Image { get; set; }
 		public Vector2 TopLimitation { get; set; }
 		public Vector2 RightLimitation { get; set; }
 		public Vector2 BottomLimitation { get; set; }
@@ -29,12 +31,11 @@ namespace Robber {
 		#region Constructor
 		public Tile(Texture2D texture, Point index, Color renderColour) {
 			this.placement = new Placement(index);
-
 			StaticDrawable2DParams parms = new StaticDrawable2DParams();
 			parms.Position = this.placement.worldPosition;
 			parms.Texture = texture;
 			parms.LightColour = renderColour;
-			this.image = new StaticDrawable2D(parms);
+			this.Image = new StaticDrawable2D(parms);
 		}
 		#endregion Constructor
 
@@ -44,16 +45,16 @@ namespace Robber {
 		}
 
 		public void render(SpriteBatch spriteBatch) {
-			if (this.image != null) {
-				this.image.render(spriteBatch);
+			if (this.Image != null) {
+				this.Image.render(spriteBatch);
 			}
 		}
 		#endregion Support methods
 		
 		#region Destructor
 		public void dispose() {
-			if (this.image != null) {
-				this.image.dispose();
+			if (this.Image != null) {
+				this.Image.dispose();
 			}
 		}
 		#endregion Destructor

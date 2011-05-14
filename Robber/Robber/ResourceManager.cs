@@ -14,6 +14,8 @@ namespace Robber {
 		public const string GUARD_IDENTIFIER = "Guard";
 		public const string GUARD_ENTRY_IDENTIFIER = "GuardEntry";
 		public const string TREASURE_IDENTIFIER = "Treasure";
+		public const string BOUNDING_BOX_IDENTIFIER = "BBox";
+		public const string WAYPOINT_IDENTIFIER = "WayPoint";
 		#endregion Class variables
 
 		#region Class properties

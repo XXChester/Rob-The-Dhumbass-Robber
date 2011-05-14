@@ -1,9 +1,24 @@
 ﻿//REQUIRED Format of IDENTIFIER|X,Y
+//Addition fields for guard are |STATE|DIRECTION
+//PLAYERS START POSITION
 Player|2,2
-Guard|17,15
-Guard|19,15
+//GUARD(S) START POSITIONS, STATE AND DIRECTION
+Guard|17,15|Patrol|Clockwise
+Guard|19,15|Patrol|CounterClockwise
+//POINT(S) THE GUARDS RUN IN FROM
 GuardEntry|18,17
+//TREASURE DEFINITIONS
 Treasure|13,0
 Treasure|12,0
 Treasure|13,1
 Treasure|12,1
+//WAY POINTS
+WayPoint|19,15
+WayPoint|3,15
+WayPoint|3,12
+WayPoint|6,14
+WayPoint|4,1
+WayPoint|6,1
+WayPoint|7,4
+WayPoint|13,3
+WayPoint|19,6

@@ -40,7 +40,7 @@ namespace Robber {
 		protected override void LoadContent() {
 			ScriptManager.getInstance().LogFile = "Log.log";
 			string MAP_INFORMATION =  Directory.GetCurrentDirectory() +  "\\Scripts\\Map1";
-			this.gameDisplay = new GameDisplay(Content, MAP_INFORMATION);
+			this.gameDisplay = new GameDisplay(GraphicsDevice, Content, MAP_INFORMATION);
 			this.activeDisplay = this.gameDisplay;
 		}
 
@@ -60,7 +60,7 @@ namespace Robber {
 		/// <param name="gameTime">Provides a snapshot of timing values.</param>
 		protected override void Update(GameTime gameTime) {
 #if DEBUG
-			base.Window.Title = "Flowers...FPS: " + FrameRate.getInstance().calculateFrameRate(gameTime) + "    X:" + Mouse.GetState().X + " Y:" + Mouse.GetState().Y;
+			base.Window.Title = "Rob, The Dumb Ass Robber...FPS: " + FrameRate.getInstance().calculateFrameRate(gameTime) + "    X:" + Mouse.GetState().X + " Y:" + Mouse.GetState().Y;
 #endif
 			// Allows the game to exit
 			if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape)) {

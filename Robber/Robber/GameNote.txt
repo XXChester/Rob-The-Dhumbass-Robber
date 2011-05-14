@@ -20,8 +20,8 @@ Raw version of the game functional with programmer art
 [*]Render the treasure
 [*]Make the player able to catch the treasure				NEEDS WORK IT IS A LITTLE BUGGY
 [*]Render guards
-[]Put collision detection in with the walls
-[]Make guards patrol the halls
+[]Put collision detection in with the walls		Wasted a mountain of time here trying to figure out a way to generate the bounding boxes on the fly
+[*]Make guards patrol the halls
 []Make the guards chase the player if he is seen
 []Make a HUD
 []Implement flow mechanism
@@ -44,14 +44,14 @@ Replace the programmer art with real art and make the game not only maintain its
 ============================
 		Time
 ============================
-Planning:2hour: 
+Planning: 2 hours
 
-Programming:		4:30pm-7:18pm	7:30pm-
+Programming:	9.5 hours	
 core:				
 polish:				
 
 Art:
-	3:30pm-4:30pm	7:18pm-7:30pm
+	1.2 5hours
 Sound:
 	
 Total Time:
