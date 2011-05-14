@@ -29,8 +29,7 @@ namespace Robber {
 		private Animated2DSprite rightSprite;
 		private Animated2DSprite downSprite;
 		private Animated2DSprite leftSprite;
-		private bool updateAI;
-		private PathFinder.TypeOfSpace previousTypeOfSpace;
+		protected PathFinder.TypeOfSpace previousTypeOfSpace;
 		protected Animated2DSprite activeSprite;
 		protected float movementSpeed;
 		protected Direction direction;
@@ -45,11 +44,10 @@ namespace Robber {
 		public Color LightColour { get { return this.activeSprite.LightColour; } }
 		public Placement Placement { get; set; }
 		public BoundingBox BoundingBox { get; set; }
-		//public BoundingSphere BoundingSphere { get; set; }
 		#endregion Class properties
 
 		#region Constructor
-		public Person(ContentManager content, string fileStartsWith, Placement startingLocation, float movementSpeed, bool updateAI) {
+		public Person(ContentManager content, string fileStartsWith, Placement startingLocation, float movementSpeed) {
 			string fileName = fileStartsWith + "Right";
 			Animated2DSpriteParams parms = new Animated2DSpriteParams();
 			parms.AnimationState = AnimationManager.AnimationState.PlayForward;
@@ -77,87 +75,50 @@ namespace Robber {
 			this.direction = Direction.None;
 			this.movementSpeed = movementSpeed;
 			this.BoundingBox = Helper.getBBox(this.Placement.worldPosition);
-			//this.BoundingSphere = Helper.getBSphere(this.Placement.worldPosition);
 			this.activeSprite = this.rightSprite;
-			this.updateAI = updateAI;
 			this.previousTypeOfSpace = AIManager.getInstane().Board[this.Placement.index.Y, this.Placement.index.X];
 		}
 		#endregion Constructor
 
 		#region Support methods
-		public abstract void updateMove();
-
-		public void update(float elapsed) {
-			this.currentKeyBoardState = Keyboard.GetState();
-			if (this.activeSprite != null) {
-				this.activeSprite.update(elapsed);
-			}
-			updateMove();
-
-			if (Keyboard.GetState().IsKeyDown(Keys.R)) {
-				this.activeSprite.Rotation += (5f / 1000f) * elapsed;
-			}
+		public virtual void updateMove(float elapsed) {
 			if (this.direction != Direction.None) {
-				float moveDistance = (movementSpeed * elapsed);
 				// we are moving
 				// if we are not moving in the same direction we need to change our sprite
 				bool updateSprite = false;
 				if (this.direction != this.previousDirection) {
 					updateSprite = true;
 				}
-				Vector2 newPos;
 				if (this.direction == Direction.Up) {
 					if (updateSprite) {
 						this.upSprite.Position = this.activeSprite.Position;
 						this.activeSprite = this.upSprite;
-					}
-					newPos = new Vector2(this.activeSprite.Position.X, this.activeSprite.Position.Y - moveDistance);
-					if (!CollisionManager.getInstance().collisionFound(Helper.getBBox(newPos))) {
-						this.activeSprite.Position = new Vector2(this.activeSprite.Position.X, this.activeSprite.Position.Y - moveDistance);
 					}
 				} else if (this.direction == Direction.Right) {
 					if (updateSprite) {
 						this.rightSprite.Position = this.activeSprite.Position;
 						this.activeSprite = this.rightSprite;
 					}
-					newPos = new Vector2(this.activeSprite.Position.X + moveDistance, this.activeSprite.Position.Y);
-					if (!CollisionManager.getInstance().collisionFound(Helper.getBBox(newPos))) {
-						this.activeSprite.Position = new Vector2(this.activeSprite.Position.X + moveDistance, this.activeSprite.Position.Y);
-					}
 				} else if (this.direction == Direction.Down) {
 					if (updateSprite) {
 						this.downSprite.Position = this.activeSprite.Position;
 						this.activeSprite = this.downSprite;
-					}
-					newPos = new Vector2(this.activeSprite.Position.X, this.activeSprite.Position.Y + moveDistance);
-					if (!CollisionManager.getInstance().collisionFound(Helper.getBBox(newPos))) {
-						this.activeSprite.Position = new Vector2(this.activeSprite.Position.X, this.activeSprite.Position.Y + moveDistance);
 					}
 				} else if (this.direction == Direction.Left) {
 					if (updateSprite) {
 						this.leftSprite.Position = this.activeSprite.Position;
 						this.activeSprite = this.leftSprite;
 					}
-					newPos = new Vector2(this.activeSprite.Position.X - moveDistance, this.activeSprite.Position.Y);
-					if (!CollisionManager.getInstance().collisionFound(Helper.getBBox(newPos))) {
-						this.activeSprite.Position = new Vector2(this.activeSprite.Position.X - moveDistance, this.activeSprite.Position.Y);
-					}
 				}
 			}
-			// update our placement and bounding box
-			this.Placement = new Placement(Placement.getIndex(this.activeSprite.Position));
-			this.BoundingBox = Helper.getBBox(this.activeSprite.Position);
-			//this.BoundingSphere = Helper.getBSphere(this.activeSprite.Position);
-			if (this.previousPlacement.index != this.Placement.index) {
-				AIManager.getInstane().Board[this.previousPlacement.index.Y, this.previousPlacement.index.X] = this.previousTypeOfSpace;
-				this.previousTypeOfSpace = AIManager.getInstane().Board[this.Placement.index.Y, this.Placement.index.X];
-				if (this.updateAI && AIManager.getInstane().PlayerDetected) {
-					// if we have been detected we need to tell the AI where we are
-					AIManager.getInstane().Board[this.Placement.index.Y, this.Placement.index.X] = PathFinder.TypeOfSpace.End;
-				} else {
-					AIManager.getInstane().Board[this.Placement.index.Y, this.Placement.index.X] = PathFinder.TypeOfSpace.Unwalkable;
-				}
+		}
+
+		public void update(float elapsed) {
+			this.currentKeyBoardState = Keyboard.GetState();
+			if (this.activeSprite != null) {
+				this.activeSprite.update(elapsed);
 			}
+			updateMove(elapsed);
 			this.previousDirection = this.direction;
 			this.previousKeyBoardState = this.currentKeyBoardState;
 			this.previousPlacement = this.Placement;

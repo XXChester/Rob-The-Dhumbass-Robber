@@ -52,7 +52,7 @@ Replace the programmer art with real art and make the game not only maintain its
 ============================
 Planning: 2 hours
 
-Programming:	9.5 hours	10:21am-11:32	12:00-12:15pm	2:45pm-
+Programming:	9.5 hours	10:21am-11:32	12:00-12:15pm	2:45pm-6:36pm	7:14pm-
 core:				
 polish:				
 

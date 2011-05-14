@@ -11,6 +11,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using GWNorthEngine.Utils;
+using GWNorthEngine.AI.AStar;
 namespace Robber {
 	public class Guard : Person {
 		public enum State {
@@ -42,7 +43,7 @@ namespace Robber {
 
 		#region Constructor
 		public Guard(GraphicsDevice device, ContentManager content, Placement startingLocation, string state, string movementDirection)
-			: base(content, "Guard", startingLocation, MOVEMENT_SPEED_WALK, false) {
+			: base(content, "Guard", startingLocation, MOVEMENT_SPEED_WALK) {
 			// figure out our direction
 			if (movementDirection == MovementDirection.Clockwise.ToString()) {
 				this.movementDirection = MovementDirection.Clockwise;
@@ -137,8 +138,43 @@ namespace Robber {
 			}
 		}
 
-		public override void updateMove() {
+		public override void updateMove(float elapsed) {
 			updateDirection();
+			if (base.direction != Direction.None) {
+				float moveDistance = (base.movementSpeed * elapsed);
+				Vector2 newPos;
+				if (base.direction == Direction.Up) {
+					newPos = new Vector2(base.activeSprite.Position.X, base.activeSprite.Position.Y - moveDistance);
+					if (!CollisionManager.getInstance().collisionFound(Helper.getBBox(newPos))) {
+						base.activeSprite.Position = new Vector2(base.activeSprite.Position.X, base.activeSprite.Position.Y - moveDistance);
+					}
+				} else if (base.direction == Direction.Right) {
+					newPos = new Vector2(base.activeSprite.Position.X + moveDistance, base.activeSprite.Position.Y);
+					if (!CollisionManager.getInstance().collisionFound(Helper.getBBox(newPos))) {
+						base.activeSprite.Position = new Vector2(base.activeSprite.Position.X + moveDistance, base.activeSprite.Position.Y);
+					}
+				} else if (base.direction == Direction.Down) {
+					newPos = new Vector2(this.activeSprite.Position.X, this.activeSprite.Position.Y + moveDistance);
+					if (!CollisionManager.getInstance().collisionFound(Helper.getBBox(newPos))) {
+						this.activeSprite.Position = new Vector2(this.activeSprite.Position.X, this.activeSprite.Position.Y + moveDistance);
+					}
+				} else if (this.direction == Direction.Left) {
+					newPos = new Vector2(base.activeSprite.Position.X - moveDistance, base.activeSprite.Position.Y);
+					if (!CollisionManager.getInstance().collisionFound(Helper.getBBox(newPos))) {
+						base.activeSprite.Position = new Vector2(base.activeSprite.Position.X - moveDistance, base.activeSprite.Position.Y);
+					}
+				}
+			}
+			// update our placement and bounding box
+			base.Placement = new Placement(Placement.getIndex(base.activeSprite.Position));
+			base.BoundingBox = Helper.getBBox(base.activeSprite.Position);
+			if (base.previousPlacement.index != base.Placement.index) {
+				AIManager.getInstane().Board[base.previousPlacement.index.Y, base.previousPlacement.index.X] = base.previousTypeOfSpace;
+				base.previousTypeOfSpace = AIManager.getInstane().Board[base.Placement.index.Y, base.Placement.index.X];
+				AIManager.getInstane().Board[base.Placement.index.Y, base.Placement.index.X] = PathFinder.TypeOfSpace.Unwalkable;
+			}
+
+			base.updateMove(elapsed);
 		}
 
 		public new void render(SpriteBatch spriteBatch) {
