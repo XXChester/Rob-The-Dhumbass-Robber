@@ -14,6 +14,7 @@ using GWNorthEngine.Model;
 using GWNorthEngine.Model.Params;
 using GWNorthEngine.Scripting;
 using GWNorthEngine.Utils;
+using GWNorthEngine.AI.AStar;
 namespace Robber {
 	public abstract class Person : IRenderable {
 		protected enum Direction {
@@ -29,6 +30,7 @@ namespace Robber {
 		private Animated2DSprite downSprite;
 		private Animated2DSprite leftSprite;
 		private bool updateAI;
+		private PathFinder.TypeOfSpace previousTypeOfSpace;
 		protected Animated2DSprite activeSprite;
 		protected float movementSpeed;
 		protected Direction direction;
@@ -76,6 +78,7 @@ namespace Robber {
 			this.BoundingBox = Helper.getBBox(this.Placement.worldPosition);
 			this.activeSprite = this.rightSprite;
 			this.updateAI = updateAI;
+			this.previousTypeOfSpace = AIManager.getInstane().Board[this.Placement.index.Y, this.Placement.index.X];
 		}
 		#endregion Constructor
 
@@ -134,8 +137,12 @@ namespace Robber {
 				this.BoundingBox = Helper.getBBox(this.Placement.worldPosition);
 			}
 			if (this.updateAI) {
+				if (this.previousPlacement.index != this.Placement.index) {
+					AIManager.getInstane().Board[this.previousPlacement.index.Y, this.previousPlacement.index.X] = this.previousTypeOfSpace;
+					this.previousTypeOfSpace = AIManager.getInstane().Board[this.Placement.index.Y, this.Placement.index.X];
+				}
 				// if we have been detected we need to tell the AI where we are
-				AIManager.getInstane().updatePlayerPosition(this.previousPlacement.index, this.Placement.index);
+				AIManager.getInstane().updatePlayerPosition(this.Placement.index);
 			}
 			this.previousDirection = this.direction;
 			this.previousKeyBoardState = this.currentKeyBoardState;
