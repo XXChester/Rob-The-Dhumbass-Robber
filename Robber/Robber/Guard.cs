@@ -35,12 +35,12 @@ namespace Robber {
 		#endregion Class variables
 
 		#region Class propeties
-
+		
 		#endregion Class properties
 
 		#region Constructor
 		public Guard(GraphicsDevice device, ContentManager content, Placement startingLocation, string state, string movementDirection)
-			: base(content, "Guard", startingLocation, MOVEMENT_SPEED_WALK) {
+			: base(content, "Guard", startingLocation, MOVEMENT_SPEED_WALK, false) {
 			// figure out our direction
 			if (movementDirection == MovementDirection.Clockwise.ToString()) {
 				this.movementDirection = MovementDirection.Clockwise;
@@ -48,18 +48,19 @@ namespace Robber {
 				this.movementDirection = MovementDirection.CounterClockwise;
 			}
 			// figure out our starting state
+			State initalState;
 			if (state == State.Chase.ToString()) {
-				this.currentState = State.Chase;
-				base.movementSpeed = MOVEMENT_SPEED_RUN;
+				initalState = State.Chase;
 			} else if (state == State.Patrol.ToString()) {
-				this.currentState = State.Patrol;
+				initalState = State.Patrol;
 			} else if (state == State.Standing.ToString()) {
-				this.currentState = State.Standing;
+				initalState = State.Standing;
 			} else {
-				this.currentState = State.NotSpawned;
+				initalState = State.NotSpawned;
 			}
+			updateState(initalState);
 
-			if (this.currentState == State.Patrol) {
+			if (this.currentState == State.Patrol || AIManager.getInstane().PlayerDetected) {
 				this.destinationWayPoint = AIManager.getInstane().getNextWayPoint(base.Placement.index, this.movementDirection);
 				this.path = new Queue<Point>(AIManager.getInstane().findPath(base.Placement.index, this.destinationWayPoint));
 				this.closestsPoint = this.path.Dequeue();
@@ -69,28 +70,58 @@ namespace Robber {
 		#endregion Constructor
 
 		#region Support methods
+		private void updateState(State newState) {
+			if (newState == State.Chase) {
+				base.movementSpeed = MOVEMENT_SPEED_RUN;
+			} else if (newState == State.Patrol) {
+				base.movementSpeed = MOVEMENT_SPEED_WALK;
+			} else if (newState == State.Standing) {
+				base.direction = Direction.None;
+			}
+			this.currentState = newState;
+		}
+
+		private void updateDirection() {
+			// figure out what direction our next waypoint is
+			Point temp = new Point(base.Placement.index.X - closestsPoint.X, base.Placement.index.Y - closestsPoint.Y);
+			if (temp.X <= -1) {
+				base.direction = Direction.Right;
+			} else if (temp.X >= 1) {
+				base.direction = Direction.Left;
+			} else if (temp.Y <= -1) {
+				base.direction = Direction.Down;
+			} else if (temp.Y >= 1) {
+				base.direction = Direction.Up;
+			} else {
+				base.direction = Direction.None;
+			}
+		}
+
 		public override void updateMove() {
-			if (this.currentState == State.Chase || this.currentState == State.Patrol) {
+			if (AIManager.getInstane().PlayerDetected) {
+				updateState(State.Chase);
+			}
+			// patrol can just generate the waypoint once
+			if (this.currentState == State.Patrol) {
 				if (base.Placement.index == this.destinationWayPoint) {
 					this.destinationWayPoint = AIManager.getInstane().getNextWayPoint(base.Placement.index, this.movementDirection);
 					this.path = new Queue<Point>(AIManager.getInstane().findPath(base.Placement.index, this.destinationWayPoint));
 				} else if (base.Placement.index != this.closestsPoint) {
-					// figure out what direction our next waypoint is
-					Point temp = new Point(base.Placement.index.X - closestsPoint.X, base.Placement.index.Y - closestsPoint.Y);
-					if (temp.X <= -1) {
-						base.direction = Direction.Right;
-					} else if (temp.X >= 1) {
-						base.direction = Direction.Left;
-					} else if (temp.Y <= -1) {
-						base.direction = Direction.Down;
-					} else if (temp.Y >= 1) {
-						base.direction = Direction.Up;
-					} else {
-						base.direction = Direction.None;
-					}
+					updateDirection();
 				} else {
-					this.closestsPoint = path.Dequeue();
+					if (this.path.Count >= 1) {
+						this.closestsPoint = path.Dequeue();
+					}
 				}
+			} else if (this.currentState == State.Chase) {
+				// chase should regenerate the waypoint all the time
+				if (this.closestsPoint == base.Placement.index) {
+					this.path = new Queue<Point>(AIManager.getInstane().findPath(base.Placement.index));
+					if (this.path.Count >= 1) {
+						this.closestsPoint = path.Dequeue();
+					}
+				}
+				updateDirection();
 			}
 		}
 

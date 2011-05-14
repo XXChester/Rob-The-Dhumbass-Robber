@@ -21,7 +21,7 @@ namespace Robber {
 
 		#region Constructor
 		public Player(ContentManager content, Placement startingLocation)
-			: base(content, "Player", startingLocation, MOVEMENT_SPEED) {
+			: base(content, "Player", startingLocation, MOVEMENT_SPEED, true) {
 
 		}
 		#endregion Constructor

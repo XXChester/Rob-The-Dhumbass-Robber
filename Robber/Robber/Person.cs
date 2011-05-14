@@ -28,12 +28,14 @@ namespace Robber {
 		private Animated2DSprite rightSprite;
 		private Animated2DSprite downSprite;
 		private Animated2DSprite leftSprite;
+		private bool updateAI;
 		protected Animated2DSprite activeSprite;
 		protected float movementSpeed;
 		protected Direction direction;
 		protected Direction previousDirection;
 		protected KeyboardState currentKeyBoardState;
 		protected KeyboardState previousKeyBoardState;
+		protected Placement previousPlacement;
 		#endregion Class variables
 
 		#region Class propeties
@@ -44,7 +46,7 @@ namespace Robber {
 		#endregion Class properties
 
 		#region Constructor
-		public Person(ContentManager content, string fileStartsWith, Placement startingLocation, float movementSpeed) {
+		public Person(ContentManager content, string fileStartsWith, Placement startingLocation, float movementSpeed, bool updateAI) {
 			string fileName = fileStartsWith + "Right";
 			Animated2DSpriteParams parms = new Animated2DSpriteParams();
 			parms.AnimationState = AnimationManager.AnimationState.PlayForward;
@@ -73,6 +75,7 @@ namespace Robber {
 			this.movementSpeed = movementSpeed;
 			this.BoundingBox = Helper.getBBox(this.Placement.worldPosition);
 			this.activeSprite = this.rightSprite;
+			this.updateAI = updateAI;
 		}
 		#endregion Constructor
 
@@ -85,7 +88,7 @@ namespace Robber {
 				this.activeSprite.update(elapsed);
 			}
 			updateMove();
-			Vector2 preChangePosition = this.activeSprite.Position;
+
 			if (this.direction != Direction.None) {
 				float moveDistance = (movementSpeed * elapsed);
 				// we are moving
@@ -121,15 +124,22 @@ namespace Robber {
 				}
 				this.activeSprite.Position = new Vector2(MathHelper.Clamp(this.activeSprite.Position.X, 0f, 671), MathHelper.Clamp(this.activeSprite.Position.Y, 0, 575));
 			}
+			// update our placement and bounding box
 			this.Placement = new Placement(Placement.getIndex(this.activeSprite.Position));
 			this.BoundingBox = Helper.getBBox(this.Placement.worldPosition);
+			// if there was a collision we cannot move there
 			if (CollisionManager.getInstance().collisionFound(this.BoundingBox)) {
-				this.activeSprite.Position = preChangePosition;
+				this.activeSprite.Position = this.previousPlacement.worldPosition;
 				this.Placement = new Placement(Placement.getIndex(this.activeSprite.Position));
 				this.BoundingBox = Helper.getBBox(this.Placement.worldPosition);
 			}
+			if (this.updateAI) {
+				// if we have been detected we need to tell the AI where we are
+				AIManager.getInstane().updatePlayerPosition(this.previousPlacement.index, this.Placement.index);
+			}
 			this.previousDirection = this.direction;
 			this.previousKeyBoardState = this.currentKeyBoardState;
+			this.previousPlacement = this.Placement;
 		}
 
 		public void render(SpriteBatch spriteBatch) {
