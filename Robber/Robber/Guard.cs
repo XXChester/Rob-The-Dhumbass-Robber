@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
@@ -28,6 +29,7 @@ namespace Robber {
 		private Point destinationWayPoint;
 		private Point closestsPoint;
 		private Queue<Point> path;
+		private Thread AIThread;
 		private MovementDirection movementDirection;
 		private const float MOVEMENT_SPEED_WALK = 60f / 1000f;
 		private const float MOVEMENT_SPEED_RUN = 155f / 1000f;
@@ -35,7 +37,7 @@ namespace Robber {
 		#endregion Class variables
 
 		#region Class propeties
-		
+		public bool RunAIThread { get; set; }
 		#endregion Class properties
 
 		#region Constructor
@@ -66,10 +68,44 @@ namespace Robber {
 				this.closestsPoint = this.path.Dequeue();
 			}
 			this.chipTexture = TextureUtils.create2DColouredTexture(device, 32, 32, Color.White);
+			this.RunAIThread = true;
+			this.AIThread= new Thread(new ThreadStart(generateMoves));
+			this.AIThread.Start();
 		}
 		#endregion Constructor
 
 		#region Support methods
+		private void generateMoves() {
+			do {
+				Thread.Sleep(10);
+				if (AIManager.getInstane().PlayerDetected) {
+					updateState(State.Chase);
+				}
+				lock (AIManager.getInstane().Board) {
+					// patrol can just generate the waypoint once
+					if (this.currentState == State.Patrol) {
+						if (base.Placement.index == this.destinationWayPoint) {
+							this.destinationWayPoint = AIManager.getInstane().getNextWayPoint(base.Placement.index, this.movementDirection);
+							this.path = new Queue<Point>(AIManager.getInstane().findPath(base.Placement.index, this.destinationWayPoint));
+						} else if (base.Placement.index == this.closestsPoint) {
+							if (this.path.Count >= 1) {
+								this.closestsPoint = path.Dequeue();
+							}
+						}
+					} else if (this.currentState == State.Chase) {
+						// chase should regenerate the waypoint all the time
+						this.path = new Queue<Point>(AIManager.getInstane().findPath(base.Placement.index));
+						if (this.path.Count >= 1) {
+							this.closestsPoint = path.Dequeue();
+						}
+					}
+				}
+				if (!this.RunAIThread) {
+					break;
+				}
+			} while (this.RunAIThread);
+		}
+
 		private void updateState(State newState) {
 			if (newState == State.Chase) {
 				base.movementSpeed = MOVEMENT_SPEED_RUN;
@@ -98,31 +134,7 @@ namespace Robber {
 		}
 
 		public override void updateMove() {
-			if (AIManager.getInstane().PlayerDetected) {
-				updateState(State.Chase);
-			}
-			// patrol can just generate the waypoint once
-			if (this.currentState == State.Patrol) {
-				if (base.Placement.index == this.destinationWayPoint) {
-					this.destinationWayPoint = AIManager.getInstane().getNextWayPoint(base.Placement.index, this.movementDirection);
-					this.path = new Queue<Point>(AIManager.getInstane().findPath(base.Placement.index, this.destinationWayPoint));
-				} else if (base.Placement.index != this.closestsPoint) {
-					updateDirection();
-				} else {
-					if (this.path.Count >= 1) {
-						this.closestsPoint = path.Dequeue();
-					}
-				}
-			} else if (this.currentState == State.Chase) {
-				// chase should regenerate the waypoint all the time
-				if (this.closestsPoint == base.Placement.index) {
-					this.path = new Queue<Point>(AIManager.getInstane().findPath(base.Placement.index));
-					if (this.path.Count >= 1) {
-						this.closestsPoint = path.Dequeue();
-					}
-				}
-				updateDirection();
-			}
+			updateDirection();
 		}
 
 		public void render(SpriteBatch spriteBatch) {
@@ -135,8 +147,11 @@ namespace Robber {
 		#endregion Support methods
 
 		#region Destructor
-		~Guard() {
+		public new void dispose() {
 			this.chipTexture.Dispose();
+			this.RunAIThread = false;
+			this.AIThread.Abort();
+			base.dispose();
 		}
 		#endregion Destructor
 	}

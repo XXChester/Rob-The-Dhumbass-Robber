@@ -169,7 +169,7 @@ namespace Robber {
 				this.player.dispose();
 			}
 			if (this.guards != null) {
-				foreach (Person guard in this.guards) {
+				foreach (Guard guard in this.guards) {
 					guard.dispose();
 				}
 			}

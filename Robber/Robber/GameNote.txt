@@ -22,7 +22,9 @@ Raw version of the game functional with programmer art
 [*]Render guards
 []Put collision detection in with the walls		Wasted a mountain of time here trying to figure out a way to generate the bounding boxes on the fly
 [*]Make guards patrol the halls
-[]Make the guards chase the player if he is seen
+[*]Make the guards chase the player if he is seen
+[]Put in collision detection with each of the guards
+[]Put in collision detection with the player
 []Make a HUD
 []Implement flow mechanism
 []Render main menu screen
@@ -46,7 +48,7 @@ Replace the programmer art with real art and make the game not only maintain its
 ============================
 Planning: 2 hours
 
-Programming:	9.5 hours	10:21am-
+Programming:	9.5 hours	10:21am-11:32
 core:				
 polish:				
 

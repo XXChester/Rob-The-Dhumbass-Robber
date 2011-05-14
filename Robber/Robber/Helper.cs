@@ -24,5 +24,9 @@ namespace Robber {
 		public static Vector2 addTileSize(Vector2 pos) {
 			return new Vector2(pos.X + ResourceManager.TILE_SIZE, pos.Y + ResourceManager.TILE_SIZE);
 		}
+
+		public static Point subtractPoint(Point p1, Point p2) {
+			return new Point(p1.X - p2.X, p1.Y - p2.Y);
+		}
 	}
 }
