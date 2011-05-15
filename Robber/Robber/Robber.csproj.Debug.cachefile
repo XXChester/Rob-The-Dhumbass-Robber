@@ -26,5 +26,9 @@ Content\Rules.xnb
 Content\Introduction.xnb
 Content\RobRight.xnb
 Content\ExitTile.xnb
+Scripts\Map3.DAT
+Scripts\Map3Indentifiers.DAT
+Scripts\Map2Indentifiers.DAT
+Scripts\Map2.DAT
 Scripts\Map1.DAT
 Scripts\Map1Indentifiers.DAT

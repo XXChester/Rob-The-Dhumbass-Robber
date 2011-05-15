@@ -10,7 +10,7 @@ namespace Robber {
 			InGameMenu,
 			InitGame,
 			Reset,
-			Waiting,
+			Waiting,//This stage is great for mapping a new mops Identifers, uncomment what you are mapping in Map.cs's update method and click away
 			Active,
 			GameOver,
 			Exit

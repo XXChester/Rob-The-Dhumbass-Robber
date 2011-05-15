@@ -54,6 +54,8 @@ Replace the programmer art with less crappy programmer art and make the game not
 []Sfx
 []Put doors in
 []Rotate idle sfxs
+[]Multiple maps read from directory
+[]Map select screen
 
 ===========================
 ISSUES
@@ -66,10 +68,10 @@ ISSUES
 ============================
 Planning: 2 hours
 
-	Programming:	20 hours		10:30am-2:45pm		3:42pm-4:02pm	5pm-
+	Programming:	20 hours		10:30am-2:45pm		3:42pm-4:02pm	5pm-5:25pm	6:15pm-
 polish:				
 
-Art: 3 hours		2:45pm-3:30pm	4:02pm-5pm
+Art: 3 hours		2:45pm-3:30pm	4:02pm-5:1p0m	6pm-6:15pm
 Sound:	.75 hours
 	
 Total Time:

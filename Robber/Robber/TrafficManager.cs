@@ -45,7 +45,7 @@ namespace Robber {
 		protected override void LoadContent() {
 			ScriptManager.getInstance().LogFile = "Log.log";
 			ResourceManager.getInstance().init(GraphicsDevice, Content);
-			string MAP_INFORMATION =  Directory.GetCurrentDirectory() +  "\\Scripts\\Map1";
+			string MAP_INFORMATION =  Directory.GetCurrentDirectory() +  "\\Scripts\\Map3";
 			this.mainMenu = new MainMenu(Content);
 			this.inGameMenu = new InGameMenu(Content);
 			this.gameDisplay = new GameDisplay(GraphicsDevice, Content, MAP_INFORMATION);
