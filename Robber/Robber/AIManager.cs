@@ -32,8 +32,11 @@ namespace Robber {
 			int index = this.WayPoints.IndexOf(currentWayPoint);
 			// Sense you can specify a starting point that is NOT a waypoint we need to account for that
 			if (index == -1) {
-				// send him to a random waypoint
-				index = new Random().Next(this.WayPoints.Count);
+				if (movementDirection == Guard.MovementDirection.Clockwise) {
+					index = 0;
+				} else {
+					index = this.WayPoints.Count - 1;
+				}
 			}
 			if (movementDirection == Guard.MovementDirection.Clockwise) {
 				if (index == this.WayPoints.Count - 1) {

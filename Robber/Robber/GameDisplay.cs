@@ -162,6 +162,8 @@ namespace Robber {
 					if (guard.BoundingBox.Intersects(this.player.BoundingBox)) {
 						StateManager.getInstance().CurrentGameState = StateManager.GameState.GameOver;
 						break;
+					} else if (guard.Ring.BoundingSphere.Intersects(this.player.BoundingBox)) {
+						AIManager.getInstane().PlayerDetected = true;
 					}
 				}
 			} else if (StateManager.getInstance().CurrentGameState == StateManager.GameState.GameOver) {
@@ -211,6 +213,14 @@ namespace Robber {
 				this.debugUtils.drawBoundingBox(spriteBatch, this.player.BoundingBox, debugColour);
 				foreach (Guard guard in this.guards) {
 					this.debugUtils.drawBoundingBox(spriteBatch, guard.BoundingBox,debugColour);
+					/*bool inRange = false;
+					int xDiff = Math.Max(base.currentMouseState.X, (int)guard.Sprite.Position.X) - Math.Min(base.currentMouseState.X, (int)guard.Sprite.Position.X);
+					int yDiff = Math.Max(base.currentMouseState.Y, (int)guard.Sprite.Position.Y) - Math.Min(base.currentMouseState.Y, (int)guard.Sprite.Position.Y);
+					// if our distance is within the range ring, we are within range
+					if (xDiff <= guard.Ring.BoundingSphere.Radius && yDiff <= guard.Ring.BoundingSphere.Radius) {
+						Console.WriteLine("In range");
+					}*/
+					//DebugUtils.drawBoundingSphere(spriteBatch, guard.Ring.BoundingSphere, debugColour, this.debugRing);
 				}
 				foreach (BoundingBox box in CollisionManager.getInstance().MapBoundingBoxes) {
 					this.debugUtils.drawBoundingBox(spriteBatch, box, debugColour);

@@ -42,6 +42,7 @@ namespace Robber {
 		#region Class propeties
 		public Texture2D ActiveTexture { get { return this.activeSprite.Texture; } }
 		public Color LightColour { get { return this.activeSprite.LightColour; } }
+		public Animated2DSprite Sprite { get { return this.activeSprite; } }
 		public Placement Placement { get; set; }
 		public BoundingBox BoundingBox { get; set; }
 		#endregion Class properties

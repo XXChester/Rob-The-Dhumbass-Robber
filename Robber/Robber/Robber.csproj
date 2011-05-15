@@ -129,6 +129,7 @@
     <Compile Include="Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="RadiusRing.cs" />
     <Compile Include="ResourceManager.cs" />
     <Compile Include="StateManager.cs" />
     <Compile Include="Tile.cs" />

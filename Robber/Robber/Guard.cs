@@ -12,6 +12,8 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using GWNorthEngine.Utils;
 using GWNorthEngine.AI.AStar;
+using GWNorthEngine.Model;
+using GWNorthEngine.Model.Params;
 namespace Robber {
 	public class Guard : Person {
 		public enum State {
@@ -26,6 +28,7 @@ namespace Robber {
 			CounterClockwise
 		}
 		#region Class variables
+		private RadiusRing ring;
 		private State currentState;
 		private Point destinationWayPoint;
 		private Point closestsPoint;
@@ -39,6 +42,7 @@ namespace Robber {
 
 		#region Class propeties
 		public bool RunAIThread { get; set; }
+		public RadiusRing Ring { get { return this.ring; } }
 		#endregion Class properties
 
 		#region Constructor
@@ -80,6 +84,8 @@ namespace Robber {
 			base.rightSprite.Origin = new Vector2(0f, 0f);
 			base.downSprite.Origin = new Vector2(0f, 0f);
 			base.leftSprite.Origin = new Vector2(0f, 0f);
+
+			this.ring = new RadiusRing(content, base.activeSprite.Position);
 		}
 		#endregion Constructor
 
@@ -170,6 +176,7 @@ namespace Robber {
 						base.activeSprite.Position = new Vector2(base.activeSprite.Position.X - moveDistance, base.activeSprite.Position.Y);
 					//}
 				}
+				this.ring.updatePosition(base.activeSprite.Position);
 			}
 			// update our placement and bounding box
 			base.Placement = new Placement(Placement.getIndex(base.activeSprite.Position));
@@ -186,6 +193,7 @@ namespace Robber {
 		}
 
 		public new void render(SpriteBatch spriteBatch) {
+			this.ring.render(spriteBatch);
 #if DEBUG
 			spriteBatch.Draw(this.chipTexture, new Placement(this.destinationWayPoint).worldPosition, Color.Green);
 #endif
@@ -196,6 +204,9 @@ namespace Robber {
 
 		#region Destructor
 		public new void dispose() {
+			if (this.ring != null) {
+				this.ring.dispose();
+			}
 			this.chipTexture.Dispose();
 			this.RunAIThread = false;
 			this.AIThread.Abort();
