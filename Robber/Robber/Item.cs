@@ -34,6 +34,12 @@ namespace Robber {
 		}
 		#endregion Constructor
 
+		#region Support methods
+		public void updateColours(Color colour) {
+			this.image.LightColour = colour;
+		}
+		#endregion Support methods
+
 		#region Destructor
 		public void dispose() {
 			if (this.image != null) {

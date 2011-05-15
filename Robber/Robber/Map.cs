@@ -24,19 +24,32 @@ namespace Robber {
 
 		#region Class propeties
 		public Tile[,] Tiles { get { return this.tiles; } }
+		public Color WallColour { get; set; }
+		public Color FloorColour { get; set; }
 		#endregion Class properties
 
 		#region Constructor
-		public Map( ContentManager content, Tile[,] tiles, int height, int width) {
+		public Map( ContentManager content, Tile[,] tiles, int height, int width, Color floorColour, Color wallColour) {
+			this.FloorColour = floorColour;
+			this.WallColour = wallColour;
 			this.tiles = tiles;
 			this.HEIGHT = height;
 			this.WIDTH = width;
 			Texture2D floorTexture = content.Load<Texture2D>("BasicTile");
-			this.floor = new Floor(ref HEIGHT, ref WIDTH, floorTexture, Color.White);
+			this.floor = new Floor(ref HEIGHT, ref WIDTH, floorTexture, floorColour);
 		}
 		#endregion Constructor
 
 		#region Support methods
+		public void updateColours(Color floorColour, Color wallColour) {
+			foreach (Tile tile in this.tiles) {
+				if (tile != null) {
+					tile.updateColours(wallColour);
+				}
+			}
+			this.floor.updateColours(floorColour);
+		}
+
 		private MouseState previous;
 		public void update(float elapsed) {
 #if DEBUG

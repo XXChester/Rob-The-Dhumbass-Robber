@@ -44,13 +44,15 @@ Replace the programmer art with real art and make the game not only maintain its
 []Make timer have decimal places
 []Delay the start of the level so the user can have a look at the layout	***
 []Pause at waypoints				
-[]Screen fades in and out
+[*]Screen fades in and out (Transitions)
 []Robber and guard sprites
 [*]Upgrade tile graphics
 []Add in garbage cans to hide in and clear agro**
 []Add in random sneezing if you stand within the same tile too long
 []Add in emote system when guards are chasing etc
+[]Sfx emotes
 []Sfx
+[]Rotate idle sfxs
 
 ===========================
 ISSUES
@@ -63,7 +65,7 @@ ISSUES
 ============================
 Planning: 2 hours
 
-	Programming:	20 hours
+	Programming:	20 hours		10:30am-
 polish:				
 
 Art: 3 hours		

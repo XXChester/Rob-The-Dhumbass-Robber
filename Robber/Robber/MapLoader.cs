@@ -14,7 +14,7 @@ using GWNorthEngine.Utils;
 using GWNorthEngine.AI.AStar;
 namespace Robber {
 	public class MapLoader {
-		public static Map load(ContentManager content, string mapName, Color renderColour) {
+		public static Map load(ContentManager content, string mapName, Color floorcolour, Color wallColour) {
 			Map map = null;
 			StreamReader reader = new StreamReader(mapName);
 			try {
@@ -69,11 +69,11 @@ namespace Robber {
 						}
 						pieceIndex = new Point(x, y);
 						tileSpaces[y, x] = EnumUtils.numberToEnum<PathFinder.TypeOfSpace>(int.Parse(components[2]));
-						mapPiece = new Tile(texture, pieceIndex, renderColour);
+						mapPiece = new Tile(texture, pieceIndex, wallColour);
 						mapPieces[pieceIndex.Y, pieceIndex.X] = mapPiece;
 					}
 				}
-				map = new Map(content, mapPieces, height, width);
+				map = new Map(content, mapPieces, height, width, floorcolour, wallColour);
 				AIManager.getInstane().init(height, width);
 				AIManager.getInstane().Board = tileSpaces;
 			} finally {

@@ -9,11 +9,19 @@ namespace Robber {
 			MainMenu,
 			InGameMenu,
 			InitGame,
-			InitReturnToMain,
+			Reset,
+			Waiting,
 			Active,
 			GameOver,
 			Exit
 		}
+
+		public enum TransitionState {
+			None,
+			TransitionIn,
+			TransitionOut,
+		};
+
 		public enum GameOverType {
 			None,
 			Player,
@@ -27,11 +35,18 @@ namespace Robber {
 
 		#region Class properties
 		public GameOverType TypeOfGameOver { get; set; }
+		public TransitionState CurrentTransitionState { get; set; }
+		public TransitionState PreviousTransitionState { get; set; }
+		public GameState PreviousGameState { get; set; }
 		public GameState CurrentGameState {
 			get { return this.gameState; }
 			set {
+				this.PreviousGameState = this.CurrentGameState;
+
 				if (value == GameState.Active) {
 					this.TypeOfGameOver = GameOverType.None;
+				} else if (value == GameState.GameOver) {
+					this.CurrentTransitionState = TransitionState.TransitionOut;
 				}
 				this.gameState = value;
 			}
@@ -40,8 +55,8 @@ namespace Robber {
 
 		#region Constructor
 		public StateManager() {
-			this.CurrentGameState = GameState.MainMenu;;
-
+			this.CurrentGameState = GameState.MainMenu;
+			this.CurrentTransitionState = TransitionState.TransitionIn;
 		}
 		#endregion Constructor
 

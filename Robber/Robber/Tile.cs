@@ -17,15 +17,15 @@ namespace Robber {
 	public class Tile : IRenderable {
 		#region Class variables
 		private Placement placement;
+		private StaticDrawable2D image;
 		#endregion Class variables
 
 		#region Class propeties
-		public BoundingBox[] BoundingBoxes { get; set; }
-		public StaticDrawable2D Image { get; set; }
+		/*public BoundingBox[] BoundingBoxes { get; set; }
 		public Vector2 TopLimitation { get; set; }
 		public Vector2 RightLimitation { get; set; }
 		public Vector2 BottomLimitation { get; set; }
-		public Vector2 LeftLimitation { get; set; }
+		public Vector2 LeftLimitation { get; set; }*/
 		#endregion Class properties
 
 		#region Constructor
@@ -35,26 +35,30 @@ namespace Robber {
 			parms.Position = this.placement.worldPosition;
 			parms.Texture = texture;
 			parms.LightColour = renderColour;
-			this.Image = new StaticDrawable2D(parms);
+			this.image = new StaticDrawable2D(parms);
 		}
 		#endregion Constructor
 
 		#region Support methods
+		public void updateColours(Color colour) {
+			this.image.LightColour = colour;
+		}
+
 		public void update(float elapsed) {
 
 		}
 
 		public void render(SpriteBatch spriteBatch) {
-			if (this.Image != null) {
-				this.Image.render(spriteBatch);
+			if (this.image != null) {
+				this.image.render(spriteBatch);
 			}
 		}
 		#endregion Support methods
 		
 		#region Destructor
 		public void dispose() {
-			if (this.Image != null) {
-				this.Image.dispose();
+			if (this.image != null) {
+				this.image.dispose();
 			}
 		}
 		#endregion Destructor

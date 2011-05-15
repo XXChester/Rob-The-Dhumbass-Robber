@@ -18,8 +18,8 @@ using GWNorthEngine.Scripting;
 namespace Robber {
 	public class MainMenu : Display {
 		#region Class variables
-		private Button playButton;
-		private Button exitButton;
+		private ColouredButton playButton;
+		private ColouredButton exitButton;
 		private StaticDrawable2D backGround;
 		private StaticDrawable2D title;
 		private SoundEffect introSfx;
@@ -73,7 +73,9 @@ namespace Robber {
 			this.idleSfx = content.Load<SoundEffect>("Rules");
 			this.outroSfx = content.Load<SoundEffect>("LetsGo");
 			this.exitSfx = content.Load<SoundEffect>("Chicken");
-			this.introSfx.Play(1f, 0f, 0f);
+			if (ResourceManager.PLAY_SOUND) {
+				this.introSfx.Play(1f, 0f, 0f);
+			}
 #if WINDOWS
 #if DEBUG
 			ScriptManager.getInstance().registerObject(((ColouredButton)this.playButton).Text, "playText");
@@ -90,19 +92,62 @@ namespace Robber {
 			
 			this.playButton.processActorsMovement(mousePos);
 			this.exitButton.processActorsMovement(mousePos);
-			if (base.currentMouseState.LeftButton == ButtonState.Pressed && base.prevousMouseState.LeftButton == ButtonState.Released) {
+			if (StateManager.getInstance().CurrentTransitionState == StateManager.TransitionState.None) {
+				if (base.currentMouseState.LeftButton == ButtonState.Pressed && base.prevousMouseState.LeftButton == ButtonState.Released) {
+					if (this.playButton.isActorOver(mousePos)) {
+						StateManager.getInstance().CurrentTransitionState = StateManager.TransitionState.TransitionOut;
+						StateManager.getInstance().CurrentGameState = StateManager.GameState.InitGame;
+						if (ResourceManager.PLAY_SOUND) {
+							this.outroSfx.Play(1f, 0f, 0f);
+						}
+					} else if (this.exitButton.isActorOver(mousePos)) {
+						StateManager.getInstance().CurrentGameState = StateManager.GameState.Exit;
+						if (ResourceManager.PLAY_SOUND) {
+							this.exitSfx.Play(1f, 0f, 0f);
+						}
+					}
+				}
+			} else if (StateManager.getInstance().CurrentTransitionState == StateManager.TransitionState.TransitionIn) {
 				if (this.playButton.isActorOver(mousePos)) {
-					StateManager.getInstance().CurrentGameState = StateManager.GameState.InitGame;
-					this.outroSfx.Play(1f, 0f, 0f);
+					this.playButton.updateColours(base.fadeIn(ResourceManager.MOUSE_OVER_COLOUR));
+					this.exitButton.updateColours(base.fadeIn(ResourceManager.TEXT_COLOUR));
 				} else if (this.exitButton.isActorOver(mousePos)) {
-					StateManager.getInstance().CurrentGameState = StateManager.GameState.Exit;
-					this.exitSfx.Play(1f, 0f, 0f);
+					this.exitButton.updateColours(base.fadeIn(ResourceManager.MOUSE_OVER_COLOUR));
+					this.playButton.updateColours(base.fadeIn(ResourceManager.TEXT_COLOUR));
+				} else {
+					this.playButton.updateColours(base.fadeIn(ResourceManager.TEXT_COLOUR));
+					this.exitButton.updateColours(base.fadeIn(ResourceManager.TEXT_COLOUR));
+				}
+				this.backGround.LightColour = base.fadeIn(Color.White);
+				this.title.LightColour = base.fadeIn(Color.White);
+			} else if (StateManager.getInstance().CurrentTransitionState == StateManager.TransitionState.TransitionOut) {
+				if (this.playButton.isActorOver(mousePos)) {
+					this.playButton.updateColours(base.fadeOut(ResourceManager.MOUSE_OVER_COLOUR));
+					this.exitButton.updateColours(base.fadeOut(ResourceManager.TEXT_COLOUR));
+				} else if (this.exitButton.isActorOver(mousePos)) {
+					this.exitButton.updateColours(base.fadeOut(ResourceManager.MOUSE_OVER_COLOUR));
+					this.playButton.updateColours(base.fadeOut(ResourceManager.TEXT_COLOUR));
+				} else {
+					this.playButton.updateColours(base.fadeOut(ResourceManager.TEXT_COLOUR));
+					this.exitButton.updateColours(base.fadeOut(ResourceManager.TEXT_COLOUR));
+				}
+				this.backGround.LightColour = base.fadeOut(Color.White);
+				this.title.LightColour = base.fadeOut(Color.White);
+			}
+			// if our transition time is up change our state
+			if (base.transitionTimeElapsed()) {
+				if (StateManager.getInstance().CurrentTransitionState == StateManager.TransitionState.TransitionIn) {
+					StateManager.getInstance().CurrentTransitionState = StateManager.TransitionState.None;
+				} else if (StateManager.getInstance().CurrentTransitionState == StateManager.TransitionState.TransitionOut) {
+					StateManager.getInstance().CurrentTransitionState = StateManager.TransitionState.TransitionIn;
 				}
 			}
-			this.timeIdle += elapsed;
-			if (this.timeIdle >= PLAY_IDLE_AT) {
-				this.idleSfx.Play(1f, 0f, 0f);
-				this.timeIdle = 0f;
+			if (ResourceManager.PLAY_SOUND) {
+				this.timeIdle += elapsed;
+				if (this.timeIdle >= PLAY_IDLE_AT) {
+					this.idleSfx.Play(1f, 0f, 0f);
+					this.timeIdle = 0f;
+				}
 			}
 			base.update(elapsed);
 		}

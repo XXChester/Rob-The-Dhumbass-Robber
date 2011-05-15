@@ -16,6 +16,7 @@ namespace Robber {
 	public class Floor : IRenderable {
 		#region Class variables
 		private Tile[,] tiles;
+		public static Color floorColour = Color.White;
 		#endregion Class variables
 
 		#region Class propeties
@@ -27,7 +28,8 @@ namespace Robber {
 			int width = WIDTH - 1;//TODO: problem with my map loader, the width is actually shorter by 1 but no time to fix this now
 			this.tiles = new Tile[HEIGHT, width];
 			CollisionManager.getInstance().FloorCenterBoxes = new List<BoundingBox>();
-			Placement collisionPlacement;
+			floorColour = renderColour;
+			//Placement collisionPlacement;
 			for (int y = 0; y < HEIGHT; y++) {
 				for (int x = 0; x < width; x++) {
 					this.tiles[y, x] = new Tile(floorTexture, new Point(x, y), renderColour);
@@ -41,6 +43,12 @@ namespace Robber {
 		#endregion Constructor
 
 		#region Support methods
+		public void updateColours(Color colour) {
+			foreach (Tile tile in this.tiles) {
+				tile.updateColours(colour);
+			}
+		}
+
 		public void update(float elapsed) {
 
 		}

@@ -57,6 +57,12 @@ namespace Robber {
 		#endregion Constructor
 
 		#region Support methods
+		public void updateColours(Color colour) {
+			this.firstPart.LightColour = colour;
+			this.secondPart.LightColour = colour;
+			this.timeText.LightColour = colour;
+		}
+
 		public void reset(float timeUntilDetection) {
 			this.time = timeUntilDetection * 60f * 1000f;// passed in as minutes, convert to mas minutes, convert to miliseconds
 		}

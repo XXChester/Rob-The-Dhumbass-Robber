@@ -53,7 +53,7 @@ namespace Robber {
 		}
 
 		public void render(SpriteBatch spriteBatch) {
-			if (this.ring != null) {
+			if (this.ring != null && StateManager.getInstance().CurrentGameState == StateManager.GameState.Active) {
 				this.ring.render(spriteBatch);
 			}
 		}

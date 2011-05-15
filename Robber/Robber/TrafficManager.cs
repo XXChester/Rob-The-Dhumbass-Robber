@@ -75,41 +75,103 @@ namespace Robber {
 #endif
 
 			// Allows the game to exit
-			if (StateManager.getInstance().CurrentGameState != StateManager.GameState.InitReturnToMain) {
-				if (StateManager.getInstance().CurrentGameState == StateManager.GameState.Active) {
-					if (Keyboard.GetState().IsKeyDown(Keys.Escape) && this.previousKeyBoardState.IsKeyUp(Keys.Escape)) {
-						StateManager.getInstance().CurrentGameState = StateManager.GameState.InGameMenu;
-					}
-				} else if (StateManager.getInstance().CurrentGameState == StateManager.GameState.MainMenu) {
+				 if (StateManager.getInstance().CurrentGameState == StateManager.GameState.MainMenu) {
 					if (Keyboard.GetState().IsKeyDown(Keys.Escape) && this.previousKeyBoardState.IsKeyUp(Keys.Escape)) {
 						this.Exit();
-					}
-				} else if (StateManager.getInstance().CurrentGameState == StateManager.GameState.InGameMenu) {
-					if (Keyboard.GetState().IsKeyDown(Keys.Escape) && this.previousKeyBoardState.IsKeyUp(Keys.Escape)) {
-						StateManager.getInstance().CurrentGameState = StateManager.GameState.Active;
 					}
 				} else if (StateManager.getInstance().CurrentGameState == StateManager.GameState.Exit) {
 					lock (this) {
-						Thread.Sleep(700);//sleep the thread so the exit emote finishes
+						if (ResourceManager.PLAY_SOUND) {
+							Thread.Sleep(700);//sleep the thread so the exit emote finishes
+						}
 						this.Exit();
 					}
 				}
+			
+			// Transition code
+			if (StateManager.getInstance().CurrentGameState == StateManager.GameState.MainMenu) {
+				if (StateManager.getInstance().PreviousGameState == StateManager.GameState.MainMenu &&
+					StateManager.getInstance().CurrentTransitionState == StateManager.TransitionState.TransitionOut) {
+						this.activeDisplay = this.mainMenu;
+				} else if (StateManager.getInstance().PreviousGameState == StateManager.GameState.InGameMenu &&
+					StateManager.getInstance().CurrentTransitionState == StateManager.TransitionState.TransitionIn) {
+					this.activeDisplay = this.mainMenu;
+				} else if (StateManager.getInstance().PreviousGameState == StateManager.GameState.InGameMenu &&
+					StateManager.getInstance().CurrentTransitionState == StateManager.TransitionState.TransitionOut) {
+					this.activeDisplay = this.inGameMenu;
+				} else {
+					this.activeDisplay = this.mainMenu;
+				}
+			} else  if (StateManager.getInstance().CurrentGameState == StateManager.GameState.Waiting || 
+				StateManager.getInstance().CurrentGameState == StateManager.GameState.Active) {
+				if (StateManager.getInstance().PreviousGameState == StateManager.GameState.MainMenu &&
+					StateManager.getInstance().CurrentTransitionState == StateManager.TransitionState.TransitionIn) {
+						this.activeDisplay = this.gameDisplay;
+				} else if (StateManager.getInstance().PreviousGameState == StateManager.GameState.MainMenu &&
+					StateManager.getInstance().CurrentTransitionState == StateManager.TransitionState.TransitionOut) {
+						this.activeDisplay = this.mainMenu;
+				} else if (StateManager.getInstance().PreviousGameState == StateManager.GameState.Active &&
+					StateManager.getInstance().CurrentTransitionState == StateManager.TransitionState.TransitionOut) {
+					this.activeDisplay = this.mainMenu;
+				} else if (StateManager.getInstance().PreviousGameState == StateManager.GameState.Active &&
+					StateManager.getInstance().CurrentTransitionState == StateManager.TransitionState.TransitionIn) {
+					this.activeDisplay = this.gameDisplay;
+				} else if (StateManager.getInstance().PreviousGameState == StateManager.GameState.InGameMenu &&
+					StateManager.getInstance().CurrentTransitionState == StateManager.TransitionState.TransitionIn) {
+					this.activeDisplay = gameDisplay;
+				} else if (StateManager.getInstance().PreviousGameState == StateManager.GameState.InGameMenu &&
+					StateManager.getInstance().CurrentTransitionState == StateManager.TransitionState.TransitionOut) {
+					this.activeDisplay = this.inGameMenu;
+				} else {
+					this.activeDisplay = this.gameDisplay;
+				}
+			} else if (StateManager.getInstance().CurrentGameState == StateManager.GameState.InGameMenu) {
+				if (StateManager.getInstance().PreviousGameState == StateManager.GameState.Active &&
+					StateManager.getInstance().CurrentTransitionState == StateManager.TransitionState.TransitionOut) {
+					this.activeDisplay = this.gameDisplay;
+				} else if (StateManager.getInstance().PreviousGameState == StateManager.GameState.Active &&
+					StateManager.getInstance().CurrentTransitionState == StateManager.TransitionState.TransitionIn) {
+					this.activeDisplay = this.inGameMenu;
+				} else if (StateManager.getInstance().PreviousGameState == StateManager.GameState.Waiting &&
+					StateManager.getInstance().CurrentTransitionState == StateManager.TransitionState.TransitionOut) {
+					this.activeDisplay = this.gameDisplay;
+				} else if (StateManager.getInstance().PreviousGameState == StateManager.GameState.Waiting &&
+					StateManager.getInstance().CurrentTransitionState == StateManager.TransitionState.TransitionIn) {
+					this.activeDisplay = this.inGameMenu;
+				} else if (StateManager.getInstance().PreviousGameState == StateManager.GameState.GameOver &&
+					StateManager.getInstance().CurrentTransitionState == StateManager.TransitionState.TransitionIn) {
+					this.activeDisplay = this.gameDisplay;
+				} else if (StateManager.getInstance().PreviousGameState == StateManager.GameState.GameOver &&
+					StateManager.getInstance().CurrentTransitionState == StateManager.TransitionState.TransitionOut) {
+					this.activeDisplay = this.gameDisplay;
+				} else {
+					this.activeDisplay = this.inGameMenu;
+				}
+			} else {
+				if (StateManager.getInstance().CurrentGameState == StateManager.GameState.InitGame) {
+					this.activeDisplay = this.mainMenu;
+					((GameDisplay)this.gameDisplay).reset(true);
+					StateManager.getInstance().CurrentGameState = StateManager.GameState.Waiting;
+					StateManager.getInstance().PreviousGameState = StateManager.GameState.MainMenu;
+				} else {
+					this.activeDisplay = this.gameDisplay;
+				}
 			}
 
-			if (StateManager.getInstance().CurrentGameState == StateManager.GameState.Active || StateManager.getInstance().CurrentGameState == StateManager.GameState.GameOver) {
+			/*if (StateManager.getInstance().CurrentGameState == StateManager.GameState.Active || StateManager.getInstance().CurrentGameState == StateManager.GameState.GameOver) {
 				this.activeDisplay = this.gameDisplay;
 			} else if (StateManager.getInstance().CurrentGameState == StateManager.GameState.MainMenu) {
 				this.activeDisplay = this.mainMenu;
 			} else if (StateManager.getInstance().CurrentGameState == StateManager.GameState.InGameMenu) {
 				this.activeDisplay = this.inGameMenu;
-			} else if (StateManager.getInstance().CurrentGameState == StateManager.GameState.InitGame) {
+			} else if (StateManager.getInstance().CurrentGameState == StateManager.GameState.Waiting) {
 				this.activeDisplay = this.gameDisplay;
 				((GameDisplay)this.activeDisplay).reset(true);
 				StateManager.getInstance().CurrentGameState = StateManager.GameState.Active;
-			} else if (StateManager.getInstance().CurrentGameState == StateManager.GameState.InitReturnToMain) {
+			} else if (StateManager.getInstance().CurrentGameState == StateManager.GameState.MainMenu) {
 				StateManager.getInstance().CurrentGameState = StateManager.GameState.MainMenu;
 				this.activeDisplay = this.mainMenu;
-			}
+			}*/
 
 			float elapsed = gameTime.ElapsedGameTime.Milliseconds;
 			this.activeDisplay.update(elapsed);
