@@ -74,6 +74,12 @@ namespace Robber {
 			this.RunAIThread = true;
 			this.AIThread= new Thread(new ThreadStart(generateMoves));
 			this.AIThread.Start();
+			// ****** For some reason the guard which is the same image has a different origin
+			base.activeSprite.Origin = new Vector2(0f, 0f);
+			base.upSprite.Origin = new Vector2(0f, 0f);
+			base.rightSprite.Origin = new Vector2(0f, 0f);
+			base.downSprite.Origin = new Vector2(0f, 0f);
+			base.leftSprite.Origin = new Vector2(0f, 0f);
 		}
 		#endregion Constructor
 
@@ -97,7 +103,7 @@ namespace Robber {
 						}
 					} else if (this.currentState == State.Chase) {
 						// chase should regenerate the waypoint all the time
-						if (this.closestsPoint == base.Placement.index) {//TODO: This can cause the AI to get stuck
+						if (this.closestsPoint == base.Placement.index) {
 							this.path = new Stack<Point>(AIManager.getInstane().findPath(base.Placement.index));
 							if (this.path.Count >= 1) {
 								this.closestsPoint = path.Pop();
@@ -145,29 +151,31 @@ namespace Robber {
 				Vector2 newPos;
 				if (base.direction == Direction.Up) {
 					newPos = new Vector2(base.activeSprite.Position.X, base.activeSprite.Position.Y - moveDistance);
-					if (!CollisionManager.getInstance().collisionFound(Helper.getBBox(newPos))) {
+					//if (!CollisionManager.getInstance().wallCollisionFound(Helper.getBBox(newPos))) {
 						base.activeSprite.Position = new Vector2(base.activeSprite.Position.X, base.activeSprite.Position.Y - moveDistance);
-					}
+					//}
 				} else if (base.direction == Direction.Right) {
 					newPos = new Vector2(base.activeSprite.Position.X + moveDistance, base.activeSprite.Position.Y);
-					if (!CollisionManager.getInstance().collisionFound(Helper.getBBox(newPos))) {
+					//if (!CollisionManager.getInstance().wallCollisionFound(Helper.getBBox(newPos))) {
 						base.activeSprite.Position = new Vector2(base.activeSprite.Position.X + moveDistance, base.activeSprite.Position.Y);
-					}
+					//}
 				} else if (base.direction == Direction.Down) {
 					newPos = new Vector2(this.activeSprite.Position.X, this.activeSprite.Position.Y + moveDistance);
-					if (!CollisionManager.getInstance().collisionFound(Helper.getBBox(newPos))) {
+					//if (!CollisionManager.getInstance().wallCollisionFound(Helper.getBBox(newPos))) {
 						this.activeSprite.Position = new Vector2(this.activeSprite.Position.X, this.activeSprite.Position.Y + moveDistance);
-					}
+					//}
 				} else if (this.direction == Direction.Left) {
 					newPos = new Vector2(base.activeSprite.Position.X - moveDistance, base.activeSprite.Position.Y);
-					if (!CollisionManager.getInstance().collisionFound(Helper.getBBox(newPos))) {
+					//if (!CollisionManager.getInstance().wallCollisionFound(Helper.getBBox(newPos))) {
 						base.activeSprite.Position = new Vector2(base.activeSprite.Position.X - moveDistance, base.activeSprite.Position.Y);
-					}
+					//}
 				}
 			}
 			// update our placement and bounding box
 			base.Placement = new Placement(Placement.getIndex(base.activeSprite.Position));
-			base.BoundingBox = Helper.getBBox(base.activeSprite.Position);
+			Vector2 bboxPos = new Vector2(base.activeSprite.Position.X + ResourceManager.TILE_SIZE / 2, base.activeSprite.Position.Y + ResourceManager.TILE_SIZE / 2);
+			base.BoundingBox = Helper.getBBox(bboxPos);
+			//base.BoundingBox = Helper.getBBox(base.activeSprite.Position);
 			if (base.previousPlacement.index != base.Placement.index) {
 				AIManager.getInstane().Board[base.previousPlacement.index.Y, base.previousPlacement.index.X] = base.previousTypeOfSpace;
 				base.previousTypeOfSpace = AIManager.getInstane().Board[base.Placement.index.Y, base.Placement.index.X];

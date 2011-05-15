@@ -33,10 +33,6 @@ namespace Robber {
 			this.WIDTH = width;
 			Texture2D floorTexture = content.Load<Texture2D>("BasicTile");
 			this.floor = new Floor(ref HEIGHT, ref WIDTH, floorTexture, Color.White);
-			/*this.boundingBoxes.Add(Helper.getBBox(new Vector2(0f, 0f), new Vector2(671f, 0f)));
-			this.boundingBoxes.Add(Helper.getBBox(new Vector2(671f, 0f), new Vector2(671f, 575f)));
-			this.boundingBoxes.Add(Helper.getBBox(new Vector2(671f,575f), new Vector2(0f, 575f)));
-			this.boundingBoxes.Add(Helper.getBBox(new Vector2(0f,575f), new Vector2(0f,0f)));*/
 		}
 		#endregion Constructor
 

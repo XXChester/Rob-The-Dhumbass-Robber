@@ -25,10 +25,10 @@ namespace Robber {
 			None
 		}
 		#region Class variables
-		private Animated2DSprite upSprite;
-		private Animated2DSprite rightSprite;
-		private Animated2DSprite downSprite;
-		private Animated2DSprite leftSprite;
+		protected Animated2DSprite upSprite;
+		protected Animated2DSprite rightSprite;
+		protected Animated2DSprite downSprite;
+		protected Animated2DSprite leftSprite;
 		protected PathFinder.TypeOfSpace previousTypeOfSpace;
 		protected Animated2DSprite activeSprite;
 		protected float movementSpeed;

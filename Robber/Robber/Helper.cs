@@ -5,10 +5,18 @@ using System.Text;
 using Microsoft.Xna.Framework;
 namespace Robber {
 	public static class Helper {
-		public static BoundingBox getBBox(Vector2 pos) {
-			Vector2 min = new Vector2(pos.X - ResourceManager.TILE_SIZE / 3, pos.Y - ResourceManager.TILE_SIZE / 3);;
-			Vector2 max = new Vector2(pos.X + ResourceManager.TILE_SIZE / 3, pos.Y + ResourceManager.TILE_SIZE / 3); ;
+		private static BoundingBox getSmallerBBox(Vector2 pos, int shrinkBy) {
+			Vector2 min = new Vector2(pos.X - ResourceManager.TILE_SIZE / shrinkBy, pos.Y - ResourceManager.TILE_SIZE / shrinkBy);
+			Vector2 max = new Vector2(pos.X + ResourceManager.TILE_SIZE / shrinkBy, pos.Y + ResourceManager.TILE_SIZE / shrinkBy);
 			return new BoundingBox(new Vector3(min, 0f), new Vector3(max, 0f));
+		}
+
+		public static BoundingBox getBBox(Vector2 pos) {
+			return getSmallerBBox(pos, 3);
+		}
+
+		public static BoundingBox getFloorBBox(Vector2 pos) {
+			return getSmallerBBox(pos, 11);
 		}
 
 		public static BoundingBox getTilePaddedBBox(Vector2 pos) {

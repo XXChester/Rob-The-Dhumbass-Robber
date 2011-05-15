@@ -26,8 +26,9 @@ Raw version of the game functional with programmer art
 [*]Major bug with the AI walking through Non-walkable spaces
 [*]Put in collision detection with each of the guards so they don't stack
 [*]Put in collision detection with the player
-[]Clean up AI so that it always walks down the middle of the square not the edge
+[*]Clean up AI so that it always walks down the middle of the square not the edge
 [*]Clean up collision detection so that it doesn't bounch you around...instead you just don't move if it will result in a collision...provisional CD opposed to reaction CD
+[]Implement Player detection via radius
 []Make a HUD
 []Implement flow mechanism
 []Render main menu screen
@@ -52,12 +53,11 @@ Replace the programmer art with real art and make the game not only maintain its
 ============================
 Planning: 2 hours
 
-Programming:	9.5 hours	10:21am-11:32	12:00-12:15pm	2:45pm-6:36pm	7:14pm-
-core:				
+	Programming:	9.5 hours	10:21am-11:32	12:00-12:15pm	2:45pm-6:36pm	7:14pm-7:27pm	7:34pm-8:24pm
 polish:				
 
 Art:
-	1.5 hours
+	1.5 hours		8:24pm-
 Sound:
 	
 Total Time:

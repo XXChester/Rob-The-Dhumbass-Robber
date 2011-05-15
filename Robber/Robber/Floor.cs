@@ -24,11 +24,17 @@ namespace Robber {
 
 		#region Constructor
 		public Floor(ref int HEIGHT, ref int WIDTH, Texture2D floorTexture, Color renderColour) {
-			int width = WIDTH - 1;// problem with my map loader, the width is actually shorter by 1 but no time to fix this now
+			int width = WIDTH - 1;//TODO: problem with my map loader, the width is actually shorter by 1 but no time to fix this now
 			this.tiles = new Tile[HEIGHT, width];
+			CollisionManager.getInstance().FloorCenterBoxes = new List<BoundingBox>();
+			Placement collisionPlacement;
 			for (int y = 0; y < HEIGHT; y++) {
 				for (int x = 0; x < width; x++) {
 					this.tiles[y, x] = new Tile(floorTexture, new Point(x, y), renderColour);
+					/*collisionPlacement = new Placement(new Point(x, y));
+					collisionPlacement.worldPosition =
+						new Vector2(collisionPlacement.worldPosition.X + ResourceManager.TILE_SIZE / 2, collisionPlacement.worldPosition.Y + ResourceManager.TILE_SIZE / 2);
+					CollisionManager.getInstance().FloorCenterBoxes.Add(Helper.getFloorBBox(collisionPlacement.worldPosition));*/
 				}
 			}
 		}

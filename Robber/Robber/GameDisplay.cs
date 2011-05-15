@@ -159,7 +159,6 @@ namespace Robber {
 				this.player.update(elapsed);
 				foreach (Guard guard in this.guards) {
 					guard.update(elapsed);
-					//if (guard.BoundingSphere.Intersects(this.player.BoundingSphere)) {
 					if (guard.BoundingBox.Intersects(this.player.BoundingBox)) {
 						StateManager.getInstance().CurrentGameState = StateManager.GameState.GameOver;
 						break;
@@ -177,7 +176,6 @@ namespace Robber {
 				}
 			}
 			foreach (Treasure treasure in this.treasures) {
-				//if (treasure.BoundingBox.Intersects(this.player.BoundingSphere)) {
 				if (treasure.BoundingBox.Intersects(this.player.BoundingBox)) {
 					treasure.PickedUp = true;
 					this.player.CapturedTreasures++;
@@ -210,13 +208,14 @@ namespace Robber {
 #if DEBUG
 			if (this.ShowAI) {
 				Color debugColour = Color.Green;
-				//DebugUtils.drawBoundingSphere(spriteBatch, this.player.BoundingSphere, debugColour, this.debugRing);
 				this.debugUtils.drawBoundingBox(spriteBatch, this.player.BoundingBox, debugColour);
 				foreach (Guard guard in this.guards) {
 					this.debugUtils.drawBoundingBox(spriteBatch, guard.BoundingBox,debugColour);
-					//DebugUtils.drawBoundingSphere(spriteBatch, guard.BoundingSphere, debugColour, this.debugRing);
 				}
 				foreach (BoundingBox box in CollisionManager.getInstance().MapBoundingBoxes) {
+					this.debugUtils.drawBoundingBox(spriteBatch, box, debugColour);
+				}
+				foreach (BoundingBox box in CollisionManager.getInstance().FloorCenterBoxes) {
 					this.debugUtils.drawBoundingBox(spriteBatch, box, debugColour);
 				}
 				foreach (Treasure treasure in this.treasures) {

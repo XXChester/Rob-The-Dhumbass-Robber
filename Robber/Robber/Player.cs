@@ -52,22 +52,22 @@ namespace Robber {
 				Vector2 newPos;
 				if (base.direction == Direction.Up) {
 					newPos = new Vector2(base.activeSprite.Position.X, base.activeSprite.Position.Y - moveDistance);
-					if (!CollisionManager.getInstance().collisionFound(Helper.getBBox(newPos))) {
+					if (!CollisionManager.getInstance().wallCollisionFound(Helper.getBBox(newPos))) {
 						base.activeSprite.Position = new Vector2(base.activeSprite.Position.X, base.activeSprite.Position.Y - moveDistance);
 					}
 				} else if (base.direction == Direction.Right) {
 					newPos = new Vector2(base.activeSprite.Position.X + moveDistance, base.activeSprite.Position.Y);
-					if (!CollisionManager.getInstance().collisionFound(Helper.getBBox(newPos))) {
+					if (!CollisionManager.getInstance().wallCollisionFound(Helper.getBBox(newPos))) {
 						base.activeSprite.Position = new Vector2(base.activeSprite.Position.X + moveDistance, base.activeSprite.Position.Y);
 					}
 				} else if (base.direction == Direction.Down) {
 					newPos = new Vector2(this.activeSprite.Position.X, this.activeSprite.Position.Y + moveDistance);
-					if (!CollisionManager.getInstance().collisionFound(Helper.getBBox(newPos))) {
+					if (!CollisionManager.getInstance().wallCollisionFound(Helper.getBBox(newPos))) {
 						this.activeSprite.Position = new Vector2(this.activeSprite.Position.X, this.activeSprite.Position.Y + moveDistance);
 					}
 				} else if (this.direction == Direction.Left) {
 					newPos = new Vector2(base.activeSprite.Position.X - moveDistance, base.activeSprite.Position.Y);
-					if (!CollisionManager.getInstance().collisionFound(Helper.getBBox(newPos))) {
+					if (!CollisionManager.getInstance().wallCollisionFound(Helper.getBBox(newPos))) {
 						base.activeSprite.Position = new Vector2(base.activeSprite.Position.X - moveDistance, base.activeSprite.Position.Y);
 					}
 				}
