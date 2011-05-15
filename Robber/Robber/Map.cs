@@ -42,7 +42,9 @@ namespace Robber {
 #if DEBUG
 			if (Mouse.GetState().LeftButton == ButtonState.Pressed && this.previous.LeftButton == ButtonState.Released && Mouse.GetState().Y > 0 && Mouse.GetState().X > 0) {
 				//Console.WriteLine(Placement.getIndex(new Vector2(Mouse.GetState().X, Mouse.GetState().Y)));
-				string message = "BBox|" + Mouse.GetState().X + "," + Mouse.GetState().Y;
+				//string message = "BBox|" + Mouse.GetState().X + "," + Mouse.GetState().Y;
+				string message = "Treasure|" + Placement.getIndex(new Vector2(Mouse.GetState().X, Mouse.GetState().Y)).X + "," +
+						Placement.getIndex(new Vector2(Mouse.GetState().X, Mouse.GetState().Y)).Y;
 				//string message = "WayPoint|" + Placement.getIndex(new Vector2(Mouse.GetState().X, Mouse.GetState().Y)).X + ","  +
 				//	Placement.getIndex(new Vector2(Mouse.GetState().X, Mouse.GetState().Y)).Y;
 				//ScriptManager.getInstance().log(message);

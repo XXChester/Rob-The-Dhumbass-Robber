@@ -42,10 +42,11 @@ Replace the programmer art with real art and make the game not only maintain its
 []Fix up AI some more....can still walk through walls sometimes
 []LOS Detection triangle
 []Make timer have decimal places
-[]Pause at waypoints
+[]Delay the start of the level so the user can have a look at the layout	***
+[]Pause at waypoints				
 []Screen fades in and out
 []Robber and guard sprites
-[]Upgrade tile graphics
+[*]Upgrade tile graphics
 []Add in garbage cans to hide in and clear agro**
 []Add in random sneezing if you stand within the same tile too long
 []Add in emote system when guards are chasing etc
@@ -55,19 +56,18 @@ Replace the programmer art with real art and make the game not only maintain its
 ISSUES
 ==========================
 []AI can sometimes walk through walls
-[]Clicking on the Return to Main button near where the Exit button spawns will exit the game
+[]Clicking on the Return to Main button near where the Exit button spawns will exit the game....if I get to transitions that should fix the issue
 []
 ============================
 		Time
 ============================
 Planning: 2 hours
 
-	Programming:	16.25 hours		9:23pm-10:37pm		10:49pm-11:24pm		11:52pm-
+	Programming:	20 hours
 polish:				
 
-Art:
-	1.5 hours		8:24pm-8:39pm	11:24pm-11:52pm
-Sound:
+Art: 3 hours		
+Sound:	.75 hours
 	
 Total Time:
 	

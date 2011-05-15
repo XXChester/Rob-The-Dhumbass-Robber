@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.IO;
+using System.Threading;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
@@ -88,7 +89,10 @@ namespace Robber {
 						StateManager.getInstance().CurrentGameState = StateManager.GameState.Active;
 					}
 				} else if (StateManager.getInstance().CurrentGameState == StateManager.GameState.Exit) {
-					this.Exit();
+					lock (this) {
+						Thread.Sleep(700);//sleep the thread so the exit emote finishes
+						this.Exit();
+					}
 				}
 			}
 

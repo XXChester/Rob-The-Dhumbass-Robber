@@ -30,6 +30,12 @@ namespace Robber {
 		private Text2D gameOverText;
 		private StaticDrawable2D winBackGround;
 		private StaticDrawable2D looseBackGround;
+		private SoundEffect cantTouchThisSfx;
+		private SoundEffect guardsAlertedSfx;
+		private SoundEffect introSfx;
+		private SoundEffect payDaySfx;
+		private float payDayDelay;
+		private const float DELAY_PAY_DAY_EMOTE = 5000f;
 
 
 		private GraphicsDevice device;
@@ -50,12 +56,6 @@ namespace Robber {
 			this.content = content;
 			this.mapInformation = mapInformation;
 			this.timer = new Timer();
-
-			// load our map
-			CollisionManager.getInstance().MapBoundingBoxes = new List<BoundingBox>();
-			this.wallColour = Color.Black;
-			this.map = MapLoader.load(content, mapInformation + ".dat", this.wallColour);
-			reset(false);
 
 			// replay button
 			ColouredButtonParams buttonParms = new ColouredButtonParams();
@@ -79,11 +79,21 @@ namespace Robber {
 			textParams.Position = new Vector2(200f, 50f);
 			this.gameOverText = new Text2D(textParams);
 
-			// background
+			// loosing background
 			StaticDrawable2DParams staticParms = new StaticDrawable2DParams();
 			staticParms.Position = new Vector2(-10f, 0f);
 			staticParms.Texture = content.Load<Texture2D>("BackGround1");
 			this.looseBackGround = new StaticDrawable2D(staticParms);
+
+			// winning background
+			staticParms.Texture = content.Load<Texture2D>("BackGround2");
+			this.winBackGround = new StaticDrawable2D(staticParms);
+
+			// load sound effects
+			this.cantTouchThisSfx = content.Load<SoundEffect>("CantTouchThis");
+			this.guardsAlertedSfx = content.Load<SoundEffect>("GuardsAlerted");
+			this.introSfx = content.Load<SoundEffect>("LevelEntry");
+			this.payDaySfx = content.Load<SoundEffect>("PayDay");
 #if WINDOWS
 #if DEBUG
 			this.debugUtils = new DebugUtils(TextureUtils.create2DColouredTexture(device, 2, 2, Color.White));
@@ -97,10 +107,17 @@ namespace Robber {
 		#region Support methods
 		public void reset(bool cleanUp) {
 			if (cleanUp) {
-				foreach (Guard guard in this.guards) {
-					guard.RunAIThread = false;
+				if (this.guards != null) {
+					foreach (Guard guard in this.guards) {
+						guard.RunAIThread = false;
+					}
 				}
 			}
+			// load our map
+			CollisionManager.getInstance().MapBoundingBoxes = new List<BoundingBox>();
+			this.wallColour = Color.Black;
+			this.map = MapLoader.load(content, mapInformation + ".dat", this.wallColour);
+
 			StreamReader reader = new StreamReader(this.mapInformation + "Indentifiers.dat");
 			this.entryExitPoints = new List<Point>();
 			Point playersLocation = new Point();
@@ -175,21 +192,27 @@ namespace Robber {
 				this.guards[i] = new Guard(this.device, this.content, placement, guardStates[i], guardDirectins[i]);
 			}
 			this.timer.reset(time);
+			this.introSfx.Play(1f, 0f, 0f);
 		}
 
 		public override void update(float elapsed) {
 			base.currentKeyBoardState = Keyboard.GetState();
 			base.currentMouseState = Mouse.GetState();
 			this.map.update(elapsed);
-			// check if the player won
-			foreach (Point point in this.entryExitPoints) {
-				if (point == this.player.Placement.index) {
-					StateManager.getInstance().CurrentGameState = StateManager.GameState.GameOver;
-					StateManager.getInstance().TypeOfGameOver = StateManager.GameOverType.Player;
-					break;
-				}
-			}
 			if (StateManager.getInstance().CurrentGameState == StateManager.GameState.Active) {
+				// check if the player won
+				foreach (Point point in this.entryExitPoints) {
+					if (point == this.player.Placement.index) {
+						StateManager.getInstance().CurrentGameState = StateManager.GameState.GameOver;
+						if (this.player.CapturedTreasures >= 1) {
+							StateManager.getInstance().TypeOfGameOver = StateManager.GameOverType.Player;
+							this.cantTouchThisSfx.Play(1f, 0f, 0f);
+						} else {
+							StateManager.getInstance().TypeOfGameOver = StateManager.GameOverType.None;
+						}
+						break;
+					}
+				}
 				this.timer.update(elapsed);
 				this.player.update(elapsed);
 				foreach (Guard guard in this.guards) {
@@ -199,6 +222,10 @@ namespace Robber {
 						StateManager.getInstance().TypeOfGameOver = StateManager.GameOverType.Guards;
 						break;
 					} else if (guard.Ring.BoundingSphere.Intersects(this.player.BoundingBox)) {
+						// did we JUST get detected?
+						if (!AIManager.getInstane().PlayerDetected) {
+							this.guardsAlertedSfx.Play(1f, 0f, 0f);
+						}
 						AIManager.getInstane().PlayerDetected = true;
 					}
 				}
@@ -207,6 +234,10 @@ namespace Robber {
 					if (treasure.BoundingBox.Intersects(this.player.BoundingBox)) {
 						treasure.PickedUp = true;
 						this.player.CapturedTreasures++;
+						if (this.payDayDelay >= DELAY_PAY_DAY_EMOTE) {
+							this.payDaySfx.Play(1f, 0f, 0f);
+							this.payDayDelay = 0f;
+						}
 						break;
 					}
 				}
@@ -223,7 +254,11 @@ namespace Robber {
 				if (StateManager.getInstance().TypeOfGameOver == StateManager.GameOverType.Guards) {
 					this.gameOverText.WrittenText = "You loose; you have to be quick";
 				} else if (StateManager.getInstance().TypeOfGameOver == StateManager.GameOverType.Player) {
+					this.gameOverText.Position = new Vector2(125f, this.gameOverText.Position.Y);
 					this.gameOverText.WrittenText = "Congratulations you won, you score is " + this.player.CapturedTreasures * 100 + this.timer.Time;
+				} else if (StateManager.getInstance().TypeOfGameOver == StateManager.GameOverType.None) {
+					this.gameOverText.Position = new Vector2(75f, this.gameOverText.Position.Y);
+					this.gameOverText.WrittenText = "You loose, you need to capture at least 1 piece of treasure";
 				}
 			}
 			if (base.currentKeyBoardState.IsKeyDown(Keys.D1) && base.previousKeyBoardState.IsKeyUp(Keys.D1)) {
@@ -233,6 +268,7 @@ namespace Robber {
 					ShowAI = true;
 				}
 			}
+			this.payDayDelay += elapsed;
 			base.update(elapsed);
 		}
 
@@ -248,7 +284,8 @@ namespace Robber {
 				}
 				this.timer.render(spriteBatch);
 			} else if (StateManager.getInstance().CurrentGameState == StateManager.GameState.GameOver) {
-				if (StateManager.getInstance().TypeOfGameOver == StateManager.GameOverType.Guards) {
+				if (StateManager.getInstance().TypeOfGameOver == StateManager.GameOverType.Guards ||
+					StateManager.getInstance().TypeOfGameOver == StateManager.GameOverType.None) {
 					this.looseBackGround.render(spriteBatch);
 				} else {
 					if (this.winBackGround != null) {
@@ -312,6 +349,18 @@ namespace Robber {
 			}
 			if (this.winBackGround != null) {
 				this.winBackGround.dispose();
+			}
+			if (this.cantTouchThisSfx != null) {
+				this.cantTouchThisSfx.Dispose();
+			}
+			if (this.guardsAlertedSfx != null) {
+				this.guardsAlertedSfx.Dispose();
+			}
+			if (this.introSfx != null) {
+				this.introSfx.Dispose();
+			}
+			if (this.payDaySfx != null) {
+				this.payDaySfx.Dispose();
 			}
 #if DEBUG
 			this.debugChip.Dispose();

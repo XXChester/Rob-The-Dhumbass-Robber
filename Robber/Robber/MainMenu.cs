@@ -22,6 +22,12 @@ namespace Robber {
 		private Button exitButton;
 		private StaticDrawable2D backGround;
 		private StaticDrawable2D title;
+		private SoundEffect introSfx;
+		private SoundEffect idleSfx;
+		private SoundEffect outroSfx;
+		private SoundEffect exitSfx;
+		private float timeIdle;
+		private const float PLAY_IDLE_AT = 30000f;
 		#endregion Class variables
 
 		#region Class propeties
@@ -59,8 +65,15 @@ namespace Robber {
 
 			// background
 			staticParms.Position = new Vector2(0f, 0f);
-			staticParms.Texture = content.Load<Texture2D>("BackGround1");
+			staticParms.Texture = content.Load<Texture2D>("Info");
 			this.backGround = new StaticDrawable2D(staticParms);
+
+			// load sound effects
+			this.introSfx = content.Load<SoundEffect>("Introduction");
+			this.idleSfx = content.Load<SoundEffect>("Rules");
+			this.outroSfx = content.Load<SoundEffect>("LetsGo");
+			this.exitSfx = content.Load<SoundEffect>("Chicken");
+			this.introSfx.Play(1f, 0f, 0f);
 #if WINDOWS
 #if DEBUG
 			ScriptManager.getInstance().registerObject(((ColouredButton)this.playButton).Text, "playText");
@@ -80,9 +93,16 @@ namespace Robber {
 			if (base.currentMouseState.LeftButton == ButtonState.Pressed && base.prevousMouseState.LeftButton == ButtonState.Released) {
 				if (this.playButton.isActorOver(mousePos)) {
 					StateManager.getInstance().CurrentGameState = StateManager.GameState.InitGame;
+					this.outroSfx.Play(1f, 0f, 0f);
 				} else if (this.exitButton.isActorOver(mousePos)) {
 					StateManager.getInstance().CurrentGameState = StateManager.GameState.Exit;
+					this.exitSfx.Play(1f, 0f, 0f);
 				}
+			}
+			this.timeIdle += elapsed;
+			if (this.timeIdle >= PLAY_IDLE_AT) {
+				this.idleSfx.Play(1f, 0f, 0f);
+				this.timeIdle = 0f;
 			}
 			base.update(elapsed);
 		}
@@ -108,6 +128,18 @@ namespace Robber {
 			}
 			if (this.title != null) {
 				this.title.dispose();
+			}
+			if (this.introSfx != null) {
+				this.introSfx.Dispose();
+			}
+			if (this.idleSfx != null) {
+				this.idleSfx.Dispose();
+			}
+			if (this.outroSfx != null) {
+				this.outroSfx.Dispose();
+			}
+			if (this.exitSfx != null) {
+				this.exitSfx.Dispose();
 			}
 		}
 		#endregion Destructor

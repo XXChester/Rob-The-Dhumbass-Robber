@@ -40,7 +40,7 @@ namespace Robber {
 
 		#region Constructor
 		public StateManager() {
-			this.CurrentGameState = GameState.InGameMenu;
+			this.CurrentGameState = GameState.MainMenu;;
 
 		}
 		#endregion Constructor

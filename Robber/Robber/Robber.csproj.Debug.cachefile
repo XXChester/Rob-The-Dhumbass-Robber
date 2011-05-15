@@ -1,3 +1,4 @@
+Content\Font.xnb
 Content\BasicTile.xnb
 Content\BottomWall.xnb
 Content\LeftWall.xnb
@@ -17,9 +18,18 @@ Content\GuardDown.xnb
 Content\GuardLeft.xnb
 Content\GuardRight.xnb
 Content\GuardUp.xnb
-Content\Font.xnb
 Content\RadiusRing.xnb
 Content\BackGround1.xnb
 Content\Title.xnb
+Content\BackGround2.xnb
+Content\Info.xnb
+Content\CantTouchThis.xnb
+Content\Chicken.xnb
+Content\GuardsAlerted.xnb
+Content\LetsGo.xnb
+Content\LevelEntry.xnb
+Content\PayDay.xnb
+Content\Rules.xnb
+Content\Introduction.xnb
 Scripts\Map1.DAT
 Scripts\Map1Indentifiers.DAT
