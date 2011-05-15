@@ -27,7 +27,7 @@ namespace Robber {
 
 		#region Constructor
 		public Player(ContentManager content, Placement startingLocation)
-			: base(content, "Player", startingLocation, MOVEMENT_SPEED) {
+			: base(content, "Rob", startingLocation, MOVEMENT_SPEED) {
 			Text2DParams textParms = new Text2DParams();
 			textParms.Font = ResourceManager.getInstance().Font;
 			textParms.LightColour = ResourceManager.TEXT_COLOUR;

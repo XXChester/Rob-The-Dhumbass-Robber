@@ -25,9 +25,7 @@ namespace Robber {
 			None
 		}
 		#region Class variables
-		protected Animated2DSprite upSprite;
 		protected Animated2DSprite rightSprite;
-		protected Animated2DSprite downSprite;
 		protected Animated2DSprite leftSprite;
 		protected PathFinder.TypeOfSpace previousTypeOfSpace;
 		protected Animated2DSprite activeSprite;
@@ -48,29 +46,18 @@ namespace Robber {
 
 		#region Constructor
 		public Person(ContentManager content, string fileStartsWith, Placement startingLocation, float movementSpeed) {
-			string fileName = fileStartsWith + "Right";
 			Animated2DSpriteParams parms = new Animated2DSpriteParams();
 			parms.AnimationState = AnimationManager.AnimationState.PlayForward;
 			parms.Content = content;
 			parms.FrameRate = 200f;
 			parms.Origin = new Vector2(ResourceManager.TILE_SIZE / 2, ResourceManager.TILE_SIZE / 2);
 			parms.LoadingType = Animated2DSprite.LoadingType.WholeSheetReadFramesFromFile;
-			parms.TexturesName = fileName;
-			parms.TotalFrameCount = 1;
+			parms.TexturesName = fileStartsWith + "Right";
+			parms.TotalFrameCount = 4;
 			parms.Position = startingLocation.worldPosition;
 			this.rightSprite = new Animated2DSprite(parms);
-			fileName = fileStartsWith + "Left";
-			parms.TexturesName = fileName;
-			parms.Texture2D = null;
+			parms.SpriteEffect = SpriteEffects.FlipHorizontally;
 			this.leftSprite = new Animated2DSprite(parms);
-			fileName = fileStartsWith + "Down";
-			parms.TexturesName = fileName;
-			parms.Texture2D = null;
-			this.downSprite = new Animated2DSprite(parms);
-			fileName = fileStartsWith + "Up";
-			parms.TexturesName = fileName;
-			parms.Texture2D = null;
-			this.upSprite = new Animated2DSprite(parms);
 			this.Placement = startingLocation;
 			this.direction = Direction.None;
 			this.movementSpeed = movementSpeed;
@@ -86,6 +73,15 @@ namespace Robber {
 		}
 
 		public virtual void updateMove(float elapsed) {
+			if (this.previousDirection != this.direction) {
+				if (this.direction == Direction.None) {
+					// we are no longer moving so stop our sprite
+					this.activeSprite.reset();
+					this.activeSprite.AnimationManager.State = AnimationManager.AnimationState.Paused;
+				} else {
+					this.activeSprite.AnimationManager.State = AnimationManager.AnimationState.PlayForward;
+				}
+			}
 			if (this.direction != Direction.None) {
 				// we are moving
 				// if we are not moving in the same direction we need to change our sprite
@@ -95,8 +91,8 @@ namespace Robber {
 				}
 				if (this.direction == Direction.Up) {
 					if (updateSprite) {
-						this.upSprite.Position = this.activeSprite.Position;
-						this.activeSprite = this.upSprite;
+						this.leftSprite.Position = this.activeSprite.Position;
+						this.activeSprite = this.leftSprite;
 					}
 				} else if (this.direction == Direction.Right) {
 					if (updateSprite) {
@@ -105,8 +101,8 @@ namespace Robber {
 					}
 				} else if (this.direction == Direction.Down) {
 					if (updateSprite) {
-						this.downSprite.Position = this.activeSprite.Position;
-						this.activeSprite = this.downSprite;
+						this.rightSprite.Position = this.activeSprite.Position;
+						this.activeSprite = this.rightSprite;
 					}
 				} else if (this.direction == Direction.Left) {
 					if (updateSprite) {
@@ -142,12 +138,6 @@ namespace Robber {
 			}
 			if (this.rightSprite != null) {
 				this.rightSprite.dispose();
-			}
-			if (this.upSprite != null) {
-				this.upSprite.dispose();
-			}
-			if (this.downSprite != null) {
-				this.downSprite.dispose();
 			}
 			if (this.activeSprite != null) {
 				this.activeSprite.dispose();

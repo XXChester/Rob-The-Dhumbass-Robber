@@ -85,9 +85,7 @@ namespace Robber {
 			this.AIThread.Start();
 			// ****** For some reason the guard which is the same image has a different origin
 			base.activeSprite.Origin = new Vector2(0f, 0f);
-			base.upSprite.Origin = new Vector2(0f, 0f);
 			base.rightSprite.Origin = new Vector2(0f, 0f);
-			base.downSprite.Origin = new Vector2(0f, 0f);
 			base.leftSprite.Origin = new Vector2(0f, 0f);
 
 			this.ring = new RadiusRing(content, base.activeSprite.Position);
@@ -134,10 +132,13 @@ namespace Robber {
 		private void updateState(State newState) {
 			if (newState == State.Chase) {
 				base.movementSpeed = MOVEMENT_SPEED_RUN;
+				base.leftSprite.AnimationManager.FrameRate = 150f;
 			} else if (newState == State.Patrol) {
 				base.movementSpeed = MOVEMENT_SPEED_WALK;
+				base.leftSprite.AnimationManager.FrameRate = 200f;
 			} else if (newState == State.Standing) {
 				base.direction = Direction.None;
+				base.leftSprite.AnimationManager.FrameRate = 0f;
 			}
 			this.currentState = newState;
 		}
