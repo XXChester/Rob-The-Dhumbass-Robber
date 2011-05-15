@@ -10,7 +10,7 @@ GuardEntry|18,17
 //Time in minutes
 Time|1
 //Colours as in Floor colour|Wall colour
-Colours|255,255,255|0,0,0
+Colours|162,162,162|251,249,67
 //TREASURE DEFINITIONS
 Treasure|13,0
 Treasure|12,0

@@ -65,6 +65,7 @@ namespace Robber {
 
 		public void reset(float timeUntilDetection) {
 			this.time = timeUntilDetection * 60f * 1000f;// passed in as minutes, convert to mas minutes, convert to miliseconds
+			this.timeText.WrittenText = this.time.ToString();
 		}
 
 		public void update(float elapsed) {

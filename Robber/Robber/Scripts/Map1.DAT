@@ -145,6 +145,7 @@ MapTile365|TopWall.png|1
 MapTile367|TopWall.png|1
 MapTile368|TopWall.png|1
 MapTile369|TopRight.png|1
+MapTile370|ExitTile.png|2
 MapTile371|LeftWall.png|1
 MapTile372|RightWall.png|1
 MapTile374|BottonLeft.png|1
@@ -165,5 +166,6 @@ MapTile388|BottomWall.png|1
 MapTile389|BottomWall.png|1
 MapTile390|BottomWall.png|1
 MapTile391|BottonRight.png|1
+MapTile392|ExitTile.png|2
 MapTile393|BottonLeft.png|1
 MapTile394|BottonRight.png|1

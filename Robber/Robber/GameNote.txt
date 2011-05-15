@@ -38,7 +38,7 @@ Raw version of the game functional with programmer art
 ============================
 	Polish(Phase 2)
 ============================
-Replace the programmer art with real art and make the game not only maintain its functionality but also add a nice playable environment and add additional functionality
+Replace the programmer art with less crappy programmer art and make the game not only maintain its functionality but also add a nice playable environment and add additional functionality
 []Fix up AI some more....can still walk through walls sometimes
 []LOS Detection triangle
 []Make timer have decimal places
@@ -52,23 +52,24 @@ Replace the programmer art with real art and make the game not only maintain its
 [*]Add in emote system when guards are chasing etc
 []Sfx emotes
 []Sfx
+[]Put doors in
 []Rotate idle sfxs
 
 ===========================
 ISSUES
 ==========================
 []AI can sometimes walk through walls
-[]Clicking on the Return to Main button near where the Exit button spawns will exit the game....if I get to transitions that should fix the issue
-[]
+[*]Clicking on the Return to Main button near where the Exit button spawns will exit the game....if I get to transitions that should fix the issue
+[]Radius detection bounding spehere is not computing correctly
 ============================
 		Time
 ============================
 Planning: 2 hours
 
-	Programming:	20 hours		10:30am-2:45pm		3:42pm-
+	Programming:	20 hours		10:30am-2:45pm		3:42pm-4:02pm	5pm-
 polish:				
 
-Art: 3 hours		2:45pm-3:30pm
+Art: 3 hours		2:45pm-3:30pm	4:02pm-5pm
 Sound:	.75 hours
 	
 Total Time:

@@ -53,7 +53,7 @@ namespace Robber {
 
 			// title
 			StaticDrawable2DParams staticParms = new StaticDrawable2DParams();
-			staticParms.Position = new Vector2(140f, 0f);
+			staticParms.Position = new Vector2(0f, -20f);
 			staticParms.Texture = ResourceManager.getInstance().TitleTexture;
 			this.title = new StaticDrawable2D(staticParms);
 

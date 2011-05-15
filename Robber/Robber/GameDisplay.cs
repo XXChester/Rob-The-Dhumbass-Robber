@@ -260,8 +260,8 @@ namespace Robber {
 					treasure.update(elapsed);
 					if (treasure.BoundingBox.Intersects(this.player.BoundingBox)) {
 						treasure.PickedUp = true;
-						if (ResourceManager.PLAY_SOUND) {
 							this.player.CapturedTreasures++;
+							if (ResourceManager.PLAY_SOUND) {
 							if (this.payDayDelay >= DELAY_PAY_DAY_EMOTE) {
 								this.payDaySfx.Play(1f, 0f, 0f);
 								this.payDayDelay = 0f;
@@ -347,7 +347,9 @@ namespace Robber {
 				}
 			}
 
-			if (StateManager.getInstance().CurrentTransitionState == StateManager.TransitionState.None) {
+			if (StateManager.getInstance().CurrentTransitionState == StateManager.TransitionState.None &&
+				StateManager.getInstance().CurrentGameState == StateManager.GameState.Waiting ||
+				StateManager.getInstance().CurrentGameState == StateManager.GameState.Active) {
 				if (base.currentKeyBoardState.IsKeyDown(Keys.Escape) && base.previousKeyBoardState.IsKeyUp(Keys.Escape)) {
 					StateManager.getInstance().CurrentGameState = StateManager.GameState.InGameMenu;
 					StateManager.getInstance().CurrentTransitionState = StateManager.TransitionState.TransitionOut;

@@ -8,16 +8,9 @@ Content\BottonLeft.xnb
 Content\BottonRight.xnb
 Content\TopLeft.xnb
 Content\TopRight.xnb
-Content\PlayerDown.xnb
-Content\PlayerLeft.xnb
-Content\PlayerRight.xnb
-Content\PlayerUp.xnb
 Content\Treasure1.xnb
 Content\Treasure2.xnb
-Content\GuardDown.xnb
-Content\GuardLeft.xnb
 Content\GuardRight.xnb
-Content\GuardUp.xnb
 Content\RadiusRing.xnb
 Content\BackGround1.xnb
 Content\Title.xnb
@@ -32,5 +25,6 @@ Content\PayDay.xnb
 Content\Rules.xnb
 Content\Introduction.xnb
 Content\RobRight.xnb
+Content\ExitTile.xnb
 Scripts\Map1.DAT
 Scripts\Map1Indentifiers.DAT
