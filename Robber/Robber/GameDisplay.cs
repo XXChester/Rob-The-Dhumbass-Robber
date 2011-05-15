@@ -328,10 +328,13 @@ namespace Robber {
 					guard.updateColours(colour);
 				}
 				this.timer.updateColours(base.fadeOut(ResourceManager.TEXT_COLOUR));
+
+				this.startButton.updateColours(base.fadeOut(ResourceManager.TEXT_COLOUR));
+				this.replayButton.updateColours(base.fadeOut(ResourceManager.TEXT_COLOUR));
 				if (this.startButton.isActorOver(mousePos)) {
 					this.startButton.updateColours(base.fadeOut(ResourceManager.MOUSE_OVER_COLOUR));
-				} else {
-					this.startButton.updateColours(base.fadeOut(ResourceManager.TEXT_COLOUR));
+				} else if (this.replayButton.isActorOver(mousePos)) {
+					this.replayButton.updateColours(base.fadeOut(ResourceManager.MOUSE_OVER_COLOUR));
 				}
 			}
 
@@ -390,7 +393,10 @@ namespace Robber {
 					guard.render(spriteBatch);
 				}
 				this.timer.render(spriteBatch);
-				if (StateManager.getInstance().CurrentGameState == StateManager.GameState.Waiting) {
+				if (StateManager.getInstance().CurrentGameState == StateManager.GameState.Waiting ||
+					(StateManager.getInstance().CurrentGameState == StateManager.GameState.InGameMenu &&
+					StateManager.getInstance().CurrentTransitionState == StateManager.TransitionState.TransitionOut) &&
+					StateManager.getInstance().PreviousGameState == StateManager.GameState.Waiting) {
 					this.startButton.render(spriteBatch);
 				}
 			} else if (StateManager.getInstance().CurrentGameState == StateManager.GameState.GameOver ||
