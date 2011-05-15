@@ -19,13 +19,15 @@ namespace Robber {
 		public const string TREASURE_IDENTIFIER = "Treasure";
 		public const string BOUNDING_BOX_IDENTIFIER = "BBox";
 		public const string WAYPOINT_IDENTIFIER = "WayPoint";
-		public static readonly Color TEXT_COLOUR = Color.Black;
-		public static readonly Color MOUSE_OVER_COLOUR = Color.Green;
+		public const string TIME_INDENTIFIER = "Time";
+		public static readonly Color TEXT_COLOUR = Color.Gray;
+		public static readonly Color MOUSE_OVER_COLOUR = Color.White;
 		#endregion Class variables
 
 		#region Class properties
 		public SpriteFont Font { get; set; }
 		public Texture2D ButtonLineTexture { get; set; }
+		public Texture2D TitleTexture { get; set; }
 		#endregion Class properties
 
 		#region Support methods
@@ -36,7 +38,19 @@ namespace Robber {
 		public void init(GraphicsDevice device, ContentManager content) {
 			this.Font = content.Load<SpriteFont>("Font");
 			this.ButtonLineTexture = TextureUtils.create2DColouredTexture(device, 2, 2, Color.White);
+			this.TitleTexture = content.Load<Texture2D>("Title");
 		}
 		#endregion Support methods
+
+		#region Destructor
+		public void dispose() {
+			if (this.ButtonLineTexture != null) {
+				this.ButtonLineTexture.Dispose();
+			}
+			if (this.TitleTexture != null) {
+				this.TitleTexture.Dispose();
+			}
+		}
+		#endregion Destructor
 	}
 }

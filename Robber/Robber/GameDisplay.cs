@@ -25,6 +25,13 @@ namespace Robber {
 		private Treasure[] treasures;
 		private Color wallColour;
 		private ColouredButton replayButton;
+		private Timer timer;
+		private List<Point> entryExitPoints;
+		private Text2D gameOverText;
+		private StaticDrawable2D winBackGround;
+		private StaticDrawable2D looseBackGround;
+
+
 		private GraphicsDevice device;
 		private ContentManager content;
 		private string mapInformation;
@@ -42,26 +49,41 @@ namespace Robber {
 			this.device = device;
 			this.content = content;
 			this.mapInformation = mapInformation;
-			CollisionManager.getInstance().MapBoundingBoxes = new List<BoundingBox>();
+			this.timer = new Timer();
 
 			// load our map
+			CollisionManager.getInstance().MapBoundingBoxes = new List<BoundingBox>();
 			this.wallColour = Color.Black;
 			this.map = MapLoader.load(content, mapInformation + ".dat", this.wallColour);
-			reset(device, content, mapInformation, false);
+			reset(false);
 
 			// replay button
 			ColouredButtonParams buttonParms = new ColouredButtonParams();
 			buttonParms.Font = ResourceManager.getInstance().Font;
-			buttonParms.Height = 50;
+			buttonParms.Height = 25;
 			buttonParms.LinesTexture = ResourceManager.getInstance().ButtonLineTexture;
 			buttonParms.MouseOverColour = ResourceManager.MOUSE_OVER_COLOUR;
 			buttonParms.RegularColour = ResourceManager.TEXT_COLOUR;
-			buttonParms.StartX = 275;
-			buttonParms.StartY = 267;
-			buttonParms.Text = "Replay";
-			buttonParms.TextsPosition = new Vector2(293f, 278f);
-			buttonParms.Width = 100;
+			buttonParms.StartX = 693;
+			buttonParms.Width = 75;
+
+			// play button
+			buttonParms.StartY = 557;
+			buttonParms.Text = "Play";
+			buttonParms.TextsPosition = new Vector2(710f, buttonParms.StartY - 2f);
 			this.replayButton = new ColouredButton(buttonParms);
+
+			// game over text
+			Text2DParams textParams = new Text2DParams();
+			textParams.Font = ResourceManager.getInstance().Font;
+			textParams.Position = new Vector2(200f, 50f);
+			this.gameOverText = new Text2D(textParams);
+
+			// background
+			StaticDrawable2DParams staticParms = new StaticDrawable2DParams();
+			staticParms.Position = new Vector2(-10f, 0f);
+			staticParms.Texture = content.Load<Texture2D>("BackGround1");
+			this.looseBackGround = new StaticDrawable2D(staticParms);
 #if WINDOWS
 #if DEBUG
 			this.debugUtils = new DebugUtils(TextureUtils.create2DColouredTexture(device, 2, 2, Color.White));
@@ -73,21 +95,22 @@ namespace Robber {
 		#endregion Constructor
 
 		#region Support methods
-		private void reset(GraphicsDevice device, ContentManager content, string mapInformation, bool cleanUp) {
+		public void reset(bool cleanUp) {
 			if (cleanUp) {
 				foreach (Guard guard in this.guards) {
 					guard.RunAIThread = false;
 				}
 			}
-			StreamReader reader = new StreamReader(mapInformation + "Locations.dat");
+			StreamReader reader = new StreamReader(this.mapInformation + "Indentifiers.dat");
+			this.entryExitPoints = new List<Point>();
 			Point playersLocation = new Point();
 			List<Point> guardLocations = new List<Point>();
 			List<string> guardDirectins = new List<string>();
 			List<string> guardStates = new List<string>();
-			List<Point> guardEntryPoints = new List<Point>();
 			List<Point> treasureLocations = new List<Point>();
 			List<Point> boundingBoxPoints = new List<Point>();
 			List<Point> wayPoints = new List<Point>();
+			float time = 0f;
 			try {
 				string[] components = null;
 				string[] indexes = null;
@@ -104,13 +127,15 @@ namespace Robber {
 							guardStates.Add(components[2]);
 							guardDirectins.Add(components[3]);
 						} else if (components[0] == ResourceManager.GUARD_ENTRY_IDENTIFIER) {
-							guardEntryPoints.Add(new Point(int.Parse(indexes[0]), int.Parse(indexes[1])));
+							this.entryExitPoints.Add(new Point(int.Parse(indexes[0]), int.Parse(indexes[1])));
 						} else if (components[0] == ResourceManager.TREASURE_IDENTIFIER) {
 							treasureLocations.Add(new Point(int.Parse(indexes[0]), int.Parse(indexes[1])));
 						} else if (components[0] == ResourceManager.BOUNDING_BOX_IDENTIFIER) {
 							boundingBoxPoints.Add(new Point(int.Parse(indexes[0]), int.Parse(indexes[1])));
 						} else if (components[0] == ResourceManager.WAYPOINT_IDENTIFIER) {
 							wayPoints.Add(new Point(int.Parse(indexes[0]), int.Parse(indexes[1])));
+						} else if (components[0] == ResourceManager.TIME_INDENTIFIER) {
+							time = float.Parse(indexes[0]);
 						}
 					}
 				}
@@ -129,7 +154,7 @@ namespace Robber {
 			CollisionManager.getInstance().MapBoundingBoxes.AddRange(mapBoundingBoxes);
 
 			// load player at starting point
-			this.player = new Player(content, new Placement(playersLocation));
+			this.player = new Player(this.content, new Placement(playersLocation));
 
 			// load treasure at starting points
 			int treasureSize = treasureLocations.Count;
@@ -138,7 +163,7 @@ namespace Robber {
 			Random random = new Random();
 			for (int i = 0; i < treasureSize; i++) {
 				treasureFileName = "Treasure" + random.Next(1, 3);
-				this.treasures[i] = new Treasure(content, treasureFileName, new Placement(treasureLocations[i]));
+				this.treasures[i] = new Treasure(this.content, treasureFileName, new Placement(treasureLocations[i]));
 			}
 
 			// load guard(s) at starting points
@@ -147,23 +172,42 @@ namespace Robber {
 			Placement placement;
 			for (int i = 0; i < guardSize; i++) {
 				placement = new Placement(guardLocations[i]);
-				this.guards[i] = new Guard(device, content, placement, guardStates[i], guardDirectins[i]);
+				this.guards[i] = new Guard(this.device, this.content, placement, guardStates[i], guardDirectins[i]);
 			}
+			this.timer.reset(time);
 		}
 
 		public override void update(float elapsed) {
 			base.currentKeyBoardState = Keyboard.GetState();
 			base.currentMouseState = Mouse.GetState();
 			this.map.update(elapsed);
+			// check if the player won
+			foreach (Point point in this.entryExitPoints) {
+				if (point == this.player.Placement.index) {
+					StateManager.getInstance().CurrentGameState = StateManager.GameState.GameOver;
+					StateManager.getInstance().TypeOfGameOver = StateManager.GameOverType.Player;
+					break;
+				}
+			}
 			if (StateManager.getInstance().CurrentGameState == StateManager.GameState.Active) {
+				this.timer.update(elapsed);
 				this.player.update(elapsed);
 				foreach (Guard guard in this.guards) {
 					guard.update(elapsed);
 					if (guard.BoundingBox.Intersects(this.player.BoundingBox)) {
 						StateManager.getInstance().CurrentGameState = StateManager.GameState.GameOver;
+						StateManager.getInstance().TypeOfGameOver = StateManager.GameOverType.Guards;
 						break;
 					} else if (guard.Ring.BoundingSphere.Intersects(this.player.BoundingBox)) {
 						AIManager.getInstane().PlayerDetected = true;
+					}
+				}
+				foreach (Treasure treasure in this.treasures) {
+					treasure.update(elapsed);
+					if (treasure.BoundingBox.Intersects(this.player.BoundingBox)) {
+						treasure.PickedUp = true;
+						this.player.CapturedTreasures++;
+						break;
 					}
 				}
 			} else if (StateManager.getInstance().CurrentGameState == StateManager.GameState.GameOver) {
@@ -172,16 +216,14 @@ namespace Robber {
 				if (base.currentMouseState.LeftButton == ButtonState.Pressed && base.prevousMouseState.LeftButton == ButtonState.Released) {
 					if (this.replayButton.isActorOver(mousePos)) {
 						StateManager.getInstance().CurrentGameState = StateManager.GameState.Active;
-						reset(this.device, this.content, this.mapInformation, true);
+						reset(true);
 						Console.WriteLine("Reset");
 					}
 				}
-			}
-			foreach (Treasure treasure in this.treasures) {
-				if (treasure.BoundingBox.Intersects(this.player.BoundingBox)) {
-					treasure.PickedUp = true;
-					this.player.CapturedTreasures++;
-					break;
+				if (StateManager.getInstance().TypeOfGameOver == StateManager.GameOverType.Guards) {
+					this.gameOverText.WrittenText = "You loose; you have to be quick";
+				} else if (StateManager.getInstance().TypeOfGameOver == StateManager.GameOverType.Player) {
+					this.gameOverText.WrittenText = "Congratulations you won, you score is " + this.player.CapturedTreasures * 100 + this.timer.Time;
 				}
 			}
 			if (base.currentKeyBoardState.IsKeyDown(Keys.D1) && base.previousKeyBoardState.IsKeyUp(Keys.D1)) {
@@ -195,17 +237,26 @@ namespace Robber {
 		}
 
 		public override void render(SpriteBatch spriteBatch) {
-			this.map.render(spriteBatch);
-			foreach (Treasure treasure in this.treasures) {
-				treasure.render(spriteBatch);
-			}
 			if (StateManager.getInstance().CurrentGameState == StateManager.GameState.Active) {
+				this.map.render(spriteBatch);
+				foreach (Treasure treasure in this.treasures) {
+					treasure.render(spriteBatch);
+				}
 				this.player.render(spriteBatch);
 				foreach (Guard guard in this.guards) {
 					guard.render(spriteBatch);
 				}
+				this.timer.render(spriteBatch);
 			} else if (StateManager.getInstance().CurrentGameState == StateManager.GameState.GameOver) {
+				if (StateManager.getInstance().TypeOfGameOver == StateManager.GameOverType.Guards) {
+					this.looseBackGround.render(spriteBatch);
+				} else {
+					if (this.winBackGround != null) {
+						this.winBackGround.render(spriteBatch);
+					}
+				}
 				this.replayButton.render(spriteBatch);
+				this.gameOverText.render(spriteBatch);
 			}
 #if DEBUG
 			if (this.ShowAI) {
@@ -213,14 +264,6 @@ namespace Robber {
 				this.debugUtils.drawBoundingBox(spriteBatch, this.player.BoundingBox, debugColour);
 				foreach (Guard guard in this.guards) {
 					this.debugUtils.drawBoundingBox(spriteBatch, guard.BoundingBox,debugColour);
-					/*bool inRange = false;
-					int xDiff = Math.Max(base.currentMouseState.X, (int)guard.Sprite.Position.X) - Math.Min(base.currentMouseState.X, (int)guard.Sprite.Position.X);
-					int yDiff = Math.Max(base.currentMouseState.Y, (int)guard.Sprite.Position.Y) - Math.Min(base.currentMouseState.Y, (int)guard.Sprite.Position.Y);
-					// if our distance is within the range ring, we are within range
-					if (xDiff <= guard.Ring.BoundingSphere.Radius && yDiff <= guard.Ring.BoundingSphere.Radius) {
-						Console.WriteLine("In range");
-					}*/
-					//DebugUtils.drawBoundingSphere(spriteBatch, guard.Ring.BoundingSphere, debugColour, this.debugRing);
 				}
 				foreach (BoundingBox box in CollisionManager.getInstance().MapBoundingBoxes) {
 					this.debugUtils.drawBoundingBox(spriteBatch, box, debugColour);
@@ -263,6 +306,12 @@ namespace Robber {
 			}
 			if (this.replayButton != null) {
 				this.replayButton.dispose();
+			}
+			if (this.looseBackGround !=null) {
+				this.looseBackGround.dispose();
+			}
+			if (this.winBackGround != null) {
+				this.winBackGround.dispose();
 			}
 #if DEBUG
 			this.debugChip.Dispose();

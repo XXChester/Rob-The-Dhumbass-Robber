@@ -10,10 +10,15 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using GWNorthEngine.AI.AStar;
+using GWNorthEngine.Model;
+using GWNorthEngine.Model.Params;
+using GWNorthEngine.Scripting;
 namespace Robber {
 	public class Player : Person{
 		#region Class variables
 		private const float MOVEMENT_SPEED = 150f / 1000f;//. player always runs
+		private Text2D treasureText;
+		private StaticDrawable2D treasure;
 		#endregion Class variables
 
 		#region Class propeties
@@ -23,7 +28,22 @@ namespace Robber {
 		#region Constructor
 		public Player(ContentManager content, Placement startingLocation)
 			: base(content, "Player", startingLocation, MOVEMENT_SPEED) {
+			Text2DParams textParms = new Text2DParams();
+			textParms.Font = ResourceManager.getInstance().Font;
+			textParms.LightColour = ResourceManager.TEXT_COLOUR;
+			textParms.Position = new Vector2(350f, 575f);
+			textParms.WrittenText = "x " + this.CapturedTreasures;
+			this.treasureText = new Text2D(textParms);
 
+			StaticDrawable2DParams staticParms = new StaticDrawable2DParams();
+			staticParms.Position = new Vector2(325f, 573f);
+			staticParms.Texture = content.Load<Texture2D>("Treasure1");
+			this.treasure = new StaticDrawable2D(staticParms);
+#if WINDOWS
+#if DEBUG
+			ScriptManager.getInstance().registerObject(this.treasureText, "treasureText");
+#endif
+#endif
 		}
 		#endregion Constructor
 
@@ -75,20 +95,33 @@ namespace Robber {
 			// update our placement and bounding box
 			base.Placement = new Placement(Placement.getIndex(base.activeSprite.Position));
 			base.BoundingBox = Helper.getBBox(base.activeSprite.Position);
+			
 			if (base.previousPlacement.index != base.Placement.index) {
 				AIManager.getInstane().Board[base.previousPlacement.index.Y, base.previousPlacement.index.X] = base.previousTypeOfSpace;
 				base.previousTypeOfSpace = AIManager.getInstane().Board[base.Placement.index.Y, base.Placement.index.X];
-				if (AIManager.getInstane().PlayerDetected) {
-					// if we have been detected we need to tell the AI where we are
-					AIManager.getInstane().Board[base.Placement.index.Y, base.Placement.index.X] = PathFinder.TypeOfSpace.End;
-				}
 			}
+			if (AIManager.getInstane().PlayerDetected) {// if we aren't moving we still need to report where we are if we are detected
+				// if we have been detected we need to tell the AI where we are
+				AIManager.getInstane().Board[base.Placement.index.Y, base.Placement.index.X] = PathFinder.TypeOfSpace.End;
+			}
+			this.treasureText.WrittenText = " x " + this.CapturedTreasures;
 			base.updateMove(elapsed);
+		}
+
+		public new void render(SpriteBatch spriteBatch) {
+			this.treasureText.render(spriteBatch);
+			this.treasure.render(spriteBatch);
+			base.render(spriteBatch);
 		}
 		#endregion Support methods
 
 		#region Destructor
-
+		public new void dispose() {
+			if (this.treasure != null) {
+				this.treasure.dispose();
+			}
+			base.dispose();
+		}
 		#endregion Destructor
 	}
 }

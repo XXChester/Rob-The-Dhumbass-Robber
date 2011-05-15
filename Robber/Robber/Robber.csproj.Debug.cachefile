@@ -19,5 +19,7 @@ Content\GuardRight.xnb
 Content\GuardUp.xnb
 Content\Font.xnb
 Content\RadiusRing.xnb
+Content\BackGround1.xnb
+Content\Title.xnb
 Scripts\Map1.DAT
-Scripts\Map1Locations.DAT
+Scripts\Map1Indentifiers.DAT

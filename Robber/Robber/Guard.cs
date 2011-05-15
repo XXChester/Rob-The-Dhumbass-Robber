@@ -67,10 +67,15 @@ namespace Robber {
 			}
 			updateState(initalState);
 
-			if (this.currentState == State.Patrol || AIManager.getInstane().PlayerDetected) {
+			if (this.currentState == State.Patrol && !AIManager.getInstane().PlayerDetected) {
 				this.destinationWayPoint = AIManager.getInstane().getNextWayPoint(base.Placement.index, this.movementDirection);
 				this.path = new Stack<Point>(AIManager.getInstane().findPath(base.Placement.index, this.destinationWayPoint));
 				this.closestsPoint = this.path.Pop();
+			} else if (this.currentState == State.Chase || AIManager.getInstane().PlayerDetected) {
+				this.path = new Stack<Point>(AIManager.getInstane().findPath(base.Placement.index));
+				if (this.path.Count >= 1) {
+					this.closestsPoint = path.Pop();
+				}
 			}
 			base.previousDirection = Direction.None;
 			updateDirection();
@@ -111,6 +116,9 @@ namespace Robber {
 						// chase should regenerate the waypoint all the time
 						if (this.closestsPoint == base.Placement.index) {
 							this.path = new Stack<Point>(AIManager.getInstane().findPath(base.Placement.index));
+							if (this.path.Count == 1) {
+								Console.WriteLine("About to capture");
+							}
 							if (this.path.Count >= 1) {
 								this.closestsPoint = path.Pop();
 							}
@@ -188,7 +196,11 @@ namespace Robber {
 				base.previousTypeOfSpace = AIManager.getInstane().Board[base.Placement.index.Y, base.Placement.index.X];
 				AIManager.getInstane().Board[base.Placement.index.Y, base.Placement.index.X] = PathFinder.TypeOfSpace.Unwalkable;
 			}
-
+			Point endNode = AIManager.getInstane().findEndNode();
+			if (this.closestsPoint == endNode) {
+				StateManager.getInstance().CurrentGameState = StateManager.GameState.GameOver;
+				StateManager.getInstance().TypeOfGameOver = StateManager.GameOverType.Guards;
+			}
 			base.updateMove(elapsed);
 		}
 

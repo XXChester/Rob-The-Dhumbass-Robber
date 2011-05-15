@@ -29,7 +29,9 @@ namespace Robber {
 
 		#region Support methods
 		public void update(float elapsed) {
-
+			if (this.PickedUp) {
+				base.BoundingBox = Helper.destroyBB();
+			}
 		}
 
 		public void render(SpriteBatch spriteBatch) {

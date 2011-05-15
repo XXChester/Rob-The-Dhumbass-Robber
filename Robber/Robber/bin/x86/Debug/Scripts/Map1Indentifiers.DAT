@@ -7,6 +7,8 @@ Guard|17,15|Patrol|Clockwise
 Guard|19,15|Patrol|CounterClockwise
 //POINT(S) THE GUARDS RUN IN FROM
 GuardEntry|18,17
+//Time in minutes
+Time|1
 //TREASURE DEFINITIONS
 Treasure|13,0
 Treasure|12,0

@@ -19,7 +19,11 @@ namespace Robber {
 	public class TrafficManager : BaseRenderer {
 
 		private Display gameDisplay;
+		private Display mainMenu;
+		private Display inGameMenu;
 		private Display activeDisplay;
+		private KeyboardState previousKeyBoardState;
+		private MouseState previousMouseState;
 
 		public TrafficManager() {
 			BaseRendererParams baseParms = new BaseRendererParams();
@@ -41,8 +45,9 @@ namespace Robber {
 			ScriptManager.getInstance().LogFile = "Log.log";
 			ResourceManager.getInstance().init(GraphicsDevice, Content);
 			string MAP_INFORMATION =  Directory.GetCurrentDirectory() +  "\\Scripts\\Map1";
+			this.mainMenu = new MainMenu(Content);
+			this.inGameMenu = new InGameMenu(Content);
 			this.gameDisplay = new GameDisplay(GraphicsDevice, Content, MAP_INFORMATION);
-			this.activeDisplay = this.gameDisplay;
 		}
 
 		/// <summary>
@@ -50,7 +55,11 @@ namespace Robber {
 		/// all content.
 		/// </summary>
 		protected override void UnloadContent() {
+			this.mainMenu.dispose();
+			this.inGameMenu.dispose();
+			this.gameDisplay.dispose();
 			this.activeDisplay.dispose();
+			ResourceManager.getInstance().dispose();
 			base.UnloadContent();
 		}
 
@@ -63,15 +72,45 @@ namespace Robber {
 #if DEBUG
 			base.Window.Title = "Rob, The Dumb Ass Robber...FPS: " + FrameRate.getInstance().calculateFrameRate(gameTime) + "    X:" + Mouse.GetState().X + " Y:" + Mouse.GetState().Y;
 #endif
+
 			// Allows the game to exit
-			if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape)) {
-				this.Exit();
+			if (StateManager.getInstance().CurrentGameState != StateManager.GameState.InitReturnToMain) {
+				if (StateManager.getInstance().CurrentGameState == StateManager.GameState.Active) {
+					if (Keyboard.GetState().IsKeyDown(Keys.Escape) && this.previousKeyBoardState.IsKeyUp(Keys.Escape)) {
+						StateManager.getInstance().CurrentGameState = StateManager.GameState.InGameMenu;
+					}
+				} else if (StateManager.getInstance().CurrentGameState == StateManager.GameState.MainMenu) {
+					if (Keyboard.GetState().IsKeyDown(Keys.Escape) && this.previousKeyBoardState.IsKeyUp(Keys.Escape)) {
+						this.Exit();
+					}
+				} else if (StateManager.getInstance().CurrentGameState == StateManager.GameState.InGameMenu) {
+					if (Keyboard.GetState().IsKeyDown(Keys.Escape) && this.previousKeyBoardState.IsKeyUp(Keys.Escape)) {
+						StateManager.getInstance().CurrentGameState = StateManager.GameState.Active;
+					}
+				} else if (StateManager.getInstance().CurrentGameState == StateManager.GameState.Exit) {
+					this.Exit();
+				}
+			}
+
+			if (StateManager.getInstance().CurrentGameState == StateManager.GameState.Active || StateManager.getInstance().CurrentGameState == StateManager.GameState.GameOver) {
+				this.activeDisplay = this.gameDisplay;
+			} else if (StateManager.getInstance().CurrentGameState == StateManager.GameState.MainMenu) {
+				this.activeDisplay = this.mainMenu;
+			} else if (StateManager.getInstance().CurrentGameState == StateManager.GameState.InGameMenu) {
+				this.activeDisplay = this.inGameMenu;
+			} else if (StateManager.getInstance().CurrentGameState == StateManager.GameState.InitGame) {
+				this.activeDisplay = this.gameDisplay;
+				((GameDisplay)this.activeDisplay).reset(true);
+				StateManager.getInstance().CurrentGameState = StateManager.GameState.Active;
+			} else if (StateManager.getInstance().CurrentGameState == StateManager.GameState.InitReturnToMain) {
+				StateManager.getInstance().CurrentGameState = StateManager.GameState.MainMenu;
+				this.activeDisplay = this.mainMenu;
 			}
 
 			float elapsed = gameTime.ElapsedGameTime.Milliseconds;
 			this.activeDisplay.update(elapsed);
-			
-
+			this.previousKeyBoardState = Keyboard.GetState();
+			this.previousMouseState = Mouse.GetState();
 			base.Update(gameTime);
 		}
 
@@ -80,7 +119,7 @@ namespace Robber {
 		/// </summary>
 		/// <param name="gameTime">Provides a snapshot of timing values.</param>
 		protected override void Draw(GameTime gameTime) {
-			GraphicsDevice.Clear(Color.Yellow);
+			GraphicsDevice.Clear(Color.Black);
 
 			base.spriteBatch.Begin();
 			this.activeDisplay.render(base.spriteBatch);

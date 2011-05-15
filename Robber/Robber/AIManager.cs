@@ -55,16 +55,7 @@ namespace Robber {
 		}
 
 		public List<Point> findPath(Point start) {
-			// find our end point
-			Point end = new Point();
-			for (int y = 0; y < this.Board.GetUpperBound(0); y++) {
-				for (int x = 0; x < this.Board.GetUpperBound(1); x++) {
-					if (this.Board[y, x] == PathFinder.TypeOfSpace.End) {
-						end = new Point(x, y);
-						break;
-					}
-				}
-			}
+			Point end = findEndNode();
 			return findPath(start, end);
 		}
 
@@ -83,6 +74,19 @@ namespace Robber {
 			this.Board[start.Y, start.X] = previousStartSpot;
 			this.Board[end.Y, end.X] = previousEndSpot;
 			return path;
+		}
+
+		public Point findEndNode() {
+			Point end = new Point();
+			for (int y = 0; y < this.Board.GetUpperBound(0); y++) {
+				for (int x = 0; x < this.Board.GetUpperBound(1); x++) {
+					if (this.Board[y, x] == PathFinder.TypeOfSpace.End) {
+						end = new Point(x, y);
+						break;
+					}
+				}
+			}
+			return end;
 		}
 		#endregion Support methods
 	}

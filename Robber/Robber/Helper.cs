@@ -46,5 +46,9 @@ namespace Robber {
 		public static Point subtractPoint(Point p1, Point p2) {
 			return new Point(p1.X - p2.X, p1.Y - p2.Y);
 		}
+
+		public static BoundingBox destroyBB() {
+			return new BoundingBox(new Vector3(-1), new Vector3(-1));
+		}
 	}
 }

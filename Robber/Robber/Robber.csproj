@@ -120,8 +120,10 @@
     <Compile Include="GameDisplay.cs" />
     <Compile Include="Guard.cs" />
     <Compile Include="Helper.cs" />
+    <Compile Include="InGameMenu.cs" />
     <Compile Include="Interfaces\IRenderable.cs" />
     <Compile Include="Item.cs" />
+    <Compile Include="MainMenu.cs" />
     <Compile Include="Map.cs" />
     <Compile Include="MapLoader.cs" />
     <Compile Include="Person.cs" />
@@ -133,6 +135,7 @@
     <Compile Include="ResourceManager.cs" />
     <Compile Include="StateManager.cs" />
     <Compile Include="Tile.cs" />
+    <Compile Include="Timer.cs" />
     <Compile Include="TrafficManager.cs" />
     <Compile Include="Treasure.cs" />
   </ItemGroup>
@@ -180,7 +183,7 @@
     <None Include="Scripts\Map1.DAT">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Scripts\Map1Locations.DAT">
+    <None Include="Scripts\Map1Indentifiers.DAT">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
