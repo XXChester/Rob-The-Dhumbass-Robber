@@ -33,6 +33,7 @@ namespace Robber {
 		public Texture2D TitleTexture { get; set; }
 		public SoundEffect MouseOverSfx { get; set; }
 		public SoundEffect FootStepsSfx { get; set; }
+		public SoundEffect PrisonCellSfx { get; set; }
 		#endregion Class properties
 
 		#region Support methods
@@ -46,6 +47,7 @@ namespace Robber {
 			this.TitleTexture = content.Load<Texture2D>("Title");
 			this.MouseOverSfx = content.Load<SoundEffect>("MouseOverButton");
 			this.FootStepsSfx = content.Load<SoundEffect>("FootSteps");
+			this.PrisonCellSfx = content.Load<SoundEffect>("CellDoor");
 		}
 		#endregion Support methods
 
@@ -62,6 +64,9 @@ namespace Robber {
 			}
 			if (this.FootStepsSfx != null) {
 				this.FootStepsSfx.Dispose();
+			}
+			if (this.PrisonCellSfx != null) {
+				this.PrisonCellSfx.Dispose();
 			}
 		}
 		#endregion Destructor

@@ -34,6 +34,7 @@ namespace Robber {
 		private StaticDrawable2D treasure;
 		private SoundEffect cantTouchThisSfx;
 		private SoundEffect guardsAlertedSfx;
+		private SoundEffect guardDetectedSfx;
 		private SoundEffect introSfx;
 		private SoundEffect payDaySfx;
 		private SoundEffect treasureSfx;
@@ -113,6 +114,7 @@ namespace Robber {
 			this.introSfx = content.Load<SoundEffect>("LevelEntry");
 			this.payDaySfx = content.Load<SoundEffect>("PayDay");
 			this.treasureSfx = content.Load<SoundEffect>("TreasureCollect");
+			this.guardDetectedSfx = content.Load<SoundEffect>("Policia");
 #if WINDOWS
 #if DEBUG
 			this.debugUtils = new DebugUtils(TextureUtils.create2DColouredTexture(device, 2, 2, Color.White));
@@ -271,12 +273,15 @@ namespace Robber {
 					if (guard.BoundingBox.Intersects(this.player.BoundingBox)) {
 						StateManager.getInstance().CurrentGameState = StateManager.GameState.GameOver;
 						StateManager.getInstance().TypeOfGameOver = StateManager.GameOverType.Guards;
+						if (ResourceManager.PLAY_SOUND) {
+							ResourceManager.getInstance().PrisonCellSfx.Play();
+						}
 						break;
 					} else if (guard.Ring.BoundingSphere.Intersects(this.player.BoundingBox)) {
 						// did we JUST get detected?
 						if (!AIManager.getInstane().PlayerDetected) {
 							if (ResourceManager.PLAY_SOUND) {
-								this.guardsAlertedSfx.Play();
+								this.guardDetectedSfx.Play();
 							}
 						}
 						AIManager.getInstane().PlayerDetected = true;
@@ -528,6 +533,9 @@ namespace Robber {
 			}
 			if (this.treasureSfx != null) {
 				this.treasureSfx.Dispose();
+			}
+			if (this.guardDetectedSfx != null) {
+				this.guardDetectedSfx.Dispose();
 			}
 #if DEBUG
 			this.debugChip.Dispose();
