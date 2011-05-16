@@ -40,7 +40,6 @@ namespace Robber {
 
 		private GraphicsDevice device;
 		private ContentManager content;
-		private string mapInformation;
 		private DebugUtils debugUtils;
 		private Texture2D debugChip;
 		private Texture2D debugRing;
@@ -51,10 +50,9 @@ namespace Robber {
 		#endregion Class properties
 
 		#region Constructor
-		public GameDisplay(GraphicsDevice device, ContentManager content, string mapInformation) {
+		public GameDisplay(GraphicsDevice device, ContentManager content) {
 			this.device = device;
 			this.content = content;
-			this.mapInformation = mapInformation;
 			this.timer = new Timer();
 
 			// replay button
@@ -110,17 +108,17 @@ namespace Robber {
 		#endregion Constructor
 
 		#region Support methods
-		public void reset(bool cleanUp) {
-			if (cleanUp) {
-				if (this.guards != null) {
-					foreach (Guard guard in this.guards) {
-						guard.RunAIThread = false;
-					}
+		public void reset() {
+			// we need to stop our guards threads
+			if (this.guards != null) {
+				foreach (Guard guard in this.guards) {
+					guard.RunAIThread = false;
 				}
 			}
+			string mapInformation = Directory.GetCurrentDirectory() + "\\Scripts\\" + StateManager.getInstance().MapInformation;
 			CollisionManager.getInstance().MapBoundingBoxes = new List<BoundingBox>();
 
-			StreamReader reader = new StreamReader(this.mapInformation + "Indentifiers.dat");
+			StreamReader reader = new StreamReader(mapInformation + "Indentifiers.dat");
 			this.entryExitPoints = new List<Point>();
 			Point playersLocation = new Point();
 			Color floorColour = Color.White;
@@ -275,9 +273,8 @@ namespace Robber {
 				if (base.currentMouseState.LeftButton == ButtonState.Pressed && base.prevousMouseState.LeftButton == ButtonState.Released) {
 					if (this.replayButton.isActorOver(mousePos)) {
 						StateManager.getInstance().CurrentGameState = StateManager.GameState.Reset;
-						//StateManager.getInstance().CurrentTransitionState = StateManager.TransitionState.TransitionIn;
 						StateManager.getInstance().CurrentTransitionState = StateManager.TransitionState.TransitionOut;
-						reset(true);
+						reset();
 						Console.WriteLine("Reset");
 					}
 				}

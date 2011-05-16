@@ -96,7 +96,7 @@ namespace Robber {
 				if (base.currentMouseState.LeftButton == ButtonState.Pressed && base.prevousMouseState.LeftButton == ButtonState.Released) {
 					if (this.playButton.isActorOver(mousePos)) {
 						StateManager.getInstance().CurrentTransitionState = StateManager.TransitionState.TransitionOut;
-						StateManager.getInstance().CurrentGameState = StateManager.GameState.InitGame;
+						StateManager.getInstance().CurrentGameState = StateManager.GameState.MapSelection;
 						if (ResourceManager.PLAY_SOUND) {
 							this.outroSfx.Play(1f, 0f, 0f);
 						}

@@ -126,6 +126,8 @@
     <Compile Include="MainMenu.cs" />
     <Compile Include="Map.cs" />
     <Compile Include="MapLoader.cs" />
+    <Compile Include="MapSelection.cs" />
+    <Compile Include="MapSeletMenu.cs" />
     <Compile Include="Person.cs" />
     <Compile Include="Placement.cs" />
     <Compile Include="Player.cs" />

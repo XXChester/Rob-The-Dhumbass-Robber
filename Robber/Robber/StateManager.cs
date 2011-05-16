@@ -13,6 +13,7 @@ namespace Robber {
 			Waiting,//This stage is great for mapping a new mops Identifers, uncomment what you are mapping in Map.cs's update method and click away
 			Active,
 			GameOver,
+			MapSelection,
 			Exit
 		}
 
@@ -34,6 +35,7 @@ namespace Robber {
 		#endregion Class variables
 
 		#region Class properties
+		public string MapInformation { get; set; }
 		public GameOverType TypeOfGameOver { get; set; }
 		public TransitionState CurrentTransitionState { get; set; }
 		public TransitionState PreviousTransitionState { get; set; }

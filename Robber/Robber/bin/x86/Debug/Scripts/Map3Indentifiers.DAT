@@ -10,7 +10,7 @@ Guard|1,1|Patrol|Clockwise
 //POINT(S) THE GUARDS RUN IN FROM
 GuardEntry|0,14
 //Time in minutes
-Time|.5
+Time|.6
 //Colours as in Floor colour|Wall colour
 Colours|255,255,255|0,0,255
 //TREASURE DEFINITIONS
