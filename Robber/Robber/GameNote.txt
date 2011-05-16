@@ -69,10 +69,9 @@ ISSUES
 ============================
 Planning: 2 hours
 
-	Programming:	20 hours		10:30am-2:45pm		3:42pm-4:02pm	5pm-5:25pm	6:15pm-8:45pm
-polish:				
+Programming:	27.5 hours
 
-Art: 3 hours		2:45pm-3:30pm	4:02pm-5:1p0m	6pm-6:15pm
+Art: 5.25 hours		
 Sound:	.75 hours
 	
 Total Time:
