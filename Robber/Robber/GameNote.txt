@@ -75,8 +75,8 @@ ISSUES
 		Time
 ============================
 Planning: 2 hours
-Programming:	27.5 hours	9:45pm-1015pm	10:30pm-10:42pm		11pm-12:45am	1am-1:15am		3:30am-4:45am	9am-11am	11:36pm-
-Art: 5.25 hours		1:15am-1:30am
+Programming:	27.5 hours	9:45pm-1015pm	10:30pm-10:42pm		11pm-12:45am	1am-1:15am		3:30am-4:45am	9am-11am	11:36pm-12
+Art: 5.25 hours		1:15am-1:30am		12:10pm-12:24pm
 Sound:	.75 hours	9:15pm-9:45pm	10:15pm-10:30pm		10:45pm-11pm	12:45am-1am
 Deployment: 1:30am-2am
 Alpha-testing:2am-3:30am	11am-11:30am

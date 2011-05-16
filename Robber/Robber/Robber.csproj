@@ -32,7 +32,7 @@
     <TargetCulture>en</TargetCulture>
     <ProductName>Rob, The Dumb Ass Robber</ProductName>
     <PublisherName>Brandon McCulligh</PublisherName>
-    <ApplicationRevision>14</ApplicationRevision>
+    <ApplicationRevision>16</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
