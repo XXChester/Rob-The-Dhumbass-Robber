@@ -216,8 +216,8 @@ namespace Robber {
 				placement = new Placement(guardLocations[i]);
 				this.guards[i] = new Guard(this.device, this.content, placement, guardStates[i], guardDirectins[i]);
 			}
-			this.treasureText.WrittenText = "x " + this.player.CapturedTreasures;
 			this.timer.reset(time);
+			this.treasureText.WrittenText = "x " + this.player.CapturedTreasures;
 		}
 
 		public override void update(float elapsed) {
@@ -318,7 +318,7 @@ namespace Robber {
 					if (this.replayButton.isActorOver(mousePos)) {
 						StateManager.getInstance().CurrentGameState = StateManager.GameState.Reset;
 						StateManager.getInstance().CurrentTransitionState = StateManager.TransitionState.TransitionOut;
-						//reset();
+						reset();
 						Console.WriteLine("Reset");
 					}
 				}
@@ -391,7 +391,7 @@ namespace Robber {
 					}
 				} else if (StateManager.getInstance().CurrentTransitionState == StateManager.TransitionState.TransitionOut) {
 					if (StateManager.getInstance().CurrentGameState == StateManager.GameState.Reset) {
-						reset();
+						//reset();
 						StateManager.getInstance().CurrentGameState = StateManager.GameState.Waiting;
 					}
 					StateManager.getInstance().CurrentTransitionState = StateManager.TransitionState.TransitionIn;
