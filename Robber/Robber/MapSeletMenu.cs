@@ -126,7 +126,7 @@ namespace Robber {
 			} else if (StateManager.getInstance().CurrentTransitionState == StateManager.TransitionState.TransitionIn) {
 				this.title.LightColour = base.fadeIn(Color.White);
 				this.exitToMainButton.updateColours(base.fadeIn(ResourceManager.TEXT_COLOUR));
-
+				this.noPreviewImage.LightColour = base.fadeIn(ResourceManager.TEXT_COLOUR);
 				if (this.exitToMainButton.isActorOver(mousePos)) {
 					this.exitToMainButton.updateColours(base.fadeIn(ResourceManager.MOUSE_OVER_COLOUR));
 				}
@@ -141,6 +141,7 @@ namespace Robber {
 			} else if (StateManager.getInstance().CurrentTransitionState == StateManager.TransitionState.TransitionOut) {
 				this.title.LightColour = base.fadeOut(Color.White);
 				this.exitToMainButton.updateColours(base.fadeOut(ResourceManager.TEXT_COLOUR));
+				this.noPreviewImage.LightColour = base.fadeOut(ResourceManager.TEXT_COLOUR);
 				if (this.exitToMainButton.isActorOver(mousePos)) {
 					this.exitToMainButton.updateColours(base.fadeOut(ResourceManager.MOUSE_OVER_COLOUR));
 				}

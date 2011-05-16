@@ -24,7 +24,7 @@ namespace Robber {
 		public const string COLOUR_IDENTIFIER = "Colours";
 		public static readonly Color TEXT_COLOUR = Color.Gray;
 		public static readonly Color MOUSE_OVER_COLOUR = Color.White;
-		public const bool PLAY_SOUND = false;
+		public const bool PLAY_SOUND = true;
 		#endregion Class variables
 
 		#region Class properties
