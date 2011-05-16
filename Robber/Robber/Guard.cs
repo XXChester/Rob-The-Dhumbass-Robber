@@ -76,8 +76,9 @@ namespace Robber {
 				if (this.path.Count >= 1) {
 					this.closestsPoint = path.Pop();
 				}
+			} else if (this.currentState == State.Standing || this.currentState == State.NotSpawned) {
+				this.closestsPoint = new Point(-1, -1);
 			}
-			base.previousDirection = Direction.None;
 			updateDirection();
 			this.chipTexture = TextureUtils.create2DColouredTexture(device, 32, 32, Color.White);
 			this.RunAIThread = true;
@@ -145,17 +146,21 @@ namespace Robber {
 
 		private void updateDirection() {
 			// figure out what direction our closests point is
-			Point temp = new Point(base.Placement.index.X - this.closestsPoint.X, base.Placement.index.Y - this.closestsPoint.Y);
-			if (temp.X <= -1) {
-				base.direction = Direction.Right;
-			} else if (temp.X >= 1) {
-				base.direction = Direction.Left;
-			} else if (temp.Y <= -1) {
-				base.direction = Direction.Down;
-			} else if (temp.Y >= 1) {
-				base.direction = Direction.Up;
-			} else {
+			if (this.closestsPoint.X == -1 && this.closestsPoint.Y == -1) {
 				base.direction = Direction.None;
+			} else {
+				Point temp = new Point(base.Placement.index.X - this.closestsPoint.X, base.Placement.index.Y - this.closestsPoint.Y);
+				if (temp.X <= -1) {
+					base.direction = Direction.Right;
+				} else if (temp.X >= 1) {
+					base.direction = Direction.Left;
+				} else if (temp.Y <= -1) {
+					base.direction = Direction.Down;
+				} else if (temp.Y >= 1) {
+					base.direction = Direction.Up;
+				} else {
+					base.direction = Direction.None;
+				}
 			}
 		}
 
