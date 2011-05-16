@@ -92,7 +92,13 @@ namespace Robber {
 				if (this.direction == Direction.Up) {
 					if (updateSprite) {
 						this.leftSprite.Position = this.activeSprite.Position;
-						this.activeSprite = this.leftSprite;
+						if (this.previousDirection == Direction.Left) {
+							this.activeSprite = this.leftSprite;
+						} else if (this.previousDirection == Direction.Right) {
+							this.activeSprite = this.rightSprite;
+						} else {
+							this.activeSprite = this.leftSprite;
+						}
 					}
 				} else if (this.direction == Direction.Right) {
 					if (updateSprite) {
@@ -102,7 +108,13 @@ namespace Robber {
 				} else if (this.direction == Direction.Down) {
 					if (updateSprite) {
 						this.rightSprite.Position = this.activeSprite.Position;
-						this.activeSprite = this.rightSprite;
+						if (this.previousDirection == Direction.Left) {
+							this.activeSprite = this.leftSprite;
+						} else if (this.previousDirection == Direction.Right) {
+							this.activeSprite = this.rightSprite;
+						} else {
+							this.activeSprite = this.rightSprite;
+						}
 					}
 				} else if (this.direction == Direction.Left) {
 					if (updateSprite) {
