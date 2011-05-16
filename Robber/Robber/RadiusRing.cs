@@ -24,6 +24,7 @@ namespace Robber {
 
 		#region Class propeties
 		public BoundingSphere BoundingSphere { get; set; }
+
 		#endregion Class properties
 
 		#region Constructor
@@ -33,7 +34,7 @@ namespace Robber {
 			ringParams.Texture = content.Load<Texture2D>("RadiusRing");
 			ringParams.Scale = SCALE;
 			ringParams.LightColour = COLOUR;
-			ringParams.Origin = new Vector2(13f, 13f);
+			ringParams.Origin = new Vector2(ResourceManager.TILE_SIZE / 2f, ResourceManager.TILE_SIZE / 2f);
 			this.ring = new StaticDrawable2D(ringParams);
 			updateBoundingSphere(position);
 		}
@@ -41,7 +42,7 @@ namespace Robber {
 
 		#region Support methods
 		private void updateBoundingSphere(Vector2 position) {
-			this.BoundingSphere = new BoundingSphere(new Vector3(position, 0f), ResourceManager.TILE_SIZE * 3);
+			this.BoundingSphere = new BoundingSphere(new Vector3(position, 0f), ResourceManager.TILE_SIZE * 3.5f);
 		}
 		
 		public void updatePosition(Vector2 newPosition) {

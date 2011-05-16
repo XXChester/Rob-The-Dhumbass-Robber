@@ -117,7 +117,7 @@ namespace Robber {
 #if DEBUG
 			this.debugUtils = new DebugUtils(TextureUtils.create2DColouredTexture(device, 2, 2, Color.White));
 			this.debugChip = TextureUtils.create2DColouredTexture(device, 32, 32, Color.White);
-			this.debugRing = TextureUtils.create2DRingTexture(device, 16, Color.White);
+			this.debugRing = TextureUtils.create2DRingTexture(device, 112, Color.White);
 #endif
 #endif
 		}
@@ -218,9 +218,6 @@ namespace Robber {
 			}
 			this.treasureText.WrittenText = "x " + this.player.CapturedTreasures;
 			this.timer.reset(time);
-			/*if (ResourceManager.PLAY_SOUND) {
-				this.introSfx.Play();
-			}*/
 		}
 
 		public override void update(float elapsed) {
@@ -284,6 +281,7 @@ namespace Robber {
 						}
 						AIManager.getInstane().PlayerDetected = true;
 					}
+					
 				}
 				foreach (Treasure treasure in this.treasures) {
 					treasure.update(elapsed);
@@ -412,11 +410,7 @@ namespace Robber {
 					ShowAI = true;
 				}
 			} else if (base.currentKeyBoardState.IsKeyDown(Keys.D2) && base.previousKeyBoardState.IsKeyUp(Keys.D2)) {
-				StateManager.getInstance().CurrentGameState = StateManager.GameState.GameOver;
-				StateManager.getInstance().TypeOfGameOver = StateManager.GameOverType.Guards;
-			} else if (base.currentKeyBoardState.IsKeyDown(Keys.D3) && base.previousKeyBoardState.IsKeyUp(Keys.D3)) {
-				StateManager.getInstance().CurrentGameState = StateManager.GameState.GameOver;
-				StateManager.getInstance().TypeOfGameOver = StateManager.GameOverType.Player;
+				Console.Clear();
 			}
 #endif
 			base.update(elapsed);
@@ -466,6 +460,7 @@ namespace Robber {
 				this.debugUtils.drawBoundingBox(spriteBatch, this.player.BoundingBox, debugColour);
 				foreach (Guard guard in this.guards) {
 					this.debugUtils.drawBoundingBox(spriteBatch, guard.BoundingBox,debugColour);
+					DebugUtils.drawBoundingSphere(spriteBatch, guard.Ring.BoundingSphere, debugColour, this.debugRing);
 				}
 				foreach (BoundingBox box in CollisionManager.getInstance().MapBoundingBoxes) {
 					this.debugUtils.drawBoundingBox(spriteBatch, box, debugColour);

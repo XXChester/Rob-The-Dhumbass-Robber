@@ -3,10 +3,10 @@
 //PLAYERS START POSITION
 Player|20,17
 //GUARD(S) START POSITIONS, STATE AND DIRECTION
-Guard|3,16|Standing|Clockwise
-Guard|11,15|Standing|Clockwise
-Guard|11,3|Standing|Clockwise
-Guard|1,1|Standing|Clockwise
+Guard|3,16|Patrol|Clockwise
+Guard|11,15|Patrol|Clockwise
+Guard|11,3|Patrol|Clockwise
+Guard|1,1|Patrol|Clockwise
 //POINT(S) THE GUARDS RUN IN FROM
 GuardEntry|20,10
 GuardEntry|0,14

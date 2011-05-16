@@ -64,7 +64,7 @@ ISSUES
 ==========================
 []AI can sometimes walk through walls
 [*]Clicking on the Return to Main button near where the Exit button spawns will exit the game....if I get to transitions that should fix the issue
-[]Radius detection bounding spehere is not computing correctly on the south/east side
+[*]Radius detection bounding spehere is not computing correctly on the south/east side
 ============================
 		Time
 ============================
