@@ -63,6 +63,7 @@ namespace Robber {
 				string message = "GuardEntry|";
 				//string message = "Player|";
 				string suffix = Placement.getIndex(new Vector2(Mouse.GetState().X, Mouse.GetState().Y)).X + "," + Placement.getIndex(new Vector2(Mouse.GetState().X, Mouse.GetState().Y)).Y;
+				Console.WriteLine(suffix);
 				//ScriptManager.getInstance().log(message + suffix);
 			}
 			this.previous = Mouse.GetState();

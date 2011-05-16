@@ -40,9 +40,9 @@ namespace Robber {
 						width = (Int32.Parse(components[1]));
 						mapPieces = new Tile[height, width];
 						// init our AI board
-						tileSpaces = new PathFinder.TypeOfSpace[height, width];
+						tileSpaces = new PathFinder.TypeOfSpace[height, width - 1];
 						for (int j = 0; j < height; j++) {
-							for (int k = 0; k < width; k++) {
+							for (int k = 0; k < width - 1; k++) {
 								tileSpaces[j, k] = PathFinder.TypeOfSpace.Walkable;
 							}
 						}
@@ -74,7 +74,7 @@ namespace Robber {
 					}
 				}
 				map = new Map(content, mapPieces, height, width, floorcolour, wallColour);
-				AIManager.getInstane().init(height, width);
+				AIManager.getInstane().init(height, width - 1);
 				AIManager.getInstane().Board = tileSpaces;
 			} finally {
 				reader.Close();
