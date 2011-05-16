@@ -90,9 +90,6 @@ namespace Robber {
 			width -= 1;
 			height -= 1;
 			bool map = true;
-			if (x == 20 && y == 9) {
-				map = false;
-			}
 			if (y == 0 || y == height || x == 0 || x == width) {
 				if (textureName != "BottomLeft" && textureName != "BottomRight" && textureName != "TopLeft" && textureName != "TopRight") {
 					map = false;
