@@ -115,7 +115,7 @@ namespace Robber {
 							if (this.path.Count == 1) {
 								Console.WriteLine("About to capture");
 							}
-							if (this.path.Count >= 1 && this.foundMiddle) {
+							if (this.path.Count >= 1) {
 								this.closestsPoint = path.Pop();
 								this.foundMiddle = false;
 							}

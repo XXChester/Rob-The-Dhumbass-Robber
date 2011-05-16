@@ -65,6 +65,7 @@ ISSUES
 []AI can sometimes walk through walls		--All the logic is correct it is just the AI is not walking down the middle of the square which it needs to
 	[*]Cleaned uup a bit but needs another pass
 [*]AI cannot get the player if they are against an outer wall
+[]If you agro the AI with the new algorithm for their walking paths they will get stucks
 [*]Clicking on the Return to Main button near where the Exit button spawns will exit the game....if I get to transitions that should fix the issue
 [*]Radius detection bounding spehere is not computing correctly on the south/east side
 []Appears the sound API crashes the game sometimes with no stack trace or anything....appears to only be in debug mode
@@ -73,10 +74,10 @@ ISSUES
 		Time
 ============================
 Planning: 2 hours
-Programming:	27.5 hours	9:45pm-1015pm	10:30pm-10:42pm		11pm-12:45am	1am-1:15am		3:30am-4:45am	9am-
+Programming:	27.5 hours	9:45pm-1015pm	10:30pm-10:42pm		11pm-12:45am	1am-1:15am		3:30am-4:45am	9am-11am
 Art: 5.25 hours		1:15am-1:30am
 Sound:	.75 hours	9:15pm-9:45pm	10:15pm-10:30pm		10:45pm-11pm	12:45am-1am
 Deployment: 1:30am-2am
-Alpha-testing:2am-3:30am
+Alpha-testing:2am-3:30am	11am-
 Total Time:
 	

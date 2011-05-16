@@ -323,6 +323,7 @@ namespace Robber {
 					}
 				}
 				if (StateManager.getInstance().TypeOfGameOver == StateManager.GameOverType.Guards) {
+					this.gameOverText.Position = new Vector2(200f, this.gameOverText.Position.Y);
 					this.gameOverText.WrittenText = "You loose; you have to be quick";
 				} else if (StateManager.getInstance().TypeOfGameOver == StateManager.GameOverType.Player) {
 					this.gameOverText.Position = new Vector2(125f, this.gameOverText.Position.Y);
