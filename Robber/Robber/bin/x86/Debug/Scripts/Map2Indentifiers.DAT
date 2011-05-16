@@ -3,17 +3,17 @@
 //PLAYERS START POSITION
 Player|20,17
 //GUARD(S) START POSITIONS, STATE AND DIRECTION
-Guard|3,16|Patrol|Clockwise
-Guard|11,15|Patrol|Clockwise
-Guard|11,3|Patrol|Clockwise
-Guard|1,1|Patrol|Clockwise
+Guard|3,16|Standing|Clockwise
+Guard|11,15|Standing|Clockwise
+Guard|11,3|Standing|Clockwise
+Guard|1,1|Standing|Clockwise
 //POINT(S) THE GUARDS RUN IN FROM
 GuardEntry|20,10
 GuardEntry|0,14
 //Time in minutes
 Time|1
 //Colours as in Floor colour|Wall colour
-Colours|0,0,0|255,255,255
+Colours|81,81,81|255,255,255
 //TREASURE DEFINITIONS
 Treasure|7,5
 Treasure|8,5

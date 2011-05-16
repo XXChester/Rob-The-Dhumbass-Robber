@@ -22,6 +22,7 @@ namespace Robber {
 		private ColouredButton exitToMainButton;
 		private StaticDrawable2D title;
 		private SoundEffect outroSfx;
+		private StaticDrawable2D noPreviewImage;
 		#endregion Class variables
 
 		#region Class propeties
@@ -54,6 +55,13 @@ namespace Robber {
 			staticParms.Position = new Vector2(0f, -20f);
 			staticParms.Texture = ResourceManager.getInstance().TitleTexture;
 			this.title = new StaticDrawable2D(staticParms);
+
+			// no preview image
+			staticParms.Position = new Vector2(20f, 100f);
+			staticParms.Texture = content.Load<Texture2D>("NoPreview");
+			staticParms.Scale = new Vector2(.8f, .8f);
+			staticParms.LightColour = ResourceManager.TEXT_COLOUR;
+			this.noPreviewImage = new StaticDrawable2D(staticParms);
 
 			// sound effects
 			this.outroSfx = content.Load<SoundEffect>("LetsGo");
@@ -164,8 +172,15 @@ namespace Robber {
 
 		public override void render(SpriteBatch spriteBatch) {
 			this.title.render(spriteBatch);
+			bool foundMouseOver = false;
 			foreach (MapSelection selection in this.mapSelections) {
 				selection.render(spriteBatch);
+				if (selection.PreviewButton.isActorOver(new Vector2(base.currentMouseState.X, base.currentMouseState.Y))) {
+					foundMouseOver = true;
+				}
+			}
+			if (!foundMouseOver) {
+				this.noPreviewImage.render(spriteBatch);
 			}
 			this.exitToMainButton.render(spriteBatch);
 		}
@@ -181,6 +196,9 @@ namespace Robber {
 			}
 			foreach (MapSelection selection in this.mapSelections) {
 				selection.dispose();
+			}
+			if (this.noPreviewImage != null) {
+				this.noPreviewImage.dispose();
 			}
 			if (this.outroSfx != null) {
 				this.outroSfx.Dispose();
