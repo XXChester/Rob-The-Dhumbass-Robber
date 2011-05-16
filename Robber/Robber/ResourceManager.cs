@@ -5,6 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Audio;
 using GWNorthEngine.Utils;
 namespace Robber {
 	public class ResourceManager {
@@ -23,13 +24,15 @@ namespace Robber {
 		public const string COLOUR_IDENTIFIER = "Colours";
 		public static readonly Color TEXT_COLOUR = Color.Gray;
 		public static readonly Color MOUSE_OVER_COLOUR = Color.White;
-		public const bool PLAY_SOUND = false;
+		public const bool PLAY_SOUND = true;
 		#endregion Class variables
 
 		#region Class properties
 		public SpriteFont Font { get; set; }
 		public Texture2D ButtonLineTexture { get; set; }
 		public Texture2D TitleTexture { get; set; }
+		public SoundEffect MouseOverSfx { get; set; }
+		public SoundEffect FootStepsSfx { get; set; }
 		#endregion Class properties
 
 		#region Support methods
@@ -41,6 +44,8 @@ namespace Robber {
 			this.Font = content.Load<SpriteFont>("Font");
 			this.ButtonLineTexture = TextureUtils.create2DColouredTexture(device, 2, 2, Color.White);
 			this.TitleTexture = content.Load<Texture2D>("Title");
+			this.MouseOverSfx = content.Load<SoundEffect>("MouseOverButton");
+			this.FootStepsSfx = content.Load<SoundEffect>("FootSteps");
 		}
 		#endregion Support methods
 
@@ -51,6 +56,12 @@ namespace Robber {
 			}
 			if (this.TitleTexture != null) {
 				this.TitleTexture.Dispose();
+			}
+			if (this.MouseOverSfx != null) {
+				this.MouseOverSfx.Dispose();
+			}
+			if (this.FootStepsSfx != null) {
+				this.FootStepsSfx.Dispose();
 			}
 		}
 		#endregion Destructor

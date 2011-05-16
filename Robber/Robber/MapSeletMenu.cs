@@ -21,6 +21,7 @@ namespace Robber {
 		private List<MapSelection> mapSelections;
 		private ColouredButton exitToMainButton;
 		private StaticDrawable2D title;
+		private SoundEffect outroSfx;
 		#endregion Class variables
 
 		#region Class propeties
@@ -53,6 +54,9 @@ namespace Robber {
 			staticParms.Position = new Vector2(0f, -20f);
 			staticParms.Texture = ResourceManager.getInstance().TitleTexture;
 			this.title = new StaticDrawable2D(staticParms);
+
+			// sound effects
+			this.outroSfx = content.Load<SoundEffect>("LetsGo");
 		}
 		#endregion Constructor
 
@@ -65,6 +69,32 @@ namespace Robber {
 				selection.update(elapsed);
 			}
 			this.exitToMainButton.processActorsMovement(mousePos);
+			// mouse over sfx
+			if (this.exitToMainButton.isActorOver(mousePos)) {
+				if (!base.previousMouseOverButton) {
+					if (ResourceManager.PLAY_SOUND) {
+						ResourceManager.getInstance().MouseOverSfx.Play();
+					}
+				}
+				base.previousMouseOverButton = true;
+			} else {
+				bool foundInLoop = false;
+				foreach (MapSelection selection in this.mapSelections) {
+					if (selection.PreviewButton.isActorOver(mousePos)) {
+						if (!base.previousMouseOverButton) {
+							if (ResourceManager.PLAY_SOUND) {
+								ResourceManager.getInstance().MouseOverSfx.Play();
+							}
+						}
+						foundInLoop = true;
+						base.previousMouseOverButton = true;
+						break;
+					}
+				}
+				if (!foundInLoop) {
+					base.previousMouseOverButton = false;
+				}
+			}
 			if (StateManager.getInstance().CurrentTransitionState == StateManager.TransitionState.None) {
 				if (base.currentMouseState.LeftButton == ButtonState.Pressed && base.prevousMouseState.LeftButton == ButtonState.Released) {
 					if (this.exitToMainButton.isActorOver(mousePos)) {
@@ -77,6 +107,9 @@ namespace Robber {
 								StateManager.getInstance().CurrentGameState = StateManager.GameState.InitGame;
 								StateManager.getInstance().CurrentTransitionState = StateManager.TransitionState.TransitionOut;
 								StateManager.getInstance().MapInformation = selection.MapName;
+								if (ResourceManager.PLAY_SOUND) {
+									this.outroSfx.Play();
+								}
 								break;
 							}
 						}
@@ -148,6 +181,9 @@ namespace Robber {
 			}
 			foreach (MapSelection selection in this.mapSelections) {
 				selection.dispose();
+			}
+			if (this.outroSfx != null) {
+				this.outroSfx.Dispose();
 			}
 		}
 		#endregion Destructor

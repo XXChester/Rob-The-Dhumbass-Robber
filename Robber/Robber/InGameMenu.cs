@@ -72,6 +72,17 @@ namespace Robber {
 
 			this.returnToGameButton.processActorsMovement(mousePos);
 			this.exitToMainButton.processActorsMovement(mousePos);
+			// mouse over sfx
+			if (this.returnToGameButton.isActorOver(mousePos) || this.exitToMainButton.isActorOver(mousePos)) {
+				if (!base.previousMouseOverButton) {
+					if (ResourceManager.PLAY_SOUND) {
+						ResourceManager.getInstance().MouseOverSfx.Play();
+					}
+				}
+				base.previousMouseOverButton = true;
+			} else {
+				base.previousMouseOverButton = false;
+			}
 			if (StateManager.getInstance().CurrentTransitionState == StateManager.TransitionState.None) {
 				if (base.currentMouseState.LeftButton == ButtonState.Pressed && base.prevousMouseState.LeftButton == ButtonState.Released) {
 					if (this.returnToGameButton.isActorOver(mousePos)) {

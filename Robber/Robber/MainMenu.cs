@@ -71,10 +71,10 @@ namespace Robber {
 			// load sound effects
 			this.introSfx = content.Load<SoundEffect>("Introduction");
 			this.idleSfx = content.Load<SoundEffect>("Rules");
-			this.outroSfx = content.Load<SoundEffect>("LetsGo");
+			//this.outroSfx = content.Load<SoundEffect>("LetsGo");
 			this.exitSfx = content.Load<SoundEffect>("Chicken");
 			if (ResourceManager.PLAY_SOUND) {
-				this.introSfx.Play(1f, 0f, 0f);
+				this.introSfx.Play();
 			}
 #if WINDOWS
 #if DEBUG
@@ -92,18 +92,29 @@ namespace Robber {
 			
 			this.playButton.processActorsMovement(mousePos);
 			this.exitButton.processActorsMovement(mousePos);
+			// mouse over sfx
+			if (this.playButton.isActorOver(mousePos) || this.exitButton.isActorOver(mousePos)) {
+				if (!base.previousMouseOverButton) {
+					if (ResourceManager.PLAY_SOUND) {
+						ResourceManager.getInstance().MouseOverSfx.Play();
+					}
+				}
+				base.previousMouseOverButton = true;
+			} else {
+				base.previousMouseOverButton = false;
+			}
 			if (StateManager.getInstance().CurrentTransitionState == StateManager.TransitionState.None) {
 				if (base.currentMouseState.LeftButton == ButtonState.Pressed && base.prevousMouseState.LeftButton == ButtonState.Released) {
 					if (this.playButton.isActorOver(mousePos)) {
 						StateManager.getInstance().CurrentTransitionState = StateManager.TransitionState.TransitionOut;
 						StateManager.getInstance().CurrentGameState = StateManager.GameState.MapSelection;
 						if (ResourceManager.PLAY_SOUND) {
-							this.outroSfx.Play(1f, 0f, 0f);
+						//	this.outroSfx.Play();
 						}
 					} else if (this.exitButton.isActorOver(mousePos)) {
 						StateManager.getInstance().CurrentGameState = StateManager.GameState.Exit;
 						if (ResourceManager.PLAY_SOUND) {
-							this.exitSfx.Play(1f, 0f, 0f);
+							this.exitSfx.Play();
 						}
 					}
 				}
@@ -145,7 +156,7 @@ namespace Robber {
 			if (ResourceManager.PLAY_SOUND) {
 				this.timeIdle += elapsed;
 				if (this.timeIdle >= PLAY_IDLE_AT) {
-					this.idleSfx.Play(1f, 0f, 0f);
+					this.idleSfx.Play();
 					this.timeIdle = 0f;
 				}
 			}

@@ -51,12 +51,13 @@ Replace the programmer art with less crappy programmer art and make the game not
 []Add in random sneezing if you stand within the same tile too long
 [*]Add in emote system when guards are chasing etc
 []Sfx emotes
-[]Sfx
+[*]Sfx
 []Put doors in
 []Rotate idle sfxs
 []Multiple maps read from directory		-Hard coded at this time because I don't have time to figure out how to change the content pipeline, making it very easy to add maps though
 	[*]Hard coded but very easy to add new ones		-Can create and map indentifiers for a new map in about 30minutes
 [*]Map select screen
+[]Change sprite direction determination for up and down, base it on last direction
 
 ===========================
 ISSUES
@@ -69,10 +70,10 @@ ISSUES
 ============================
 Planning: 2 hours
 
-Programming:	27.5 hours
+Programming:	27.5 hours	9:45pm-1015pm	10:30pm-
 
 Art: 5.25 hours		
-Sound:	.75 hours
+Sound:	.75 hours	9:15pm-9:45pm	10:15pm-10:30pm
 	
 Total Time:
 	

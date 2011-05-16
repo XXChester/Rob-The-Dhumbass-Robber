@@ -29,6 +29,9 @@ Content\ExitTile.xnb
 Content\Map1Preview.xnb
 Content\Map2Preview.xnb
 Content\Map3Preview.xnb
+Content\MouseOverButton.xnb
+Content\TreasureCollect.xnb
+Content\FootSteps.xnb
 Scripts\Map3.DAT
 Scripts\Map3Indentifiers.DAT
 Scripts\Map2Indentifiers.DAT

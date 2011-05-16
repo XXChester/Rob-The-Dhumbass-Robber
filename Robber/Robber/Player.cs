@@ -16,9 +16,9 @@ using GWNorthEngine.Scripting;
 namespace Robber {
 	public class Player : Person{
 		#region Class variables
+		private float footStepSFXDelay;
 		private const float MOVEMENT_SPEED = 150f / 1000f;//. player always runs
-		private Text2D treasureText;
-		private StaticDrawable2D treasure;
+		private const float FOOT_STEP_SFX_DELAY = 600f;
 		#endregion Class variables
 
 		#region Class propeties
@@ -28,28 +28,12 @@ namespace Robber {
 		#region Constructor
 		public Player(ContentManager content, Placement startingLocation)
 			: base(content, "Rob", startingLocation, MOVEMENT_SPEED) {
-			Text2DParams textParms = new Text2DParams();
-			textParms.Font = ResourceManager.getInstance().Font;
-			textParms.LightColour = ResourceManager.TEXT_COLOUR;
-			textParms.Position = new Vector2(350f, 575f);
-			textParms.WrittenText = "x " + this.CapturedTreasures;
-			this.treasureText = new Text2D(textParms);
 
-			StaticDrawable2DParams staticParms = new StaticDrawable2DParams();
-			staticParms.Position = new Vector2(325f, 573f);
-			staticParms.Texture = content.Load<Texture2D>("Treasure1");
-			this.treasure = new StaticDrawable2D(staticParms);
-#if WINDOWS
-#if DEBUG
-			ScriptManager.getInstance().registerObject(this.treasureText, "treasureText");
-#endif
-#endif
 		}
 		#endregion Constructor
 
 		#region Support methods
 		public override void updateMove(float elapsed) {
-
 			if (this.currentKeyBoardState.IsKeyDown(Keys.Left)) {
 				base.direction = Person.Direction.Left;
 			} else if (this.currentKeyBoardState.IsKeyDown(Keys.Up)) {
@@ -68,6 +52,10 @@ namespace Robber {
 
 
 			if (base.direction != Direction.None) {
+				if (this.footStepSFXDelay >= FOOT_STEP_SFX_DELAY && ResourceManager.PLAY_SOUND) {
+					ResourceManager.getInstance().FootStepsSfx.Play();
+					this.footStepSFXDelay = 0f;
+				}
 				float moveDistance = (base.movementSpeed * elapsed);
 				Vector2 newPos;
 				if (base.direction == Direction.Up) {
@@ -104,24 +92,13 @@ namespace Robber {
 				// if we have been detected we need to tell the AI where we are
 				AIManager.getInstane().Board[base.Placement.index.Y, base.Placement.index.X] = PathFinder.TypeOfSpace.End;
 			}
-			this.treasureText.WrittenText = " x " + this.CapturedTreasures;
+			this.footStepSFXDelay += elapsed;
 			base.updateMove(elapsed);
-		}
-
-		public new void render(SpriteBatch spriteBatch) {
-			this.treasureText.render(spriteBatch);
-			this.treasure.render(spriteBatch);
-			base.render(spriteBatch);
 		}
 		#endregion Support methods
 
 		#region Destructor
-		public new void dispose() {
-			if (this.treasure != null) {
-				this.treasure.dispose();
-			}
-			base.dispose();
-		}
+
 		#endregion Destructor
 	}
 }

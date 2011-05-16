@@ -14,8 +14,9 @@ namespace Robber {
 		protected KeyboardState previousKeyBoardState;
 		protected MouseState currentMouseState;
 		protected MouseState prevousMouseState;
+		protected bool previousMouseOverButton;
 		private float currentTransitionTime;
-		private const float TRANSITION_TIME = 400f;
+		private const float TRANSITION_TIME = 600f;
 		#endregion Class variables
 
 		#region Class propeties
@@ -23,7 +24,9 @@ namespace Robber {
 		#endregion Class properties
 
 		#region Constructor
-
+		public Display() {
+			this.previousMouseOverButton = false;
+		}
 		#endregion Constructor
 
 		#region Support methods
