@@ -25,7 +25,6 @@ namespace Robber {
 		private SoundEffect introSfx;
 		private SoundEffect idleSfx;
 		private SoundEffect outroSfx;
-		private SoundEffect exitSfx;
 		private float timeIdle;
 		private const float PLAY_IDLE_AT = 30000f;
 		#endregion Class variables
@@ -71,8 +70,7 @@ namespace Robber {
 			// load sound effects
 			this.introSfx = content.Load<SoundEffect>("Introduction");
 			this.idleSfx = content.Load<SoundEffect>("Rules");
-			//this.outroSfx = content.Load<SoundEffect>("LetsGo");
-			this.exitSfx = content.Load<SoundEffect>("Chicken");
+			this.outroSfx = content.Load<SoundEffect>("WhereWeGonnaRob");
 			if (ResourceManager.PLAY_SOUND) {
 				this.introSfx.Play();
 			}
@@ -109,13 +107,10 @@ namespace Robber {
 						StateManager.getInstance().CurrentTransitionState = StateManager.TransitionState.TransitionOut;
 						StateManager.getInstance().CurrentGameState = StateManager.GameState.MapSelection;
 						if (ResourceManager.PLAY_SOUND) {
-						//	this.outroSfx.Play();
+							this.outroSfx.Play();
 						}
 					} else if (this.exitButton.isActorOver(mousePos)) {
 						StateManager.getInstance().CurrentGameState = StateManager.GameState.Exit;
-						if (ResourceManager.PLAY_SOUND) {
-							this.exitSfx.Play();
-						}
 					}
 				}
 			} else if (StateManager.getInstance().CurrentTransitionState == StateManager.TransitionState.TransitionIn) {
@@ -193,9 +188,6 @@ namespace Robber {
 			}
 			if (this.outroSfx != null) {
 				this.outroSfx.Dispose();
-			}
-			if (this.exitSfx != null) {
-				this.exitSfx.Dispose();
 			}
 		}
 		#endregion Destructor

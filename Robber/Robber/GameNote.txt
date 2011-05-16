@@ -70,10 +70,10 @@ ISSUES
 ============================
 Planning: 2 hours
 
-Programming:	27.5 hours	9:45pm-1015pm	10:30pm-
+Programming:	27.5 hours	9:45pm-1015pm	10:30pm-10:42pm		11pm-
 
 Art: 5.25 hours		
-Sound:	.75 hours	9:15pm-9:45pm	10:15pm-10:30pm
+Sound:	.75 hours	9:15pm-9:45pm	10:15pm-10:30pm		10:45pm-11pm
 	
 Total Time:
 	

@@ -85,14 +85,9 @@ namespace Robber {
 					if (Keyboard.GetState().IsKeyDown(Keys.Escape) && this.previousKeyBoardState.IsKeyUp(Keys.Escape)) {
 						this.Exit();
 					}
-				} else if (StateManager.getInstance().CurrentGameState == StateManager.GameState.Exit) {
-					lock (this) {
-						if (ResourceManager.PLAY_SOUND) {
-							Thread.Sleep(700);//sleep the thread so the exit emote finishes
-						}
-						this.Exit();
-					}
-				}
+				 } else if (StateManager.getInstance().CurrentGameState == StateManager.GameState.Exit) {
+					 this.Exit();
+				 }
 			
 			// Transition code
 			if (StateManager.getInstance().CurrentGameState == StateManager.GameState.MainMenu) {

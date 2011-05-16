@@ -226,7 +226,9 @@ namespace Robber {
 		public override void update(float elapsed) {
 			base.currentKeyBoardState = Keyboard.GetState();
 			base.currentMouseState = Mouse.GetState();
-			this.treasureText.WrittenText = " x " + this.player.CapturedTreasures;
+			if (this.player != null) {
+				this.treasureText.WrittenText = " x " + this.player.CapturedTreasures;
+			}
 			if (this.map != null) {
 				this.map.update(elapsed);
 			}
