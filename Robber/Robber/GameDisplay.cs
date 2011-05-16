@@ -475,13 +475,13 @@ namespace Robber {
 				foreach (Treasure treasure in this.treasures) {
 					this.debugUtils.drawBoundingBox(spriteBatch, treasure.BoundingBox, debugColour);
 				}
-				/*for (int y = 0; y < 18; y++) {
-					for (int x = 0; x < 22; x++) {
+				for (int y = 0; y < 18; y++) {
+					for (int x = 0; x < 21; x++) {
 						if (AIManager.getInstane().Board[y, x] == PathFinder.TypeOfSpace.Unwalkable) {
 							spriteBatch.Draw(this.debugChip, new Placement(new Point(x, y)).worldPosition, Color.Red);
 						}
 					}
-				}*/
+				}
 			}
 #endif
 		}

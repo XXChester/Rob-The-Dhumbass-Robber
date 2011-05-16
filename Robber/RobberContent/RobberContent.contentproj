@@ -69,13 +69,13 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BottonLeft.png">
-      <Name>BottonLeft</Name>
+    <Compile Include="BottomLeft.png">
+      <Name>BottomLeft</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="BottonRight.png">
-      <Name>BottonRight</Name>
+    <Compile Include="BottomRight.png">
+      <Name>BottomRight</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

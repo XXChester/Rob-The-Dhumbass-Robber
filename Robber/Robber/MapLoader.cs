@@ -68,7 +68,10 @@ namespace Robber {
 							y = 0;
 						}
 						pieceIndex = new Point(x, y);
-						tileSpaces[y, x] = EnumUtils.numberToEnum<PathFinder.TypeOfSpace>(int.Parse(components[2]));
+						// override so the AI can walk the outter wall
+						if (mapAsUnwalkable(textureName, y,x, height, width - 1)) {
+							tileSpaces[y, x] = EnumUtils.numberToEnum<PathFinder.TypeOfSpace>(int.Parse(components[2]));
+						}
 						mapPiece = new Tile(texture, pieceIndex, wallColour);
 						mapPieces[pieceIndex.Y, pieceIndex.X] = mapPiece;
 					}
@@ -79,6 +82,26 @@ namespace Robber {
 			} finally {
 				reader.Close();
 				reader.Dispose();
+			}
+			return map;
+		}
+
+		private static bool mapAsUnwalkable(string textureName, int y, int x, int height, int width) {
+			width -= 1;
+			height -= 1;
+			bool map = true;
+			if (x == 20 && y == 9) {
+				map = false;
+			}
+			if (y == 0 || y == height || x == 0 || x == width) {
+				if (textureName != "BottomLeft" && textureName != "BottomRight" && textureName != "TopLeft" && textureName != "TopRight") {
+					map = false;
+				} else {
+					// make sure we are not a corner of the board
+					if ((y == 0 && x == 0) || (y == height && x == width) || (y == 0 && x == width) || (y == height && x == 0)) {
+						map = false;
+					}
+				}
 			}
 			return map;
 		}

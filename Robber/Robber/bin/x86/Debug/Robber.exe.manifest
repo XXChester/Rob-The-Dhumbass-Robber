@@ -105,14 +105,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Robber.exe" size="54784">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Robber.exe" size="55296">
       <assemblyIdentity name="Robber" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>qwnnQWHkcEsFxbJBlZqcTgBXHBE=</dsig:DigestValue>
+        <dsig:DigestValue>DxlmC7sm/QiBM7jrinSIr4nsLpM=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -143,16 +143,7 @@
       <dsig:DigestValue>4mcDHgm2hCl57kfTeHvarqmuJ+8=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Content\BottomWall.xnb" size="4283">
-    <hash>
-      <dsig:Transforms>
-        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
-      </dsig:Transforms>
-      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>Qu60gAAvRqJCyEwNASVYodsV3CA=</dsig:DigestValue>
-    </hash>
-  </file>
-  <file name="Content\BottonLeft.xnb" size="4283">
+  <file name="Content\BottomLeft.xnb" size="4283">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
@@ -161,13 +152,22 @@
       <dsig:DigestValue>7aZtrZTmehtvW8gwA3eg3h2bwjM=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Content\BottonRight.xnb" size="4283">
+  <file name="Content\BottomRight.xnb" size="4283">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
       <dsig:DigestValue>BKFjDxsATqm2LEX0tmErHNFisIc=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Content\BottomWall.xnb" size="4283">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>Qu60gAAvRqJCyEwNASVYodsV3CA=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Content\CantTouchThis.xnb" size="285801">
@@ -473,7 +473,7 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>CODG9EOtdqG2RSq6FMIh1GGPsGk=</dsig:DigestValue>
+      <dsig:DigestValue>vNmXa0cHYFENFZp/MgwKEjg1YQs=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Scripts\Map1Indentifiers.DAT" size="2124">
@@ -491,7 +491,7 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>NAirK0rkLzdrTPWHwGedfG9l6mY=</dsig:DigestValue>
+      <dsig:DigestValue>qkh8Fh0lCW5YfWXNzLHnV6SrrsM=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Scripts\Map2Indentifiers.DAT" size="2943">
@@ -509,7 +509,7 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>AEbxYUJVeofOvSbnVoh1pOsd8vM=</dsig:DigestValue>
+      <dsig:DigestValue>aZ6Tzwqn/bii+f/Uwgt3VngGHAY=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Scripts\Map3Indentifiers.DAT" size="2925">
