@@ -33,7 +33,6 @@ namespace Robber {
 		private Text2D treasureText;
 		private StaticDrawable2D treasure;
 		private SoundEffect cantTouchThisSfx;
-		private SoundEffect guardsAlertedSfx;
 		private SoundEffect guardDetectedSfx;
 		private SoundEffect introSfx;
 		private SoundEffect payDaySfx;
@@ -57,7 +56,7 @@ namespace Robber {
 		public GameDisplay(GraphicsDevice device, ContentManager content) {
 			this.device = device;
 			this.content = content;
-			this.timer = new Timer();
+			this.timer = new Timer(content);
 
 			// replay button
 			ColouredButtonParams buttonParms = new ColouredButtonParams();
@@ -110,7 +109,6 @@ namespace Robber {
 
 			// load sound effects
 			this.cantTouchThisSfx = content.Load<SoundEffect>("CantTouchThis");
-			this.guardsAlertedSfx = content.Load<SoundEffect>("GuardsAlerted");
 			this.introSfx = content.Load<SoundEffect>("LevelEntry");
 			this.payDaySfx = content.Load<SoundEffect>("PayDay");
 			this.treasureSfx = content.Load<SoundEffect>("TreasureCollect");
@@ -320,7 +318,7 @@ namespace Robber {
 					if (this.replayButton.isActorOver(mousePos)) {
 						StateManager.getInstance().CurrentGameState = StateManager.GameState.Reset;
 						StateManager.getInstance().CurrentTransitionState = StateManager.TransitionState.TransitionOut;
-						reset();
+						//reset();
 						Console.WriteLine("Reset");
 					}
 				}
@@ -392,6 +390,7 @@ namespace Robber {
 					}
 				} else if (StateManager.getInstance().CurrentTransitionState == StateManager.TransitionState.TransitionOut) {
 					if (StateManager.getInstance().CurrentGameState == StateManager.GameState.Reset) {
+						reset();
 						StateManager.getInstance().CurrentGameState = StateManager.GameState.Waiting;
 					}
 					StateManager.getInstance().CurrentTransitionState = StateManager.TransitionState.TransitionIn;
@@ -518,12 +517,11 @@ namespace Robber {
 			if (this.treasure != null) {
 				this.treasure.dispose();
 			}
+			this.timer.dispose();
+
 			// sfxs
 			if (this.cantTouchThisSfx != null) {
 				this.cantTouchThisSfx.Dispose();
-			}
-			if (this.guardsAlertedSfx != null) {
-				this.guardsAlertedSfx.Dispose();
 			}
 			if (this.introSfx != null) {
 				this.introSfx.Dispose();

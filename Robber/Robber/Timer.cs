@@ -21,6 +21,7 @@ namespace Robber {
 		private Text2D firstPart;
 		private Text2D secondPart;
 		private Text2D timeText;
+		private SoundEffect guardsAlertedSfx;
 		private float time;
 		private const string FIRST_PART = "Time Until";
 		private const string SECOND_PART = "Detection;";
@@ -31,7 +32,7 @@ namespace Robber {
 		#endregion Class properties
 
 		#region Constructor
-		public Timer() {
+		public Timer(ContentManager content) {
 			Text2DParams parms = new Text2DParams();
 			parms.Font = ResourceManager.getInstance().Font;
 			parms.LightColour = ResourceManager.TEXT_COLOUR;
@@ -46,6 +47,9 @@ namespace Robber {
 			parms.Position = new Vector2(702f, 63f);
 			parms.WrittenText = "0";
 			this.timeText = new Text2D(parms);
+			
+			//sfxs
+			this.guardsAlertedSfx = content.Load<SoundEffect>("GuardsAlerted");
 #if WINDOWS
 #if DEBUG
 			ScriptManager.getInstance().registerObject(this.firstPart, "first");
@@ -71,6 +75,9 @@ namespace Robber {
 		public void update(float elapsed) {
 			this.time -= elapsed;
 			if (this.time <= 0f) {
+				if (ResourceManager.PLAY_SOUND && !AIManager.getInstane().PlayerDetected) {
+					this.guardsAlertedSfx.Play();
+				}
 				//Alert the authorities
 				AIManager.getInstane().PlayerDetected = true;
 				this.timeText.WrittenText = "0";
@@ -88,7 +95,9 @@ namespace Robber {
 
 		#region Destructor
 		public void dispose() {
-			
+			if (this.guardsAlertedSfx != null) {
+				this.guardsAlertedSfx.Dispose();
+			}
 		}
 		#endregion Destructor
 	}
