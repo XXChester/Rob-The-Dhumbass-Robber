@@ -67,9 +67,7 @@ namespace Robber {
 			this.Board[end.Y, end.X] = PathFinder.TypeOfSpace.End;
 			List<Point> path = new List<Point>();
 			this.pathFinder.findPath(this.Board);
-			//if (this.pathFinder.End == end) {
-				path = this.pathFinder.Path;
-			//}
+			path = this.pathFinder.Path;
 			// reset our pieces back
 			this.Board[start.Y, start.X] = previousStartSpot;
 			this.Board[end.Y, end.X] = previousEndSpot;

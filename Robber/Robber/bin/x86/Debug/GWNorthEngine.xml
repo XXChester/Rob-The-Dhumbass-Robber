@@ -241,6 +241,167 @@
             Gets or sets the Texts position
             </summary>
         </member>
+        <member name="T:GWNorthEngine.AI.AStar.PathFinder">
+            <summary>
+            Abstract class containing the common information for basic A* Pathfinding
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.AI.AStar.PathFinder.HEIGHT">
+            <summary>
+            Height of the board
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.AI.AStar.PathFinder.WIDTH">
+            <summary>
+            Width of the board
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.AI.AStar.PathFinder.directions">
+            <summary>
+            Directions we can generate moves in
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.AI.AStar.PathFinder.board">
+            <summary>
+            A* readable board representation
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.AI.AStar.PathFinder.openList">
+            <summary>
+            List of open nodes
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.AI.AStar.PathFinder.closedList">
+            <summary>
+            List of closed nodes
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.AI.AStar.PathFinder.path">
+            <summary>
+            Path to the target from the starting position
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.AI.AStar.PathFinder.end">
+            <summary>
+            Ending position in the board[,]
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.AI.AStar.PathFinder.start">
+            <summary>
+            Starting position in the board[,]
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.AI.AStar.PathFinder.tieBreakerRandom">
+            <summary>
+            Random number generator used to break ties in the path
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.AI.AStar.PathFinder.#ctor(System.Int32,System.Int32,GWNorthEngine.AI.AStar.PathFinder.RestrictionType)">
+            <summary>
+            Builds a base A* PathFinder instance for on the fly processing
+            </summary>
+            <param name="height">Height of the board</param>
+            <param name="width">Width of the board</param>
+            <param name="restrictionType">Movement restriction type</param>
+        </member>
+        <member name="M:GWNorthEngine.AI.AStar.PathFinder.#ctor(GWNorthEngine.AI.AStar.PathFinder.TypeOfSpace[0:,0:],GWNorthEngine.AI.AStar.PathFinder.RestrictionType)">
+            <summary>
+            Builds a base A* PathFinder instance for static processing
+            </summary>
+            <param name="board">A* representation of the board</param>
+            <param name="restrictionType">Movement restriction type</param>
+        </member>
+        <member name="M:GWNorthEngine.AI.AStar.PathFinder.findPath(GWNorthEngine.AI.AStar.PathNode,System.Int32)">
+            <summary>
+            Finds a path based within the board if one is available
+            </summary>
+            <param name="parent">Parent node of the new nodes to be processed</param>
+            <param name="parentsIndex">Index of the parent in the open list</param>
+        </member>
+        <member name="M:GWNorthEngine.AI.AStar.PathFinder.getDistance(Microsoft.Xna.Framework.Point,System.Int32@,System.Int32@)">
+            <summary>
+            Retrieves the start distance and the end distance from the current position
+            </summary>
+            <param name="currentPosition">Current position we are at in the search</param>
+            <param name="startDistance">Output the distance from the start</param>
+            <param name="endDistance">Output the distance from the end</param>
+        </member>
+        <member name="M:GWNorthEngine.AI.AStar.PathFinder.getDistance(Microsoft.Xna.Framework.Point,Microsoft.Xna.Framework.Point)">
+            <summary>
+            Retrieves the distance from the current position and the specified position
+            </summary>
+            <param name="currentPosition">Current position we are at</param>
+            <param name="comparePosition">Posiiton we are looking for the distance from</param>
+            <returns></returns>
+        </member>
+        <member name="M:GWNorthEngine.AI.AStar.PathFinder.getStartAndEnd">
+            <summary>
+            Figures out the starting and ending positions in the board
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.AI.AStar.PathFinder.checkForTieBreakerAndResolvePath(System.Collections.Generic.List{GWNorthEngine.AI.AStar.PathNode}@)">
+            <summary>
+            Determines a path when there are 2 nodes with the same FScore
+            </summary>
+            <param name="surrondingCosts">Surronding nodes that we are looking at</param>
+            <returns>Index of the node to use to carry on the search</returns>
+        </member>
+        <member name="M:GWNorthEngine.AI.AStar.PathFinder.findPath">
+            <summary>
+            Finds a path from the starting position to the ending position if one exists
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.AI.AStar.PathFinder.findPath(GWNorthEngine.AI.AStar.PathFinder.TypeOfSpace[0:,0:])">
+            <summary>
+            Finds a path from the starting position to the ending position if one exists
+            </summary>
+            <param name="board">Board to search through</param>
+        </member>
+        <member name="P:GWNorthEngine.AI.AStar.PathFinder.Path">
+            <summary>
+            Gets the path leading from the starting position to the ending position if there is one
+            </summary>
+        </member>
+        <member name="T:GWNorthEngine.AI.AStar.PathFinder.TypeOfSpace">
+            <summary>
+            Type of spaces the board can contain
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.AI.AStar.PathFinder.TypeOfSpace.Start">
+            <summary>
+            Starting position on the board
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.AI.AStar.PathFinder.TypeOfSpace.Unwalkable">
+            <summary>
+            Non-moveable piece on the board
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.AI.AStar.PathFinder.TypeOfSpace.Walkable">
+            <summary>
+            Moveable piece on the board
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.AI.AStar.PathFinder.TypeOfSpace.End">
+            <summary>
+            Goal position on the board
+            </summary>
+        </member>
+        <member name="T:GWNorthEngine.AI.AStar.PathFinder.RestrictionType">
+            <summary>
+            Restriction type used for searching of the next node
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.AI.AStar.PathFinder.RestrictionType.Restricted">
+            <summary>
+            Can only generates moves in a zig zag pattern, cannot cut corners or move diagonally
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.AI.AStar.PathFinder.RestrictionType.All">
+            <summary>
+            Can generate moves in any direction
+            </summary>
+        </member>
         <member name="T:GWNorthEngine.Scripting.ScriptManager">
             <summary>
             Singleton class that handles the recieving of input and disbatching it to the proper registered objects
@@ -353,6 +514,63 @@
             </summary>
             <param name="gameTime">GameTime object</param>
             <returns>Current frames per second (FPS)</returns>
+        </member>
+        <member name="T:GWNorthEngine.AI.AStar.PathNode">
+            <summary>
+            A* node of each moveable space
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.AI.AStar.PathNode.#ctor(GWNorthEngine.AI.AStar.PathNode,Microsoft.Xna.Framework.Point,System.Int32,System.Int32)">
+            <summary>
+            Construction of the PathNode object
+            </summary>
+            <param name="parent">Parent of the node</param>
+            <param name="position">Position within the board of the node</param>
+            <param name="startDistance">Distance from the start</param>
+            <param name="endDistance">Distance from the end</param>
+        </member>
+        <member name="M:GWNorthEngine.AI.AStar.PathNode.calculateFScore">
+            <summary>
+            Calculates and assigns the FScore of a node based on its G and H scores
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.AI.AStar.PathNode.fScoresEqual(GWNorthEngine.AI.AStar.PathNode)">
+            <summary>
+            Determines if two Nodes have an equal F score and H score
+            </summary>
+            <param name="compareWith">Node to compare with this node</param>
+            <returns>true if the nodes are equal, otherwise false</returns>
+        </member>
+        <member name="M:GWNorthEngine.AI.AStar.PathNode.ToString">
+            <summary>
+            Tostring of the node
+            </summary>
+            <returns>String of the node object</returns>
+        </member>
+        <member name="P:GWNorthEngine.AI.AStar.PathNode.H">
+            <summary>
+            Get or sets the H score of a node
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.AI.AStar.PathNode.G">
+            <summary>
+            Gets or sets the G score of a node
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.AI.AStar.PathNode.FScore">
+            <summary>
+            Gets or sets the total F score of a node
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.AI.AStar.PathNode.Position">
+            <summary>
+            Gets or sets the nodes position within the board
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.AI.AStar.PathNode.Parent">
+            <summary>
+            Gets or sets the nodes parent node
+            </summary>
         </member>
         <member name="T:GWNorthEngine.Model.BaseParticle2D">
             <summary>
@@ -688,6 +906,23 @@
             <param name="debugColour">Colour to draw the box in</param>
             <param name="lineTexture">Texture2D used for drawing the bounding box</param>
         </member>
+        <member name="M:GWNorthEngine.Utils.DebugUtils.drawBoundingSphere(Microsoft.Xna.Framework.Graphics.SpriteBatch,Microsoft.Xna.Framework.BoundingSphere,Microsoft.Xna.Framework.Color)">
+            <summary>
+            Draws a bounding sphere
+            </summary>
+            <param name="spriteBatch">SpriteBatch object used to draw the sphere</param>
+            <param name="boundingSphere">BoundingSPhere object to draw</param>
+            <param name="debugColour">Colour to draw the sphere in</param>
+        </member>
+        <member name="M:GWNorthEngine.Utils.DebugUtils.drawBoundingSphere(Microsoft.Xna.Framework.Graphics.SpriteBatch,Microsoft.Xna.Framework.BoundingSphere,Microsoft.Xna.Framework.Color,Microsoft.Xna.Framework.Graphics.Texture2D)">
+            <summary>
+            Draws a bounding sphere
+            </summary>
+            <param name="spriteBatch">SpriteBatch object used to draw the sphere</param>
+            <param name="boundingSphere">BoundingSPhere object to draw</param>
+            <param name="debugColour">Colour to draw the sphere in</param>
+            <param name="lineTexture">Texture2D used for drawing the bounding sphere</param>
+        </member>
         <member name="M:GWNorthEngine.Utils.DebugUtils.drawRectangle(Microsoft.Xna.Framework.Graphics.SpriteBatch,Microsoft.Xna.Framework.Rectangle,Microsoft.Xna.Framework.Color,Microsoft.Xna.Framework.Graphics.Texture2D)">
             <summary>
             Draws a rectangle using Line2D's
@@ -999,6 +1234,11 @@
             Gets or sets the Line2D object used by the button
             </summary>
         </member>
+        <member name="T:GWNorthEngine.Utils.CollisionUtils">
+            <summary>
+            Helper methods for determining collision between objects
+            </summary>
+        </member>
         <member name="T:GWNorthEngine.Model.Params.Animated2DSpriteParams">
             <summary>
             Object containing the data required to build a sprite
@@ -1070,6 +1310,58 @@
             <summary>
             Gets or Sets the distance between the frames in the sprite sheet to load.  ***NOT REQUIRED FOR INTERNALLY LOADED SPRITES***
             </summary>
+        </member>
+        <member name="T:GWNorthEngine.AI.AStar.Walker">
+            <summary>
+            Child path finding class that moves in a any direction and can optionally cut corners
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.AI.AStar.Walker.#ctor(System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            Builds a Walker instance based on the height, width and ability to cut corners. Used for on the fly path calculation
+            </summary>
+            <param name="height">Height of the board</param>
+            <param name="width">Width of the board</param>
+            <param name="allowedToCutCorners">Ability to cut across corners</param>
+        </member>
+        <member name="M:GWNorthEngine.AI.AStar.Walker.#ctor(GWNorthEngine.AI.AStar.PathFinder.TypeOfSpace[0:,0:],System.Boolean)">
+            <summary>
+            Builds a Walker instance based on the board and ability to cut corners. Used for one off path calculation
+            </summary>
+            <param name="board">A* representation of the board</param>
+            <param name="allowedToCutCorners">Ability to cut across corners</param>
+        </member>
+        <member name="M:GWNorthEngine.AI.AStar.Walker.findPath(GWNorthEngine.AI.AStar.PathNode,System.Int32)">
+            <summary>
+            Finds a path based within the board if one is available
+            </summary>
+            <param name="parent">Parent node of the new nodes to be processed</param>
+            <param name="parentsIndex">Index of the parent in the open list</param>
+        </member>
+        <member name="T:GWNorthEngine.AI.AStar.MazeSolver">
+            <summary>
+            Child path finding class that moves in a zig zag pattern and cannot cut corners
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.AI.AStar.MazeSolver.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Builds a MazeSolver instance based on the height and width passed in. Used for on the fly path calculation
+            </summary>
+            <param name="height">Height of the board</param>
+            <param name="width">Width of the board</param>
+        </member>
+        <member name="M:GWNorthEngine.AI.AStar.MazeSolver.#ctor(GWNorthEngine.AI.AStar.PathFinder.TypeOfSpace[0:,0:])">
+            <summary>
+            Builds a MazeSolver instance based on a board. Used for one off path calculation
+            </summary>
+            <param name="board">A* representation of the board</param>
+        </member>
+        <member name="M:GWNorthEngine.AI.AStar.MazeSolver.findPath(GWNorthEngine.AI.AStar.PathNode,System.Int32)">
+            <summary>
+            Finds a path based within the board if one is available
+            </summary>
+            <param name="parent">Parent node of the new nodes to be processed</param>
+            <param name="parentsIndex">Index of the parent in the open list</param>
         </member>
         <member name="T:GWNorthEngine.Model.TexturedButton">
             <summary>
