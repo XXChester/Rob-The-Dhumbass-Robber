@@ -140,6 +140,18 @@
             Gets or sets the end position of the line
             </summary>
         </member>
+        <member name="T:GWNorthEngine.Tools.Translator">
+            <summary>
+            Translation utility between tool values and other engine components values
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Tools.Translator.translateTileValueToAStarType(System.Int32)">
+            <summary>
+            Translates am int representation of a TilePlacer.TileValue to an AI.AStar.PathFinder.TypeOfSpace value
+            </summary>
+            <param name="value">Tile placer value</param>
+            <returns>AStar representation of the value passed in</returns>
+        </member>
         <member name="T:GWNorthEngine.Model.Params.BaseButtonParams">
             <summary>
             Base class modeling the common data required for a button

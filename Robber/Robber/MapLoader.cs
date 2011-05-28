@@ -12,6 +12,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using GWNorthEngine.Utils;
 using GWNorthEngine.AI.AStar;
+using GWNorthEngine.Tools;
 namespace Robber {
 	public class MapLoader {
 		public static Map load(ContentManager content, string mapName, Color floorcolour, Color wallColour) {
@@ -70,7 +71,7 @@ namespace Robber {
 						pieceIndex = new Point(x, y);
 						// override so the AI can walk the outter wall
 						if (mapAsUnwalkable(textureName, y,x, height, width - 1)) {
-							tileSpaces[y, x] = EnumUtils.numberToEnum<PathFinder.TypeOfSpace>(int.Parse(components[2]));
+							tileSpaces[y, x] = Translator.translateTileValueToAStarType(int.Parse(components[2]));
 						}
 						mapPiece = new Tile(texture, pieceIndex, wallColour);
 						mapPieces[pieceIndex.Y, pieceIndex.X] = mapPiece;
