@@ -71,6 +71,7 @@ ISSUES
 []Appears the sound API crashes the game sometimes with no stack trace or anything....appears to only be in debug mode
 [*]Nasty flash when you hit replay			-caused by the reset() call
 	[]Solving this makes the score reset to the levels time before the transition out, it was either this or a nasty flash...I think the flash was a lot worse
+[*]Major bug in the tile editor, the width is padded + 1, once the editor is fixed you need to remap all 3 maps, and rip out the padding all over the code.
 ============================
 		Time
 ============================

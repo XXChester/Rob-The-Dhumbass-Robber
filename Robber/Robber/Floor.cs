@@ -25,7 +25,7 @@ namespace Robber {
 
 		#region Constructor
 		public Floor(ref int HEIGHT, ref int WIDTH, Texture2D floorTexture, Color renderColour) {
-			int width = WIDTH - 1;//TODO: problem with my map loader, the width is actually shorter by 1 but no time to fix this now
+			int width = WIDTH;
 			this.tiles = new Tile[HEIGHT, width];
 			CollisionManager.getInstance().FloorCenterBoxes = new List<BoundingBox>();
 			floorColour = renderColour;

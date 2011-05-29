@@ -41,7 +41,7 @@ namespace Robber {
 						width = (Int32.Parse(components[1]));
 						mapPieces = new Tile[height, width];
 						// init our AI board
-						tileSpaces = new PathFinder.TypeOfSpace[height, width - 1];
+						tileSpaces = new PathFinder.TypeOfSpace[height, width];
 						for (int j = 0; j < height; j++) {
 							for (int k = 0; k < width - 1; k++) {
 								tileSpaces[j, k] = PathFinder.TypeOfSpace.Walkable;
@@ -61,16 +61,16 @@ namespace Robber {
 						} else {
 							texture = textureList[texturesIndex];
 						}
-						if (tileNumber > (width - 1)) {
+						if (tileNumber >= width) {
 							x = (tileNumber % width);
 							y = (tileNumber / width);
 						} else {
-							x = tileNumber - 1;
+							x = tileNumber;
 							y = 0;
 						}
 						pieceIndex = new Point(x, y);
 						// override so the AI can walk the outter wall
-						if (mapAsUnwalkable(textureName, y,x, height, width - 1)) {
+						if (mapAsUnwalkable(textureName, y,x, height, width)) {
 							tileSpaces[y, x] = Translator.translateTileValueToAStarType(int.Parse(components[2]));
 						}
 						mapPiece = new Tile(texture, pieceIndex, wallColour);
