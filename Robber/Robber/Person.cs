@@ -46,18 +46,20 @@ namespace Robber {
 
 		#region Constructor
 		public Person(ContentManager content, string fileStartsWith, Placement startingLocation, float movementSpeed) {
-			Animated2DSpriteParams parms = new Animated2DSpriteParams();
-			parms.AnimationState = AnimationManager.AnimationState.PlayForward;
-			parms.Content = content;
-			parms.FrameRate = 200f;
-			parms.Origin = new Vector2(ResourceManager.TILE_SIZE / 2, ResourceManager.TILE_SIZE / 2);
-			parms.LoadingType = Animated2DSprite.LoadingType.WholeSheetReadFramesFromFile;
-			parms.TexturesName = fileStartsWith + "Right";
-			parms.TotalFrameCount = 4;
-			parms.Position = startingLocation.worldPosition;
-			this.rightSprite = new Animated2DSprite(parms);
-			parms.SpriteEffect = SpriteEffects.FlipHorizontally;
-			this.leftSprite = new Animated2DSprite(parms);
+			BaseAnimationManagerParams animationParams = new BaseAnimationManagerParams();
+			animationParams.AnimationState = AnimationManager.AnimationState.PlayForward;
+			animationParams.FrameRate = 200f;
+			animationParams.TotalFrameCount = 4;
+			Animated2DSpriteParams spriteParams = new Animated2DSpriteParams();
+			spriteParams.Content = content;
+			spriteParams.Origin = new Vector2(ResourceManager.TILE_SIZE / 2, ResourceManager.TILE_SIZE / 2);
+			spriteParams.LoadingType = Animated2DSprite.LoadingType.WholeSheetReadFramesFromFile;
+			spriteParams.TexturesName = fileStartsWith + "Right";
+			spriteParams.AnimationParams = animationParams; ;
+			spriteParams.Position = startingLocation.worldPosition;
+			this.rightSprite = new Animated2DSprite(spriteParams);
+			spriteParams.SpriteEffect = SpriteEffects.FlipHorizontally;
+			this.leftSprite = new Animated2DSprite(spriteParams);
 			this.Placement = startingLocation;
 			this.direction = Direction.None;
 			this.movementSpeed = movementSpeed;

@@ -771,7 +771,7 @@
             </summary>
             <param name="parms">SpriteParams object containing all of the data to how this sprite is loaded, its position, colour, etc,etc</param>
         </member>
-        <member name="M:GWNorthEngine.Model.Animated2DSprite.initSprite(Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Vector2,System.Single,Microsoft.Xna.Framework.Vector2,System.Single,Microsoft.Xna.Framework.Graphics.Texture2D,System.Int32,System.Single,Microsoft.Xna.Framework.Color,GWNorthEngine.Model.AnimationManager.AnimationState,GWNorthEngine.Model.Animated2DSprite.LoadingType,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+        <member name="M:GWNorthEngine.Model.Animated2DSprite.initSprite(Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Vector2,System.Single,Microsoft.Xna.Framework.Vector2,System.Single,Microsoft.Xna.Framework.Graphics.Texture2D,Microsoft.Xna.Framework.Color,GWNorthEngine.Model.Animated2DSprite.LoadingType,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,GWNorthEngine.Model.Params.BaseAnimationManagerParams)">
             <summary>
             Actual building of the sprite
             </summary>
@@ -781,16 +781,14 @@
             <param name="scale">X,Y scale of the sprite</param>
             <param name="depth">Layer to draw the sprite at</param>
             <param name="texture">Texture2D use to render the sprite</param>
-            <param name="totalFrameCount">Total number of frames the sprite has</param>
-            <param name="frameRate">Rate at which we animate the sprite</param>
             <param name="lightColour">Colour to render to the sprite in</param>
-            <param name="animationState">Animation state to start the sprite in</param>
             <param name="loadingType">Way to load the sprite</param>
             <param name="framesStartWidth">Starting x point of the sprite in the sprite sheet</param>
             <param name="framesStartHeight">Starting y point of the sprite in the sprite sheet</param>
             <param name="frameWidth">X size of a sprites single frame</param>
             <param name="frameHeight">Y size of a sprites single frame</param>
             <param name="spaceBetweenFrames">Space between the frames in the sprite sheet</param>
+            <param name="animationParams">BaseAnimationManagerParams object containing the animation information for the sprite</param>
         </member>
         <member name="M:GWNorthEngine.Model.Animated2DSprite.reset">
             <summary>
@@ -1278,21 +1276,6 @@
             Gets or sets the texture for a sprite for externally loaded sprites
             </summary>
         </member>
-        <member name="P:GWNorthEngine.Model.Params.Animated2DSpriteParams.FrameRate">
-            <summary>
-            Gets or sets the starting frame rate in which the sprite is to be animated at
-            </summary>
-        </member>
-        <member name="P:GWNorthEngine.Model.Params.Animated2DSpriteParams.TotalFrameCount">
-            <summary>
-            Gets or sets the total numebr of frames for the sprite
-            </summary>
-        </member>
-        <member name="P:GWNorthEngine.Model.Params.Animated2DSpriteParams.AnimationState">
-            <summary>
-            Gets or sets the starting animation state of the sprite
-            </summary>
-        </member>
         <member name="P:GWNorthEngine.Model.Params.Animated2DSpriteParams.LoadingType">
             <summary>
             Gets or sets the loading type of the sprite
@@ -1321,6 +1304,11 @@
         <member name="P:GWNorthEngine.Model.Params.Animated2DSpriteParams.SpaceBetweenFrames">
             <summary>
             Gets or Sets the distance between the frames in the sprite sheet to load.  ***NOT REQUIRED FOR INTERNALLY LOADED SPRITES***
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Params.Animated2DSpriteParams.AnimationParams">
+            <summary>
+            Gets or sets the BaseAnimationManagerParams object for the sprite
             </summary>
         </member>
         <member name="T:GWNorthEngine.AI.AStar.Walker">
@@ -1652,13 +1640,11 @@
             Current frame we are at in the animation line
             </summary>
         </member>
-        <member name="M:GWNorthEngine.Model.AnimationManager.#ctor(GWNorthEngine.Model.AnimationManager.AnimationState,System.Single,System.Int32)">
+        <member name="M:GWNorthEngine.Model.AnimationManager.#ctor(GWNorthEngine.Model.Params.BaseAnimationManagerParams)">
             <summary>
-            Builds an AnimationManager based on the animation state
+            Builds an AnimationManager based on the AnimationManagerParams object passed in
             </summary>
-            <param name="animationState">Start animation state of the object</param>
-            <param name="frameRate">Starting frame rate of the object</param>
-            <param name="maxFrameCount">Used in reverse playing scenarios; it sets the first frame to the end</param>
+            <param name="parms">BaseAnimationManagerParams object containing the data required to load the Animation Manager object</param>
         </member>
         <member name="M:GWNorthEngine.Model.AnimationManager.setNextFrame(System.Int32)">
             <summary>

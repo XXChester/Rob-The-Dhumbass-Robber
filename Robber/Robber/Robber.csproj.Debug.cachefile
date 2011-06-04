@@ -3,6 +3,8 @@ Content\BottomWall.xnb
 Content\LeftWall.xnb
 Content\RightWall.xnb
 Content\TopWall.xnb
+Content\BottomLeft.xnb
+Content\BottomRight.xnb
 Content\TopLeft.xnb
 Content\TopRight.xnb
 Content\Treasure1.xnb
@@ -33,8 +35,6 @@ Content\FootSteps.xnb
 Content\WhereWeGonnaRob.xnb
 Content\Policia.xnb
 Content\CellDoor.xnb
-Content\BottomLeft.xnb
-Content\BottomRight.xnb
 Scripts\Map1.DAT
 Scripts\Map1Indentifiers.DAT
 Scripts\Map2.DAT
