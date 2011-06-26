@@ -9,6 +9,11 @@
             Models the basis of every SpriteBatch drawable object
             </summary>
         </member>
+        <member name="F:GWNorthEngine.Model.Base2DSpriteDrawable.positivePulse">
+            <summary>
+            Used by the scalingPulse(...) effect to determine which way it is scaling
+            </summary>
+        </member>
         <member name="F:GWNorthEngine.Model.Base2DSpriteDrawable.position">
             <summary>
             Position of the sprite
@@ -44,11 +49,36 @@
             SpriteEffects to render the sprite with
             </summary>
         </member>
+        <member name="F:GWNorthEngine.Model.Base2DSpriteDrawable.originalLightColour">
+            <summary>
+            Original colour the sprite was rendered in
+            </summary>
+        </member>
         <member name="M:GWNorthEngine.Model.Base2DSpriteDrawable.#ctor(GWNorthEngine.Model.Params.Base2DSpriteDrawableParams)">
             <summary>
             Builds a basic SpriteBatch drawable item
             </summary>
             <param name="parms">BaseSpriteDrawableParams object</param>
+        </member>
+        <member name="M:GWNorthEngine.Model.Base2DSpriteDrawable.scaleAsLifeProgresses(Microsoft.Xna.Framework.Vector2)">
+            <summary>
+            Scales the object over time
+            </summary>
+            <param name="scaleBy"></param>
+        </member>
+        <member name="M:GWNorthEngine.Model.Base2DSpriteDrawable.rotateAsLifeProgresses(System.Single)">
+            <summary>
+            Rotates the object over time
+            </summary>
+            <param name="rotationSpeed"></param>
+        </member>
+        <member name="M:GWNorthEngine.Model.Base2DSpriteDrawable.scalingPulse(System.Single,System.Single,Microsoft.Xna.Framework.Vector2)">
+            <summary>
+            Pulse effect by scaling the object between to pre-defined scales
+            </summary>
+            <param name="startScale">Lowest scale value we want to shrink too</param>
+            <param name="endScale">Highest scale value we want to grow to</param>
+            <param name="scaleSpeed">Speed in which we want to pulse at</param>
         </member>
         <member name="M:GWNorthEngine.Model.Base2DSpriteDrawable.update(System.Single)">
             <summary>
@@ -140,14 +170,50 @@
             Gets or sets the end position of the line
             </summary>
         </member>
+        <member name="T:GWNorthEngine.Utils.LoadingUtils">
+            <summary>
+            Contains helper methods for loading data from the file system
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Utils.LoadingUtils.loadTexture2D(Microsoft.Xna.Framework.Content.ContentManager,System.String)">
+            <summary>
+            Loads a texture via the ContentManager and assigns the texture a name for debugging purposes
+            </summary>
+            <param name="content">ContentManager object</param>
+            <param name="textureName">Name of the texture</param>
+            <returns>Texture2D object</returns>
+        </member>
+        <member name="M:GWNorthEngine.Utils.LoadingUtils.loadSpriteFont(Microsoft.Xna.Framework.Content.ContentManager,System.String)">
+            <summary>
+            Loads a SpriteFont via the ContentManager and assigns the font a name for debugging purposes
+            </summary>
+            <param name="content">ContentManager object</param>
+            <param name="spriteFontName">Name of the sprite font</param>
+            <returns>Texture2D object</returns>
+        </member>
+        <member name="M:GWNorthEngine.Utils.LoadingUtils.loadSoundEffect(Microsoft.Xna.Framework.Content.ContentManager,System.String)">
+            <summary>
+            Loads a SoundEffect via the ContentManager and assigns the sound effect a name for debugging purposes
+            </summary>
+            <param name="content">ContentManager object</param>
+            <param name="soundEffectName">Name of the sound effect</param>
+            <returns>Texture2D object</returns>
+        </member>
         <member name="T:GWNorthEngine.Tools.Translator">
             <summary>
             Translation utility between tool values and other engine components values
             </summary>
         </member>
+        <member name="M:GWNorthEngine.Tools.Translator.translateTileValueToAStarType(GWNorthEngine.Tools.TilePlacer.TileValues)">
+            <summary>
+            Translates a TilePlacer.TileValue to an AI.AStar.PathFinder.TypeOfSpace value
+            </summary>
+            <param name="value">Tile placer value</param>
+            <returns>AStar representation of the value passed in</returns>
+        </member>
         <member name="M:GWNorthEngine.Tools.Translator.translateTileValueToAStarType(System.Int32)">
             <summary>
-            Translates am int representation of a TilePlacer.TileValue to an AI.AStar.PathFinder.TypeOfSpace value
+            Translates an int representation of a TilePlacer.TileValue to an AI.AStar.PathFinder.TypeOfSpace value
             </summary>
             <param name="value">Tile placer value</param>
             <returns>AStar representation of the value passed in</returns>
@@ -414,6 +480,36 @@
             Can generate moves in any direction
             </summary>
         </member>
+        <member name="T:GWNorthEngine.Tools.TilePlacer.TileValues">
+            <summary>
+            Constant values for the TilePlacer tool
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Tools.TilePlacer.TileValues.Unknown">
+            <summary>
+            Unknown tile value meaning the tile was left empty
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Tools.TilePlacer.TileValues.BackGround">
+            <summary>
+            Background tile
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Tools.TilePlacer.TileValues.NoMovements">
+            <summary>
+            Tile that you cannot pass through
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Tools.TilePlacer.TileValues.StandOns">
+            <summary>
+            Tiles that you stand on
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Tools.TilePlacer.TileValues.Climbers">
+            <summary>
+            Tiles that you can climb
+            </summary>
+        </member>
         <member name="T:GWNorthEngine.Scripting.ScriptManager">
             <summary>
             Singleton class that handles the recieving of input and disbatching it to the proper registered objects
@@ -599,26 +695,6 @@
             Time the particle dies at
             </summary>
         </member>
-        <member name="F:GWNorthEngine.Model.BaseParticle2D.position">
-            <summary>
-            Position of the particle
-            </summary>
-        </member>
-        <member name="F:GWNorthEngine.Model.BaseParticle2D.scale">
-            <summary>
-            Scale of the particle
-            </summary>
-        </member>
-        <member name="F:GWNorthEngine.Model.BaseParticle2D.origin">
-            <summary>
-            Sprites origin used for rotation
-            </summary>
-        </member>
-        <member name="F:GWNorthEngine.Model.BaseParticle2D.originalPosition">
-            <summary>
-            Original position of the particle
-            </summary>
-        </member>
         <member name="F:GWNorthEngine.Model.BaseParticle2D.acceleration">
             <summary>
             Acceleration of the particle
@@ -629,19 +705,14 @@
             Direction the particle is headed in
             </summary>
         </member>
-        <member name="F:GWNorthEngine.Model.BaseParticle2D.lightColour">
-            <summary>
-            Colour to render the particle in
-            </summary>
-        </member>
-        <member name="F:GWNorthEngine.Model.BaseParticle2D.layer">
-            <summary>
-            Layer the particle is to be rendered at
-            </summary>
-        </member>
         <member name="F:GWNorthEngine.Model.BaseParticle2D.texture">
             <summary>
             Texture of the particle
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Model.BaseParticle2D.originalPosition">
+            <summary>
+            Original position of the particle
             </summary>
         </member>
         <member name="M:GWNorthEngine.Model.BaseParticle2D.#ctor(GWNorthEngine.Model.Params.BaseParticle2DParams)">
@@ -677,11 +748,6 @@
             Gets or sets the maximum time the particle can live for
             </summary>
         </member>
-        <member name="P:GWNorthEngine.Model.BaseParticle2D.OriginalPosition">
-            <summary>
-            Gets or sets the original position of the particle
-            </summary>
-        </member>
         <member name="P:GWNorthEngine.Model.BaseParticle2D.Acceleration">
             <summary>
             Gets or sets the acceleration of the particle
@@ -690,21 +756,6 @@
         <member name="P:GWNorthEngine.Model.BaseParticle2D.Direction">
             <summary>
             Gets or sets the directional value of the particle
-            </summary>
-        </member>
-        <member name="P:GWNorthEngine.Model.BaseParticle2D.Position">
-            <summary>
-            Gets or sets the position of the sprite
-            </summary>
-        </member>
-        <member name="P:GWNorthEngine.Model.BaseParticle2D.Scale">
-            <summary>
-            Gets or sets the scale of the sprite
-            </summary>
-        </member>
-        <member name="P:GWNorthEngine.Model.BaseParticle2D.LightColour">
-            <summary>
-            Gets or sets the Colour in which the sprite is to be rendered in
             </summary>
         </member>
         <member name="P:GWNorthEngine.Model.BaseParticle2D.Texture">
@@ -724,6 +775,32 @@
             <param name="actorsPosition">Actors position. Could be mouse position, XBox controllers stick position etc</param>
             <param name="buttonsRectangle">rectangle to check for collision</param>
             <returns></returns>
+        </member>
+        <member name="T:GWNorthEngine.Model.Params.BaseAnimationManagerParams">
+            <summary>
+            Object containing the required data to build the AnimationManager object
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Model.Params.BaseAnimationManagerParams.#ctor">
+            <summary>
+            Builds the default settings for setting up the AnimationManager object. The default settings are below;
+            AnimationState:		Paused
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Params.BaseAnimationManagerParams.FrameRate">
+            <summary>
+            Gets or sets the rate in which the object animates at
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Params.BaseAnimationManagerParams.TotalFrameCount">
+            <summary>
+            Gets or sets the total animation frame count
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Params.BaseAnimationManagerParams.AnimationState">
+            <summary>
+            Gets or sets the AnimationState of the object
+            </summary>
         </member>
         <member name="T:GWNorthEngine.Model.Params.TexturedButtonParams">
             <summary>
@@ -1417,14 +1494,6 @@
             Object containing the data required to build a base 2D particle
             </summary>
         </member>
-        <member name="M:GWNorthEngine.Model.Params.BaseParticle2DParams.#ctor">
-            <summary>
-            Defines a new SpriteParams object with the defaults set. The defaults are listed below;
-            LightColour:	Colour.White
-            Scale:			Vector2(1f,1f)
-            Layer:			0f
-            </summary>
-        </member>
         <member name="P:GWNorthEngine.Model.Params.BaseParticle2DParams.TimeToLive">
             <summary>
             Gets or sets the maximum time the particle can live for
@@ -1438,31 +1507,6 @@
         <member name="P:GWNorthEngine.Model.Params.BaseParticle2DParams.Direction">
             <summary>
             Gets or sets the directional value of the particle
-            </summary>
-        </member>
-        <member name="P:GWNorthEngine.Model.Params.BaseParticle2DParams.Origin">
-            <summary>
-            Gets or sets the starting origin of the particle
-            </summary>
-        </member>
-        <member name="P:GWNorthEngine.Model.Params.BaseParticle2DParams.Position">
-            <summary>
-            Gets or sets the starting position of the sprite
-            </summary>
-        </member>
-        <member name="P:GWNorthEngine.Model.Params.BaseParticle2DParams.Scale">
-            <summary>
-            Gets or Sets the startign scale of the sprite
-            </summary>
-        </member>
-        <member name="P:GWNorthEngine.Model.Params.BaseParticle2DParams.Layer">
-            <summary>
-            Gets or sets the starting layer to render the sprite at
-            </summary>
-        </member>
-        <member name="P:GWNorthEngine.Model.Params.BaseParticle2DParams.LightColour">
-            <summary>
-            Gets or sets the starting colour in which to render the sprite in
             </summary>
         </member>
         <member name="P:GWNorthEngine.Model.Params.BaseParticle2DParams.Texture">
@@ -1745,6 +1789,116 @@
         <member name="P:GWNorthEngine.Model.StaticDrawable2D.Texture">
             <summary>
             Gets or sets the Texture of the static drawable object
+            </summary>
+        </member>
+        <member name="T:GWNorthEngine.Tools.TilePlacer.MapLoader">
+            <summary>
+            Loads a TilePlacer map file
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Tools.TilePlacer.MapLoader.load(Microsoft.Xna.Framework.Content.ContentManager,System.String)">
+            <summary>
+            Loads a TilePlacer map from the file system
+            </summary>
+            <param name="content">ContentManager used to load textures for the map</param>
+            <param name="mapName">Name of the map to load</param>
+            <returns>LoadResult object containing the data that resulted from the loading of the map</returns>
+        </member>
+        <member name="M:GWNorthEngine.Tools.TilePlacer.MapLoader.initTiles``1(GWNorthEngine.Tools.TilePlacer.MapTile[0:,0:],GWNorthEngine.Tools.TilePlacer.MapLoader.TileConstructor{``0})">
+            <summary>
+            Initializes the type of Tiles passed in based on the MapTile object loaded from the Load(...) process
+            </summary>
+            <typeparam name="T">Type of object array we are going to create</typeparam>
+            <param name="tiles">MapTile array that is used to create the new typed array</param>
+            <param name="objectConstruction">TileConstructor delegate used to convert the MapTile object to the subclass passed in as T</param>
+            <returns>T[,] type of objects created from MapTiles[,] passed in</returns>
+        </member>
+        <member name="T:GWNorthEngine.Tools.TilePlacer.MapLoader.TileConstructor`1">
+            <summary>
+             Delegate used for the construction of an object type that represents a Tile from the TilePlacer
+            </summary>
+            <typeparam name="T">Type of object we are going to create that is a subclass of MapTile</typeparam>
+            <param name="tile">MapTile object that will be used to create the child class</param>
+            <returns>newly created object of the Type passed in</returns>
+        </member>
+        <member name="T:GWNorthEngine.Tools.TilePlacer.MapTile">
+            <summary>
+            Models the basic data of a TilePlacer tile
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Tools.TilePlacer.MapTile.#ctor(Microsoft.Xna.Framework.Point,Microsoft.Xna.Framework.Graphics.Texture2D)">
+            <summary>
+            Basic construction of the MapTile
+            </summary>
+            <param name="index">Index the tile resides at in the array</param>
+            <param name="texture">Texture the tile is rendered with</param>
+        </member>
+        <member name="M:GWNorthEngine.Tools.TilePlacer.MapTile.#ctor(Microsoft.Xna.Framework.Point,Microsoft.Xna.Framework.Graphics.Texture2D,GWNorthEngine.Tools.TilePlacer.TileValues,Microsoft.Xna.Framework.Vector2)">
+            <summary>
+            Construction of the MapTile
+            </summary>
+            <param name="index">Index the tile resides at in the array</param>
+            <param name="texture">Texture the tile is rendered with</param>
+            <param name="tileValue">Type of the tile</param>
+            <param name="scale">Scale of the tiles</param>
+        </member>
+        <member name="M:GWNorthEngine.Tools.TilePlacer.MapTile.dispose">
+            <summary>
+            Disposes the texture that is used to represent the tile
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Tools.TilePlacer.MapTile.Index">
+            <summary>
+            Gets or sets Index in the array that this tile resides at
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Tools.TilePlacer.MapTile.WorldPosition">
+            <summary>
+            Gets or sets the world position of the tile
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Tools.TilePlacer.MapTile.Texture">
+            <summary>
+            Gets or sets the Texture the tile uses
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Tools.TilePlacer.MapTile.TileValue">
+            <summary>
+            Gets or sets the TileValue of the tile which defines which type of tile it is
+            </summary>
+        </member>
+        <member name="T:GWNorthEngine.Tools.TilePlacer.LoadResult">
+            <summary>
+            Models the data that is a direct result from loading a TilePlacer map
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Tools.TilePlacer.LoadResult.#ctor(System.Int32,System.Int32,GWNorthEngine.Tools.TilePlacer.MapTile[0:,0:],GWNorthEngine.Tools.TilePlacer.TileValues[0:,0:])">
+            <summary>
+            Constructs a LoadResult object
+            </summary>
+            <param name="height">Height of the map</param>
+            <param name="width">Width of the map</param>
+            <param name="mapTiles">MapTile objects that make the map</param>
+            <param name="tileValues">TileValues of the types of tiles that make up the map</param>
+        </member>
+        <member name="P:GWNorthEngine.Tools.TilePlacer.LoadResult.Height">
+            <summary>
+            Gets or sets the height of the map
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Tools.TilePlacer.LoadResult.Width">
+            <summary>
+            Gets or sets the width of the map
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Tools.TilePlacer.LoadResult.MapTiles">
+            <summary>
+            Gets or sets the MapTile array representation of the map
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Tools.TilePlacer.LoadResult.TileValues">
+            <summary>
+            Gets or sets the TileValues array representation of the map
             </summary>
         </member>
     </members>

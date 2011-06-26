@@ -13,10 +13,10 @@ using Robber.Interfaces;
 using GWNorthEngine.Model;
 using GWNorthEngine.Model.Params;
 using GWNorthEngine.AI.AStar;
+using GWNorthEngine.Tools.TilePlacer;
 namespace Robber {
-	public class Tile : IRenderable {
+	public class Tile : MapTile, IRenderable {
 		#region Class variables
-		private Placement placement;
 		private StaticDrawable2D image;
 		#endregion Class variables
 
@@ -29,10 +29,10 @@ namespace Robber {
 		#endregion Class properties
 
 		#region Constructor
-		public Tile(Texture2D texture, Point index, Color renderColour) {
-			this.placement = new Placement(index);
+		public Tile(Texture2D texture, Point index, Color renderColour)
+		:base(index, texture) {
 			StaticDrawable2DParams parms = new StaticDrawable2DParams();
-			parms.Position = this.placement.worldPosition;
+			parms.Position = base.WorldPosition;
 			parms.Texture = texture;
 			parms.LightColour = renderColour;
 			this.image = new StaticDrawable2D(parms);
