@@ -76,7 +76,8 @@ ISSUES
 		Time
 ============================
 Planning: 2 hours
-Programming:	34 hours
+Programming:	32.5 hours
+Map Creation:	1.5 hours
 Art: 5.75 hours	
 Sound:	2 hours	
 Deployment: .5 hours
