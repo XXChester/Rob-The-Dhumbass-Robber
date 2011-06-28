@@ -16,6 +16,7 @@ using GWNorthEngine.Model.Params;
 using GWNorthEngine.Utils;
 using GWNorthEngine.AI.AStar;
 using GWNorthEngine.Scripting;
+using GWNorthEngine.Tools.TilePlacer;
 namespace Robber {
 	public class GameDisplay : Display{
 		#region Class variables
@@ -183,7 +184,7 @@ namespace Robber {
 				reader.Dispose();
 			}
 			// load our map
-			this.map = MapLoader.load(content, mapInformation + ".dat", floorColour, wallColour);
+			this.map = MapLoader.load(content, mapInformation + Constants.FILE_EXTENSION, floorColour, wallColour);
 
 			// let our AI manager know about the maps way points
 			AIManager.getInstane().WayPoints = wayPoints;

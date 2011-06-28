@@ -93,14 +93,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="GWNorthEngine.dll" size="52224">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="GWNorthEngine.dll" size="53248">
       <assemblyIdentity name="GWNorthEngine" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>B5VRy3QqzHikQC3Em0myJ/XqxZw=</dsig:DigestValue>
+        <dsig:DigestValue>ecSdwV0a4YCjtpk+jcrTMijgj48=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -112,7 +112,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>sYHxkgRt5JVXAcKkevA17cn140g=</dsig:DigestValue>
+        <dsig:DigestValue>HY1Eh/4kr5/eQ1BKyfFGGH08d4o=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -467,13 +467,13 @@
       <dsig:DigestValue>diNvdcDpDtGEMuMQIHpkKK3qVHc=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Scripts\Map1.DAT" size="4618">
+  <file name="Scripts\Map1.XML" size="20031" writeableType="applicationData">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>/2src3/XyyACIq8MV6wZng/kREE=</dsig:DigestValue>
+      <dsig:DigestValue>2a84+NGsEm4s1eaX8WaiN+ilbo8=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Scripts\Map1Indentifiers.DAT" size="2124">
@@ -485,13 +485,13 @@
       <dsig:DigestValue>PMscWi52qBTTKXoivtYcSF/E3gE=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Scripts\Map2.DAT" size="4312">
+  <file name="Scripts\Map2.XML" size="18629" writeableType="applicationData">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>q1oq4t5iz2Xf1UCQwcjviEog/G8=</dsig:DigestValue>
+      <dsig:DigestValue>dmlIb7xpJi8IPDDx/DHjAUtWfMU=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Scripts\Map2Indentifiers.DAT" size="2943">
@@ -503,13 +503,13 @@
       <dsig:DigestValue>urPamvp2SqRRVC2kUN4GJjKxtwU=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Scripts\Map3.DAT" size="4312">
+  <file name="Scripts\Map3.XML" size="18512" writeableType="applicationData">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>wRYuFnXD47+w6RhHtZXm/ZWsbIw=</dsig:DigestValue>
+      <dsig:DigestValue>IZ1nN72WUVjKNtiuhDTgonTBQx0=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Scripts\Map3Indentifiers.DAT" size="2925">

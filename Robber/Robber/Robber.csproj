@@ -162,21 +162,21 @@
     <Content Include="GameNote.txt" />
     <Content Include="GameThumbnail.png" />
     <None Include="Log.log" />
-    <Content Include="Story.txt" />
-    <None Include="Robber_TemporaryKey.pfx" />
-    <Content Include="Scripts\Map1.DAT">
+    <Content Include="Scripts\Map1.XML">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Scripts\Map2.XML">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Map3.XML">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Story.txt" />
+    <None Include="Robber_TemporaryKey.pfx" />
     <Content Include="Scripts\Map1Indentifiers.DAT">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Scripts\Map2.DAT">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Scripts\Map2Indentifiers.DAT">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Scripts\Map3.DAT">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Scripts\Map3Indentifiers.DAT">

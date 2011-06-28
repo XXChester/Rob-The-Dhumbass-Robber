@@ -35,6 +35,9 @@ Content\FootSteps.xnb
 Content\WhereWeGonnaRob.xnb
 Content\Policia.xnb
 Content\CellDoor.xnb
+Scripts\Map1.XML
+Scripts\Map2.XML
+Scripts\Map3.XML
 Scripts\Map1.DAT
 Scripts\Map1Indentifiers.DAT
 Scripts\Map2.DAT
