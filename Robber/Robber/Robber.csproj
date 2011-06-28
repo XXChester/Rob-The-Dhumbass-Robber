@@ -129,33 +129,34 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AIManager.cs" />
-    <Compile Include="CollisionManager.cs" />
-    <Compile Include="Display.cs" />
-    <Compile Include="Floor.cs" />
-    <Compile Include="GameDisplay.cs" />
-    <Compile Include="Guard.cs" />
-    <Compile Include="Helper.cs" />
-    <Compile Include="InGameMenu.cs" />
-    <Compile Include="Interfaces\IRenderable.cs" />
-    <Compile Include="Item.cs" />
-    <Compile Include="MainMenu.cs" />
-    <Compile Include="Map.cs" />
-    <Compile Include="MapLoader.cs" />
-    <Compile Include="MapSelection.cs" />
-    <Compile Include="MapSeletMenu.cs" />
-    <Compile Include="Person.cs" />
-    <Compile Include="Placement.cs" />
-    <Compile Include="Player.cs" />
+    <Compile Include="Helpers\MapEditor.cs" />
+    <Compile Include="Managers\AIManager.cs" />
+    <Compile Include="Managers\CollisionManager.cs" />
+    <Compile Include="Displays\Display.cs" />
+    <Compile Include="Models\Floor.cs" />
+    <Compile Include="Displays\GameDisplay.cs" />
+    <Compile Include="Models\Guard.cs" />
+    <Compile Include="Helpers\Helper.cs" />
+    <Compile Include="Displays\InGameMenu.cs" />
+    <Compile Include="Models\IRenderable.cs" />
+    <Compile Include="Models\Item.cs" />
+    <Compile Include="Displays\MainMenu.cs" />
+    <Compile Include="Models\Map.cs" />
+    <Compile Include="Helpers\MapLoader.cs" />
+    <Compile Include="Models\MapSelection.cs" />
+    <Compile Include="Displays\MapSeletMenu.cs" />
+    <Compile Include="Models\Person.cs" />
+    <Compile Include="Helpers\Placement.cs" />
+    <Compile Include="Models\Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="RadiusRing.cs" />
-    <Compile Include="ResourceManager.cs" />
-    <Compile Include="StateManager.cs" />
-    <Compile Include="Tile.cs" />
-    <Compile Include="Timer.cs" />
+    <Compile Include="Models\RadiusRing.cs" />
+    <Compile Include="Managers\ResourceManager.cs" />
+    <Compile Include="Managers\StateManager.cs" />
+    <Compile Include="Models\Tile.cs" />
+    <Compile Include="Models\Timer.cs" />
     <Compile Include="TrafficManager.cs" />
-    <Compile Include="Treasure.cs" />
+    <Compile Include="Models\Treasure.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />
