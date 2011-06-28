@@ -56,10 +56,11 @@ namespace Robber {
 		#endregion Support methods
 		
 		#region Destructor
-		public void dispose() {
+		public override void dispose() {
 			if (this.image != null) {
 				this.image.dispose();
 			}
+			base.dispose();
 		}
 		#endregion Destructor
 	}

@@ -227,7 +227,7 @@
       <IncludeHash>True</IncludeHash>
       <FileType>File</FileType>
     </PublishFile>
-    <PublishFile Include="Scripts\Map1.DAT">
+    <PublishFile Include="Scripts\Map1.XML">
       <Visible>False</Visible>
       <Group>
       </Group>
@@ -247,7 +247,7 @@
       <IncludeHash>True</IncludeHash>
       <FileType>File</FileType>
     </PublishFile>
-    <PublishFile Include="Scripts\Map2.DAT">
+    <PublishFile Include="Scripts\Map2.XML">
       <Visible>False</Visible>
       <Group>
       </Group>
@@ -267,7 +267,7 @@
       <IncludeHash>True</IncludeHash>
       <FileType>File</FileType>
     </PublishFile>
-    <PublishFile Include="Scripts\Map3.DAT">
+    <PublishFile Include="Scripts\Map3.XML">
       <Visible>False</Visible>
       <Group>
       </Group>

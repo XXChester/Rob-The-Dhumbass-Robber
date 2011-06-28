@@ -112,7 +112,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>HY1Eh/4kr5/eQ1BKyfFGGH08d4o=</dsig:DigestValue>
+        <dsig:DigestValue>EsFU7Ff8+KhXtkrGswgKudQrGAQ=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -467,7 +467,7 @@
       <dsig:DigestValue>diNvdcDpDtGEMuMQIHpkKK3qVHc=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Scripts\Map1.XML" size="20031" writeableType="applicationData">
+  <file name="Scripts\Map1.XML" size="20031">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
@@ -485,7 +485,7 @@
       <dsig:DigestValue>PMscWi52qBTTKXoivtYcSF/E3gE=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Scripts\Map2.XML" size="18629" writeableType="applicationData">
+  <file name="Scripts\Map2.XML" size="18629">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
@@ -503,7 +503,7 @@
       <dsig:DigestValue>urPamvp2SqRRVC2kUN4GJjKxtwU=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Scripts\Map3.XML" size="18512" writeableType="applicationData">
+  <file name="Scripts\Map3.XML" size="18512">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
