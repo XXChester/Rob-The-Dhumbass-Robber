@@ -52,7 +52,7 @@ namespace Robber {
 			ResourceManager.getInstance().init(GraphicsDevice, Content);
 			this.mainMenu = new MainMenu(Content);
 			this.inGameMenu = new InGameMenu(Content);
-			this.gameDisplay = new GameDisplay(GraphicsDevice, Content);
+			this.gameDisplay = new GameDisplay(Content);
 			this.mapSelectionMenu = new MapSeletMenu(Content);
 		}
 

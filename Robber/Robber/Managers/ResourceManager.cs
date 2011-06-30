@@ -34,6 +34,10 @@ namespace Robber {
 		public SoundEffect MouseOverSfx { get; set; }
 		public SoundEffect FootStepsSfx { get; set; }
 		public SoundEffect PrisonCellSfx { get; set; }
+#if DEBUG
+		public Texture2D DebugChip { get; set; }
+		public Texture2D DebugRing { get; set; }
+#endif
 		#endregion Class properties
 
 		#region Support methods
@@ -48,6 +52,10 @@ namespace Robber {
 			this.MouseOverSfx = content.Load<SoundEffect>("MouseOverButton");
 			this.FootStepsSfx = content.Load<SoundEffect>("FootSteps");
 			this.PrisonCellSfx = content.Load<SoundEffect>("CellDoor");
+#if DEBUG
+			this.DebugChip = TextureUtils.create2DColouredTexture(device, 32, 32, Color.White);
+			this.DebugRing = TextureUtils.create2DRingTexture(device, 112, Color.White);
+#endif
 		}
 		#endregion Support methods
 
@@ -68,6 +76,14 @@ namespace Robber {
 			if (this.PrisonCellSfx != null) {
 				this.PrisonCellSfx.Dispose();
 			}
+#if DEBUG
+			if (this.DebugChip != null) {
+				this.DebugChip.Dispose();
+			}
+			if (this.DebugRing != null) {
+				this.DebugRing.Dispose();
+			}
+#endif
 		}
 		#endregion Destructor
 	}

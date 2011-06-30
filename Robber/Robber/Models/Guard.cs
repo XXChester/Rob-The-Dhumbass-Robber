@@ -37,7 +37,6 @@ namespace Robber {
 		private MovementDirection movementDirection;
 		private const float MOVEMENT_SPEED_WALK = 60f / 1000f;
 		private const float MOVEMENT_SPEED_RUN = 155f / 1000f;
-		private Texture2D chipTexture;
 		private bool foundMiddle;
 		#endregion Class variables
 
@@ -47,7 +46,7 @@ namespace Robber {
 		#endregion Class properties
 
 		#region Constructor
-		public Guard(GraphicsDevice device, ContentManager content, Placement startingLocation, string state, string movementDirection)
+		public Guard(ContentManager content, Placement startingLocation, string state, string movementDirection)
 			: base(content, "Guard", startingLocation, MOVEMENT_SPEED_WALK) {
 			// figure out our direction
 			if (movementDirection == MovementDirection.Clockwise.ToString()) {
@@ -81,7 +80,6 @@ namespace Robber {
 				this.closestsPoint = new Point(-1, -1);
 			}
 			updateDirection();
-			this.chipTexture = TextureUtils.create2DColouredTexture(device, 32, 32, Color.White);
 			this.RunAIThread = true;
 			this.AIThread= new Thread(new ThreadStart(generateMoves));
 			this.AIThread.Start();
@@ -254,7 +252,7 @@ namespace Robber {
 		public new void render(SpriteBatch spriteBatch) {
 			this.ring.render(spriteBatch);
 #if DEBUG
-			spriteBatch.Draw(this.chipTexture, new Placement(this.destinationWayPoint).worldPosition, Color.Green);
+			spriteBatch.Draw(ResourceManager.getInstance().DebugChip, new Placement(this.destinationWayPoint).worldPosition, Color.Green);
 #endif
 			
 			base.render(spriteBatch);
@@ -266,7 +264,6 @@ namespace Robber {
 			if (this.ring != null) {
 				this.ring.dispose();
 			}
-			this.chipTexture.Dispose();
 			this.RunAIThread = false;
 			this.AIThread.Abort();
 			base.dispose();

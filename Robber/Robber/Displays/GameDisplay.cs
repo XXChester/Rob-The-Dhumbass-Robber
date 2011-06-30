@@ -41,12 +41,7 @@ namespace Robber {
 		private float payDayDelay;
 		private const float DELAY_PAY_DAY_EMOTE = 5000f;
 
-
-		private GraphicsDevice device;
 		private ContentManager content;
-		private DebugUtils debugUtils;
-		private Texture2D debugChip;
-		private Texture2D debugRing;
 #if DEBUG
 		private bool showAI = false;
 		private bool showCD = false;
@@ -58,8 +53,7 @@ namespace Robber {
 		#endregion Class properties
 
 		#region Constructor
-		public GameDisplay(GraphicsDevice device, ContentManager content) {
-			this.device = device;
+		public GameDisplay(ContentManager content) {
 			this.content = content;
 			this.timer = new Timer(content);
 
@@ -118,13 +112,6 @@ namespace Robber {
 			this.payDaySfx = content.Load<SoundEffect>("PayDay");
 			this.treasureSfx = content.Load<SoundEffect>("TreasureCollect");
 			this.guardDetectedSfx = content.Load<SoundEffect>("Policia");
-#if WINDOWS
-#if DEBUG
-			this.debugUtils = new DebugUtils(TextureUtils.create2DColouredTexture(device, 2, 2, Color.White));
-			this.debugChip = TextureUtils.create2DColouredTexture(device, 32, 32, Color.White);
-			this.debugRing = TextureUtils.create2DRingTexture(device, 112, Color.White);
-#endif
-#endif
 		}
 		#endregion Constructor
 
@@ -199,7 +186,7 @@ namespace Robber {
 			Placement placement;
 			for (int i = 0; i < guardSize; i++) {
 				placement = new Placement(guardLocations[i]);
-				this.guards[i] = new Guard(this.device, this.content, placement, guardStates[i], guardDirectins[i]);
+				this.guards[i] = new Guard(this.content, placement, guardStates[i], guardDirectins[i]);
 			}
 			this.timer.reset(time);
 			this.treasureText.WrittenText = "x " + this.player.CapturedTreasures;
@@ -445,26 +432,26 @@ namespace Robber {
 #if DEBUG
 			if (this.showCD) {
 				Color debugColour = Color.Green;
-				this.debugUtils.drawBoundingBox(spriteBatch, this.player.BoundingBox, debugColour);
+				DebugUtils.drawBoundingBox(spriteBatch, this.player.BoundingBox, debugColour, ResourceManager.getInstance().ButtonLineTexture);
 				foreach (Guard guard in this.guards) {
-					this.debugUtils.drawBoundingBox(spriteBatch, guard.BoundingBox,debugColour);
-					DebugUtils.drawBoundingSphere(spriteBatch, guard.Ring.BoundingSphere, debugColour, this.debugRing);
+					DebugUtils.drawBoundingBox(spriteBatch, guard.BoundingBox, debugColour, ResourceManager.getInstance().ButtonLineTexture);
+					DebugUtils.drawBoundingSphere(spriteBatch, guard.Ring.BoundingSphere, debugColour, ResourceManager.getInstance().DebugRing);
 				}
 				foreach (BoundingBox box in CollisionManager.getInstance().MapBoundingBoxes) {
-					this.debugUtils.drawBoundingBox(spriteBatch, box, debugColour);
+					DebugUtils.drawBoundingBox(spriteBatch, box, debugColour, ResourceManager.getInstance().ButtonLineTexture);
 				}
 				foreach (BoundingBox box in CollisionManager.getInstance().FloorCenterBoxes) {
-					this.debugUtils.drawBoundingBox(spriteBatch, box, debugColour);
+					DebugUtils.drawBoundingBox(spriteBatch, box, debugColour, ResourceManager.getInstance().ButtonLineTexture);
 				}
 				foreach (Treasure treasure in this.treasures) {
-					this.debugUtils.drawBoundingBox(spriteBatch, treasure.BoundingBox, debugColour);
+					DebugUtils.drawBoundingBox(spriteBatch, treasure.BoundingBox, debugColour, ResourceManager.getInstance().ButtonLineTexture);
 				}
 			}
 			if (this.showAI) {
 				for (int y = 0; y < 18; y++) {
 					for (int x = 0; x < 21; x++) {
 						if (AIManager.getInstane().Board[y, x] == PathFinder.TypeOfSpace.Unwalkable) {
-							spriteBatch.Draw(this.debugChip, new Placement(new Point(x, y)).worldPosition, Color.Red);
+							spriteBatch.Draw(ResourceManager.getInstance().DebugChip, new Placement(new Point(x, y)).worldPosition, Color.Red);
 						}
 					}
 				}
@@ -521,10 +508,6 @@ namespace Robber {
 			if (this.guardDetectedSfx != null) {
 				this.guardDetectedSfx.Dispose();
 			}
-#if DEBUG
-			this.debugChip.Dispose();
-			this.debugRing.Dispose();
-#endif
 		}
 		#endregion Destructor
 	}
