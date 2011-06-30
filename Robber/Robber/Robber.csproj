@@ -129,6 +129,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers\CollisionDetectionGenerator.cs" />
     <Compile Include="Helpers\MapEditor.cs" />
     <Compile Include="Managers\AIManager.cs" />
     <Compile Include="Managers\CollisionManager.cs" />

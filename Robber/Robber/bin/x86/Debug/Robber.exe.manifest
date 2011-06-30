@@ -100,19 +100,19 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>ecSdwV0a4YCjtpk+jcrTMijgj48=</dsig:DigestValue>
+        <dsig:DigestValue>G+N4cPosi1kh+Xq68jq25DLu+uQ=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Robber.exe" size="60928">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Robber.exe" size="61952">
       <assemblyIdentity name="Robber" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>MFQkzCKD27rmIX16zX4dSNhlmP4=</dsig:DigestValue>
+        <dsig:DigestValue>uXHWEj1tbqWFpxkNmDxLOLt7q4E=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -476,13 +476,13 @@
       <dsig:DigestValue>vWcYBoIaFN3jd+Tlbin1Mh/3p/c=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Scripts\Map1Identifiers.xml" size="8261" writeableType="applicationData">
+  <file name="Scripts\Map1Identifiers.xml" size="2423" writeableType="applicationData">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>LWjly5X1myqUJEh/6uNIyRMjx7k=</dsig:DigestValue>
+      <dsig:DigestValue>+u8VGm7ii7+NfzEdldOLsVymNFY=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Scripts\Map2.XML" size="18629">
@@ -494,13 +494,13 @@
       <dsig:DigestValue>dmlIb7xpJi8IPDDx/DHjAUtWfMU=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Scripts\Map2Identifiers.xml" size="11623" writeableType="applicationData">
+  <file name="Scripts\Map2Identifiers.xml" size="4691" writeableType="applicationData">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>l/GnAVPPVmtrxnx3Ij8E8AzvZBo=</dsig:DigestValue>
+      <dsig:DigestValue>np9bVuNJXw0Iuv2ByRKYv0k1Ols=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Scripts\Map3.XML" size="18512">
@@ -512,13 +512,13 @@
       <dsig:DigestValue>IZ1nN72WUVjKNtiuhDTgonTBQx0=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Scripts\Map3Identifiers.xml" size="11622" writeableType="applicationData">
+  <file name="Scripts\Map3Identifiers.xml" size="4690" writeableType="applicationData">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>eCdRgpGb4yMtOeM8cBcD/DZfdMc=</dsig:DigestValue>
+      <dsig:DigestValue>1cRVY2krGVqmx68/dOW/ECgNIE0=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>

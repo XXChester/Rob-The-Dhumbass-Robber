@@ -47,10 +47,14 @@ namespace Robber {
 		private DebugUtils debugUtils;
 		private Texture2D debugChip;
 		private Texture2D debugRing;
+#if DEBUG
+		private bool showAI = false;
+		private bool showCD = false;
+#endif
 		#endregion Class variables
 
 		#region Class propeties
-		public bool ShowAI { get; set; }
+
 		#endregion Class properties
 
 		#region Constructor
@@ -144,7 +148,6 @@ namespace Robber {
 			List<string> guardDirectins = new List<string>();
 			List<string> guardStates = new List<string>();
 			List<Point> treasureLocations = new List<Point>();
-			List<Point> boundingBoxPoints = new List<Point>();
 			List<Point> wayPoints = new List<Point>();
 			float time = 0f;
 			
@@ -168,9 +171,6 @@ namespace Robber {
 				
 				// load the waypoint information
 				MapLoader.loadGenericPointList(doc, MapEditor.MappingState.WayPoint, out wayPoints);
-				
-				// load the collision information
-				MapLoader.loadGenericPointList(doc, MapEditor.MappingState.BoundingBox, out boundingBoxPoints);
 			} finally {
 				xmlReader.Close();
 			}
@@ -179,13 +179,6 @@ namespace Robber {
 
 			// let our AI manager know about the maps way points
 			AIManager.getInstane().WayPoints = wayPoints;
-
-			List<BoundingBox> mapBoundingBoxes = new List<BoundingBox>();
-			for (int i = 0; i < boundingBoxPoints.Count; i += 2) {
-				mapBoundingBoxes.Add(Helper.getBBox(boundingBoxPoints[i], boundingBoxPoints[i + 1]));
-
-			}
-			CollisionManager.getInstance().MapBoundingBoxes.AddRange(mapBoundingBoxes);
 
 			// load player at starting point
 			this.player = new Player(this.content, new Placement(playersLocation));
@@ -401,13 +394,9 @@ namespace Robber {
 			this.payDayDelay += elapsed;
 #if DEBUG
 			if (base.currentKeyBoardState.IsKeyDown(Keys.D1) && base.previousKeyBoardState.IsKeyUp(Keys.D1)) {
-				if (ShowAI) {
-					ShowAI = false;
-				} else {
-					ShowAI = true;
-				}
+				this.showAI = !this.showAI;
 			} else if (base.currentKeyBoardState.IsKeyDown(Keys.D2) && base.previousKeyBoardState.IsKeyUp(Keys.D2)) {
-				Console.Clear();
+				this.showCD = !this.showCD;
 			}
 			// map editor
 			MapEditor.getInstance().update();
@@ -454,7 +443,7 @@ namespace Robber {
 				this.gameOverText.render(spriteBatch);
 			}
 #if DEBUG
-			if (this.ShowAI) {
+			if (this.showCD) {
 				Color debugColour = Color.Green;
 				this.debugUtils.drawBoundingBox(spriteBatch, this.player.BoundingBox, debugColour);
 				foreach (Guard guard in this.guards) {
@@ -470,6 +459,8 @@ namespace Robber {
 				foreach (Treasure treasure in this.treasures) {
 					this.debugUtils.drawBoundingBox(spriteBatch, treasure.BoundingBox, debugColour);
 				}
+			}
+			if (this.showAI) {
 				for (int y = 0; y < 18; y++) {
 					for (int x = 0; x < 21; x++) {
 						if (AIManager.getInstane().Board[y, x] == PathFinder.TypeOfSpace.Unwalkable) {

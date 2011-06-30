@@ -41,7 +41,6 @@ Raw version of the game functional with programmer art
 	Polish(Phase 2)
 ============================
 Replace the programmer art with less crappy programmer art and make the game not only maintain its functionality but also add a nice playable environment and add additional functionality
-[]Fix up AI some more....can still walk through walls sometimes
 []LOS Detection triangle
 []Make timer have decimal places
 [*]Delay the start of the level so the user can have a look at the layout	***
@@ -60,6 +59,7 @@ Replace the programmer art with less crappy programmer art and make the game not
 	[*]Hard coded but very easy to add new ones		-Can create and map indentifiers for a new map in about 30minutes
 [*]Map select screen
 [*]Change sprite direction determination for up and down, base it on last direction
+[*]Design an algorithm for automatically generating bounding boxes
 
 ===========================
 ISSUES
@@ -79,7 +79,7 @@ ISSUES
 		Time
 ============================
 Planning: 2 hours
-Programming:	32.5 hours
+Programming:	35 hours	
 Map Creation(Including creating editor via scripting engine):	5.5 hours
 Art: 5.75 hours	
 Sound:	2 hours	

@@ -17,6 +17,14 @@ namespace Robber {
 	public class Tile : MapTile, IRenderable {
 		#region Class variables
 		private StaticDrawable2D image;
+		public const string TILE_NAME_TOP = "TopWall";
+		public const string TILE_NAME_RIGHT = "RightWall";
+		public const string TILE_NAME_BOTTOM = "BottomWall";
+		public const string TILE_NAME_LEFT = "LeftWall";
+		public const string TILE_NAME_TOP_LEFTT = "TopLeft";
+		public const string TILE_NAME_TOP_RIGHT = "TopRight";
+		public const string TILE_NAME_BOTTOM_RIGHT = "BottomRight";
+		public const string TILE_NAME_BOTTOM_LEFT = "BottomLeft";
 		#endregion Class variables
 
 		#region Class propeties

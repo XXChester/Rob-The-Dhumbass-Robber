@@ -65,8 +65,9 @@ namespace Robber {
 			return loadObject<T>(doc, header.ToString(), new string[] { MapEditor.XML_X, MapEditor.XML_Y });
 		}
 
-		public static Map load(ContentManager content, string mapName, Color floorcolour, Color wallColour) {
+		public static Map load(ContentManager content, string mapName, Color floorColour, Color wallColour) {
 			Map map = null;
+			// load the map
 			LoadResult loadResult = GWNorthEngine.Tools.TilePlacer.MapLoader.load(content, mapName);
 			int height = loadResult.Height;
 			int width = loadResult.Width;
@@ -74,6 +75,7 @@ namespace Robber {
 			Tile[,] tiles = GWNorthEngine.Tools.TilePlacer.MapLoader.initTiles<Tile>(mapTiles, delegate(MapTile tile) {
 				return new Tile(tile.Texture, tile.Index, wallColour);
 			});
+			// load the AI for the map
 			PathFinder.TypeOfSpace[,] tileSpaces = new PathFinder.TypeOfSpace[height, width];
 			TileValues tileValue;
 			for (int y = 0; y < height; y++) {
@@ -88,9 +90,23 @@ namespace Robber {
 				}
 			}
 
-			map = new Map(content, tiles, height, width, floorcolour, wallColour);
+			map = new Map(content, tiles, height, width, floorColour, wallColour);
 			AIManager.getInstane().init(height, width);
 			AIManager.getInstane().Board = tileSpaces;
+
+			// generate the collision detection
+			Placement tilesPlacement;
+			List<BoundingBox> tileBBoxes = new List<BoundingBox>();
+			for (int y = 0; y < height; y++) {
+				for (int x = 0; x < width; x++) {
+					if (mapTiles[y, x] != null) {
+						tilesPlacement = new Placement(new Point(x, y));
+						tileBBoxes.AddRange(CollisionDetectionGenerator.generateBoundingBoxesForTexture(mapTiles[tilesPlacement.index.Y, tilesPlacement.index.X].Texture, tilesPlacement));
+					}
+				}
+			}
+			CollisionManager.getInstance().MapBoundingBoxes.AddRange(tileBBoxes);
+
 			return map;
 		}
 

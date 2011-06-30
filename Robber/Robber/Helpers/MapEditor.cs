@@ -13,8 +13,7 @@ namespace Robber {
 			GuardPosition,
 			GuardEntry,
 			Treasure,
-			WayPoint,
-			BoundingBox
+			WayPoint
 		};
 		//singleton variable
 		private static MapEditor instance = new MapEditor();
@@ -28,7 +27,6 @@ namespace Robber {
 		private const string COMMAND_GUARD_ENTRY = "guardentry";
 		private const string COMMAND_TREASURE = "treasure";
 		private const string COMMAND_WAY_POINTS = "waypoint";
-		private const string COMMAND_BOUNDING_BOX = "boundingbox";
 		public static string XML_X = "X";
 		public static string XML_Y = "Y";
 		public static string XML_R = "R";
@@ -73,7 +71,6 @@ namespace Robber {
 			Console.WriteLine("Guard entry point / Exit point - " + COMMAND_GUARD_ENTRY);
 			Console.WriteLine("Treasure - " + COMMAND_TREASURE);
 			Console.WriteLine("Guard way points - " + COMMAND_WAY_POINTS);
-			Console.WriteLine("Bounding Boxes - " + COMMAND_BOUNDING_BOX);
 		}
 
 		public void editMap(string value) {
@@ -97,9 +94,6 @@ namespace Robber {
 				case COMMAND_WAY_POINTS:
 					this.mappingState = MappingState.WayPoint;
 					break;
-				case COMMAND_BOUNDING_BOX:
-					this.mappingState = MappingState.BoundingBox;
-					break;
 				default:
 					Console.WriteLine("Failed to recognize your command, try using the editMapHelp()");
 					break;
@@ -114,12 +108,6 @@ namespace Robber {
 				Point indexPosition = Placement.getIndex(new Vector2(Mouse.GetState().X, Mouse.GetState().Y));
 
 				switch (this.mappingState) {
-					case MappingState.BoundingBox:
-							xml.Append("\t\t<" + this.mappingState + ">");
-							xml.Append("\n\t\t\t<" + XML_X + ">" + worldPosition.X + "</" + XML_X + ">");
-							xml.Append("\n\t\t\t<" + XML_Y + ">" + worldPosition.Y + "</" + XML_Y + ">");
-							xml.Append("\n</" + this.mappingState + ">");
-						break;
 					case MappingState.GuardPosition:
 						xml.Append("\t\t<Guard>");
 						xml.Append("\n\t\t\t<State></State>");

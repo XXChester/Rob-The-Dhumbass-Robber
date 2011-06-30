@@ -1208,6 +1208,56 @@
             Gets or sets the texture to be drawn to the screen
             </summary>
         </member>
+        <member name="T:GWNorthEngine.Tools.TilePlacer.Constants">
+            <summary>
+            Contains common constants for the TilePlacer tool
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Tools.TilePlacer.Constants.FILE_EXTENSION">
+            <summary>
+            File extension used by files for or created by the TilePlacer
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Tools.TilePlacer.Constants.XML_HEADER_SIZE">
+            <summary>
+            Header that denotes the start of the map size section
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Tools.TilePlacer.Constants.XML_HEIGHT">
+            <summary>
+            Height of the map
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Tools.TilePlacer.Constants.XML_WIDTH">
+            <summary>
+            Width of the map
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Tools.TilePlacer.Constants.XML_HEADER_LAYER">
+            <summary>
+            Header that denotes the start of a layer
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Tools.TilePlacer.Constants.XML_HEADER_TILE">
+            <summary>
+            Header that denotes the start of a tile
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Tools.TilePlacer.Constants.XML_TILE_INDEX">
+            <summary>
+            Index of the tile
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Tools.TilePlacer.Constants.XML_TILE_FILE_NAME">
+            <summary>
+            Filename of the tile
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Tools.TilePlacer.Constants.XML_TILE_VALUE">
+            <summary>
+            Value of the tile (TileValues int representation)
+            </summary>
+        </member>
         <member name="T:GWNorthEngine.Scripting.Model.RegisteredObject">
             <summary>
             Models the data required to use an object via scripting
@@ -1917,56 +1967,6 @@
         <member name="P:GWNorthEngine.Model.StaticDrawable2D.Texture">
             <summary>
             Gets or sets the Texture of the static drawable object
-            </summary>
-        </member>
-        <member name="T:GWNorthEngine.Tools.TilePlacer.Constants">
-            <summary>
-            Contains common constants for the TilePlacer tool
-            </summary>
-        </member>
-        <member name="F:GWNorthEngine.Tools.TilePlacer.Constants.FILE_EXTENSION">
-            <summary>
-            File extension used by files for or created by the TilePlacer
-            </summary>
-        </member>
-        <member name="F:GWNorthEngine.Tools.TilePlacer.Constants.XML_HEADER_SIZE">
-            <summary>
-            Header that denotes the start of the map size section
-            </summary>
-        </member>
-        <member name="F:GWNorthEngine.Tools.TilePlacer.Constants.XML_HEIGHT">
-            <summary>
-            Height of the map
-            </summary>
-        </member>
-        <member name="F:GWNorthEngine.Tools.TilePlacer.Constants.XML_WIDTH">
-            <summary>
-            Width of the map
-            </summary>
-        </member>
-        <member name="F:GWNorthEngine.Tools.TilePlacer.Constants.XML_HEADER_LAYER">
-            <summary>
-            Header that denotes the start of a layer
-            </summary>
-        </member>
-        <member name="F:GWNorthEngine.Tools.TilePlacer.Constants.XML_HEADER_TILE">
-            <summary>
-            Header that denotes the start of a tile
-            </summary>
-        </member>
-        <member name="F:GWNorthEngine.Tools.TilePlacer.Constants.XML_TILE_INDEX">
-            <summary>
-            Index of the tile
-            </summary>
-        </member>
-        <member name="F:GWNorthEngine.Tools.TilePlacer.Constants.XML_TILE_FILE_NAME">
-            <summary>
-            Filename of the tile
-            </summary>
-        </member>
-        <member name="F:GWNorthEngine.Tools.TilePlacer.Constants.XML_TILE_VALUE">
-            <summary>
-            Value of the tile (TileValues int representation)
             </summary>
         </member>
     </members>
