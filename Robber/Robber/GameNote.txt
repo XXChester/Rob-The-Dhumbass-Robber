@@ -27,7 +27,7 @@ Raw version of the game functional with programmer art
 [*]Put in collision detection with each of the guards so they don't stack
 [*]Put in collision detection with the player
 [*]Clean up AI so that it always walks down the middle of the square not the edge
-[*]Clean up collision detection so that it doesn't bounch you around...instead you just don't move if it will result in a collision...provisional CD opposed to reaction CD
+[*]Clean up collision detection so that it doesn't bounce you around...instead you just don't move if it will result in a collision...provisional CD opposed to reaction CD
 [*]Implement Player detection via radius
 [*]Make a HUD
 [*]Implement flow mechanism

@@ -34,6 +34,7 @@ namespace Robber {
 		protected KeyboardState currentKeyBoardState;
 		protected KeyboardState previousKeyBoardState;
 		protected Placement previousPlacement;
+		private const float FRAME_RATE = 200f;
 		#endregion Class variables
 
 		#region Class propeties
@@ -47,7 +48,7 @@ namespace Robber {
 		public Person(ContentManager content, string fileStartsWith, Placement startingLocation, float movementSpeed) {
 			BaseAnimationManagerParams animationParams = new BaseAnimationManagerParams();
 			animationParams.AnimationState = AnimationManager.AnimationState.PlayForward;
-			animationParams.FrameRate = 200f;
+			animationParams.FrameRate = FRAME_RATE;
 			animationParams.TotalFrameCount = 4;
 			Animated2DSpriteParams spriteParams = new Animated2DSpriteParams();
 			spriteParams.Content = content;
@@ -79,6 +80,7 @@ namespace Robber {
 					// we are no longer moving so stop our sprite
 					this.activeSprite.reset();
 					this.activeSprite.AnimationManager.State = AnimationManager.AnimationState.Paused;
+					this.activeSprite.AnimationManager.TotalElapsed = FRAME_RATE;// make it so that as soon as we start to move the sprite starts to walk
 				} else {
 					this.activeSprite.AnimationManager.State = AnimationManager.AnimationState.PlayForward;
 				}
