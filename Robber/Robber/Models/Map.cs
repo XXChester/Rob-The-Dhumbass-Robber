@@ -49,24 +49,9 @@ namespace Robber {
 			this.floor.updateColours(floorColour);
 		}
 
-		private MouseState previous;
+		
 		public void update(float elapsed) {
-#if DEBUG
-			if (Mouse.GetState().LeftButton == ButtonState.Pressed && this.previous.LeftButton == ButtonState.Released && Mouse.GetState().Y >= 0 && Mouse.GetState().X >= 0) {
-				//Console.WriteLine(Placement.getIndex(new Vector2(Mouse.GetState().X, Mouse.GetState().Y)));
-				//string message = "BBox|";
-				//string suffix = Mouse.GetState().X + "," + Mouse.GetState().Y;
-				//string message = "Treasure|";
-				//string message = "Guard|";
-				//string message = "WayPoint|";
-				string message = "GuardEntry|";
-				//string message = "Player|";
-				string suffix = Placement.getIndex(new Vector2(Mouse.GetState().X, Mouse.GetState().Y)).X + "," + Placement.getIndex(new Vector2(Mouse.GetState().X, Mouse.GetState().Y)).Y;
-				Console.WriteLine(suffix);
-				//ScriptManager.getInstance().log(message + suffix);
-			}
-			this.previous = Mouse.GetState();
-#endif
+
 		}
 
 		public void render(SpriteBatch spriteBatch) {

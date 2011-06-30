@@ -36,11 +36,11 @@ Content\WhereWeGonnaRob.xnb
 Content\Policia.xnb
 Content\CellDoor.xnb
 Scripts\Map1.XML
+Scripts\Map1Identifiers.xml
 Scripts\Map2.XML
+Scripts\Map2Identifiers.xml
 Scripts\Map3.XML
-Scripts\Map1.DAT
-Scripts\Map1Indentifiers.DAT
-Scripts\Map2.DAT
-Scripts\Map2Indentifiers.DAT
-Scripts\Map3.DAT
-Scripts\Map3Indentifiers.DAT
+Scripts\Map3Identifiers.xml
+Scripts\Map1Identifiers.DAT
+Scripts\Map2Identifiers.DAT
+Scripts\Map3Identifiers.DAT

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
+using System.Xml;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
@@ -134,7 +135,7 @@ namespace Robber {
 			string mapInformation = Directory.GetCurrentDirectory() + "\\Scripts\\" + StateManager.getInstance().MapInformation;
 			CollisionManager.getInstance().MapBoundingBoxes = new List<BoundingBox>();
 
-			StreamReader reader = new StreamReader(mapInformation + "Indentifiers.dat");
+			XmlReader xmlReader = XmlReader.Create(mapInformation + "Identifiers.xml");
 			this.entryExitPoints = new List<Point>();
 			Point playersLocation = new Point();
 			Color floorColour = Color.White;
@@ -146,41 +147,32 @@ namespace Robber {
 			List<Point> boundingBoxPoints = new List<Point>();
 			List<Point> wayPoints = new List<Point>();
 			float time = 0f;
+			
 			try {
-				string[] components = null;
-				string[] indexes = null;
-				string line = null;
-				while (!reader.EndOfStream) {
-					line = reader.ReadLine();
-					if (!line.StartsWith(@"//")) {
-						components = line.Split(ResourceManager.SEPARATOR);
-						indexes = components[1].Split(',');
-						if (components[0] == ResourceManager.PLAYER_IDENTIFIER) {
-							playersLocation = new Point(int.Parse(indexes[0]), int.Parse(indexes[1]));
-						} else if (components[0] == ResourceManager.GUARD_IDENTIFIER) {
-							guardLocations.Add(new Point(int.Parse(indexes[0]), int.Parse(indexes[1])));
-							guardStates.Add(components[2]);
-							guardDirectins.Add(components[3]);
-						} else if (components[0] == ResourceManager.GUARD_ENTRY_IDENTIFIER) {
-							this.entryExitPoints.Add(new Point(int.Parse(indexes[0]), int.Parse(indexes[1])));
-						} else if (components[0] == ResourceManager.TREASURE_IDENTIFIER) {
-							treasureLocations.Add(new Point(int.Parse(indexes[0]), int.Parse(indexes[1])));
-						} else if (components[0] == ResourceManager.BOUNDING_BOX_IDENTIFIER) {
-							boundingBoxPoints.Add(new Point(int.Parse(indexes[0]), int.Parse(indexes[1])));
-						} else if (components[0] == ResourceManager.WAYPOINT_IDENTIFIER) {
-							wayPoints.Add(new Point(int.Parse(indexes[0]), int.Parse(indexes[1])));
-						} else if (components[0] == ResourceManager.TIME_INDENTIFIER) {
-							time = float.Parse(indexes[0]);
-						} else if (components[0] == ResourceManager.COLOUR_IDENTIFIER) {
-							floorColour = new Color(int.Parse(indexes[0]), int.Parse(indexes[1]), int.Parse(indexes[2]));
-							indexes = components[2].Split(',');
-							wallColour = new Color(int.Parse(indexes[0]), int.Parse(indexes[1]), int.Parse(indexes[2]));
-						}
-					}
-				}
+				XmlDocument doc = new XmlDocument();
+				doc.Load(xmlReader);
+				// load the map information
+				MapLoader.loadLevelInformation(doc, out wallColour, out floorColour, out time);
+				
+				// load the player information
+				MapLoader.loadPlayerInformation(doc, out playersLocation);
+				
+				// load the treasure information
+				MapLoader.loadGenericPointList(doc, MapEditor.MappingState.Treasure, out treasureLocations);
+				
+				// load the entry information
+				MapLoader.loadGenericPointList(doc, MapEditor.MappingState.GuardEntry, out entryExitPoints);
+				
+				// load the guard information
+				MapLoader.loadGuardInformation(doc, out guardLocations, out guardDirectins, out guardStates);
+				
+				// load the waypoint information
+				MapLoader.loadGenericPointList(doc, MapEditor.MappingState.WayPoint, out wayPoints);
+				
+				// load the collision information
+				MapLoader.loadGenericPointList(doc, MapEditor.MappingState.BoundingBox, out boundingBoxPoints);
 			} finally {
-				reader.Close();
-				reader.Dispose();
+				xmlReader.Close();
 			}
 			// load our map
 			this.map = MapLoader.load(content, mapInformation + Constants.FILE_EXTENSION, floorColour, wallColour);
@@ -417,6 +409,8 @@ namespace Robber {
 			} else if (base.currentKeyBoardState.IsKeyDown(Keys.D2) && base.previousKeyBoardState.IsKeyUp(Keys.D2)) {
 				Console.Clear();
 			}
+			// map editor
+			MapEditor.getInstance().update();
 #endif
 			base.update(elapsed);
 		}
