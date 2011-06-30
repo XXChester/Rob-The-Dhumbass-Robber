@@ -34,17 +34,10 @@ namespace Robber {
 		public static string XML_R = "R";
 		public static string XML_G = "G";
 		public static string XML_B = "B";
-		public static string XML_HEADER_LEVEL_INFO = "LevelInformation";
 		public static string XML_TIME = "Time";
 		public static string XML_MINUTES = "Minutes";
 		public static string XML_WALL_COLOUR = "Walls";
 		public static string XML_FLOOR_COLOUR = "Floor";
-		public static string XML_HEADER_PLAYER_INFO = "PlayerInformation";
-		public static string XML_HEADER_TREASURE_INFO = "TreasureInformation";
-		public static string XML_HEADER_ENTRY_INFO = "EntryInformation";
-		public static string XML_HEADER_WAYPOINT_INFO = "WaypointInformation";
-		public static string XML_HEADER_COLLISION_INFO = "CollisionInformation";
-		public static string XML_HEADER_GUARD_INFO = "GuardInformation";
 		public static string XML_HEADER_GUARD = "Guard";
 		public static string XML_GUARD_STATE = "State";
 		public static string XML_GUARD_DIRECTION = "Direction";
