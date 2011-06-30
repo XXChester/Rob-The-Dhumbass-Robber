@@ -150,17 +150,6 @@ namespace Robber {
 				if (this.mappingState != MappingState.None) {
 					ScriptManager.getInstance().log(xml.ToString());
 				}
-				//Console.WriteLine(Placement.getIndex(new Vector2(Mouse.GetState().X, Mouse.GetState().Y)));
-				//string message = "BBox|";
-				//string suffix = Mouse.GetState().X + "," + Mouse.GetState().Y;
-				//string message = "Treasure|";
-				//string message = "Guard|";
-				//string message = "WayPoint|";
-				//string message = "GuardEntry|";
-				//string message = "Player|";
-				//string suffix = Placement.getIndex(new Vector2(Mouse.GetState().X, Mouse.GetState().Y)).X + "," + Placement.getIndex(new Vector2(Mouse.GetState().X, Mouse.GetState().Y)).Y;
-				//Console.WriteLine(suffix);
-				//ScriptManager.getInstance().log(message + suffix);
 			}
 			this.previous = Mouse.GetState();
 		}

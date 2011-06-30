@@ -362,22 +362,7 @@
     </Tile>
     <Tile>
       <Index>168</Index>
-      <FileName>BottomLeft.png</FileName>
-      <Value>1</Value>
-    </Tile>
-    <Tile>
-      <Index>169</Index>
-      <FileName>BottomWall.png</FileName>
-      <Value>1</Value>
-    </Tile>
-    <Tile>
-      <Index>170</Index>
-      <FileName>BottomWall.png</FileName>
-      <Value>1</Value>
-    </Tile>
-    <Tile>
-      <Index>171</Index>
-      <FileName>BottomRight.png</FileName>
+      <FileName>LeftWall.png</FileName>
       <Value>1</Value>
     </Tile>
     <Tile>
@@ -412,8 +397,23 @@
     </Tile>
     <Tile>
       <Index>189</Index>
-      <FileName>LeftWall.png</FileName>
-      <Value>0</Value>
+      <FileName>BottomLeft.png</FileName>
+      <Value>1</Value>
+    </Tile>
+    <Tile>
+      <Index>190</Index>
+      <FileName>BottomWall.png</FileName>
+      <Value>1</Value>
+    </Tile>
+    <Tile>
+      <Index>191</Index>
+      <FileName>BottomWall.png</FileName>
+      <Value>1</Value>
+    </Tile>
+    <Tile>
+      <Index>192</Index>
+      <FileName>BottomRight.png</FileName>
+      <Value>1</Value>
     </Tile>
     <Tile>
       <Index>196</Index>
@@ -454,11 +454,6 @@
       <Index>210</Index>
       <FileName>LeftWall.png</FileName>
       <Value>0</Value>
-    </Tile>
-    <Tile>
-      <Index>212</Index>
-      <FileName>RightWall.png</FileName>
-      <Value>1</Value>
     </Tile>
     <Tile>
       <Index>217</Index>
