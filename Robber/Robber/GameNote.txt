@@ -42,7 +42,7 @@ Raw version of the game functional with programmer art
 ============================
 Replace the programmer art with less crappy programmer art and make the game not only maintain its functionality but also add a nice playable environment and add additional functionality
 []LOS Detection triangle
-[]Make timer have decimal places
+[*]Make timer have decimal places
 [*]Delay the start of the level so the user can have a look at the layout	***
 []Pause at waypoints				
 [*]Screen fades in and out (Transitions)
@@ -79,7 +79,7 @@ ISSUES
 		Time
 ============================
 Planning: 2 hours
-Programming:	35 hours	
+Programming:	35.25 hours	
 Map Creation(Including creating editor via scripting engine):	5.5 hours
 Art: 5.75 hours	
 Sound:	2 hours	

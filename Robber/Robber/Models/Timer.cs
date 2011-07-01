@@ -67,8 +67,13 @@ namespace Robber {
 		}
 
 		public void reset(float timeUntilDetection) {
-			this.time = timeUntilDetection * 60f * 1000f;// passed in as minutes, convert to mas minutes, convert to miliseconds
-			this.timeText.WrittenText = this.time.ToString();
+			this.time = timeUntilDetection * 60f * 1000f;// passed in as minutes, convert to seconds, convert to miliseconds
+			float seconds = this.time / 1000f;
+			if (this.time % 1000f == 0f) {
+				this.timeText.WrittenText = seconds.ToString() + ".000";
+			} else {
+				this.timeText.WrittenText = seconds.ToString();
+			}
 		}
 
 		public void update(float elapsed) {
@@ -81,7 +86,8 @@ namespace Robber {
 				AIManager.getInstane().PlayerDetected = true;
 				this.timeText.WrittenText = "0";
 			} else {
-				this.timeText.WrittenText = this.time.ToString();
+				float seconds = this.time / 1000f;
+				this.timeText.WrittenText = seconds.ToString();
 			}
 		}
 
