@@ -67,12 +67,12 @@ namespace Robber {
 			}
 			updateState(initalState);
 
-			if (this.currentState == State.Patrol && !AIManager.getInstane().PlayerDetected) {
-				this.destinationWayPoint = AIManager.getInstane().getNextWayPoint(base.Placement.index, this.movementDirection);
-				this.path = new Stack<Point>(AIManager.getInstane().findPath(base.Placement.index, this.destinationWayPoint));
+			if (this.currentState == State.Patrol && !AIManager.getInstance().PlayerDetected) {
+				this.destinationWayPoint = AIManager.getInstance().getNextWayPoint(base.Placement.index, this.movementDirection);
+				this.path = new Stack<Point>(AIManager.getInstance().findPath(base.Placement.index, this.destinationWayPoint));
 				this.closestsPoint = this.path.Pop();
-			} else if (this.currentState == State.Chase || AIManager.getInstane().PlayerDetected) {
-				this.path = new Stack<Point>(AIManager.getInstane().findPath(base.Placement.index));
+			} else if (this.currentState == State.Chase || AIManager.getInstance().PlayerDetected) {
+				this.path = new Stack<Point>(AIManager.getInstance().findPath(base.Placement.index));
 				if (this.path.Count >= 1) {
 					this.closestsPoint = path.Pop();
 				}
@@ -92,15 +92,15 @@ namespace Robber {
 		private void generateMoves() {
 			do {
 				Thread.Sleep(10);
-				if (AIManager.getInstane().PlayerDetected) {
+				if (AIManager.getInstance().PlayerDetected) {
 					updateState(State.Chase);
 				}
-				lock (AIManager.getInstane().Board) {
+				lock (AIManager.getInstance().Board) {
 					// patrol can just generate the waypoint once
 					if (this.currentState == State.Patrol) {
 						if (base.Placement.index == this.destinationWayPoint) {
-							this.destinationWayPoint = AIManager.getInstane().getNextWayPoint(base.Placement.index, this.movementDirection);
-							this.path = new Stack<Point>(AIManager.getInstane().findPath(base.Placement.index, this.destinationWayPoint));
+							this.destinationWayPoint = AIManager.getInstance().getNextWayPoint(base.Placement.index, this.movementDirection);
+							this.path = new Stack<Point>(AIManager.getInstance().findPath(base.Placement.index, this.destinationWayPoint));
 						} else if (base.Placement.index == this.closestsPoint) {
 							if (this.path.Count >= 1 && this.foundMiddle) {
 								this.closestsPoint = path.Pop();
@@ -109,7 +109,7 @@ namespace Robber {
 					} else if (this.currentState == State.Chase) {
 						// chase should regenerate the waypoint all the time
 						if (this.closestsPoint == base.Placement.index) {
-							this.path = new Stack<Point>(AIManager.getInstane().findPath(base.Placement.index));
+							this.path = new Stack<Point>(AIManager.getInstance().findPath(base.Placement.index));
 							if (this.path.Count == 1) {
 								Console.WriteLine("About to capture");
 							}
@@ -234,11 +234,11 @@ namespace Robber {
 			base.Placement = new Placement(Placement.getIndex(base.activeSprite.Position));
 			base.BoundingBox = Helper.getBBox(base.activeSprite.Position);
 			if (base.previousPlacement.index != base.Placement.index) {
-				AIManager.getInstane().Board[base.previousPlacement.index.Y, base.previousPlacement.index.X] = base.previousTypeOfSpace;
-				base.previousTypeOfSpace = AIManager.getInstane().Board[base.Placement.index.Y, base.Placement.index.X];
-				AIManager.getInstane().Board[base.Placement.index.Y, base.Placement.index.X] = PathFinder.TypeOfSpace.Unwalkable;
+				AIManager.getInstance().Board[base.previousPlacement.index.Y, base.previousPlacement.index.X] = base.previousTypeOfSpace;
+				base.previousTypeOfSpace = AIManager.getInstance().Board[base.Placement.index.Y, base.Placement.index.X];
+				AIManager.getInstance().Board[base.Placement.index.Y, base.Placement.index.X] = PathFinder.TypeOfSpace.Unwalkable;
 			}
-			Point endNode = AIManager.getInstane().findEndNode();
+			Point endNode = AIManager.getInstance().findEndNode();
 			if (this.closestsPoint == endNode) {
 				StateManager.getInstance().CurrentGameState = StateManager.GameState.GameOver;
 				StateManager.getInstance().TypeOfGameOver = StateManager.GameOverType.Guards;

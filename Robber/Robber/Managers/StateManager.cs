@@ -57,9 +57,9 @@ namespace Robber {
 
 		#region Constructor
 		public StateManager() {
-			this.CurrentGameState = GameState.MainMenu;
-			//this.CurrentGameState = GameState.InitGame;
-			//this.MapInformation = "Map1";
+			//this.CurrentGameState = GameState.MainMenu;
+			this.CurrentGameState = GameState.InitGame;
+			this.MapInformation = "Map1";
 			this.CurrentTransitionState = TransitionState.TransitionIn;
 		}
 		#endregion Constructor

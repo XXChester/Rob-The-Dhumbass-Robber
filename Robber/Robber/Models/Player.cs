@@ -85,12 +85,12 @@ namespace Robber {
 			base.BoundingBox = Helper.getBBox(base.activeSprite.Position);
 			
 			if (base.previousPlacement.index != base.Placement.index) {
-				AIManager.getInstane().Board[base.previousPlacement.index.Y, base.previousPlacement.index.X] = base.previousTypeOfSpace;
-				base.previousTypeOfSpace = AIManager.getInstane().Board[base.Placement.index.Y, base.Placement.index.X];
+				AIManager.getInstance().Board[base.previousPlacement.index.Y, base.previousPlacement.index.X] = base.previousTypeOfSpace;
+				base.previousTypeOfSpace = AIManager.getInstance().Board[base.Placement.index.Y, base.Placement.index.X];
 			}
-			if (AIManager.getInstane().PlayerDetected) {// if we aren't moving we still need to report where we are if we are detected
+			if (AIManager.getInstance().PlayerDetected) {// if we aren't moving we still need to report where we are if we are detected
 				// if we have been detected we need to tell the AI where we are
-				AIManager.getInstane().Board[base.Placement.index.Y, base.Placement.index.X] = PathFinder.TypeOfSpace.End;
+				AIManager.getInstance().Board[base.Placement.index.Y, base.Placement.index.X] = PathFinder.TypeOfSpace.End;
 			}
 			this.footStepSFXDelay += elapsed;
 			base.updateMove(elapsed);

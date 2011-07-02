@@ -91,8 +91,8 @@ namespace Robber {
 			}
 
 			map = new Map(content, tiles, height, width, floorColour, wallColour);
-			AIManager.getInstane().init(height, width);
-			AIManager.getInstane().Board = tileSpaces;
+			AIManager.getInstance().init(height, width);
+			AIManager.getInstance().Board = tileSpaces;
 
 			// generate the collision detection
 			Placement tilesPlacement;

@@ -65,7 +65,7 @@ namespace Robber {
 			this.movementSpeed = movementSpeed;
 			this.BoundingBox = Helper.getBBox(this.Placement.worldPosition);
 			this.activeSprite = this.rightSprite;
-			this.previousTypeOfSpace = AIManager.getInstane().Board[this.Placement.index.Y, this.Placement.index.X];
+			this.previousTypeOfSpace = AIManager.getInstance().Board[this.Placement.index.Y, this.Placement.index.X];
 		}
 		#endregion Constructor
 

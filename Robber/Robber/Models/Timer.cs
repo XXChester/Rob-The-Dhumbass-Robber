@@ -79,11 +79,11 @@ namespace Robber {
 		public void update(float elapsed) {
 			this.time -= elapsed;
 			if (this.time <= 0f) {
-				if (!AIManager.getInstane().PlayerDetected) {
+				if (!AIManager.getInstance().PlayerDetected) {
 					SoundManager.getInstance().sfxEngine.playSoundEffect(this.guardsAlertedSfx);
 				}
 				//Alert the authorities
-				AIManager.getInstane().PlayerDetected = true;
+				AIManager.getInstance().PlayerDetected = true;
 				this.timeText.WrittenText = "0";
 			} else {
 				float seconds = this.time / 1000f;

@@ -19,7 +19,7 @@ namespace Robber {
 		#endregion Class properties
 
 		#region Support methods
-		public static AIManager getInstane() {
+		public static AIManager getInstance() {
 			return instance;
 		}
 
