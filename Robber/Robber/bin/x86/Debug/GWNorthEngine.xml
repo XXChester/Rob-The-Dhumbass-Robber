@@ -177,7 +177,7 @@
         </member>
         <member name="M:GWNorthEngine.Utils.LoadingUtils.loadTexture2D(Microsoft.Xna.Framework.Content.ContentManager,System.String)">
             <summary>
-            Loads a texture via the ContentManager and assigns the texture a name for debugging purposes
+            Loads a texture via the ContentManager and assigns the texture custom data for debugging purposes
             </summary>
             <param name="content">ContentManager object</param>
             <param name="textureName">Name of the texture</param>
@@ -185,7 +185,7 @@
         </member>
         <member name="M:GWNorthEngine.Utils.LoadingUtils.loadSpriteFont(Microsoft.Xna.Framework.Content.ContentManager,System.String)">
             <summary>
-            Loads a SpriteFont via the ContentManager and assigns the font a name for debugging purposes
+            Loads a SpriteFont via the ContentManager and assigns the font custom data for debugging purposes
             </summary>
             <param name="content">ContentManager object</param>
             <param name="spriteFontName">Name of the sprite font</param>
@@ -193,11 +193,19 @@
         </member>
         <member name="M:GWNorthEngine.Utils.LoadingUtils.loadSoundEffect(Microsoft.Xna.Framework.Content.ContentManager,System.String)">
             <summary>
-            Loads a SoundEffect via the ContentManager and assigns the sound effect a name for debugging purposes
+            Loads a SoundEffect via the ContentManager and assigns the sound effect custom data for debugging purposes
             </summary>
             <param name="content">ContentManager object</param>
             <param name="soundEffectName">Name of the sound effect</param>
             <returns>Texture2D object</returns>
+        </member>
+        <member name="M:GWNorthEngine.Utils.LoadingUtils.loadSong(Microsoft.Xna.Framework.Content.ContentManager,System.String)">
+            <summary>
+            Loads a Song via the ContentManager and assugbs the song custom data for debugging purposes
+            </summary>
+            <param name="content">ContentManager object</param>
+            <param name="songName">Name of the song</param>
+            <returns></returns>
         </member>
         <member name="T:GWNorthEngine.Tools.Translator">
             <summary>
@@ -1991,7 +1999,7 @@
             Gets or sets the volume to play sound effects at
             </summary>
         </member>
-        <member name="P:GWNorthEngine.Audio.Params.BaseSoundEngineParams.Enabled">
+        <member name="P:GWNorthEngine.Audio.Params.BaseSoundEngineParams.Muted">
             <summary>
             Gets or sets whether audio is to be played
             </summary>
@@ -2024,12 +2032,6 @@
             </summary>
             <param name="parms"></param>
         </member>
-        <member name="M:GWNorthEngine.Audio.BaseSoundEngine.stop(System.String)">
-            <summary>
-            Stops the specified audio from playing
-            </summary>
-            <param name="name">Name of the audio file to stop playing</param>
-        </member>
         <member name="M:GWNorthEngine.Audio.BaseSoundEngine.dispose">
             <summary>
             Cleans up resources used by the SoundEngine
@@ -2040,7 +2042,7 @@
             Gets or sets the volume to play the audio at
             </summary>
         </member>
-        <member name="P:GWNorthEngine.Audio.BaseSoundEngine.Enabled">
+        <member name="P:GWNorthEngine.Audio.BaseSoundEngine.Muted">
             <summary>
             Gets or sets whether to play audio or not
             </summary>
@@ -2107,6 +2109,17 @@
         <member name="P:GWNorthEngine.Audio.SFXEngine.Pitch">
             <summary>
             Gets or sets the pitch of the sound effects
+            </summary>
+        </member>
+        <member name="T:GWNorthEngine.Audio.Params.MusicEngineParams">
+            <summary>
+            Object containing the required data to build a MusicEngine instance
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Audio.Params.MusicEngineParams.#ctor">
+            <summary>
+            Builds the default settings for setting up a MusicEngine. The default settings are listed below.
+            
             </summary>
         </member>
     </members>

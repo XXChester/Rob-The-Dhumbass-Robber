@@ -18,7 +18,7 @@ namespace Robber {
 		#region Constructor
 		public SoundManager() {
 			SFXEngineParams parms = new SFXEngineParams();
-			parms.Enabled = true;
+			parms.Muted = true;
 			this.sfxEngine = new SFXEngine(parms);
 		}
 		#endregion Constructor
