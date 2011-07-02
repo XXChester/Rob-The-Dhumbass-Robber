@@ -134,6 +134,7 @@
     <Compile Include="Managers\AIManager.cs" />
     <Compile Include="Managers\CollisionManager.cs" />
     <Compile Include="Displays\Display.cs" />
+    <Compile Include="Managers\SoundManager.cs" />
     <Compile Include="Models\Floor.cs" />
     <Compile Include="Displays\GameDisplay.cs" />
     <Compile Include="Models\Guard.cs" />
@@ -239,7 +240,7 @@
       <IncludeHash>True</IncludeHash>
       <FileType>File</FileType>
     </PublishFile>
-    <PublishFile Include="Scripts\Map1Indentifiers.DAT">
+    <PublishFile Include="Scripts\Map1Identifiers.xml">
       <Visible>False</Visible>
       <Group>
       </Group>
@@ -259,7 +260,7 @@
       <IncludeHash>True</IncludeHash>
       <FileType>File</FileType>
     </PublishFile>
-    <PublishFile Include="Scripts\Map2Indentifiers.DAT">
+    <PublishFile Include="Scripts\Map2Identifiers.xml">
       <Visible>False</Visible>
       <Group>
       </Group>
@@ -279,7 +280,7 @@
       <IncludeHash>True</IncludeHash>
       <FileType>File</FileType>
     </PublishFile>
-    <PublishFile Include="Scripts\Map3Indentifiers.DAT">
+    <PublishFile Include="Scripts\Map3Identifiers.xml">
       <Visible>False</Visible>
       <Group>
       </Group>

@@ -79,8 +79,8 @@ namespace Robber {
 		public void update(float elapsed) {
 			this.time -= elapsed;
 			if (this.time <= 0f) {
-				if (ResourceManager.PLAY_SOUND && !AIManager.getInstane().PlayerDetected) {
-					this.guardsAlertedSfx.Play();
+				if (!AIManager.getInstane().PlayerDetected) {
+					SoundManager.getInstance().sfxEngine.playSoundEffect(this.guardsAlertedSfx);
 				}
 				//Alert the authorities
 				AIManager.getInstane().PlayerDetected = true;

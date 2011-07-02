@@ -70,9 +70,7 @@ namespace Robber {
 			this.introSfx = content.Load<SoundEffect>("Introduction");
 			this.idleSfx = content.Load<SoundEffect>("Rules");
 			this.outroSfx = content.Load<SoundEffect>("WhereWeGonnaRob");
-			if (ResourceManager.PLAY_SOUND) {
-				this.introSfx.Play();
-			}
+			SoundManager.getInstance().sfxEngine.playSoundEffect(this.introSfx);
 #if WINDOWS
 #if DEBUG
 			ScriptManager.getInstance().registerObject(((ColouredButton)this.playButton).Text, "playText");
@@ -86,15 +84,13 @@ namespace Robber {
 			base.currentKeyBoardState = Keyboard.GetState();
 			base.currentMouseState = Mouse.GetState();
 			Vector2 mousePos = new Vector2(base.currentMouseState.X, base.currentMouseState.Y);
-			
+
 			this.playButton.processActorsMovement(mousePos);
 			this.exitButton.processActorsMovement(mousePos);
 			// mouse over sfx
 			if (this.playButton.isActorOver(mousePos) || this.exitButton.isActorOver(mousePos)) {
 				if (!base.previousMouseOverButton) {
-					if (ResourceManager.PLAY_SOUND) {
-						ResourceManager.getInstance().MouseOverSfx.Play();
-					}
+					SoundManager.getInstance().sfxEngine.playSoundEffect(ResourceManager.getInstance().MouseOverSfx);
 				}
 				base.previousMouseOverButton = true;
 			} else {
@@ -105,9 +101,7 @@ namespace Robber {
 					if (this.playButton.isActorOver(mousePos)) {
 						StateManager.getInstance().CurrentTransitionState = StateManager.TransitionState.TransitionOut;
 						StateManager.getInstance().CurrentGameState = StateManager.GameState.MapSelection;
-						if (ResourceManager.PLAY_SOUND) {
-							this.outroSfx.Play();
-						}
+						SoundManager.getInstance().sfxEngine.playSoundEffect(this.outroSfx);
 					} else if (this.exitButton.isActorOver(mousePos)) {
 						StateManager.getInstance().CurrentGameState = StateManager.GameState.Exit;
 					}
@@ -147,12 +141,10 @@ namespace Robber {
 					StateManager.getInstance().CurrentTransitionState = StateManager.TransitionState.TransitionIn;
 				}
 			}
-			if (ResourceManager.PLAY_SOUND) {
-				this.timeIdle += elapsed;
-				if (this.timeIdle >= PLAY_IDLE_AT) {
-					this.idleSfx.Play();
-					this.timeIdle = 0f;
-				}
+			this.timeIdle += elapsed;
+			if (this.timeIdle >= PLAY_IDLE_AT) {
+				SoundManager.getInstance().sfxEngine.playSoundEffect(this.idleSfx);
+				this.timeIdle = 0f;
 			}
 			base.update(elapsed);
 		}

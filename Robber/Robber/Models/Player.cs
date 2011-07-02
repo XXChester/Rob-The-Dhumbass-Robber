@@ -52,8 +52,8 @@ namespace Robber {
 
 
 			if (base.direction != Direction.None) {
-				if (this.footStepSFXDelay >= FOOT_STEP_SFX_DELAY && ResourceManager.PLAY_SOUND) {
-					ResourceManager.getInstance().FootStepsSfx.Play();
+				if (this.footStepSFXDelay >= FOOT_STEP_SFX_DELAY) {
+					SoundManager.getInstance().sfxEngine.playSoundEffect(ResourceManager.getInstance().FootStepsSfx);
 					this.footStepSFXDelay = 0f;
 				}
 				float moveDistance = (base.movementSpeed * elapsed);

@@ -2024,6 +2024,12 @@
             </summary>
             <param name="parms"></param>
         </member>
+        <member name="M:GWNorthEngine.Audio.BaseSoundEngine.stop(System.String)">
+            <summary>
+            Stops the specified audio from playing
+            </summary>
+            <param name="name">Name of the audio file to stop playing</param>
+        </member>
         <member name="M:GWNorthEngine.Audio.BaseSoundEngine.dispose">
             <summary>
             Cleans up resources used by the SoundEngine
@@ -2071,6 +2077,12 @@
             <param name="volume">Volume to play the sound effect at</param>
             <param name="pan">Pan to play the sound effect at</param>
             <param name="pitch">Pitch to play the sound effect at</param>
+        </member>
+        <member name="M:GWNorthEngine.Audio.SFXEngine.stop(System.String)">
+            <summary>
+            Stops all sound effects that match the name passed in and are not already stopped
+            </summary>
+            <param name="name">Name of the sound effect we are trying to stop</param>
         </member>
         <member name="M:GWNorthEngine.Audio.SFXEngine.update">
             <summary>

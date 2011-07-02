@@ -74,9 +74,7 @@ namespace Robber {
 			// mouse over sfx
 			if (this.returnToGameButton.isActorOver(mousePos) || this.exitToMainButton.isActorOver(mousePos)) {
 				if (!base.previousMouseOverButton) {
-					if (ResourceManager.PLAY_SOUND) {
-						ResourceManager.getInstance().MouseOverSfx.Play();
-					}
+						SoundManager.getInstance().sfxEngine.playSoundEffect(ResourceManager.getInstance().MouseOverSfx);
 				}
 				base.previousMouseOverButton = true;
 			} else {

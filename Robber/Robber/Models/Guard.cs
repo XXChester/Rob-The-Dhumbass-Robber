@@ -242,9 +242,7 @@ namespace Robber {
 			if (this.closestsPoint == endNode) {
 				StateManager.getInstance().CurrentGameState = StateManager.GameState.GameOver;
 				StateManager.getInstance().TypeOfGameOver = StateManager.GameOverType.Guards;
-				if (ResourceManager.PLAY_SOUND) {
-					ResourceManager.getInstance().PrisonCellSfx.Play();
-				}
+				SoundManager.getInstance().sfxEngine.playSoundEffect(ResourceManager.getInstance().PrisonCellSfx);
 			}
 			base.updateMove(elapsed);
 		}

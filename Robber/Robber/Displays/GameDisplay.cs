@@ -207,9 +207,7 @@ namespace Robber {
 				// mouse over sfx
 				if (this.startButton.isActorOver(mousePos)) {
 					if (!base.previousMouseOverButton) {
-						if (ResourceManager.PLAY_SOUND) {
-							ResourceManager.getInstance().MouseOverSfx.Play();
-						}
+						SoundManager.getInstance().sfxEngine.playSoundEffect(ResourceManager.getInstance().MouseOverSfx);
 					}
 					base.previousMouseOverButton = true;
 				} else {
@@ -227,9 +225,7 @@ namespace Robber {
 						StateManager.getInstance().CurrentGameState = StateManager.GameState.GameOver;
 						if (this.player.CapturedTreasures >= 1) {
 							StateManager.getInstance().TypeOfGameOver = StateManager.GameOverType.Player;
-							if (ResourceManager.PLAY_SOUND) {
-								this.cantTouchThisSfx.Play();
-							}
+							SoundManager.getInstance().sfxEngine.playSoundEffect(this.cantTouchThisSfx);
 						} else {
 							StateManager.getInstance().TypeOfGameOver = StateManager.GameOverType.None;
 						}
@@ -243,16 +239,12 @@ namespace Robber {
 					if (guard.BoundingBox.Intersects(this.player.BoundingBox)) {
 						StateManager.getInstance().CurrentGameState = StateManager.GameState.GameOver;
 						StateManager.getInstance().TypeOfGameOver = StateManager.GameOverType.Guards;
-						if (ResourceManager.PLAY_SOUND) {
-							ResourceManager.getInstance().PrisonCellSfx.Play();
-						}
+						SoundManager.getInstance().sfxEngine.playSoundEffect(ResourceManager.getInstance().PrisonCellSfx);
 						break;
 					} else if (guard.Ring.BoundingSphere.Intersects(this.player.BoundingBox)) {
 						// did we JUST get detected?
 						if (!AIManager.getInstane().PlayerDetected) {
-							if (ResourceManager.PLAY_SOUND) {
-								this.guardDetectedSfx.Play();
-							}
+							SoundManager.getInstance().sfxEngine.playSoundEffect(this.guardDetectedSfx);
 						}
 						AIManager.getInstane().PlayerDetected = true;
 					}
@@ -263,13 +255,11 @@ namespace Robber {
 					if (treasure.BoundingBox.Intersects(this.player.BoundingBox)) {
 						treasure.PickedUp = true;
 						this.player.CapturedTreasures++;
-						if (ResourceManager.PLAY_SOUND) {
-							if (this.payDayDelay >= DELAY_PAY_DAY_EMOTE) {
-								this.payDaySfx.Play();
-								this.payDayDelay = 0f;
-							}
-							this.treasureSfx.Play(.5f, 0f, 0f);
+						if (this.payDayDelay >= DELAY_PAY_DAY_EMOTE) {
+							SoundManager.getInstance().sfxEngine.playSoundEffect(this.payDaySfx);
+							this.payDayDelay = 0f;
 						}
+						SoundManager.getInstance().sfxEngine.playSoundEffect(this.treasureSfx, .5f);
 						break;
 					}
 				}
@@ -278,9 +268,7 @@ namespace Robber {
 				// mouse over sfx
 				if (this.replayButton.isActorOver(mousePos)) {
 					if (!base.previousMouseOverButton) {
-						if (ResourceManager.PLAY_SOUND) {
-							ResourceManager.getInstance().MouseOverSfx.Play();
-						}
+						SoundManager.getInstance().sfxEngine.playSoundEffect(ResourceManager.getInstance().MouseOverSfx);
 					}
 					base.previousMouseOverButton = true;
 				} else {
@@ -357,9 +345,7 @@ namespace Robber {
 				if (StateManager.getInstance().CurrentTransitionState == StateManager.TransitionState.TransitionIn) {
 					StateManager.getInstance().CurrentTransitionState = StateManager.TransitionState.None;
 					if (StateManager.getInstance().PreviousGameState == StateManager.GameState.MapSelection) {
-						if (ResourceManager.PLAY_SOUND) {
-							this.introSfx.Play();
-						}
+							SoundManager.getInstance().sfxEngine.playSoundEffect(this.introSfx);
 					}
 				} else if (StateManager.getInstance().CurrentTransitionState == StateManager.TransitionState.TransitionOut) {
 					if (StateManager.getInstance().CurrentGameState == StateManager.GameState.Reset) {

@@ -79,9 +79,7 @@ namespace Robber {
 			// mouse over sfx
 			if (this.exitToMainButton.isActorOver(mousePos)) {
 				if (!base.previousMouseOverButton) {
-					if (ResourceManager.PLAY_SOUND) {
-						ResourceManager.getInstance().MouseOverSfx.Play();
-					}
+					SoundManager.getInstance().sfxEngine.playSoundEffect(ResourceManager.getInstance().MouseOverSfx);
 				}
 				base.previousMouseOverButton = true;
 			} else {
@@ -89,9 +87,7 @@ namespace Robber {
 				foreach (MapSelection selection in this.mapSelections) {
 					if (selection.PreviewButton.isActorOver(mousePos)) {
 						if (!base.previousMouseOverButton) {
-							if (ResourceManager.PLAY_SOUND) {
-								ResourceManager.getInstance().MouseOverSfx.Play();
-							}
+							SoundManager.getInstance().sfxEngine.playSoundEffect(ResourceManager.getInstance().MouseOverSfx);
 						}
 						foundInLoop = true;
 						base.previousMouseOverButton = true;
@@ -114,9 +110,7 @@ namespace Robber {
 								StateManager.getInstance().CurrentGameState = StateManager.GameState.InitGame;
 								StateManager.getInstance().CurrentTransitionState = StateManager.TransitionState.TransitionOut;
 								StateManager.getInstance().MapInformation = selection.MapName;
-								if (ResourceManager.PLAY_SOUND) {
-									this.outroSfx.Play();
-								}
+								SoundManager.getInstance().sfxEngine.playSoundEffect(this.outroSfx);
 								break;
 							}
 						}
