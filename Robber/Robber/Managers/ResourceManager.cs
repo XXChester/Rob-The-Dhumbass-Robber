@@ -45,12 +45,12 @@ namespace Robber {
 		}
 
 		public void init(GraphicsDevice device, ContentManager content) {
-			this.Font = content.Load<SpriteFont>("Font");
+			this.Font = LoadingUtils.loadSpriteFont(content, "Font");
 			this.ButtonLineTexture = TextureUtils.create2DColouredTexture(device, 2, 2, Color.White);
-			this.TitleTexture = content.Load<Texture2D>("Title");
-			this.MouseOverSfx = content.Load<SoundEffect>("MouseOverButton");
-			this.FootStepsSfx = content.Load<SoundEffect>("FootSteps");
-			this.PrisonCellSfx = content.Load<SoundEffect>("CellDoor");
+			this.TitleTexture = LoadingUtils.loadTexture2D(content, "Title");
+			this.MouseOverSfx = LoadingUtils.loadSoundEffect(content, "MouseOverButton");
+			this.FootStepsSfx = LoadingUtils.loadSoundEffect(content, "FootSteps");
+			this.PrisonCellSfx = LoadingUtils.loadSoundEffect(content, "CellDoor");
 #if DEBUG
 			this.DebugChip = TextureUtils.create2DColouredTexture(device, 32, 32, Color.White);
 			this.DebugRing = TextureUtils.create2DRingTexture(device, 112, Color.White);

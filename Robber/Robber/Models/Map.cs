@@ -34,7 +34,7 @@ namespace Robber {
 			this.tiles = tiles;
 			this.HEIGHT = height;
 			this.WIDTH = width;
-			Texture2D floorTexture = content.Load<Texture2D>("BasicTile");
+			Texture2D floorTexture = LoadingUtils.loadTexture2D(content, "BasicTile");
 			this.floor = new Floor(ref HEIGHT, ref WIDTH, floorTexture, floorColour);
 		}
 		#endregion Constructor

@@ -57,13 +57,13 @@ namespace Robber {
 
 			// no preview image
 			staticParms.Position = new Vector2(20f, 100f);
-			staticParms.Texture = content.Load<Texture2D>("NoPreview");
+			staticParms.Texture = LoadingUtils.loadTexture2D(content, "NoPreview");
 			staticParms.Scale = new Vector2(.8f, .8f);
 			staticParms.LightColour = ResourceManager.TEXT_COLOUR;
 			this.noPreviewImage = new StaticDrawable2D(staticParms);
 
 			// sound effects
-			this.outroSfx = content.Load<SoundEffect>("LetsGo");
+			this.outroSfx = LoadingUtils.loadSoundEffect(content, "LetsGo");
 		}
 		#endregion Constructor
 

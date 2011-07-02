@@ -11,6 +11,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using GWNorthEngine.Model;
 using GWNorthEngine.Model.Params;
+using GWNorthEngine.Utils;
 namespace Robber {
 	public class Item {
 		#region Class variables
@@ -25,7 +26,7 @@ namespace Robber {
 		#region Constructor
 		public Item(ContentManager content, string textureName, Placement startingPlacement) {
 			StaticDrawable2DParams parms = new StaticDrawable2DParams();
-			parms.Texture = content.Load<Texture2D>(textureName);
+			parms.Texture = LoadingUtils.loadTexture2D(content, textureName);
 			parms.Position = startingPlacement.worldPosition;
 			this.image = new StaticDrawable2D(parms);
 			this.placement = startingPlacement;

@@ -44,7 +44,7 @@ namespace Robber {
 			// title
 			StaticDrawable2DParams staticParms = new StaticDrawable2DParams();
 			staticParms.Position = new Vector2(20f, 100f);
-			staticParms.Texture = content.Load<Texture2D>(mapName + "preview");
+			staticParms.Texture = LoadingUtils.loadTexture2D(content,  mapName + "preview");
 			staticParms.Scale = new Vector2(.8f, .8f);
 			this.previewImage = new StaticDrawable2D(staticParms);
 		}

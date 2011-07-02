@@ -58,7 +58,7 @@ namespace Robber {
 
 			// background
 			staticParms.Position = new Vector2(-10f, 0f);
-			staticParms.Texture = content.Load<Texture2D>("BackGround1");
+			staticParms.Texture = LoadingUtils.loadTexture2D(content, "BackGround1");
 			this.backGround = new StaticDrawable2D(staticParms);
 		}
 		#endregion Constructor

@@ -48,7 +48,7 @@ namespace Robber {
 			this.timeText = new Text2D(parms);
 			
 			//sfxs
-			this.guardsAlertedSfx = content.Load<SoundEffect>("GuardsAlerted");
+			this.guardsAlertedSfx = LoadingUtils.loadSoundEffect(content, "GuardsAlerted");
 #if WINDOWS
 #if DEBUG
 			ScriptManager.getInstance().registerObject(this.firstPart, "first");

@@ -96,7 +96,7 @@ ISSUES
 		Time
 ============================
 Planning: 2 hours
-Programming:	35.5 hours	
+Programming:	36 hours	
 Map Creation(Including creating editor via scripting engine):	5.5 hours
 Art: 5.75 hours	
 Sound:	2 hours	

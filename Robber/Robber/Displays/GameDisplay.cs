@@ -87,11 +87,11 @@ namespace Robber {
 			// loosing background
 			StaticDrawable2DParams staticParms = new StaticDrawable2DParams();
 			staticParms.Position = new Vector2(-10f, 0f);
-			staticParms.Texture = content.Load<Texture2D>("BackGround1");
+			staticParms.Texture = LoadingUtils.loadTexture2D(content, "BackGround1");
 			this.looseBackGround = new StaticDrawable2D(staticParms);
 
 			// winning background
-			staticParms.Texture = content.Load<Texture2D>("BackGround2");
+			staticParms.Texture = LoadingUtils.loadTexture2D(content, "BackGround2");
 			this.winBackGround = new StaticDrawable2D(staticParms);
 
 			// HUD
@@ -103,15 +103,15 @@ namespace Robber {
 
 			staticParms = new StaticDrawable2DParams();
 			staticParms.Position = new Vector2(325f, 573f);
-			staticParms.Texture = content.Load<Texture2D>("Treasure1");
+			staticParms.Texture = LoadingUtils.loadTexture2D(content, "Treasure1");
 			this.treasure = new StaticDrawable2D(staticParms);
 
 			// load sound effects
-			this.cantTouchThisSfx = content.Load<SoundEffect>("CantTouchThis");
-			this.introSfx = content.Load<SoundEffect>("LevelEntry");
-			this.payDaySfx = content.Load<SoundEffect>("PayDay");
-			this.treasureSfx = content.Load<SoundEffect>("TreasureCollect");
-			this.guardDetectedSfx = content.Load<SoundEffect>("Policia");
+			this.cantTouchThisSfx = LoadingUtils.loadSoundEffect(content, "CantTouchThis");
+			this.introSfx = LoadingUtils.loadSoundEffect(content, "LevelEntry");
+			this.payDaySfx = LoadingUtils.loadSoundEffect(content, "PayDay");
+			this.treasureSfx = LoadingUtils.loadSoundEffect(content, "TreasureCollect");
+			this.guardDetectedSfx = LoadingUtils.loadSoundEffect(content, "Policia");
 		}
 		#endregion Constructor
 

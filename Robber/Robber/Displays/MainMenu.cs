@@ -63,13 +63,13 @@ namespace Robber {
 
 			// background
 			staticParms.Position = new Vector2(0f, 0f);
-			staticParms.Texture = content.Load<Texture2D>("Info");
+			staticParms.Texture = LoadingUtils.loadTexture2D(content, "Info");
 			this.backGround = new StaticDrawable2D(staticParms);
 
 			// load sound effects
-			this.introSfx = content.Load<SoundEffect>("Introduction");
-			this.idleSfx = content.Load<SoundEffect>("Rules");
-			this.outroSfx = content.Load<SoundEffect>("WhereWeGonnaRob");
+			this.introSfx = LoadingUtils.loadSoundEffect(content, "Introduction");
+			this.idleSfx = LoadingUtils.loadSoundEffect(content, "Rules");
+			this.outroSfx = LoadingUtils.loadSoundEffect(content, "WhereWeGonnaRob");
 			SoundManager.getInstance().sfxEngine.playSoundEffect(this.introSfx);
 #if WINDOWS
 #if DEBUG

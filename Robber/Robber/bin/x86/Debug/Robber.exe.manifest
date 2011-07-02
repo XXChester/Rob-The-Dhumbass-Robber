@@ -112,7 +112,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>qqBTK9q6Lr1xCmA66Sq6IZZ8Ufk=</dsig:DigestValue>
+        <dsig:DigestValue>l+mIE5G/1LDlVZINCj5MNYF9Dg8=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -476,13 +476,13 @@
       <dsig:DigestValue>vWcYBoIaFN3jd+Tlbin1Mh/3p/c=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Scripts\Map1Identifiers.xml" size="2424">
+  <file name="Scripts\Map1Identifiers.xml" size="2423">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>LArHDOZrTI4IrbtFLLayzeAdPaw=</dsig:DigestValue>
+      <dsig:DigestValue>+u8VGm7ii7+NfzEdldOLsVymNFY=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Scripts\Map2.XML" size="18629">
