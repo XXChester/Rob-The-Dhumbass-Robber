@@ -8,14 +8,14 @@
     <framework targetVersion="4.0" profile="Full" supportedRuntime="4.0.30319" />
   </compatibleFrameworks>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="Robber.exe.manifest" size="24107">
+    <dependentAssembly dependencyType="install" codebase="Robber.exe.manifest" size="24011">
       <assemblyIdentity name="Robber.exe" version="1.0.0.18" publicKeyToken="0000000000000000" language="en" processorArchitecture="x86" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>PpTuP0Q6dMuzE8nJB7i/8Fp0lCg=</dsig:DigestValue>
+        <dsig:DigestValue>9Qrb64A9MeZ6qEED6DDpEbkdhFE=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

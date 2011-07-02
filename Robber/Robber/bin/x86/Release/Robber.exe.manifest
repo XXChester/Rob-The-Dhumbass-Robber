@@ -93,26 +93,26 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="GWNorthEngine.dll" size="48640">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="GWNorthEngine.dll" size="53248">
       <assemblyIdentity name="GWNorthEngine" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>C/sAZkXriWjRzxGKYFqYgA+VLvI=</dsig:DigestValue>
+        <dsig:DigestValue>Vx2i8OYJ/Jz99NJqA41tOoO6f+Q=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Robber.exe" size="48640">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Robber.exe" size="55296">
       <assemblyIdentity name="Robber" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>shRtinjY1urwi9tV7hIDK1t8XdY=</dsig:DigestValue>
+        <dsig:DigestValue>h7rc0NsaXg/VdM0brnG2TTzfg/U=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -467,58 +467,58 @@
       <dsig:DigestValue>diNvdcDpDtGEMuMQIHpkKK3qVHc=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Scripts\Map1.DAT" size="4618">
+  <file name="Scripts\Map1.XML" size="19914">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>/2src3/XyyACIq8MV6wZng/kREE=</dsig:DigestValue>
+      <dsig:DigestValue>vWcYBoIaFN3jd+Tlbin1Mh/3p/c=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Scripts\Map1Indentifiers.DAT" size="2124">
+  <file name="Scripts\Map1Identifiers.xml" size="2423">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>PMscWi52qBTTKXoivtYcSF/E3gE=</dsig:DigestValue>
+      <dsig:DigestValue>+u8VGm7ii7+NfzEdldOLsVymNFY=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Scripts\Map2.DAT" size="4312">
+  <file name="Scripts\Map2.XML" size="18629">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>q1oq4t5iz2Xf1UCQwcjviEog/G8=</dsig:DigestValue>
+      <dsig:DigestValue>dmlIb7xpJi8IPDDx/DHjAUtWfMU=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Scripts\Map2Indentifiers.DAT" size="2943">
+  <file name="Scripts\Map2Identifiers.xml" size="4691">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>urPamvp2SqRRVC2kUN4GJjKxtwU=</dsig:DigestValue>
+      <dsig:DigestValue>np9bVuNJXw0Iuv2ByRKYv0k1Ols=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Scripts\Map3.DAT" size="4312">
+  <file name="Scripts\Map3.XML" size="18512">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>wRYuFnXD47+w6RhHtZXm/ZWsbIw=</dsig:DigestValue>
+      <dsig:DigestValue>IZ1nN72WUVjKNtiuhDTgonTBQx0=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Scripts\Map3Indentifiers.DAT" size="2925">
+  <file name="Scripts\Map3Identifiers.xml" size="4690">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>6CoBELZrb7ePmN3k1US9PcU9t8k=</dsig:DigestValue>
+      <dsig:DigestValue>1cRVY2krGVqmx68/dOW/ECgNIE0=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>

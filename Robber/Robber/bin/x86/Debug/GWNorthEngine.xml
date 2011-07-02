@@ -1664,7 +1664,7 @@
             RunningMode enum
             </summary>
         </member>
-        <member name="M:GWNorthEngine.Engine.BaseRenderer.initialize(GWNorthEngine.Model.Params.BaseRendererParams)">
+        <member name="M:GWNorthEngine.Engine.BaseRenderer.initialize(GWNorthEngine.Engine.Params.BaseRendererParams)">
             <summary>
             Initializes variables based on the parms object
             </summary>
@@ -1788,58 +1788,6 @@
         <member name="P:GWNorthEngine.Model.Params.Text2DParams.WrittenText">
             <summary>
             Gets or sets the text to be written
-            </summary>
-        </member>
-        <member name="T:GWNorthEngine.Model.Params.BaseRendererParams">
-            <summary>
-            Object containing the data required to build the BaseRenderer
-            </summary>
-        </member>
-        <member name="M:GWNorthEngine.Model.Params.BaseRendererParams.#ctor">
-            <summary>
-            Builds the default settings for setting up the the BaseRenderer. The default settings are below;
-            ScreenHeight:			600
-            ScreenWidth:			800
-            MouseVisiblity:			true
-            FullScreen:				false
-            ContentRootDirectory:	"Content"
-            WindowText:				"PLEASE FILL ME IN!"
-            RunningMOdeL			Release
-            </summary>
-        </member>
-        <member name="P:GWNorthEngine.Model.Params.BaseRendererParams.ScreenWidth">
-            <summary>
-            Gets or sets the initial screen width for the game
-            </summary>
-        </member>
-        <member name="P:GWNorthEngine.Model.Params.BaseRendererParams.ScreenHeight">
-            <summary>
-            Gets or sets the initial screen height for the game
-            </summary>
-        </member>
-        <member name="P:GWNorthEngine.Model.Params.BaseRendererParams.ContentRootDirectory">
-            <summary>
-            Gets or sets the content root directory for the game
-            </summary>
-        </member>
-        <member name="P:GWNorthEngine.Model.Params.BaseRendererParams.WindowsText">
-            <summary>
-            Gets or sets the windows text for the game
-            </summary>
-        </member>
-        <member name="P:GWNorthEngine.Model.Params.BaseRendererParams.MouseVisible">
-            <summary>
-            Gets or sets whether the mouse is visible in the application
-            </summary>
-        </member>
-        <member name="P:GWNorthEngine.Model.Params.BaseRendererParams.FullScreen">
-            <summary>
-            Gets or sets whether the game will be run in full screen mode or note
-            </summary>
-        </member>
-        <member name="P:GWNorthEngine.Model.Params.BaseRendererParams.RunningMode">
-            <summary>
-            Gets or sets whether the game is running in Release or Debug mode
             </summary>
         </member>
         <member name="T:GWNorthEngine.Model.AnimationManager">
@@ -1967,6 +1915,186 @@
         <member name="P:GWNorthEngine.Model.StaticDrawable2D.Texture">
             <summary>
             Gets or sets the Texture of the static drawable object
+            </summary>
+        </member>
+        <member name="T:GWNorthEngine.Engine.Params.BaseRendererParams">
+            <summary>
+            Object containing the data required to build the BaseRenderer
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Engine.Params.BaseRendererParams.#ctor">
+            <summary>
+            Builds the default settings for setting up the the BaseRenderer. The default settings are below;
+            ScreenHeight:			600
+            ScreenWidth:			800
+            MouseVisiblity:			true
+            FullScreen:				false
+            ContentRootDirectory:	"Content"
+            WindowText:				"PLEASE FILL ME IN!"
+            RunningMOdeL			Release
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Engine.Params.BaseRendererParams.ScreenWidth">
+            <summary>
+            Gets or sets the initial screen width for the game
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Engine.Params.BaseRendererParams.ScreenHeight">
+            <summary>
+            Gets or sets the initial screen height for the game
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Engine.Params.BaseRendererParams.ContentRootDirectory">
+            <summary>
+            Gets or sets the content root directory for the game
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Engine.Params.BaseRendererParams.WindowsText">
+            <summary>
+            Gets or sets the windows text for the game
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Engine.Params.BaseRendererParams.MouseVisible">
+            <summary>
+            Gets or sets whether the mouse is visible in the application
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Engine.Params.BaseRendererParams.FullScreen">
+            <summary>
+            Gets or sets whether the game will be run in full screen mode or note
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Engine.Params.BaseRendererParams.RunningMode">
+            <summary>
+            Gets or sets whether the game is running in Release or Debug mode
+            </summary>
+        </member>
+        <member name="T:GWNorthEngine.Audio.Params.SFXEngineParams">
+            <summary>
+            Object containing the required data to build a SFXEngine instance
+            </summary>
+        </member>
+        <member name="T:GWNorthEngine.Audio.Params.BaseSoundEngineParams">
+            <summary>
+            Object containing the data required to build the BaseSoundEngine
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Audio.Params.BaseSoundEngineParams.#ctor">
+            <summary>
+            Builds the default settings for setting up a BaseSoundEngine. The default settings are listed below
+            Volume:		100%(1f)
+            Enabled:	True
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Audio.Params.BaseSoundEngineParams.Volume">
+            <summary>
+            Gets or sets the volume to play sound effects at
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Audio.Params.BaseSoundEngineParams.Enabled">
+            <summary>
+            Gets or sets whether audio is to be played
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Audio.Params.SFXEngineParams.#ctor">
+            <summary>
+            Builds the default settings for setting up a SFXEngine. The default settings are listed below.
+            Pan:		0f(Centered)
+            Pitch:		0f(Unity)
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Audio.Params.SFXEngineParams.Pan">
+            <summary>
+            Gets or sets the panning of the sound effects
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Audio.Params.SFXEngineParams.Pitch">
+            <summary>
+            Gets or sets the pitch of the sound effects
+            </summary>
+        </member>
+        <member name="T:GWNorthEngine.Audio.BaseSoundEngine">
+            <summary>
+            Base implementation of a sound engine
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Audio.BaseSoundEngine.#ctor(GWNorthEngine.Audio.Params.BaseSoundEngineParams)">
+            <summary>
+            Constructs a SoundEngine object based on the data passed in via the params object
+            </summary>
+            <param name="parms"></param>
+        </member>
+        <member name="M:GWNorthEngine.Audio.BaseSoundEngine.dispose">
+            <summary>
+            Cleans up resources used by the SoundEngine
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Audio.BaseSoundEngine.Volume">
+            <summary>
+            Gets or sets the volume to play the audio at
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Audio.BaseSoundEngine.Enabled">
+            <summary>
+            Gets or sets whether to play audio or not
+            </summary>
+        </member>
+        <member name="T:GWNorthEngine.Audio.SFXEngine">
+            <summary>
+            Sound effect engine, properly plays sound effects
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Audio.SFXEngine.#ctor(GWNorthEngine.Audio.Params.SFXEngineParams)">
+            <summary>
+            Builds a SFXEngine based on the parameter objects data
+            </summary>
+            <param name="parms">SFXEngineParams object containing the data required to build the SFXEngine</param>
+        </member>
+        <member name="M:GWNorthEngine.Audio.SFXEngine.playSoundEffect(Microsoft.Xna.Framework.Audio.SoundEffect)">
+            <summary>
+            Plays a sound effect with the generic data of the SFXEngine such as volume, etc
+            </summary>
+            <param name="sfx">SoundEffect to play</param>
+        </member>
+        <member name="M:GWNorthEngine.Audio.SFXEngine.playSoundEffect(Microsoft.Xna.Framework.Audio.SoundEffect,System.Single)">
+            <summary>
+            Plays a sound effect with a specific volume
+            </summary>
+            <param name="sfx">SoundEffect to play</param>
+            <param name="volume">Volume to play the sound effect at</param>
+        </member>
+        <member name="M:GWNorthEngine.Audio.SFXEngine.playSoundEffect(Microsoft.Xna.Framework.Audio.SoundEffect,System.Single,System.Single,System.Single)">
+            <summary>
+            Plays a sound effect at a specific volume, pan and pitch
+            </summary>
+            <param name="sfx">Sound effect to play</param>
+            <param name="volume">Volume to play the sound effect at</param>
+            <param name="pan">Pan to play the sound effect at</param>
+            <param name="pitch">Pitch to play the sound effect at</param>
+        </member>
+        <member name="M:GWNorthEngine.Audio.SFXEngine.update">
+            <summary>
+            Monitors current SoundEffectInstances and flags them for cleanup if they have finished playing
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Audio.SFXEngine.Finalize">
+            <summary>
+            Cleans up the SFXEngines resources
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Audio.SFXEngine.dispose">
+            <summary>
+            Cleans up the SFXEngines resources
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Audio.SFXEngine.Pan">
+            <summary>
+            Gets or sets the panning of the sound effects
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Audio.SFXEngine.Pitch">
+            <summary>
+            Gets or sets the pitch of the sound effects
             </summary>
         </member>
     </members>

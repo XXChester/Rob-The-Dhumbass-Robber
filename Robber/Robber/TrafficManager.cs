@@ -11,7 +11,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using GWNorthEngine.Engine;
-using GWNorthEngine.Model.Params;
+using GWNorthEngine.Engine.Params;
 using GWNorthEngine.Scripting;
 namespace Robber {
 	/// <summary>
@@ -173,6 +173,7 @@ namespace Robber {
 			this.activeDisplay.update(elapsed);
 			this.previousKeyBoardState = Keyboard.GetState();
 			this.previousMouseState = Mouse.GetState();
+			SoundManager.getInstance().update();
 			base.Update(gameTime);
 		}
 
