@@ -82,7 +82,7 @@ ISSUES
 ==========================
 []AI can sometimes walk through walls		--All the logic is correct it is just the AI is not walking down the middle of the square which it needs to
 	[*]Cleaned up a bit but needs another pass
-[]With the new manager the AI can sometimes bounce back and forth several times before actually thinking it caught the player
+[*]With the new manager the AI can sometimes bounce back and forth several times before actually thinking it caught the player
 [*]AI cannot get the player if they are against an outer wall
 [*]If you agro the AI with the new algorithm for their walking paths they will get stucks
 [*]Clicking on the Return to Main button near where the Exit button spawns will exit the game....if I get to transitions that should fix the issue

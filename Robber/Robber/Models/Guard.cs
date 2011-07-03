@@ -73,14 +73,14 @@ namespace Robber {
 			if (this.currentState == State.Patrol && !AIManager.getInstance().PlayerDetected) {
 				this.destinationWayPoint = AIManager.getInstance().getNextWayPoint(base.Placement.index, this.movementDirection);
 				AIManager.getInstance().requestPath(base.Placement.index, this.destinationWayPoint, delegate(Stack<Point> path) {
-					this.path = path;
+					this.callBackDelegate.Invoke(path);
 					if (this.path != null && this.path.Count >= 1) {
 						this.closestsPoint = this.path.Pop();
 					}
 				});
 			} else if (this.currentState == State.Chase || AIManager.getInstance().PlayerDetected) {
 				AIManager.getInstance().requestPath(base.Placement.index, delegate(Stack<Point> path) {
-					this.path = path;
+					this.callBackDelegate.Invoke(path);
 					if (this.path != null && this.path.Count >= 1) {
 						this.closestsPoint = this.path.Pop();
 					}
@@ -113,11 +113,13 @@ namespace Robber {
 			} else if (this.currentState == State.Chase) {
 				// chase should regenerate the waypoint all the time
 				if (this.closestsPoint == base.Placement.index) {
-					AIManager.getInstance().requestPath(base.Placement.index, this.callBackDelegate);
-					if (this.path.Count >= 1) {
-						this.closestsPoint = path.Pop();
-						this.foundMiddle = false;
-					}
+					AIManager.getInstance().requestPath(base.Placement.index, delegate(Stack<Point> path) {
+						this.callBackDelegate.Invoke(path);
+						if (this.path.Count >= 1) {
+							this.closestsPoint = path.Pop();
+							this.foundMiddle = false;
+						}
+					});
 				}
 			}
 		}
