@@ -33,21 +33,24 @@ namespace Robber {
 		private Point destinationWayPoint;
 		private Point closestsPoint;
 		private Stack<Point> path;
-		private Thread AIThread;
 		private MovementDirection movementDirection;
+		private bool foundMiddle;
+		private PathRequest.FoundPathCallBack callBackDelegate;
 		private const float MOVEMENT_SPEED_WALK = 60f / 1000f;
 		private const float MOVEMENT_SPEED_RUN = 155f / 1000f;
-		private bool foundMiddle;
 		#endregion Class variables
 
 		#region Class propeties
-		public bool RunAIThread { get; set; }
 		public RadiusRing Ring { get { return this.ring; } }
 		#endregion Class properties
 
 		#region Constructor
 		public Guard(ContentManager content, Placement startingLocation, string state, string movementDirection)
 			: base(content, "Guard", startingLocation, MOVEMENT_SPEED_WALK) {
+
+			this.callBackDelegate = delegate(Stack<Point> path) {
+				this.path = path;
+			};
 			// figure out our direction
 			if (movementDirection == MovementDirection.Clockwise.ToString()) {
 				this.movementDirection = MovementDirection.Clockwise;
@@ -69,20 +72,23 @@ namespace Robber {
 
 			if (this.currentState == State.Patrol && !AIManager.getInstance().PlayerDetected) {
 				this.destinationWayPoint = AIManager.getInstance().getNextWayPoint(base.Placement.index, this.movementDirection);
-				this.path = new Stack<Point>(AIManager.getInstance().findPath(base.Placement.index, this.destinationWayPoint));
-				this.closestsPoint = this.path.Pop();
+				AIManager.getInstance().requestPath(base.Placement.index, this.destinationWayPoint, delegate(Stack<Point> path) {
+					this.path = path;
+					if (this.path != null && this.path.Count >= 1) {
+						this.closestsPoint = this.path.Pop();
+					}
+				});
 			} else if (this.currentState == State.Chase || AIManager.getInstance().PlayerDetected) {
-				this.path = new Stack<Point>(AIManager.getInstance().findPath(base.Placement.index));
-				if (this.path.Count >= 1) {
-					this.closestsPoint = path.Pop();
-				}
+				AIManager.getInstance().requestPath(base.Placement.index, delegate(Stack<Point> path) {
+					this.path = path;
+					if (this.path != null && this.path.Count >= 1) {
+						this.closestsPoint = this.path.Pop();
+					}
+				});
 			} else if (this.currentState == State.Standing || this.currentState == State.NotSpawned) {
 				this.closestsPoint = new Point(-1, -1);
 			}
 			updateDirection();
-			this.RunAIThread = true;
-			this.AIThread= new Thread(new ThreadStart(generateMoves));
-			this.AIThread.Start();
 
 			this.ring = new RadiusRing(content, base.activeSprite.Position);
 		}
@@ -90,40 +96,30 @@ namespace Robber {
 
 		#region Support methods
 		private void generateMoves() {
-			do {
-				Thread.Sleep(10);
-				if (AIManager.getInstance().PlayerDetected) {
-					updateState(State.Chase);
-				}
-				lock (AIManager.getInstance().Board) {
-					// patrol can just generate the waypoint once
-					if (this.currentState == State.Patrol) {
-						if (base.Placement.index == this.destinationWayPoint) {
-							this.destinationWayPoint = AIManager.getInstance().getNextWayPoint(base.Placement.index, this.movementDirection);
-							this.path = new Stack<Point>(AIManager.getInstance().findPath(base.Placement.index, this.destinationWayPoint));
-						} else if (base.Placement.index == this.closestsPoint) {
-							if (this.path.Count >= 1 && this.foundMiddle) {
-								this.closestsPoint = path.Pop();
-							}
-						}
-					} else if (this.currentState == State.Chase) {
-						// chase should regenerate the waypoint all the time
-						if (this.closestsPoint == base.Placement.index) {
-							this.path = new Stack<Point>(AIManager.getInstance().findPath(base.Placement.index));
-							if (this.path.Count == 1) {
-								Console.WriteLine("About to capture");
-							}
-							if (this.path.Count >= 1) {
-								this.closestsPoint = path.Pop();
-								this.foundMiddle = false;
-							}
-						}
+			if (AIManager.getInstance().PlayerDetected) {
+				updateState(State.Chase);
+			}
+
+			// patrol can just generate the waypoint once
+			if (this.currentState == State.Patrol) {
+				if (base.Placement.index == this.destinationWayPoint) {
+					this.destinationWayPoint = AIManager.getInstance().getNextWayPoint(base.Placement.index, this.movementDirection);
+					AIManager.getInstance().requestPath(base.Placement.index, this.destinationWayPoint, this.callBackDelegate);
+				} else if (base.Placement.index == this.closestsPoint) {
+					if (this.path.Count >= 1 && this.foundMiddle) {
+						this.closestsPoint = path.Pop();
 					}
 				}
-				if (!this.RunAIThread) {
-					break;
+			} else if (this.currentState == State.Chase) {
+				// chase should regenerate the waypoint all the time
+				if (this.closestsPoint == base.Placement.index) {
+					AIManager.getInstance().requestPath(base.Placement.index, this.callBackDelegate);
+					if (this.path.Count >= 1) {
+						this.closestsPoint = path.Pop();
+						this.foundMiddle = false;
+					}
 				}
-			} while (this.RunAIThread);
+			}
 		}
 
 		private void updateState(State newState) {
@@ -179,6 +175,7 @@ namespace Robber {
 		}
 
 		public override void updateMove(float elapsed) {
+			generateMoves();
 			updateDirection();
 			if (base.direction != Direction.None) {
 				float moveDistance = (base.movementSpeed * elapsed);
@@ -262,8 +259,6 @@ namespace Robber {
 			if (this.ring != null) {
 				this.ring.dispose();
 			}
-			this.RunAIThread = false;
-			this.AIThread.Abort();
 			base.dispose();
 		}
 		#endregion Destructor

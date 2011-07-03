@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using Microsoft.Xna.Framework;
 using GWNorthEngine.AI.AStar;
 namespace Robber {
@@ -10,6 +11,9 @@ namespace Robber {
 		// singleton instance
 		private static AIManager instance = new AIManager();
 		private PathFinder pathFinder;
+		private Thread thread;
+		private bool running;
+		private List<PathRequest> pathRequests;
 		#endregion Class variables
 
 		#region Class properties
@@ -18,14 +22,83 @@ namespace Robber {
 		public bool PlayerDetected { get; set; }
 		#endregion Class properties
 
+		#region Constructor
+		public AIManager() {
+			this.running = true;
+			this.pathRequests = new List<PathRequest>();
+			this.thread = new Thread(new ThreadStart(requestProcessor));
+			this.thread.Start();
+		}
+		#endregion Constructor
+
 		#region Support methods
 		public static AIManager getInstance() {
 			return instance;
 		}
 
+		private void requestProcessor() {
+			do {
+				Thread.Sleep(10);
+
+				if (this.pathRequests.Count >= 1) {
+					// clone the current requests
+					Queue<PathRequest> clonedRequests = null;
+					lock (this.pathRequests) {
+						clonedRequests = new Queue<PathRequest>(this.pathRequests);
+					}
+
+					// process the requests
+					PathRequest request = null;
+					Stack<Point> path = null;
+					List<int> processedRequests = new List<int>();
+					for (int i = 0; i < clonedRequests.Count; i++) {
+						request = clonedRequests.Dequeue();
+						if (request != null) {
+							path = new Stack<Point>(findPath(request.Start, request.End));
+							request.CallBack.Invoke(path);
+						}
+						processedRequests.Add(i);
+					}
+
+					// remove the requests from the master list so we do not run them again
+					for (int i = processedRequests.Count - 1; i >= 0; i--) {
+						this.pathRequests.RemoveAt(processedRequests[i]);
+					}
+				}
+			} while (this.running);
+		}
+
+		private List<Point> findPath(Point start) {
+			Point end = findEndNode();
+			return findPath(start, end);
+		}
+
+		private List<Point> findPath(Point start, Point end) {
+			// backup the board first
+			PathFinder.TypeOfSpace previousStartSpot = this.Board[start.Y, start.X];
+			PathFinder.TypeOfSpace previousEndSpot = this.Board[end.Y, end.X];
+			this.Board[start.Y, start.X] = PathFinder.TypeOfSpace.Start;
+			this.Board[end.Y, end.X] = PathFinder.TypeOfSpace.End;
+			List<Point> path = new List<Point>();
+			this.pathFinder.findPath(this.Board);
+			path = this.pathFinder.Path;
+			// reset our pieces back
+			this.Board[start.Y, start.X] = previousStartSpot;
+			this.Board[end.Y, end.X] = previousEndSpot;
+			return path;
+		}
+
 		public void init(int height, int width) {
 			this.pathFinder = new MazeSolver(height, width);
 			this.PlayerDetected = false;
+		}
+
+		public void requestPath(Point start, PathRequest.FoundPathCallBack callBack) {
+			requestPath(start, findEndNode(), callBack);
+		}
+
+		public void requestPath(Point start, Point end,  PathRequest.FoundPathCallBack callBack) {
+			this.pathRequests.Add(new PathRequest(start, end, callBack));
 		}
 
 		public Point getNextWayPoint(Point currentWayPoint, Guard.MovementDirection movementDirection) {
@@ -54,26 +127,6 @@ namespace Robber {
 			return this.WayPoints[index];
 		}
 
-		public List<Point> findPath(Point start) {
-			Point end = findEndNode();
-			return findPath(start, end);
-		}
-
-		public List<Point> findPath(Point start, Point end) {
-			// backup the board first
-			PathFinder.TypeOfSpace previousStartSpot = this.Board[start.Y, start.X];
-			PathFinder.TypeOfSpace previousEndSpot = this.Board[end.Y, end.X];
-			this.Board[start.Y, start.X] = PathFinder.TypeOfSpace.Start;
-			this.Board[end.Y, end.X] = PathFinder.TypeOfSpace.End;
-			List<Point> path = new List<Point>();
-			this.pathFinder.findPath(this.Board);
-			path = this.pathFinder.Path;
-			// reset our pieces back
-			this.Board[start.Y, start.X] = previousStartSpot;
-			this.Board[end.Y, end.X] = previousEndSpot;
-			return path;
-		}
-
 		public Point findEndNode() {
 			Point end = new Point();
 			for (int y = 0; y <= this.Board.GetUpperBound(0); y++) {
@@ -87,5 +140,16 @@ namespace Robber {
 			return end;
 		}
 		#endregion Support methods
+
+		#region Destructor
+		~AIManager() {
+			dispose();
+		}
+
+		public void dispose() {
+			this.running = false;
+			this.thread.Abort();
+		}
+		#endregion Destructor
 	}
 }

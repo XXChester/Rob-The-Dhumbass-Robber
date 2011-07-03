@@ -51,8 +51,8 @@ Raw version of the game functional with programmer art
 []Add in random sneezing if you stand within the same tile too long
 []Put doors in
 [*]Design an algorithm for automatically generating bounding boxes
-[]Every guard gets there own AI thread ATM, this is unncessary. Change the AI manager to be single threaded and guards put a request to the manager when they need a new path
-[]Alternate flow to go from a game over state(regardless of win/loose etc) to the map selection screen
+[*]Every guard gets there own AI thread ATM, this is unncessary. Change the AI manager to be single threaded and guards put a request to the manager when they need a new path
+[]Alternate flow to go from a "game over state"(regardless of win/loose etc) to the map selection screen
 
 ============================
 	Polish(Phase 2)
@@ -82,6 +82,7 @@ ISSUES
 ==========================
 []AI can sometimes walk through walls		--All the logic is correct it is just the AI is not walking down the middle of the square which it needs to
 	[*]Cleaned up a bit but needs another pass
+[]With the new manager the AI can sometimes bounce back and forth several times before actually thinking it caught the player
 [*]AI cannot get the player if they are against an outer wall
 [*]If you agro the AI with the new algorithm for their walking paths they will get stucks
 [*]Clicking on the Return to Main button near where the Exit button spawns will exit the game....if I get to transitions that should fix the issue
@@ -91,12 +92,12 @@ ISSUES
 [*]Nasty flash when you hit replay			-caused by the reset() call
 	[]Solving this makes the score reset to the levels time before the transition out, it was either this or a nasty flash...I think the flash was a lot worse
 [*]Major bug in the tile editor, the width is padded + 1, once the editor is fixed you need to remap all 3 maps, and rip out the padding all over the code.
-
+[]Memory leak when the game goes to game over
 ============================
 		Time
 ============================
 Planning: 2 hours
-Programming:	36 hours	
+Programming:	37.75 hours
 Map Creation(Including creating editor via scripting engine):	5.5 hours
 Art: 5.75 hours	
 Sound:	2 hours	

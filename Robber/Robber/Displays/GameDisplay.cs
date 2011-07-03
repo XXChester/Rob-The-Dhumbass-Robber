@@ -117,12 +117,6 @@ namespace Robber {
 
 		#region Support methods
 		public void reset() {
-			// we need to stop our guards threads
-			if (this.guards != null) {
-				foreach (Guard guard in this.guards) {
-					guard.RunAIThread = false;
-				}
-			}
 			string mapInformation = Directory.GetCurrentDirectory() + "\\Scripts\\" + StateManager.getInstance().MapInformation;
 			CollisionManager.getInstance().MapBoundingBoxes = new List<BoundingBox>();
 
@@ -165,7 +159,7 @@ namespace Robber {
 			this.map = MapLoader.load(content, mapInformation + Constants.FILE_EXTENSION, floorColour, wallColour);
 
 			// let our AI manager know about the maps way points
-			AIManager.getInstane().WayPoints = wayPoints;
+			AIManager.getInstance().WayPoints = wayPoints;
 
 			// load player at starting point
 			this.player = new Player(this.content, new Placement(playersLocation));
@@ -243,10 +237,10 @@ namespace Robber {
 						break;
 					} else if (guard.Ring.BoundingSphere.Intersects(this.player.BoundingBox)) {
 						// did we JUST get detected?
-						if (!AIManager.getInstane().PlayerDetected) {
+						if (!AIManager.getInstance().PlayerDetected) {
 							SoundManager.getInstance().sfxEngine.playSoundEffect(this.guardDetectedSfx);
 						}
-						AIManager.getInstane().PlayerDetected = true;
+						AIManager.getInstance().PlayerDetected = true;
 					}
 					
 				}
@@ -436,7 +430,7 @@ namespace Robber {
 			if (this.showAI) {
 				for (int y = 0; y < 18; y++) {
 					for (int x = 0; x < 21; x++) {
-						if (AIManager.getInstane().Board[y, x] == PathFinder.TypeOfSpace.Unwalkable) {
+						if (AIManager.getInstance().Board[y, x] == PathFinder.TypeOfSpace.Unwalkable) {
 							spriteBatch.Draw(ResourceManager.getInstance().DebugChip, new Placement(new Point(x, y)).worldPosition, Color.Red);
 						}
 					}
@@ -494,6 +488,9 @@ namespace Robber {
 			if (this.guardDetectedSfx != null) {
 				this.guardDetectedSfx.Dispose();
 			}
+
+			// AI
+			AIManager.getInstance().dispose();
 		}
 		#endregion Destructor
 	}

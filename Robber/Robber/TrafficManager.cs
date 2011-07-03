@@ -67,6 +67,7 @@ namespace Robber {
 			this.mapSelectionMenu.dispose();
 			this.activeDisplay.dispose();
 			SoundManager.getInstance().dispose();
+			AIManager.getInstance().dispose();
 			ResourceManager.getInstance().dispose();
 			base.UnloadContent();
 		}

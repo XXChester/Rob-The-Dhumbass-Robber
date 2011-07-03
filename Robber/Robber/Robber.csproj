@@ -131,6 +131,7 @@
   <ItemGroup>
     <Compile Include="Helpers\CollisionDetectionGenerator.cs" />
     <Compile Include="Helpers\MapEditor.cs" />
+    <Compile Include="Helpers\PathRequest.cs" />
     <Compile Include="Managers\AIManager.cs" />
     <Compile Include="Managers\CollisionManager.cs" />
     <Compile Include="Displays\Display.cs" />
