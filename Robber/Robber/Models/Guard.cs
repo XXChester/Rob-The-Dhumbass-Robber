@@ -34,7 +34,6 @@ namespace Robber {
 		private Point closestsPoint;
 		private Stack<Point> path;
 		private MovementDirection movementDirection;
-		private bool foundMiddle;
 		private PathRequest.FoundPathCallBack callBackDelegate;
 		private const float MOVEMENT_SPEED_WALK = 60f / 1000f;
 		private const float MOVEMENT_SPEED_RUN = 155f / 1000f;
@@ -47,7 +46,6 @@ namespace Robber {
 		#region Constructor
 		public Guard(ContentManager content, Placement startingLocation, string state, string movementDirection)
 			: base(content, "Guard", startingLocation, MOVEMENT_SPEED_WALK) {
-
 			this.callBackDelegate = delegate(Stack<Point> path) {
 				this.path = path;
 			};
@@ -88,14 +86,13 @@ namespace Robber {
 			} else if (this.currentState == State.Standing || this.currentState == State.NotSpawned) {
 				this.closestsPoint = new Point(-1, -1);
 			}
-			updateDirection();
 
 			this.ring = new RadiusRing(content, base.activeSprite.Position);
 		}
 		#endregion Constructor
 
 		#region Support methods
-		private void generateMoves() {
+		private void generateMove() {
 			if (AIManager.getInstance().PlayerDetected) {
 				updateState(State.Chase);
 			}
@@ -106,7 +103,7 @@ namespace Robber {
 					this.destinationWayPoint = AIManager.getInstance().getNextWayPoint(base.Placement.index, this.movementDirection);
 					AIManager.getInstance().requestPath(base.Placement.index, this.destinationWayPoint, this.callBackDelegate);
 				} else if (base.Placement.index == this.closestsPoint) {
-					if (this.path.Count >= 1 && this.foundMiddle) {
+					if (this.path.Count >= 1) {
 						this.closestsPoint = path.Pop();
 					}
 				}
@@ -117,7 +114,6 @@ namespace Robber {
 						this.callBackDelegate.Invoke(path);
 						if (this.path.Count >= 1) {
 							this.closestsPoint = path.Pop();
-							this.foundMiddle = false;
 						}
 					});
 				}
@@ -138,7 +134,25 @@ namespace Robber {
 			this.currentState = newState;
 		}
 
-		private void updateDirection() {
+		private bool withinDestinationSquare() {
+			bool withinDestination = false;
+			Point temp = new Point(base.Placement.index.X - this.closestsPoint.X, base.Placement.index.Y - this.closestsPoint.Y);
+			if (temp.X == 0 && temp.Y == 0) {
+				withinDestination = true;
+			}
+			return withinDestination;
+		}
+
+		private Vector2 getMiddleOfCurrentSquare() {
+			Placement squaresPlacement = new Placement(this.closestsPoint);
+			return Vector2.Add(squaresPlacement.worldPosition, new Vector2(ResourceManager.TILE_SIZE / 2f));
+		}
+
+		private Vector2 getMiddleOfSprite() {
+			return new Vector2(this.activeSprite.Position.X, this.activeSprite.Position.Y + this.activeSprite.Origin.Y);
+		}
+
+		protected override void updateDirection(float elapsed) {
 			// figure out what direction our closests point is
 			if (this.closestsPoint.X == -1 && this.closestsPoint.Y == -1) {
 				base.direction = Direction.None;
@@ -153,22 +167,21 @@ namespace Robber {
 				} else if (temp.Y >= 1) {
 					base.direction = Direction.Up;
 				} else {
-					// need a distance check for the middle of the square
-					Placement squaresPlacement = new Placement(this.closestsPoint);
-					Vector2 middleOfSquare =
-						new Vector2(squaresPlacement.worldPosition.X + ResourceManager.TILE_SIZE / 2f, squaresPlacement.worldPosition.Y + ResourceManager.TILE_SIZE / 2f);
-					if (this.activeSprite.Position == middleOfSquare) {
-						this.foundMiddle = true;
+					Vector2 middleOfSquare = getMiddleOfCurrentSquare();
+					Vector2 middleOfSprite = getMiddleOfSprite();
+					Vector2 difference = Vector2.Subtract(middleOfSquare, middleOfSprite);
+					if (Vector2.Zero == difference) {
 						base.direction = Direction.None;
+						generateMove();
 					} else {
-						Vector2 midsDirection = new Vector2(base.activeSprite.Position.X - middleOfSquare.X, base.activeSprite.Position.Y - middleOfSquare.Y);
-						if (midsDirection.X < 0) {
-							base.direction = Direction.Right;
-						} else if (midsDirection.X > 0) {
+						// find the direction of the middle
+						if (difference.X < 0) {
 							base.direction = Direction.Left;
-						} else if (midsDirection.Y < 0) {
+						} else if (difference.X > 0) {
+							base.direction = Direction.Right;
+						} else if (difference.Y > 0) {
 							base.direction = Direction.Down;
-						} else if (midsDirection.Y > 0) {
+						} else if (difference.Y < 0) {
 							base.direction = Direction.Up;
 						}
 					}
@@ -176,65 +189,9 @@ namespace Robber {
 			}
 		}
 
-		public override void updateMove(float elapsed) {
-			generateMoves();
-			updateDirection();
-			if (base.direction != Direction.None) {
-				float moveDistance = (base.movementSpeed * elapsed);
-				int decimalPlaces = 10000;
-				// round our vector
-				float roundedY = (long)(base.activeSprite.Position.Y * decimalPlaces);
-				float roundedX = (long)(base.activeSprite.Position.X * decimalPlaces);
-				base.activeSprite.Position = new Vector2(((float)roundedX / decimalPlaces), ((float)roundedY / decimalPlaces));
-				
-				Placement squaresPlacement = new Placement(this.closestsPoint);
-				Vector2 middleOfSquare =
-						new Vector2(squaresPlacement.worldPosition.X + ResourceManager.TILE_SIZE / 2f, squaresPlacement.worldPosition.Y + ResourceManager.TILE_SIZE / 2f);
-				float x = base.activeSprite.Position.X - middleOfSquare.X;
-				long t = ((long)(x * decimalPlaces));
-				x = ((float)t / decimalPlaces);
-				float y = base.activeSprite.Position.Y - middleOfSquare.Y;
-				t = ((long)(y * decimalPlaces));
-				y = ((float)t / decimalPlaces);
-				if (x < moveDistance && x > 0) {
-					moveDistance = x;
-				} else if (-x < moveDistance && x < 0) {
-					moveDistance = -x;
-				} else if (y < moveDistance && y > 0) {
-					moveDistance = y;
-				} else if (-y < moveDistance && y < 0) {
-					moveDistance = -y;
-				}
-				Vector2 newPos;
-				if (base.direction == Direction.Up) {
-					newPos = new Vector2(base.activeSprite.Position.X, base.activeSprite.Position.Y - moveDistance);
-					//if (!CollisionManager.getInstance().wallCollisionFound(Helper.getBBox(newPos))) {
-					base.activeSprite.Position = new Vector2(base.activeSprite.Position.X, base.activeSprite.Position.Y - moveDistance);
-					//}
-				} else if (base.direction == Direction.Right) {
-					newPos = new Vector2(base.activeSprite.Position.X + moveDistance, base.activeSprite.Position.Y);
-					//if (!CollisionManager.getInstance().wallCollisionFound(Helper.getBBox(newPos))) {
-					base.activeSprite.Position = new Vector2(base.activeSprite.Position.X + moveDistance, base.activeSprite.Position.Y);
-					//}
-				} else if (base.direction == Direction.Down) {
-					newPos = new Vector2(this.activeSprite.Position.X, this.activeSprite.Position.Y + moveDistance);
-					//if (!CollisionManager.getInstance().wallCollisionFound(Helper.getBBox(newPos))) {
-					base.activeSprite.Position = new Vector2(this.activeSprite.Position.X, this.activeSprite.Position.Y + moveDistance);
-					//}
-				} else if (this.direction == Direction.Left) {
-					newPos = new Vector2(base.activeSprite.Position.X - moveDistance, base.activeSprite.Position.Y);
-					//if (!CollisionManager.getInstance().wallCollisionFound(Helper.getBBox(newPos))) {
-					base.activeSprite.Position = new Vector2(base.activeSprite.Position.X - moveDistance, base.activeSprite.Position.Y);
-					//}
-				}
-				this.ring.updatePosition(base.activeSprite.Position);
-			}
-			// update our placement and bounding box
-			base.Placement = new Placement(Placement.getIndex(base.activeSprite.Position));
-			base.BoundingBox = Helper.getBBox(base.activeSprite.Position);
+		protected override void updateLocation(float elapsed) {
+			this.ring.updatePosition(base.activeSprite.Position);
 			if (base.previousPlacement.index != base.Placement.index) {
-				AIManager.getInstance().Board[base.previousPlacement.index.Y, base.previousPlacement.index.X] = base.previousTypeOfSpace;
-				base.previousTypeOfSpace = AIManager.getInstance().Board[base.Placement.index.Y, base.Placement.index.X];
 				AIManager.getInstance().Board[base.Placement.index.Y, base.Placement.index.X] = PathFinder.TypeOfSpace.Unwalkable;
 			}
 			Point endNode = AIManager.getInstance().findEndNode();
@@ -243,7 +200,55 @@ namespace Robber {
 				StateManager.getInstance().TypeOfGameOver = StateManager.GameOverType.Guards;
 				SoundManager.getInstance().sfxEngine.playSoundEffect(ResourceManager.getInstance().PrisonCellSfx);
 			}
-			base.updateMove(elapsed);
+
+			if (this.direction != Direction.None) {
+				float moveDistanceX = (this.movementSpeed * elapsed);
+				float moveDistanceY = (this.movementSpeed * elapsed);
+				if (withinDestinationSquare()) {
+					// check if the center is less of a distance than the default via the elapsed * moevment speed
+					Vector2 currentSquaresMid = getMiddleOfCurrentSquare();
+					Vector2 middleOfSprite = getMiddleOfSprite();
+					Vector2 max = Vector2.Max(currentSquaresMid, middleOfSprite);
+					Vector2 min = Vector2.Min(currentSquaresMid, middleOfSprite);
+					Vector2 difference = Vector2.Subtract(max, min);
+
+					if (base.direction == Direction.Up) {
+						if (difference.Y < moveDistanceY) {
+							moveDistanceY = difference.Y;
+						}
+					} else if (base.direction == Direction.Down) {
+						if (difference.Y < moveDistanceY) {
+							moveDistanceY = difference.Y;
+						}
+					} else if (base.direction == Direction.Left) {
+						if (difference.X < moveDistanceX) {
+							moveDistanceX = difference.X;
+						}
+					} else if (base.direction == Direction.Right) {
+						if (difference.X < moveDistanceX) {
+							moveDistanceX = difference.X;
+						}
+					}
+				}
+				Vector2 newPos = base.activeSprite.Position;
+				if (this.direction == Direction.Up) {
+					newPos = new Vector2(this.activeSprite.Position.X, this.activeSprite.Position.Y - moveDistanceY);
+				} else if (this.direction == Direction.Right) {
+					newPos = new Vector2(this.activeSprite.Position.X + moveDistanceX, this.activeSprite.Position.Y);
+				} else if (this.direction == Direction.Down) {
+					newPos = new Vector2(this.activeSprite.Position.X, this.activeSprite.Position.Y + moveDistanceY);
+				} else if (this.direction == Direction.Left) {
+					newPos = new Vector2(this.activeSprite.Position.X - moveDistanceX, this.activeSprite.Position.Y);
+				}
+				base.activeSprite.Position = newPos;
+			}
+
+			// call the generic code before continuing
+			base.updateLocation(elapsed);
+
+			if (this.previousPlacement.index != this.Placement.index) {
+				AIManager.getInstance().Board[this.Placement.index.Y, this.Placement.index.X] = PathFinder.TypeOfSpace.Unwalkable;
+			}
 		}
 
 		public new void render(SpriteBatch spriteBatch) {
@@ -253,6 +258,13 @@ namespace Robber {
 #endif
 			
 			base.render(spriteBatch);
+#if DEBUG
+			Vector2 sp = getMiddleOfSprite();
+			Vector2 start = Vector2.Subtract(sp, new Vector2(2f));
+			Vector2 end = Vector2.Add(sp, new Vector2(2f));
+			BoundingBox bbox = Helper.getBBox(start, end);
+			DebugUtils.drawBoundingBox(spriteBatch, bbox, Color.Yellow, ResourceManager.getInstance().ButtonLineTexture);
+#endif
 		}
 		#endregion Support methods
 

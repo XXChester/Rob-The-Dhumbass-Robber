@@ -289,6 +289,7 @@ namespace Robber {
 			}
 
 			// Transitions
+			#region Transitions
 			if (StateManager.getInstance().CurrentTransitionState == StateManager.TransitionState.TransitionIn) {
 				Color colour = base.fadeIn(Color.White);
 				this.looseBackGround.LightColour = colour;
@@ -358,12 +359,16 @@ namespace Robber {
 					StateManager.getInstance().CurrentTransitionState = StateManager.TransitionState.TransitionOut;
 				}
 			}
+			#endregion Transitions
 			this.payDayDelay += elapsed;
 #if DEBUG
 			if (base.currentKeyBoardState.IsKeyDown(Keys.D1) && base.previousKeyBoardState.IsKeyUp(Keys.D1)) {
 				this.showAI = !this.showAI;
 			} else if (base.currentKeyBoardState.IsKeyDown(Keys.D2) && base.previousKeyBoardState.IsKeyUp(Keys.D2)) {
 				this.showCD = !this.showCD;
+			} else if (base.currentKeyBoardState.IsKeyDown(Keys.R) && base.previousKeyBoardState.IsKeyUp(Keys.R)) {
+				StateManager.getInstance().CurrentGameState = StateManager.GameState.Waiting;
+				reset();
 			}
 			// map editor
 			MapEditor.getInstance().update();

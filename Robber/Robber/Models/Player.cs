@@ -33,7 +33,7 @@ namespace Robber {
 		#endregion Constructor
 
 		#region Support methods
-		public override void updateMove(float elapsed) {
+		protected override void updateDirection(float elapsed) {
 			if (this.currentKeyBoardState.IsKeyDown(Keys.Left)) {
 				base.direction = Person.Direction.Left;
 			} else if (this.currentKeyBoardState.IsKeyDown(Keys.Up)) {
@@ -46,54 +46,46 @@ namespace Robber {
 				// if none of our direction keys are down than we are not moving
 				if (base.previousKeyBoardState.IsKeyDown(Keys.Left) || base.previousKeyBoardState.IsKeyDown(Keys.Up) || base.previousKeyBoardState.IsKeyDown(Keys.Right) ||
 					base.previousKeyBoardState.IsKeyDown(Keys.Down)) {
-						base.direction = Person.Direction.None;
+					base.direction = Person.Direction.None;
 				}
 			}
-
-
+			
+			//play movement sfx
 			if (base.direction != Direction.None) {
 				if (this.footStepSFXDelay >= FOOT_STEP_SFX_DELAY) {
 					SoundManager.getInstance().sfxEngine.playSoundEffect(ResourceManager.getInstance().FootStepsSfx);
 					this.footStepSFXDelay = 0f;
 				}
-				float moveDistance = (base.movementSpeed * elapsed);
-				Vector2 newPos;
-				if (base.direction == Direction.Up) {
-					newPos = new Vector2(base.activeSprite.Position.X, base.activeSprite.Position.Y - moveDistance);
-					if (!CollisionManager.getInstance().wallCollisionFound(Helper.getBBox(newPos))) {
-						base.activeSprite.Position = new Vector2(base.activeSprite.Position.X, base.activeSprite.Position.Y - moveDistance);
-					}
-				} else if (base.direction == Direction.Right) {
-					newPos = new Vector2(base.activeSprite.Position.X + moveDistance, base.activeSprite.Position.Y);
-					if (!CollisionManager.getInstance().wallCollisionFound(Helper.getBBox(newPos))) {
-						base.activeSprite.Position = new Vector2(base.activeSprite.Position.X + moveDistance, base.activeSprite.Position.Y);
-					}
-				} else if (base.direction == Direction.Down) {
+			}
+			this.footStepSFXDelay += elapsed;
+		}
+
+		protected override void updateLocation(float elapsed) {
+			if (this.direction != Direction.None) {
+				float moveDistance = (this.movementSpeed * elapsed);
+				Vector2 newPos = this.activeSprite.Position;
+				if (this.direction == Direction.Up) {
+					newPos = new Vector2(this.activeSprite.Position.X, this.activeSprite.Position.Y - moveDistance);
+				} else if (this.direction == Direction.Right) {
+					newPos = new Vector2(this.activeSprite.Position.X + moveDistance, this.activeSprite.Position.Y);
+				} else if (this.direction == Direction.Down) {
 					newPos = new Vector2(this.activeSprite.Position.X, this.activeSprite.Position.Y + moveDistance);
-					if (!CollisionManager.getInstance().wallCollisionFound(Helper.getBBox(newPos))) {
-						this.activeSprite.Position = new Vector2(this.activeSprite.Position.X, this.activeSprite.Position.Y + moveDistance);
-					}
 				} else if (this.direction == Direction.Left) {
-					newPos = new Vector2(base.activeSprite.Position.X - moveDistance, base.activeSprite.Position.Y);
-					if (!CollisionManager.getInstance().wallCollisionFound(Helper.getBBox(newPos))) {
-						base.activeSprite.Position = new Vector2(base.activeSprite.Position.X - moveDistance, base.activeSprite.Position.Y);
-					}
+					newPos = new Vector2(this.activeSprite.Position.X - moveDistance, this.activeSprite.Position.Y);
+				}
+				// check if the new position would result in a collision, if not, assign the sprite the position
+				if (!CollisionManager.getInstance().wallCollisionFound(Helper.getBBox(newPos))) {
+					this.activeSprite.Position = newPos;
 				}
 			}
-			// update our placement and bounding box
-			base.Placement = new Placement(Placement.getIndex(base.activeSprite.Position));
-			base.BoundingBox = Helper.getBBox(base.activeSprite.Position);
 			
-			if (base.previousPlacement.index != base.Placement.index) {
-				AIManager.getInstance().Board[base.previousPlacement.index.Y, base.previousPlacement.index.X] = base.previousTypeOfSpace;
-				base.previousTypeOfSpace = AIManager.getInstance().Board[base.Placement.index.Y, base.Placement.index.X];
-			}
+			// call the generic code before continuing
+			base.updateLocation(elapsed);
+
 			if (AIManager.getInstance().PlayerDetected) {// if we aren't moving we still need to report where we are if we are detected
 				// if we have been detected we need to tell the AI where we are
 				AIManager.getInstance().Board[base.Placement.index.Y, base.Placement.index.X] = PathFinder.TypeOfSpace.End;
 			}
-			this.footStepSFXDelay += elapsed;
-			base.updateMove(elapsed);
 		}
 		#endregion Support methods
 

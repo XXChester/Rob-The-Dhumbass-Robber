@@ -53,6 +53,9 @@ Raw version of the game functional with programmer art
 [*]Design an algorithm for automatically generating bounding boxes
 [*]Every guard gets there own AI thread ATM, this is unncessary. Change the AI manager to be single threaded and guards put a request to the manager when they need a new path
 []Alternate flow to go from a "game over state"(regardless of win/loose etc) to the map selection screen
+[*]Guards and player actually start in the middle of their square, not on the left edge in the middle
+[*]Rewrite guard movement code, it is a giant mess from the competition and only works for left/right movement (in the sense of walking down the missle of a tile)
+[]Write an input manager
 
 ============================
 	Polish(Phase 2)
@@ -80,8 +83,9 @@ Replace the programmer art with less crappy programmer art and make the game not
 ===========================
 ISSUES
 ==========================
-[]AI can sometimes walk through walls		--All the logic is correct it is just the AI is not walking down the middle of the square which it needs to
+[*]AI can sometimes walk through walls		--All the logic is correct it is just the AI is not walking down the middle of the square which it needs to
 	[*]Cleaned up a bit but needs another pass
+	-What a nightmare this was, there were a couple MAJOR bugs in the code. In total between during competition trying to fix this and post-comp probably spent about 10 hours debugging it
 [*]With the new manager the AI can sometimes bounce back and forth several times before actually thinking it caught the player
 [*]AI cannot get the player if they are against an outer wall
 [*]If you agro the AI with the new algorithm for their walking paths they will get stucks
@@ -97,7 +101,7 @@ ISSUES
 		Time
 ============================
 Planning: 2 hours
-Programming:	37.75 hours
+Programming:	41 hours	
 Map Creation(Including creating editor via scripting engine):	5.5 hours
 Art: 5.75 hours	
 Sound:	2 hours	

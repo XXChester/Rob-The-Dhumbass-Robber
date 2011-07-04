@@ -56,25 +56,25 @@ namespace Robber {
 			spriteParams.LoadingType = Animated2DSprite.LoadingType.WholeSheetReadFramesFromFile;
 			spriteParams.TexturesName = fileStartsWith + "Right";
 			spriteParams.AnimationParams = animationParams; ;
-			spriteParams.Position = startingLocation.worldPosition;
+			// we actually want his feet in the middle, not his chest which is where the origin is
+			spriteParams.Position = new Vector2(startingLocation.worldPosition.X + spriteParams.Origin.X, startingLocation.worldPosition.Y);
 			this.rightSprite = new Animated2DSprite(spriteParams);
 			spriteParams.SpriteEffect = SpriteEffects.FlipHorizontally;
 			this.leftSprite = new Animated2DSprite(spriteParams);
 			this.Placement = startingLocation;
 			this.direction = Direction.None;
 			this.movementSpeed = movementSpeed;
-			this.BoundingBox = Helper.getBBox(this.Placement.worldPosition);
 			this.activeSprite = this.rightSprite;
+			this.BoundingBox = Helper.getBBox(this.activeSprite.Position);
 			this.previousTypeOfSpace = AIManager.getInstance().Board[this.Placement.index.Y, this.Placement.index.X];
 		}
 		#endregion Constructor
 
 		#region Support methods
-		public void updateColours(Color colour) {
-			this.activeSprite.LightColour = colour;
-		}
+		protected abstract void updateDirection(float elapsed);
 
-		public virtual void updateMove(float elapsed) {
+		protected virtual void updateSpritesVisuals(float elapsed) {
+			updateDirection(elapsed);
 			if (this.previousDirection != this.direction) {
 				if (this.direction == Direction.None) {
 					// we are no longer moving so stop our sprite
@@ -128,12 +128,28 @@ namespace Robber {
 			}
 		}
 
+		protected virtual void updateLocation(float elapsed) {
+			// update our placement and bounding box
+			this.Placement = new Placement(Placement.getIndex(this.activeSprite.Position));
+			this.BoundingBox = Helper.getBBox(this.activeSprite.Position);
+
+			if (this.previousPlacement.index != this.Placement.index) {
+				AIManager.getInstance().Board[this.previousPlacement.index.Y, this.previousPlacement.index.X] = this.previousTypeOfSpace;
+				this.previousTypeOfSpace = AIManager.getInstance().Board[this.Placement.index.Y, this.Placement.index.X];
+			}
+		}
+
+		public void updateColours(Color colour) {
+			this.activeSprite.LightColour = colour;
+		}
+
 		public void update(float elapsed) {
 			this.currentKeyBoardState = Keyboard.GetState();
 			if (this.activeSprite != null) {
 				this.activeSprite.update(elapsed);
 			}
-			updateMove(elapsed);
+			updateSpritesVisuals(elapsed);
+			updateLocation(elapsed);
 			this.previousDirection = this.direction;
 			this.previousKeyBoardState = this.currentKeyBoardState;
 			this.previousPlacement = this.Placement;
