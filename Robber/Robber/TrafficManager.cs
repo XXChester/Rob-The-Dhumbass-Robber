@@ -24,6 +24,7 @@ namespace Robber {
 		private Display inGameMenu;
 		private Display activeDisplay;
 		private Display mapSelectionMenu;
+		private Display gameOverDisplay;
 		private KeyboardState previousKeyBoardState;
 		private MouseState previousMouseState;
 
@@ -54,6 +55,11 @@ namespace Robber {
 			this.inGameMenu = new InGameMenu(Content);
 			this.gameDisplay = new GameDisplay(Content);
 			this.mapSelectionMenu = new MapSeletMenu(Content);
+			this.gameOverDisplay = new GameOverMenu(Content, delegate() {
+				return ((GameDisplay)this.gameDisplay).Score;
+			}, delegate() {
+				((GameDisplay)this.gameDisplay).reset();
+			});
 		}
 
 		/// <summary>
@@ -65,6 +71,7 @@ namespace Robber {
 			this.mainMenu.dispose();
 			this.inGameMenu.dispose();
 			this.mapSelectionMenu.dispose();
+			this.gameOverDisplay.dispose();
 			this.activeDisplay.dispose();
 			SoundManager.getInstance().dispose();
 			AIManager.getInstance().dispose();
@@ -83,19 +90,20 @@ namespace Robber {
 #endif
 
 			// Allows the game to exit
-				 if (StateManager.getInstance().CurrentGameState == StateManager.GameState.MainMenu) {
-					if (Keyboard.GetState().IsKeyDown(Keys.Escape) && this.previousKeyBoardState.IsKeyUp(Keys.Escape)) {
-						this.Exit();
-					}
-				 } else if (StateManager.getInstance().CurrentGameState == StateManager.GameState.Exit) {
-					 this.Exit();
-				 }
-			
+			if (StateManager.getInstance().CurrentGameState == StateManager.GameState.MainMenu) {
+				if (Keyboard.GetState().IsKeyDown(Keys.Escape) && this.previousKeyBoardState.IsKeyUp(Keys.Escape)) {
+					this.Exit();
+				}
+			} else if (StateManager.getInstance().CurrentGameState == StateManager.GameState.Exit) {
+				this.Exit();
+			}
+
 			// Transition code
+			#region Transitions
 			if (StateManager.getInstance().CurrentGameState == StateManager.GameState.MainMenu) {
 				if (StateManager.getInstance().PreviousGameState == StateManager.GameState.MainMenu &&
 					StateManager.getInstance().CurrentTransitionState == StateManager.TransitionState.TransitionOut) {
-						this.activeDisplay = this.mainMenu;
+					this.activeDisplay = this.mainMenu;
 				} else if (StateManager.getInstance().PreviousGameState == StateManager.GameState.InGameMenu &&
 					StateManager.getInstance().CurrentTransitionState == StateManager.TransitionState.TransitionIn) {
 					this.activeDisplay = this.mainMenu;
@@ -104,18 +112,18 @@ namespace Robber {
 					this.activeDisplay = this.inGameMenu;
 				} else if (StateManager.getInstance().PreviousGameState == StateManager.GameState.MapSelection &&
 					StateManager.getInstance().CurrentTransitionState == StateManager.TransitionState.TransitionOut) {
-						this.activeDisplay = this.mapSelectionMenu;
+					this.activeDisplay = this.mapSelectionMenu;
 				} else {
 					this.activeDisplay = this.mainMenu;
 				}
-			} else  if (StateManager.getInstance().CurrentGameState == StateManager.GameState.Waiting || 
+			} else if (StateManager.getInstance().CurrentGameState == StateManager.GameState.Waiting ||
 				StateManager.getInstance().CurrentGameState == StateManager.GameState.Active) {
 				if (StateManager.getInstance().PreviousGameState == StateManager.GameState.MapSelection &&
 					StateManager.getInstance().CurrentTransitionState == StateManager.TransitionState.TransitionIn) {
-						this.activeDisplay = this.gameDisplay;
+					this.activeDisplay = this.gameDisplay;
 				} else if (StateManager.getInstance().PreviousGameState == StateManager.GameState.MapSelection &&
 					StateManager.getInstance().CurrentTransitionState == StateManager.TransitionState.TransitionOut) {
-						this.activeDisplay = this.mapSelectionMenu;
+					this.activeDisplay = this.mapSelectionMenu;
 				} else if (StateManager.getInstance().PreviousGameState == StateManager.GameState.Active &&
 					StateManager.getInstance().CurrentTransitionState == StateManager.TransitionState.TransitionOut) {
 					this.activeDisplay = this.mainMenu;
@@ -157,8 +165,25 @@ namespace Robber {
 				if (StateManager.getInstance().PreviousGameState == StateManager.GameState.MainMenu &&
 					StateManager.getInstance().CurrentTransitionState == StateManager.TransitionState.TransitionOut) {
 					this.activeDisplay = this.mainMenu;
+				} else if (StateManager.getInstance().PreviousGameState == StateManager.GameState.GameOver &&
+					StateManager.getInstance().CurrentTransitionState == StateManager.TransitionState.TransitionOut) {
+						this.activeDisplay = this.gameOverDisplay;
 				} else {
 					this.activeDisplay = this.mapSelectionMenu;
+				}
+			} else if (StateManager.getInstance().CurrentGameState == StateManager.GameState.GameOver) {
+				if (StateManager.getInstance().PreviousGameState == StateManager.GameState.Active &&
+					StateManager.getInstance().CurrentTransitionState == StateManager.TransitionState.TransitionOut) {
+						this.activeDisplay = this.gameDisplay;
+				} else {
+					this.activeDisplay = this.gameOverDisplay;
+				}
+			} else if (StateManager.getInstance().CurrentGameState == StateManager.GameState.Reset) {
+				if (StateManager.getInstance().PreviousGameState == StateManager.GameState.GameOver &&
+					StateManager.getInstance().CurrentTransitionState == StateManager.TransitionState.TransitionOut) {
+					this.activeDisplay = this.gameOverDisplay;
+				} else {
+					this.activeDisplay = this.gameDisplay;
 				}
 			} else {
 				if (StateManager.getInstance().CurrentGameState == StateManager.GameState.InitGame) {
@@ -170,6 +195,7 @@ namespace Robber {
 					this.activeDisplay = this.gameDisplay;
 				}
 			}
+			#endregion Transitions
 
 			float elapsed = gameTime.ElapsedGameTime.Milliseconds;
 			this.activeDisplay.update(elapsed);

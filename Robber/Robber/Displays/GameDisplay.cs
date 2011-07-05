@@ -24,13 +24,9 @@ namespace Robber {
 		private Player player;
 		private Person[] guards;
 		private Treasure[] treasures;
-		private ColouredButton replayButton;
 		private ColouredButton startButton;
 		private Timer timer;
 		private List<Point> entryExitPoints;
-		private Text2D gameOverText;
-		private StaticDrawable2D winBackGround;
-		private StaticDrawable2D looseBackGround;
 		private Text2D treasureText;
 		private StaticDrawable2D treasure;
 		private SoundEffect cantTouchThisSfx;
@@ -49,7 +45,7 @@ namespace Robber {
 		#endregion Class variables
 
 		#region Class propeties
-
+		public float Score { get { return (this.player.CapturedTreasures * 100 + this.timer.Time); } }
 		#endregion Class properties
 
 		#region Constructor
@@ -57,7 +53,6 @@ namespace Robber {
 			this.content = content;
 			this.timer = new Timer(content);
 
-			// replay button
 			ColouredButtonParams buttonParms = new ColouredButtonParams();
 			buttonParms.Font = ResourceManager.getInstance().Font;
 			buttonParms.Height = 25;
@@ -66,33 +61,12 @@ namespace Robber {
 			buttonParms.RegularColour = ResourceManager.TEXT_COLOUR;
 			buttonParms.StartX = 693;
 			buttonParms.Width = 75;
-
-			// play button
 			buttonParms.StartY = 557;
-			buttonParms.Text = "Replay";
-			buttonParms.TextsPosition = new Vector2(698f, buttonParms.StartY - 2f);
-			this.replayButton = new ColouredButton(buttonParms);
 
 			// start button
 			buttonParms.Text = "Start";
 			buttonParms.TextsPosition = new Vector2(704f, buttonParms.StartY - 2f);
 			this.startButton = new ColouredButton(buttonParms);
-
-			// game over text
-			Text2DParams textParams = new Text2DParams();
-			textParams.Font = ResourceManager.getInstance().Font;
-			textParams.Position = new Vector2(200f, 50f);
-			this.gameOverText = new Text2D(textParams);
-
-			// loosing background
-			StaticDrawable2DParams staticParms = new StaticDrawable2DParams();
-			staticParms.Position = new Vector2(-10f, 0f);
-			staticParms.Texture = LoadingUtils.loadTexture2D(content, "BackGround1");
-			this.looseBackGround = new StaticDrawable2D(staticParms);
-
-			// winning background
-			staticParms.Texture = LoadingUtils.loadTexture2D(content, "BackGround2");
-			this.winBackGround = new StaticDrawable2D(staticParms);
 
 			// HUD
 			Text2DParams textParms = new Text2DParams();
@@ -101,6 +75,7 @@ namespace Robber {
 			textParms.Position = new Vector2(350f, 575f);
 			this.treasureText = new Text2D(textParms);
 
+			StaticDrawable2DParams staticParms = new StaticDrawable2DParams();
 			staticParms = new StaticDrawable2DParams();
 			staticParms.Position = new Vector2(325f, 573f);
 			staticParms.Texture = LoadingUtils.loadTexture2D(content, "Treasure1");
@@ -257,44 +232,12 @@ namespace Robber {
 						break;
 					}
 				}
-			} else if (StateManager.getInstance().CurrentGameState == StateManager.GameState.GameOver) {
-				this.replayButton.processActorsMovement(mousePos);
-				// mouse over sfx
-				if (this.replayButton.isActorOver(mousePos)) {
-					if (!base.previousMouseOverButton) {
-						SoundManager.getInstance().sfxEngine.playSoundEffect(ResourceManager.getInstance().MouseOverSfx);
-					}
-					base.previousMouseOverButton = true;
-				} else {
-					base.previousMouseOverButton = false;
-				}
-				if (base.currentMouseState.LeftButton == ButtonState.Pressed && base.prevousMouseState.LeftButton == ButtonState.Released) {
-					if (this.replayButton.isActorOver(mousePos)) {
-						StateManager.getInstance().CurrentGameState = StateManager.GameState.Reset;
-						StateManager.getInstance().CurrentTransitionState = StateManager.TransitionState.TransitionOut;
-						reset();
-						Console.WriteLine("Reset");
-					}
-				}
-				if (StateManager.getInstance().TypeOfGameOver == StateManager.GameOverType.Guards) {
-					this.gameOverText.Position = new Vector2(200f, this.gameOverText.Position.Y);
-					this.gameOverText.WrittenText = "You loose; you have to be quick";
-				} else if (StateManager.getInstance().TypeOfGameOver == StateManager.GameOverType.Player) {
-					this.gameOverText.Position = new Vector2(125f, this.gameOverText.Position.Y);
-					this.gameOverText.WrittenText = "Congratulations you won, you score is " + this.player.CapturedTreasures * 100 + this.timer.Time;
-				} else if (StateManager.getInstance().TypeOfGameOver == StateManager.GameOverType.None) {
-					this.gameOverText.Position = new Vector2(75f, this.gameOverText.Position.Y);
-					this.gameOverText.WrittenText = "You loose, you need to capture at least 1 piece of treasure";
-				}
 			}
 
 			// Transitions
 			#region Transitions
 			if (StateManager.getInstance().CurrentTransitionState == StateManager.TransitionState.TransitionIn) {
 				Color colour = base.fadeIn(Color.White);
-				this.looseBackGround.LightColour = colour;
-				this.winBackGround.LightColour = colour;
-				this.gameOverText.LightColour = colour;
 				this.map.updateColours(base.fadeIn(this.map.FloorColour), base.fadeIn(this.map.WallColour));
 				foreach (Treasure treasure in this.treasures) {
 					treasure.updateColours(colour);
@@ -305,17 +248,11 @@ namespace Robber {
 				}
 				this.timer.updateColours(base.fadeIn(ResourceManager.TEXT_COLOUR));
 				this.startButton.updateColours(base.fadeIn(ResourceManager.TEXT_COLOUR));
-				this.replayButton.updateColours(base.fadeIn(ResourceManager.TEXT_COLOUR));
 				if (this.startButton.isActorOver(mousePos)) {
 					this.startButton.updateColours(base.fadeIn(ResourceManager.MOUSE_OVER_COLOUR));
-				} else if (this.replayButton.isActorOver(mousePos)) {
-					this.replayButton.updateColours(base.fadeIn(ResourceManager.MOUSE_OVER_COLOUR));
 				}
 			} else if (StateManager.getInstance().CurrentTransitionState == StateManager.TransitionState.TransitionOut) {
 				Color colour = base.fadeOut(Color.White);
-				this.looseBackGround.LightColour = colour;
-				this.winBackGround.LightColour = colour;
-				this.gameOverText.LightColour = colour;
 				this.map.updateColours(base.fadeOut(this.map.FloorColour), base.fadeOut(this.map.WallColour));
 				foreach (Treasure treasure in this.treasures) {
 					treasure.updateColours(colour);
@@ -327,11 +264,8 @@ namespace Robber {
 				this.timer.updateColours(base.fadeOut(ResourceManager.TEXT_COLOUR));
 
 				this.startButton.updateColours(base.fadeOut(ResourceManager.TEXT_COLOUR));
-				this.replayButton.updateColours(base.fadeOut(ResourceManager.TEXT_COLOUR));
 				if (this.startButton.isActorOver(mousePos)) {
 					this.startButton.updateColours(base.fadeOut(ResourceManager.MOUSE_OVER_COLOUR));
-				} else if (this.replayButton.isActorOver(mousePos)) {
-					this.replayButton.updateColours(base.fadeOut(ResourceManager.MOUSE_OVER_COLOUR));
 				}
 			}
 
@@ -342,11 +276,8 @@ namespace Robber {
 					if (StateManager.getInstance().PreviousGameState == StateManager.GameState.MapSelection) {
 							SoundManager.getInstance().sfxEngine.playSoundEffect(this.introSfx);
 					}
+					StateManager.getInstance().CurrentGameState = StateManager.GameState.Waiting;
 				} else if (StateManager.getInstance().CurrentTransitionState == StateManager.TransitionState.TransitionOut) {
-					if (StateManager.getInstance().CurrentGameState == StateManager.GameState.Reset) {
-						//reset();
-						StateManager.getInstance().CurrentGameState = StateManager.GameState.Waiting;
-					}
 					StateManager.getInstance().CurrentTransitionState = StateManager.TransitionState.TransitionIn;
 				}
 			}
@@ -377,12 +308,6 @@ namespace Robber {
 		}
 
 		public override void render(SpriteBatch spriteBatch) {
-			if (StateManager.getInstance().CurrentGameState == StateManager.GameState.Active ||
-				StateManager.getInstance().CurrentGameState == StateManager.GameState.Waiting || (
-				StateManager.getInstance().CurrentGameState == StateManager.GameState.InGameMenu && 
-				StateManager.getInstance().CurrentTransitionState == StateManager.TransitionState.TransitionOut) ||
-				(StateManager.getInstance().CurrentGameState == StateManager.GameState.GameOver &&
-				StateManager.getInstance().CurrentTransitionState == StateManager.TransitionState.TransitionOut)) {
 				this.map.render(spriteBatch);
 				this.treasureText.render(spriteBatch);
 				this.treasure.render(spriteBatch);
@@ -394,26 +319,9 @@ namespace Robber {
 					guard.render(spriteBatch);
 				}
 				this.timer.render(spriteBatch);
-				if (StateManager.getInstance().CurrentGameState == StateManager.GameState.Waiting ||
-					(StateManager.getInstance().CurrentGameState == StateManager.GameState.InGameMenu &&
-					StateManager.getInstance().CurrentTransitionState == StateManager.TransitionState.TransitionOut) &&
-					StateManager.getInstance().PreviousGameState == StateManager.GameState.Waiting) {
+				if (StateManager.getInstance().CurrentGameState == StateManager.GameState.Reset || StateManager.getInstance().CurrentGameState == StateManager.GameState.Waiting) {
 					this.startButton.render(spriteBatch);
 				}
-			} else if (StateManager.getInstance().CurrentGameState == StateManager.GameState.GameOver ||
-				StateManager.getInstance().CurrentGameState == StateManager.GameState.Reset &&
-				StateManager.getInstance().CurrentTransitionState == StateManager.TransitionState.TransitionOut) {
-				if (StateManager.getInstance().TypeOfGameOver == StateManager.GameOverType.Guards ||
-					StateManager.getInstance().TypeOfGameOver == StateManager.GameOverType.None) {
-					this.looseBackGround.render(spriteBatch);
-				} else {
-					if (this.winBackGround != null) {
-						this.winBackGround.render(spriteBatch);
-					}
-				}
-				this.replayButton.render(spriteBatch);
-				this.gameOverText.render(spriteBatch);
-			}
 #if DEBUG
 			if (this.showCD) {
 				Color debugColour = Color.Green;
@@ -462,15 +370,6 @@ namespace Robber {
 				foreach (Treasure treasure in this.treasures) {
 					treasure.dispose();
 				}
-			}
-			if (this.replayButton != null) {
-				this.replayButton.dispose();
-			}
-			if (this.looseBackGround !=null) {
-				this.looseBackGround.dispose();
-			}
-			if (this.winBackGround != null) {
-				this.winBackGround.dispose();
 			}
 			if (this.treasure != null) {
 				this.treasure.dispose();

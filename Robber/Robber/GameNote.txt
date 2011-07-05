@@ -45,6 +45,7 @@ Raw version of the game functional with programmer art
 ============================
 	Core(Phase 1.5)
 ============================
+Fix major problems with the game and implement some of the features that got scrapped due to time
 [*]Create in game editor for placing guards, treasure etc
 [*]Change all data to xml based
 []Add in garbage cans to hide in and clear agro**
@@ -52,10 +53,11 @@ Raw version of the game functional with programmer art
 []Put doors in
 [*]Design an algorithm for automatically generating bounding boxes
 [*]Every guard gets there own AI thread ATM, this is unncessary. Change the AI manager to be single threaded and guards put a request to the manager when they need a new path
-[]Alternate flow to go from a "game over state"(regardless of win/loose etc) to the map selection screen
+[*]Alternate flow to go from a "game over state"(regardless of win/loose etc) to the map selection screen
 [*]Guards and player actually start in the middle of their square, not on the left edge in the middle
 [*]Rewrite guard movement code, it is a giant mess from the competition and only works for left/right movement (in the sense of walking down the missle of a tile)
 []Write an input manager
+[*]Pull the game over screen out of the GameDisplay....I crammed this into that display due to crunch at the end of the competition...now do it properly
 
 ============================
 	Polish(Phase 2)
@@ -97,11 +99,12 @@ ISSUES
 	[]Solving this makes the score reset to the levels time before the transition out, it was either this or a nasty flash...I think the flash was a lot worse
 [*]Major bug in the tile editor, the width is padded + 1, once the editor is fixed you need to remap all 3 maps, and rip out the padding all over the code.
 []Memory leak when the game goes to game over
+[]In level 1 once the AI makes a complete round and are back at the beginning they both start to walk in same direction. Counter-clockwise guy gets the right waypoint but longest path
 ============================
 		Time
 ============================
 Planning: 2 hours
-Programming:	41 hours	
+Programming:	43 hours
 Map Creation(Including creating editor via scripting engine):	5.5 hours
 Art: 5.75 hours	
 Sound:	2 hours	
