@@ -49,8 +49,9 @@ Fix major problems with the game and implement some of the features that got scr
 [*]Create in game editor for placing guards, treasure etc
 [*]Change all data to xml based
 []Add in garbage cans to hide in and clear agro**
+[]Couple extra guards run in from the exit point if you are detected
 []Add in random sneezing if you stand within the same tile too long
-[]Put doors in
+[]Put doors in	-wasn't going to put these in but should put locked doors in that only guards can walk through
 [*]Design an algorithm for automatically generating bounding boxes
 [*]Every guard gets there own AI thread ATM, this is unncessary. Change the AI manager to be single threaded and guards put a request to the manager when they need a new path
 [*]Alternate flow to go from a "game over state"(regardless of win/loose etc) to the map selection screen
@@ -69,7 +70,8 @@ Replace the programmer art with less crappy programmer art and make the game not
 []Pause at waypoints??	-Not certain I want this still
 [*]Screen fades in and out (Transitions)
 [*]Robber and guard sprites
-[*]Upgrade wall tile graphics
+[]Change the tile placer program to write multiple layers so that the floor is not hardcoded to a white square, it can now have a real texture applied
+[*]Upgrade floor tile graphics
 []Upgrade radius ring graphic
 [*]Sfx emotes
 [*]Sfx
@@ -107,7 +109,7 @@ ISSUES
 ============================
 Planning: 2 hours
 Programming:	43.5 hours	
-Map Creation(Including creating editor via scripting engine):	5.5 hours
+Map Creation(Including creating editor via scripting engine):	5.5 hours		8:15pm-
 Art: 5.75 hours	
 Sound:	2 hours	
 Deployment: .5 hours

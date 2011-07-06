@@ -41,19 +41,31 @@ namespace Robber {
 		}
 
 		private static object loadObject<T>(XmlDocument doc, string header, string[] searchStrings, int nodeDepth) {
-			T[] result = new T[searchStrings.Length];
-			XmlNodeList nodes = doc.GetElementsByTagName(header)[nodeDepth].ChildNodes;
-			XmlNode node;
-			Type type = typeof(T);
-			MethodInfo parseMethod = type.GetMethod("Parse", new Type[] { typeof(string)});
-			for (int i = 0; i < nodes.Count; i++) {
-				node = nodes[i];
-				for (int j = 0; j < searchStrings.Length; j++) {
-					if (node.Name == searchStrings[j]) {
-						if (type == typeof(string)) {
-							result[j] = (T)((object)node.FirstChild.Value);
-						} else {
-							result[j] = (T)parseMethod.Invoke(type, new object[] { ((string)node.FirstChild.Value) });
+			T[] result = null;
+			if (doc.GetElementsByTagName(header) != null && doc.GetElementsByTagName(header)[nodeDepth] != null) {
+				XmlNodeList nodes = doc.GetElementsByTagName(header)[nodeDepth].ChildNodes;
+				XmlNode node;
+				Type type = typeof(T);
+				MethodInfo parseMethod = type.GetMethod("Parse", new Type[] { typeof(string) });
+				for (int i = 0; i < nodes.Count; i++) {
+					node = nodes[i];
+					for (int j = 0; j < searchStrings.Length; j++) {
+						if (node.Name == searchStrings[j]) {
+							if (type == typeof(string)) {
+								if (node.FirstChild != null && node.FirstChild.Value != null) {// we may just want the default
+									if (result == null) {
+										result = new T[searchStrings.Length];
+									}
+									result[j] = (T)((object)node.FirstChild.Value);
+								}
+							} else {
+								if (node.FirstChild != null && node.FirstChild.Value != null) {// we may just want the default
+									if (result == null) {
+										result = new T[searchStrings.Length];
+									}
+									result[j] = (T)parseMethod.Invoke(type, new object[] { ((string)node.FirstChild.Value) });
+								} 
+							}
 						}
 					}
 				}
@@ -125,34 +137,45 @@ namespace Robber {
 			}
 
 		}
-		public static void loadLevelInformation(XmlDocument doc, out Color wallColour, out Color floorColour, out float time) {
+		public static void loadLevelInformation(XmlDocument doc, ref Color wallColour, ref Color floorColour, ref float time) {
 			string[] rgb = new string[] { MapEditor.XML_R, MapEditor.XML_G, MapEditor.XML_B };
-			int[] result = (int[])loadObject<Int32>(doc, MapEditor.XML_WALL_COLOUR, rgb);
-			wallColour = new Color(result[0], result[1], result[2]);
+			try {
+				int[] result = (int[])loadObject<Int32>(doc, MapEditor.XML_WALL_COLOUR, rgb);
+				wallColour = new Color(result[0], result[1], result[2]);
 
-			result = (int[])loadObject<Int32>(doc, MapEditor.XML_FLOOR_COLOUR, rgb);
-			floorColour = new Color(result[0], result[1], result[2]);
+				result = (int[])loadObject<Int32>(doc, MapEditor.XML_FLOOR_COLOUR, rgb);
+				floorColour = new Color(result[0], result[1], result[2]);
 
-			time = (float)(((float[])loadObject<float>(doc, MapEditor.XML_TIME, new string[] { MapEditor.XML_MINUTES }))[0]);
-		}
-
-		public static void loadPlayerInformation(XmlDocument doc, out Point playerStart) {
-			int[] result = (int[])loadObject<Int32>(doc, MapEditor.MappingState.PlayerStart);
-			playerStart = new Point(result[0], result[1]);
-		}
-
-		public static void loadGuardInformation(XmlDocument doc, out List<Point> guardPositions, out List<string> directions, out List<string> states) {
-			XmlNodeList guardNodes = doc.GetElementsByTagName(MapEditor.XML_HEADER_GUARD);
-			directions = new List<string>();
-			states = new List<string>();
-			string[] stateSearch = new string[] { MapEditor.XML_GUARD_STATE };
-			string[] directionSearch = new string[] { MapEditor.XML_GUARD_DIRECTION };
-			for (int i = 0; i < guardNodes.Count; i++) {
-				states.Add(((string[])loadObject<string>(doc, MapEditor.XML_HEADER_GUARD, stateSearch, i))[0]);
-				directions.Add(((string[])loadObject<string>(doc, MapEditor.XML_HEADER_GUARD, directionSearch, i))[0]);
+				time = (float)(((float[])loadObject<float>(doc, MapEditor.XML_TIME, new string[] { MapEditor.XML_MINUTES }))[0]);
+			} catch (Exception e) {
+				// do nothign else with the error as the map is obviously in development stages
 			}
-			loadGenericPointList(doc, MapEditor.XML_GUARD_POSITION, out guardPositions);
+		}
 
+		public static void loadPlayerInformation(XmlDocument doc, ref Point playerStart) {
+			try {
+				int[] result = (int[])loadObject<Int32>(doc, MapEditor.MappingState.PlayerStart);
+				playerStart = new Point(result[0], result[1]);
+			} catch (Exception e) {
+				// do nothign else with the error as the map is obviously in development stages
+			}
+		}
+
+		public static void loadGuardInformation(XmlDocument doc, ref List<Point> guardPositions, ref List<string> directions, ref List<string> states) {
+			try {
+				XmlNodeList guardNodes = doc.GetElementsByTagName(MapEditor.XML_HEADER_GUARD);
+				directions = new List<string>();
+				states = new List<string>();
+				string[] stateSearch = new string[] { MapEditor.XML_GUARD_STATE };
+				string[] directionSearch = new string[] { MapEditor.XML_GUARD_DIRECTION };
+				for (int i = 0; i < guardNodes.Count; i++) {
+					states.Add(((string[])loadObject<string>(doc, MapEditor.XML_HEADER_GUARD, stateSearch, i))[0]);
+					directions.Add(((string[])loadObject<string>(doc, MapEditor.XML_HEADER_GUARD, directionSearch, i))[0]);
+				}
+				loadGenericPointList(doc, MapEditor.XML_GUARD_POSITION, out guardPositions);
+			} catch (Exception e) {
+				// do nothign else with the error as the map is obviously in development stages
+			}
 		}
 	}
 }

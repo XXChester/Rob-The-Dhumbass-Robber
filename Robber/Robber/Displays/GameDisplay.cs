@@ -111,10 +111,10 @@ namespace Robber {
 				XmlDocument doc = new XmlDocument();
 				doc.Load(xmlReader);
 				// load the map information
-				MapLoader.loadLevelInformation(doc, out wallColour, out floorColour, out time);
+				MapLoader.loadLevelInformation(doc, ref wallColour, ref floorColour, ref time);
 				
 				// load the player information
-				MapLoader.loadPlayerInformation(doc, out playersLocation);
+				MapLoader.loadPlayerInformation(doc, ref playersLocation);
 				
 				// load the treasure information
 				MapLoader.loadGenericPointList(doc, MapEditor.MappingState.Treasure, out treasureLocations);
@@ -123,7 +123,7 @@ namespace Robber {
 				MapLoader.loadGenericPointList(doc, MapEditor.MappingState.GuardEntry, out entryExitPoints);
 				
 				// load the guard information
-				MapLoader.loadGuardInformation(doc, out guardLocations, out guardDirectins, out guardStates);
+				MapLoader.loadGuardInformation(doc, ref guardLocations, ref guardDirectins, ref guardStates);
 				
 				// load the waypoint information
 				MapLoader.loadGenericPointList(doc, MapEditor.MappingState.WayPoint, out wayPoints);
