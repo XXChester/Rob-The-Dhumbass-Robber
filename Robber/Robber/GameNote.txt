@@ -104,6 +104,14 @@ ISSUES
 []Memory leak when the game goes to game over
 []In level 1 once the AI makes a complete round and are back at the beginning they both start to walk in same direction. Counter-clockwise guy gets the right waypoint but longest path
 [*]AI manager rarely throws an InvalidOperation exception on startup due to the collection being modified...even though it is wrapped in a lock statement
+[]AI is throwly an excepton on resets for Map4
+[]Audio API is still throwing an exception
+	{"Attempted to read or write protected memory. This is often an indication that other memory is corrupt."}
+   at Microsoft.Xna.Framework.Audio.AudioCallbackDispatcher.IsEventRegistered(EventType type)
+   at Microsoft.Xna.Framework.Audio.AudioCallbackDispatcher.UnregisterEvent(EventType type)
+   at Microsoft.Xna.Framework.Audio.KernelMicrophone.ShutdownCaptureEngine()
+   at Microsoft.Xna.Framework.Audio.MicrophoneUnsafeNativeMethods.ShutdownCaptureEngine()
+   at Microsoft.Xna.Framework.Audio.AudioRendererShutdownHandler.AppExitingEventHandler(Object sender, EventArgs args)
 ============================
 		Time
 ============================

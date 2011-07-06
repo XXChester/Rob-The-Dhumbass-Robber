@@ -145,7 +145,11 @@ namespace Robber {
 
 				result = (int[])loadObject<Int32>(doc, MapEditor.XML_FLOOR_COLOUR, rgb);
 				floorColour = new Color(result[0], result[1], result[2]);
+			} catch (Exception e) {
+				// do nothign else with the error as the map is obviously in development stages
+			}
 
+			try {
 				time = (float)(((float[])loadObject<float>(doc, MapEditor.XML_TIME, new string[] { MapEditor.XML_MINUTES }))[0]);
 			} catch (Exception e) {
 				// do nothign else with the error as the map is obviously in development stages

@@ -75,6 +75,7 @@ namespace Robber {
 
 		public void editMap(string value) {
 			value = value.ToLower();
+			MappingState oldState = this.mappingState;
 			switch (value) {
 				case COMMAND_NONE:
 					this.mappingState = MappingState.None;
@@ -97,6 +98,9 @@ namespace Robber {
 				default:
 					Console.WriteLine("Failed to recognize your command, try using the editMapHelp()");
 					break;
+			}
+			if (this.mappingState != oldState) {
+				ScriptManager.getInstance().log("Changed to edit: " + this.mappingState.ToString());
 			}
 			Console.WriteLine("Mapping: " + this.mappingState.ToString());
 		}

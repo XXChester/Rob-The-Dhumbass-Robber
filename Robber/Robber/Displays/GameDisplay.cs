@@ -41,6 +41,7 @@ namespace Robber {
 #if DEBUG
 		private bool showAI = false;
 		private bool showCD = false;
+		private bool showWayPoints = false;
 #endif
 		#endregion Class variables
 
@@ -297,6 +298,8 @@ namespace Robber {
 				this.showAI = !this.showAI;
 			} else if (base.currentKeyBoardState.IsKeyDown(Keys.D2) && base.previousKeyBoardState.IsKeyUp(Keys.D2)) {
 				this.showCD = !this.showCD;
+			} else if (base.currentKeyBoardState.IsKeyDown(Keys.D3) && base.previousKeyBoardState.IsKeyUp(Keys.D3)) {
+				this.showWayPoints = !this.showWayPoints;
 			} else if (base.currentKeyBoardState.IsKeyDown(Keys.R) && base.previousKeyBoardState.IsKeyUp(Keys.R)) {
 				StateManager.getInstance().CurrentGameState = StateManager.GameState.Waiting;
 				reset();
@@ -338,6 +341,12 @@ namespace Robber {
 				}
 				foreach (Treasure treasure in this.treasures) {
 					DebugUtils.drawBoundingBox(spriteBatch, treasure.BoundingBox, debugColour, ResourceManager.getInstance().ButtonLineTexture);
+				}
+			}
+			if (this.showWayPoints) {
+				List<Point> wayPoints = AIManager.getInstance().WayPoints;
+				foreach (Point wayPoint in wayPoints) {
+					spriteBatch.Draw(ResourceManager.getInstance().DebugChip, new Placement(wayPoint).worldPosition, Color.Blue);
 				}
 			}
 			if (this.showAI) {
