@@ -96,10 +96,9 @@ namespace Robber {
 			if (AIManager.getInstance().PlayerDetected) {
 				updateState(State.Chase);
 			}
-
 			// patrol can just generate the waypoint once
 			if (this.currentState == State.Patrol) {
-				if (base.Placement.index == this.destinationWayPoint) {
+				if (base.Placement.index == this.destinationWayPoint)  {
 					this.destinationWayPoint = AIManager.getInstance().getNextWayPoint(base.Placement.index, this.movementDirection);
 					AIManager.getInstance().requestPath(base.Placement.index, this.destinationWayPoint, this.callBackDelegate);
 				} else if (base.Placement.index == this.closestsPoint) {
@@ -245,10 +244,6 @@ namespace Robber {
 
 			// call the generic code before continuing
 			base.updateLocation(elapsed);
-
-			if (this.previousPlacement.index != this.Placement.index) {
-				AIManager.getInstance().Board[this.Placement.index.Y, this.Placement.index.X] = PathFinder.TypeOfSpace.Unwalkable;
-			}
 		}
 
 		public new void render(SpriteBatch spriteBatch) {

@@ -112,7 +112,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>lkhYLqkIijOdWbCPuYjJrbErliQ=</dsig:DigestValue>
+        <dsig:DigestValue>l2HilP1Hv8ZA7Fsl/PZ7iqASDWg=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -521,6 +521,15 @@
       <dsig:DigestValue>1cRVY2krGVqmx68/dOW/ECgNIE0=</dsig:DigestValue>
     </hash>
   </file>
+  <file name="Maps\Map4.png" size="32270">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>hUYZwoOpPpx5Zg+LluoVBfYc818=</dsig:DigestValue>
+    </hash>
+  </file>
   <file name="Maps\Map4.xml" size="17974" writeableType="applicationData">
     <hash>
       <dsig:Transforms>
@@ -530,13 +539,13 @@
       <dsig:DigestValue>M6gCLdAMCdshwm566HhWHVK5U2c=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Maps\Map4Identifiers.xml" size="3261" writeableType="applicationData">
+  <file name="Maps\Map4Identifiers.xml" size="3337" writeableType="applicationData">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>4DxpcKI2959HDCAzp8Bt1PYCHGA=</dsig:DigestValue>
+      <dsig:DigestValue>mkVWF2yPb2G6DN6KcWVWrgjSwpM=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>

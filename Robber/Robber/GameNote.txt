@@ -32,7 +32,8 @@ Raw version of the game functional with programmer art
 [*]Make guards patrol the halls
 [*]Make the guards chase the player if he is seen
 [*]Major bug with the AI walking through Non-walkable spaces
-[*]Put in collision detection with each of the guards so they don't stack
+[]Put in collision detection with each of the guards so they don't stack		
+		-Removed this as it was causing problems because the guards only generate paths to way points once, not every new square
 [*]Put in collision detection with the player
 [*]Clean up AI so that it always walks down the middle of the square not the edge
 [*]Clean up collision detection so that it doesn't bounce you around...instead you just don't move if it will result in a collision...provisional CD opposed to reaction CD
@@ -102,9 +103,9 @@ ISSUES
 	[]Solving this makes the score reset to the levels time before the transition out, it was either this or a nasty flash...I think the flash was a lot worse
 [*]Major bug in the tile editor, the width is padded + 1, once the editor is fixed you need to remap all 3 maps, and rip out the padding all over the code.
 []Memory leak when the game goes to game over
-[]In level 1 once the AI makes a complete round and are back at the beginning they both start to walk in same direction. Counter-clockwise guy gets the right waypoint but longest path
+[*]In level 1 once the AI makes a complete round and are back at the beginning they both start to walk in same direction. Counter-clockwise guy gets the right waypoint but longest path
 [*]AI manager rarely throws an InvalidOperation exception on startup due to the collection being modified...even though it is wrapped in a lock statement
-[]AI is throwly an excepton on resets for Map4
+[*]AI is throwing an excepton on resets for Map4
 []Audio API is still throwing an exception
 	{"Attempted to read or write protected memory. This is often an indication that other memory is corrupt."}
    at Microsoft.Xna.Framework.Audio.AudioCallbackDispatcher.IsEventRegistered(EventType type)
@@ -117,7 +118,7 @@ ISSUES
 ============================
 Planning: 2 hours
 Programming:	43.5 hours	
-Map Creation(Including creating editor via scripting engine):	5.5 hours		8:15pm-
+Map Creation(Including creating editor via scripting engine):	8 hours	
 Art: 5.75 hours	
 Sound:	2 hours	
 Deployment: .5 hours

@@ -145,13 +145,13 @@ namespace Robber {
 
 				result = (int[])loadObject<Int32>(doc, MapEditor.XML_FLOOR_COLOUR, rgb);
 				floorColour = new Color(result[0], result[1], result[2]);
-			} catch (Exception e) {
+			} catch (Exception) {
 				// do nothign else with the error as the map is obviously in development stages
 			}
 
 			try {
 				time = (float)(((float[])loadObject<float>(doc, MapEditor.XML_TIME, new string[] { MapEditor.XML_MINUTES }))[0]);
-			} catch (Exception e) {
+			} catch (Exception) {
 				// do nothign else with the error as the map is obviously in development stages
 			}
 		}
@@ -160,7 +160,7 @@ namespace Robber {
 			try {
 				int[] result = (int[])loadObject<Int32>(doc, MapEditor.MappingState.PlayerStart);
 				playerStart = new Point(result[0], result[1]);
-			} catch (Exception e) {
+			} catch (Exception) {
 				// do nothign else with the error as the map is obviously in development stages
 			}
 		}
@@ -177,7 +177,7 @@ namespace Robber {
 					directions.Add(((string[])loadObject<string>(doc, MapEditor.XML_HEADER_GUARD, directionSearch, i))[0]);
 				}
 				loadGenericPointList(doc, MapEditor.XML_GUARD_POSITION, out guardPositions);
-			} catch (Exception e) {
+			} catch (Exception) {
 				// do nothign else with the error as the map is obviously in development stages
 			}
 		}
