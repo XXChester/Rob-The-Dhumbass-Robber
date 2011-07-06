@@ -10,8 +10,8 @@ to submit there game.
 ============================
 	Objectives	V2
 ============================
-Continue on with the development and finish the game off to make it more fun than it already is after the competition and implement scrapped features. Also want to go back and clean
-up the code that got rushed near the end of the competition and became quite messy.
+Continue on with the development and finish the game off to make it more fun than it already is after the competition and implement some scrapped features. Also want to go back and clean
+up the code that got rushed near the end of the competition and became quite messy. Create more content.
 
 ============================
 	Core(Phase 1)
