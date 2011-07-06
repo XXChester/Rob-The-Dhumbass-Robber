@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.IO;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
@@ -29,7 +29,7 @@ namespace Robber {
 		#endregion Class properties
 
 		#region Constructor
-		public MapSeletMenu(ContentManager content) {
+		public MapSeletMenu(GraphicsDevice device, ContentManager content) {
 			ColouredButtonParams buttonParms = new ColouredButtonParams();
 			buttonParms.Font = ResourceManager.getInstance().Font;
 			buttonParms.Height = 25;
@@ -43,10 +43,16 @@ namespace Robber {
 			buttonParms.TextsPosition = new Vector2(590f, buttonParms.StartY - 2);
 			this.exitToMainButton = new ColouredButton(buttonParms);
 
-			string[] maps = new string[] { "Map3", "Map2", "Map1"};
+			// read in our map names from the Maps directory
+			string[] maps = Directory.GetFiles(ResourceManager.MAP_FOLDER, "*.png");
+			for (int i = 0; i < maps.Length; i++) {
+				maps[i] = StringUtils.scrubPathAndExtFromFileName(maps[i]);
+			}
+
+			// load up our map selections via the names from the dierctory
 			this.mapSelections = new List<MapSelection>(maps.Length);
 			for (int i = 0; i < maps.Length; i++) {
-				this.mapSelections.Add(new MapSelection(content, maps[i], i, buttonParms.Width, buttonParms.Height, buttonParms.StartX, buttonParms.StartY));
+				this.mapSelections.Add(new MapSelection(device, maps[i], i, buttonParms.Width, buttonParms.Height, buttonParms.StartX, buttonParms.StartY));
 			}
 
 			// title

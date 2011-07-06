@@ -98,7 +98,9 @@ namespace Robber {
 		}
 
 		public void requestPath(Point start, Point end,  PathRequest.FoundPathCallBack callBack) {
-			this.pathRequests.Add(new PathRequest(start, end, callBack));
+			lock (this.pathRequests) {
+				this.pathRequests.Add(new PathRequest(start, end, callBack));
+			}
 		}
 
 		public Point getNextWayPoint(Point currentWayPoint, Guard.MovementDirection movementDirection) {

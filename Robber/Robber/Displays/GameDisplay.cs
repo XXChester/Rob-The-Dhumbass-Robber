@@ -92,7 +92,7 @@ namespace Robber {
 
 		#region Support methods
 		public void reset() {
-			string mapInformation = Directory.GetCurrentDirectory() + "\\Scripts\\" + StateManager.getInstance().MapInformation;
+			string mapInformation = Directory.GetCurrentDirectory() + "\\" + ResourceManager.MAP_FOLDER + StateManager.getInstance().MapInformation;
 			CollisionManager.getInstance().MapBoundingBoxes = new List<BoundingBox>();
 
 			XmlReader xmlReader = XmlReader.Create(mapInformation + "Identifiers.xml");

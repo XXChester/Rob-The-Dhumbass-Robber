@@ -199,23 +199,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Map1Preview.PNG">
-      <Name>Map1Preview</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Map2Preview.PNG">
-      <Name>Map2Preview</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Map3Preview.PNG">
-      <Name>Map3Preview</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="MouseOverButton.mp3">
       <Name>MouseOverButton</Name>
       <Importer>Mp3Importer</Importer>

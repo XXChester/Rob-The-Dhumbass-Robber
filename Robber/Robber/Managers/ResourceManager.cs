@@ -22,6 +22,7 @@ namespace Robber {
 		public const string WAYPOINT_IDENTIFIER = "WayPoint";
 		public const string TIME_INDENTIFIER = "Time";
 		public const string COLOUR_IDENTIFIER = "Colours";
+		public const string MAP_FOLDER = "Maps\\";
 		public static readonly Color TEXT_COLOUR = Color.Gray;
 		public static readonly Color MOUSE_OVER_COLOUR = Color.White;
 		#endregion Class variables

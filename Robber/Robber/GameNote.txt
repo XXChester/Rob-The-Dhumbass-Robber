@@ -74,7 +74,8 @@ Replace the programmer art with less crappy programmer art and make the game not
 [*]Sfx emotes
 [*]Sfx
 []Rotate idle sfxs
-[]Multiple maps read from directory		-Hard coded at this time because I don't have time to figure out how to change the content pipeline, making it very easy to add maps though
+[*]Change map previews to load from Maps directory instead of through the content pipeline
+[*]Multiple maps read from directory		-Hard coded at this time because I don't have time to figure out how to change the content pipeline, making it very easy to add maps though
 	[*]Hard coded but very easy to add new ones		-Can create and map indentifiers for a new map in about 30minutes
 [*]Map select screen
 [*]Change sprite direction determination for up and down, base it on last direction
@@ -100,11 +101,12 @@ ISSUES
 [*]Major bug in the tile editor, the width is padded + 1, once the editor is fixed you need to remap all 3 maps, and rip out the padding all over the code.
 []Memory leak when the game goes to game over
 []In level 1 once the AI makes a complete round and are back at the beginning they both start to walk in same direction. Counter-clockwise guy gets the right waypoint but longest path
+[*]AI manager rarely throws an InvalidOperation exception on startup due to the collection being modified...even though it is wrapped in a lock statement
 ============================
 		Time
 ============================
 Planning: 2 hours
-Programming:	43 hours
+Programming:	43.5 hours	
 Map Creation(Including creating editor via scripting engine):	5.5 hours
 Art: 5.75 hours	
 Sound:	2 hours	

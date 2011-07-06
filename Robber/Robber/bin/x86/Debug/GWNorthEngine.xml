@@ -180,6 +180,14 @@
             Contains helper methods for loading data from the file system
             </summary>
         </member>
+        <member name="M:GWNorthEngine.Utils.LoadingUtils.setCommonAttributes(Microsoft.Xna.Framework.Graphics.Texture2D,System.String)">
+            <summary>
+            Sets all of the common data for the Texture2D
+            </summary>
+            <param name="texture">Loaded Texture2D to set the data on</param>
+            <param name="fileName">Name of the file</param>
+            <returns>Texture2D with the custom data appended to it</returns>
+        </member>
         <member name="M:GWNorthEngine.Utils.LoadingUtils.loadTexture2D(Microsoft.Xna.Framework.Content.ContentManager,System.String)">
             <summary>
             Loads a texture via the ContentManager and assigns the texture custom data for debugging purposes
@@ -187,6 +195,15 @@
             <param name="content">ContentManager object</param>
             <param name="textureName">Name of the texture</param>
             <returns>Texture2D object</returns>
+        </member>
+        <member name="M:GWNorthEngine.Utils.LoadingUtils.loadTexture2D(Microsoft.Xna.Framework.Graphics.GraphicsDevice,System.String)">
+            <summary>
+            Loads a Texture2D not via the Content pipeline
+            </summary>
+            <param name="device">active GraphicsDevice reference</param>
+            <param name="fileNameWithPathAndExtension">Texute's name we are trying to load with the full path and file extension (Assets\Test.png)</param>
+            <returns>Texture2D object</returns>
+            <author>Largely based on http://jakepoz.com/jake_poznanski__speeding_up_xna.html </author>
         </member>
         <member name="M:GWNorthEngine.Utils.LoadingUtils.loadSpriteFont(Microsoft.Xna.Framework.Content.ContentManager,System.String)">
             <summary>
@@ -2214,6 +2231,32 @@
             <summary>
             Gets or sets the Texture of the static drawable object
             </summary>
+        </member>
+        <member name="T:GWNorthEngine.Utils.StringUtils">
+            <summary>
+            Helper methods for manipulating string values
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Utils.StringUtils.scrubPathAndExtFromFileName(System.String)">
+            <summary>
+            Stribs the file path and extension (if they exist) off of a file name
+            </summary>
+            <param name="fileName">filename to alter</param>
+            <returns>filename with the path and extension ripped off if they were present</returns>
+        </member>
+        <member name="M:GWNorthEngine.Utils.StringUtils.scrubPathFromFileName(System.String)">
+            <summary>
+            Scrubs the directory information off of a file name
+            </summary>
+            <param name="fileName">filename to alter</param>
+            <returns>filename with the path ripped off if it were present</returns>
+        </member>
+        <member name="M:GWNorthEngine.Utils.StringUtils.scrubExtensionFromFilename(System.String)">
+            <summary>
+            Scrubs the file extension from a file name
+            </summary>
+            <param name="fileName">filename to alter</param>
+            <returns>filename with the extension ripped off if it were present</returns>
         </member>
     </members>
 </doc>

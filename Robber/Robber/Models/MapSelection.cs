@@ -26,7 +26,7 @@ namespace Robber {
 		#endregion Class properties
 
 		#region Constructor
-		public MapSelection(ContentManager content, string mapName, int index, int width, int height, int startX, int startY) {
+		public MapSelection(GraphicsDevice device, string mapName, int index, int width, int height, int startX, int startY) {
 			this.MapName = mapName;
 			ColouredButtonParams buttonParms = new ColouredButtonParams();
 			buttonParms.Font = ResourceManager.getInstance().Font;
@@ -44,7 +44,7 @@ namespace Robber {
 			// title
 			StaticDrawable2DParams staticParms = new StaticDrawable2DParams();
 			staticParms.Position = new Vector2(20f, 100f);
-			staticParms.Texture = LoadingUtils.loadTexture2D(content,  mapName + "preview");
+			staticParms.Texture = LoadingUtils.loadTexture2D(device, ResourceManager.MAP_FOLDER + mapName + ".png");
 			staticParms.Scale = new Vector2(.8f, .8f);
 			this.previewImage = new StaticDrawable2D(staticParms);
 		}

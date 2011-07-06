@@ -167,22 +167,31 @@
     <Content Include="GameNote.txt" />
     <Content Include="GameThumbnail.png" />
     <None Include="Log.log" />
-    <Content Include="Scripts\Map1.XML">
+    <Content Include="Maps\Map1.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Scripts\Map1Identifiers.xml">
+    <Content Include="Maps\Map1Identifiers.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Scripts\Map2.XML">
+    <Content Include="Maps\Map1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Scripts\Map2Identifiers.xml">
+    <Content Include="Maps\Map2.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Scripts\Map3.XML">
+    <Content Include="Maps\Map2Identifiers.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Scripts\Map3Identifiers.xml">
+    <Content Include="Maps\Map2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Maps\Map3.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Maps\Map3Identifiers.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Maps\Map3.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Story.txt" />
@@ -232,7 +241,7 @@
       <IncludeHash>True</IncludeHash>
       <FileType>File</FileType>
     </PublishFile>
-    <PublishFile Include="Scripts\Map1.XML">
+    <PublishFile Include="Maps\Map1.XML">
       <Visible>False</Visible>
       <Group>
       </Group>
@@ -242,7 +251,7 @@
       <IncludeHash>True</IncludeHash>
       <FileType>File</FileType>
     </PublishFile>
-    <PublishFile Include="Scripts\Map1Identifiers.xml">
+    <PublishFile Include="Maps\Map1Identifiers.xml">
       <Visible>False</Visible>
       <Group>
       </Group>
@@ -252,7 +261,7 @@
       <IncludeHash>True</IncludeHash>
       <FileType>File</FileType>
     </PublishFile>
-    <PublishFile Include="Scripts\Map2.XML">
+    <PublishFile Include="Maps\Map2.XML">
       <Visible>False</Visible>
       <Group>
       </Group>
@@ -262,7 +271,7 @@
       <IncludeHash>True</IncludeHash>
       <FileType>File</FileType>
     </PublishFile>
-    <PublishFile Include="Scripts\Map2Identifiers.xml">
+    <PublishFile Include="Maps\Map2Identifiers.xml">
       <Visible>False</Visible>
       <Group>
       </Group>
@@ -272,7 +281,7 @@
       <IncludeHash>True</IncludeHash>
       <FileType>File</FileType>
     </PublishFile>
-    <PublishFile Include="Scripts\Map3.XML">
+    <PublishFile Include="Maps\Map3.XML">
       <Visible>False</Visible>
       <Group>
       </Group>
@@ -282,7 +291,7 @@
       <IncludeHash>True</IncludeHash>
       <FileType>File</FileType>
     </PublishFile>
-    <PublishFile Include="Scripts\Map3Identifiers.xml">
+    <PublishFile Include="Maps\Map3Identifiers.xml">
       <Visible>False</Visible>
       <Group>
       </Group>
