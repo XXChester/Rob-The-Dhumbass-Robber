@@ -74,8 +74,8 @@ Replace the programmer art with less crappy programmer art and make the game not
 []Pause at waypoints??	-Not certain I want this still
 [*]Screen fades in and out (Transitions)
 [*]Robber and guard sprites
-[]Change the tile placer program to write multiple layers so that the floor is not hardcoded to a white square, it can now have a real texture applied
-[*]Upgrade floor tile graphics
+[*]Change the tile placer program to write multiple layers so that the floor is not hardcoded to a white square, it can now have a real texture applied
+[]Upgrade floor tile graphics
 []Upgrade radius ring graphic
 [*]Sfx emotes
 [*]Sfx

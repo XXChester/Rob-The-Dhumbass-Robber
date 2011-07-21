@@ -600,6 +600,32 @@
             Can generate moves in any direction
             </summary>
         </member>
+        <member name="T:GWNorthEngine.Utils.StringUtils">
+            <summary>
+            Helper methods for manipulating string values
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Utils.StringUtils.scrubPathAndExtFromFileName(System.String)">
+            <summary>
+            Stribs the file path and extension (if they exist) off of a file name
+            </summary>
+            <param name="fileName">filename to alter</param>
+            <returns>filename with the path and extension ripped off if they were present</returns>
+        </member>
+        <member name="M:GWNorthEngine.Utils.StringUtils.scrubPathFromFileName(System.String)">
+            <summary>
+            Scrubs the directory information off of a file name
+            </summary>
+            <param name="fileName">filename to alter</param>
+            <returns>filename with the path ripped off if it were present</returns>
+        </member>
+        <member name="M:GWNorthEngine.Utils.StringUtils.scrubExtensionFromFilename(System.String)">
+            <summary>
+            Scrubs the file extension from a file name
+            </summary>
+            <param name="fileName">filename to alter</param>
+            <returns>filename with the extension ripped off if it were present</returns>
+        </member>
         <member name="T:GWNorthEngine.Tools.TilePlacer.TileValues">
             <summary>
             Constant values for the TilePlacer tool
@@ -947,14 +973,13 @@
             Models the data that is a direct result from loading a TilePlacer map
             </summary>
         </member>
-        <member name="M:GWNorthEngine.Tools.TilePlacer.LoadResult.#ctor(System.Int32,System.Int32,GWNorthEngine.Tools.TilePlacer.MapTile[0:,0:],GWNorthEngine.Tools.TilePlacer.TileValues[0:,0:])">
+        <member name="M:GWNorthEngine.Tools.TilePlacer.LoadResult.#ctor(System.Int32,System.Int32,GWNorthEngine.Tools.TilePlacer.Layer[])">
             <summary>
             Constructs a LoadResult object
             </summary>
             <param name="height">Height of the map</param>
             <param name="width">Width of the map</param>
-            <param name="mapTiles">MapTile objects that make the map</param>
-            <param name="tileValues">TileValues of the types of tiles that make up the map</param>
+            <param name="layers">Layers of MapTile objects that make the map</param>
         </member>
         <member name="P:GWNorthEngine.Tools.TilePlacer.LoadResult.Height">
             <summary>
@@ -964,16 +989,6 @@
         <member name="P:GWNorthEngine.Tools.TilePlacer.LoadResult.Width">
             <summary>
             Gets or sets the width of the map
-            </summary>
-        </member>
-        <member name="P:GWNorthEngine.Tools.TilePlacer.LoadResult.MapTiles">
-            <summary>
-            Gets or sets the MapTile array representation of the map
-            </summary>
-        </member>
-        <member name="P:GWNorthEngine.Tools.TilePlacer.LoadResult.TileValues">
-            <summary>
-            Gets or sets the TileValues array representation of the map
             </summary>
         </member>
         <member name="T:GWNorthEngine.Model.Params.BaseAnimationManagerParams">
@@ -2231,32 +2246,6 @@
             <summary>
             Gets or sets the Texture of the static drawable object
             </summary>
-        </member>
-        <member name="T:GWNorthEngine.Utils.StringUtils">
-            <summary>
-            Helper methods for manipulating string values
-            </summary>
-        </member>
-        <member name="M:GWNorthEngine.Utils.StringUtils.scrubPathAndExtFromFileName(System.String)">
-            <summary>
-            Stribs the file path and extension (if they exist) off of a file name
-            </summary>
-            <param name="fileName">filename to alter</param>
-            <returns>filename with the path and extension ripped off if they were present</returns>
-        </member>
-        <member name="M:GWNorthEngine.Utils.StringUtils.scrubPathFromFileName(System.String)">
-            <summary>
-            Scrubs the directory information off of a file name
-            </summary>
-            <param name="fileName">filename to alter</param>
-            <returns>filename with the path ripped off if it were present</returns>
-        </member>
-        <member name="M:GWNorthEngine.Utils.StringUtils.scrubExtensionFromFilename(System.String)">
-            <summary>
-            Scrubs the file extension from a file name
-            </summary>
-            <param name="fileName">filename to alter</param>
-            <returns>filename with the extension ripped off if it were present</returns>
         </member>
     </members>
 </doc>
