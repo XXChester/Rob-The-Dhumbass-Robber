@@ -93,14 +93,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="GWNorthEngine.dll" size="62464">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="GWNorthEngine.dll" size="61440">
       <assemblyIdentity name="GWNorthEngine" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>ZCwGI4/hH7Ct5zTYxSD7vbZq7UQ=</dsig:DigestValue>
+        <dsig:DigestValue>ruFPWoDpwl49c4WySyPvsEcQGXI=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -112,7 +112,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>JLpzkoT3eYwAAJVjosBrkaifEj4=</dsig:DigestValue>
+        <dsig:DigestValue>U3X8T9W4Ok5FkIk3cbN27BYJnfI=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

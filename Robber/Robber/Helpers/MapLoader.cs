@@ -24,7 +24,8 @@ namespace Robber {
 			height -= 1;
 			bool map = true;
 			if (y == 0 || y == height || x == 0 || x == width) {
-				if (textureName != "BottomLeft" && textureName != "BottomRight" && textureName != "TopLeft" && textureName != "TopRight") {
+				if (textureName != Tile.TILE_NAME_BOTTOM_LEFT && textureName != Tile.TILE_NAME_BOTTOM_RIGHT && textureName != Tile.TILE_NAME_TOP_LEFTT && 
+					textureName != Tile.TILE_NAME_TOP_RIGHT) {
 					map = false;
 				} else {
 					// make sure we are not a corner of the board
@@ -94,13 +95,11 @@ namespace Robber {
 			});
 			// load the AI for the map
 			PathFinder.TypeOfSpace[,] tileSpaces = new PathFinder.TypeOfSpace[height, width];
-			TileValues tileValue;
 			for (int y = 0; y < height; y++) {
 				for (int x = 0; x < width; x++) {
-					tileValue = loadResult.Layers[0].TileValues[y, x];
 					// override so the AI can walk the outter wall
 					if (tiles[y, x] != null && mapAsUnwalkable(tiles[y, x].Texture.Name, y, x, height, width)) {
-						tileSpaces[y, x] = Translator.translateTileValueToAStarType(tileValue);
+						tileSpaces[y, x] = Translator.translateTileValueToAStarType(loadResult.Layers[0].Tiles[y,x].TileValue);
 					} else {
 						tileSpaces[y, x] = PathFinder.TypeOfSpace.Walkable;
 					}
