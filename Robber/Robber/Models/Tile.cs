@@ -25,14 +25,10 @@ namespace Robber {
 		public const string TILE_NAME_TOP_RIGHT = "TopRight";
 		public const string TILE_NAME_BOTTOM_RIGHT = "BottomRight";
 		public const string TILE_NAME_BOTTOM_LEFT = "BottomLeft";
+		public const string TILE_NAME_EXIT = "ExitTile";
 		#endregion Class variables
 
 		#region Class propeties
-		/*public BoundingBox[] BoundingBoxes { get; set; }
-		public Vector2 TopLimitation { get; set; }
-		public Vector2 RightLimitation { get; set; }
-		public Vector2 BottomLimitation { get; set; }
-		public Vector2 LeftLimitation { get; set; }*/
 		#endregion Class properties
 
 		#region Constructor

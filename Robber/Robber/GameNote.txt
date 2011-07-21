@@ -60,6 +60,9 @@ Fix major problems with the game and implement some of the features that got scr
 [*]Rewrite guard movement code, it is a giant mess from the competition and only works for left/right movement (in the sense of walking down the missle of a tile)
 []Write an input manager
 [*]Pull the game over screen out of the GameDisplay....I crammed this into that display due to crunch at the end of the competition...now do it properly
+[*]Change exit tile to be written in white and than load it's colour throw the XML loader
+	-Didn't want this to be dynamic so made it so that it always renders white. The problem was for certain colours of the walls the exit tile would render black and not red(desired)
+[]Move bounding boxes down to represent the feet in the tile now as we are now sort of taking on a 2.5D perspective
 
 ============================
 	Polish(Phase 2)

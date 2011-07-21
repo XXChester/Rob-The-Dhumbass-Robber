@@ -43,7 +43,11 @@ namespace Robber {
 		public void updateColours(Color floorColour, Color wallColour) {
 			foreach (Tile tile in this.tiles) {
 				if (tile != null) {
-					tile.updateColours(wallColour);
+					if (Tile.TILE_NAME_EXIT.Equals(tile.Texture.Name)) {
+						tile.updateColours(Color.White);
+					} else {
+						tile.updateColours(wallColour);
+					}
 				}
 			}
 			this.floor.updateColours(floorColour);

@@ -85,7 +85,11 @@ namespace Robber {
 			int width = loadResult.Width;
 			MapTile[,] mapTiles = loadResult.MapTiles;
 			Tile[,] tiles = GWNorthEngine.Tools.TilePlacer.MapLoader.initTiles<Tile>(mapTiles, delegate(MapTile tile) {
-				return new Tile(tile.Texture, tile.Index, wallColour);
+				if (Tile.TILE_NAME_EXIT.Equals(tile.Texture.Name)) {
+					return new Tile(tile.Texture, tile.Index, Color.White);
+				} else {
+					return new Tile(tile.Texture, tile.Index, wallColour);
+				}
 			});
 			// load the AI for the map
 			PathFinder.TypeOfSpace[,] tileSpaces = new PathFinder.TypeOfSpace[height, width];
