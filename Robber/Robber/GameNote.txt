@@ -95,6 +95,9 @@ ISSUES
 [*]AI can sometimes walk through walls		--All the logic is correct it is just the AI is not walking down the middle of the square which it needs to
 	[*]Cleaned up a bit but needs another pass
 	-What a nightmare this was, there were a couple MAJOR bugs in the code. In total between during competition trying to fix this and post-comp probably spent about 10 hours debugging it
+	[]When the player walks into a tile that is a wall the AI will walk right through it, implement one or the other or both of the below
+		[]Make it so if the player walks against a wall the Tile that the player is on (from an AI perspective) will not update, so the AI will know there is a wall there
+		[]Tile smasher...smash each tile into 9 tiles from an AI perspective
 [*]With the new manager the AI can sometimes bounce back and forth several times before actually thinking it caught the player
 [*]AI cannot get the player if they are against an outer wall
 [*]If you agro the AI with the new algorithm for their walking paths they will get stucks
@@ -109,13 +112,15 @@ ISSUES
 [*]In level 1 once the AI makes a complete round and are back at the beginning they both start to walk in same direction. Counter-clockwise guy gets the right waypoint but longest path
 [*]AI manager rarely throws an InvalidOperation exception on startup due to the collection being modified...even though it is wrapped in a lock statement
 [*]AI is throwing an excepton on resets for Map4
-[]Audio API is still throwing an exception
+[*]Audio API is still throwing an exception
 	{"Attempted to read or write protected memory. This is often an indication that other memory is corrupt."}
    at Microsoft.Xna.Framework.Audio.AudioCallbackDispatcher.IsEventRegistered(EventType type)
    at Microsoft.Xna.Framework.Audio.AudioCallbackDispatcher.UnregisterEvent(EventType type)
    at Microsoft.Xna.Framework.Audio.KernelMicrophone.ShutdownCaptureEngine()
    at Microsoft.Xna.Framework.Audio.MicrophoneUnsafeNativeMethods.ShutdownCaptureEngine()
    at Microsoft.Xna.Framework.Audio.AudioRendererShutdownHandler.AppExitingEventHandler(Object sender, EventArgs args)
+	-Problem with the XNA framework when you manually(correctly) dispose of sound effects on closing. The solution is to let the ContentManager handle the disposale of SFX's
+
 ============================
 		Time
 ============================

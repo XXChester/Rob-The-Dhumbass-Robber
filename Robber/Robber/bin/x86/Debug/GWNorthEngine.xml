@@ -1998,6 +1998,27 @@
             UnloadContent will be called once per game and is the place to unload all content
             </summary>
         </member>
+        <member name="T:GWNorthEngine.Tools.TilePlacer.Layer">
+            <summary>
+            Models the data that makes up a layer of a full map
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Tools.TilePlacer.Layer.#ctor(GWNorthEngine.Tools.TilePlacer.MapTile[0:,0:])">
+            <summary>
+            Constructs a Layer based off the xml loaded via the MapLoader
+            </summary>
+            <param name="tiles">Array of MapTile objects loaded from the xml</param>
+        </member>
+        <member name="M:GWNorthEngine.Tools.TilePlacer.Layer.dispose">
+            <summary>
+            Cleans up the tiles
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Tools.TilePlacer.Layer.Tiles">
+            <summary>
+            Gets or sets the tiles used to draw the map
+            </summary>
+        </member>
         <member name="T:GWNorthEngine.Scripting.Utils.ScriptUtils">
             <summary>
             Helpful methods for scripting
@@ -2250,27 +2271,6 @@
         <member name="P:GWNorthEngine.Model.StaticDrawable2D.Texture">
             <summary>
             Gets or sets the Texture of the static drawable object
-            </summary>
-        </member>
-        <member name="T:GWNorthEngine.Tools.TilePlacer.Layer">
-            <summary>
-            Models the data that makes up a layer of a full map
-            </summary>
-        </member>
-        <member name="M:GWNorthEngine.Tools.TilePlacer.Layer.#ctor(GWNorthEngine.Tools.TilePlacer.MapTile[0:,0:])">
-            <summary>
-            Constructs a Layer based off the xml loaded via the MapLoader
-            </summary>
-            <param name="tiles">Array of MapTile objects loaded from the xml</param>
-        </member>
-        <member name="M:GWNorthEngine.Tools.TilePlacer.Layer.dispose">
-            <summary>
-            Cleans up the tiles
-            </summary>
-        </member>
-        <member name="P:GWNorthEngine.Tools.TilePlacer.Layer.Tiles">
-            <summary>
-            Gets or sets the tiles used to draw the map
             </summary>
         </member>
     </members>
