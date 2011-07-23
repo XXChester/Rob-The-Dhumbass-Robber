@@ -27,10 +27,12 @@ namespace Robber {
 		public Item(ContentManager content, string textureName, Placement startingPlacement) {
 			StaticDrawable2DParams parms = new StaticDrawable2DParams();
 			parms.Texture = LoadingUtils.loadTexture2D(content, textureName);
-			parms.Position = startingPlacement.worldPosition;
+			parms.Origin = new Vector2(ResourceManager.TILE_SIZE / 2f);
+			//parms.Position = startingPlacement.worldPosition;
+			parms.Position = new Vector2(startingPlacement.worldPosition.X + parms.Origin.X, startingPlacement.worldPosition.Y);
 			this.image = new StaticDrawable2D(parms);
 			this.placement = startingPlacement;
-			this.BoundingBox = Helper.getTilePaddedBBox(this.placement.worldPosition);
+			this.BoundingBox = Helper.getSmallerBBox(parms.Position, 3.5f);// Helper.getTilePaddedBBox(this.placement.worldPosition);
 		}
 		#endregion Constructor
 

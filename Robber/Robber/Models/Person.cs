@@ -65,7 +65,7 @@ namespace Robber {
 			this.direction = Direction.None;
 			this.movementSpeed = movementSpeed;
 			this.activeSprite = this.rightSprite;
-			this.BoundingBox = Helper.getBBox(this.activeSprite.Position);
+			this.BoundingBox = Helper.getPersonBBox(this.activeSprite.Position);
 			this.previousTypeOfSpace = AIManager.getInstance().Board[this.Placement.index.Y, this.Placement.index.X];
 		}
 		#endregion Constructor
@@ -131,7 +131,7 @@ namespace Robber {
 		protected virtual void updateLocation(float elapsed) {
 			// update our placement and bounding box
 			this.Placement = new Placement(Placement.getIndex(this.activeSprite.Position));
-			this.BoundingBox = Helper.getBBox(this.activeSprite.Position);
+			this.BoundingBox = Helper.getPersonBBox(this.activeSprite.Position);
 
 			if (this.previousPlacement.index != this.Placement.index) {
 				AIManager.getInstance().Board[this.previousPlacement.index.Y, this.previousPlacement.index.X] = this.previousTypeOfSpace;

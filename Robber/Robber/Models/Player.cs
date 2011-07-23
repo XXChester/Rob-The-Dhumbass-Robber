@@ -74,7 +74,7 @@ namespace Robber {
 					newPos = new Vector2(this.activeSprite.Position.X - moveDistance, this.activeSprite.Position.Y);
 				}
 				// check if the new position would result in a collision, if not, assign the sprite the position
-				if (!CollisionManager.getInstance().wallCollisionFound(Helper.getBBox(newPos))) {
+				if (!CollisionManager.getInstance().wallCollisionFound(Helper.getPersonBBox(newPos))) {
 					this.activeSprite.Position = newPos;
 				}
 			}

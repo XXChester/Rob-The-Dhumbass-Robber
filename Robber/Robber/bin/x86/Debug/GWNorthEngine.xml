@@ -646,7 +646,7 @@
             Tile that you cannot pass through
             </summary>
         </member>
-        <member name="F:GWNorthEngine.Tools.TilePlacer.TileValues.StandOns">
+        <member name="F:GWNorthEngine.Tools.TilePlacer.TileValues.SpawnPoint">
             <summary>
             Tiles that you stand on
             </summary>
@@ -1640,6 +1640,11 @@
             Music engine, handles playing a play list
             </summary>
         </member>
+        <member name="F:GWNorthEngine.Audio.MusicEngine.internalTrackNumber">
+            <summary>
+            This should only be used within the music engine and NEVER for an update, use the TrackNumber property for updates
+            </summary>
+        </member>
         <member name="M:GWNorthEngine.Audio.MusicEngine.#ctor(GWNorthEngine.Audio.Params.MusicEngineParams)">
             <summary>
             Builds a MusicEngine based on the data passed in via the parameter object
@@ -1688,9 +1693,19 @@
             Unpauses the current track
             </summary>
         </member>
+        <member name="M:GWNorthEngine.Audio.MusicEngine.update">
+            <summary>
+            Progresses the sound track alongs its path at the end of a sound
+            </summary>
+        </member>
         <member name="M:GWNorthEngine.Audio.MusicEngine.dispose">
             <summary>
             Cleans up resources used by the music engine
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Audio.MusicEngine.TrackNumber">
+            <summary>
+            Gets the track number we are sitting at
             </summary>
         </member>
         <member name="P:GWNorthEngine.Audio.MusicEngine.currentTrack">

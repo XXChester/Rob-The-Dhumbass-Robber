@@ -62,7 +62,8 @@ Fix major problems with the game and implement some of the features that got scr
 [*]Pull the game over screen out of the GameDisplay....I crammed this into that display due to crunch at the end of the competition...now do it properly
 [*]Change exit tile to be written in white and than load it's colour throw the XML loader
 	-Didn't want this to be dynamic so made it so that it always renders white. The problem was for certain colours of the walls the exit tile would render black and not red(desired)
-[]Move bounding boxes down to represent the feet in the tile now as we are now sort of taking on a 2.5D perspective
+[*]Move bounding boxes down to represent the feet in the tile now as we are now sort of taking on a 2.5D perspective
+	-Also did the treasure
 
 ============================
 	Polish(Phase 2)
@@ -112,7 +113,7 @@ ISSUES
 [*]In level 1 once the AI makes a complete round and are back at the beginning they both start to walk in same direction. Counter-clockwise guy gets the right waypoint but longest path
 [*]AI manager rarely throws an InvalidOperation exception on startup due to the collection being modified...even though it is wrapped in a lock statement
 [*]AI is throwing an excepton on resets for Map4
-[*]Audio API is still throwing an exception
+[]Audio API is still throwing an exception
 	{"Attempted to read or write protected memory. This is often an indication that other memory is corrupt."}
    at Microsoft.Xna.Framework.Audio.AudioCallbackDispatcher.IsEventRegistered(EventType type)
    at Microsoft.Xna.Framework.Audio.AudioCallbackDispatcher.UnregisterEvent(EventType type)
@@ -120,12 +121,13 @@ ISSUES
    at Microsoft.Xna.Framework.Audio.MicrophoneUnsafeNativeMethods.ShutdownCaptureEngine()
    at Microsoft.Xna.Framework.Audio.AudioRendererShutdownHandler.AppExitingEventHandler(Object sender, EventArgs args)
 	-Problem with the XNA framework when you manually(correctly) dispose of sound effects on closing. The solution is to let the ContentManager handle the disposale of SFX's
+		-This did not solve the problem either
 
 ============================
 		Time
 ============================
 Planning: 2 hours
-Programming:	43.5 hours	
+Programming:	44 hours
 Map Creation(Including creating editor via scripting engine):	8 hours	
 Art: 5.75 hours	
 Sound:	2 hours	
