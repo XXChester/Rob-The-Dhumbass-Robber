@@ -1,7 +1,7 @@
 ﻿============================
 	Objectives	V1
 ============================
-Entry into my first ever dev competition and it is the GameDev.net community weekend challenge starting May 12th at noon to May 16th at Noon. My plan is to get something in a playable
+Entry into my first ever dev competition and it is the GameDev.net community weekend challenge starting May 12th, 2011 at noon to May 16th, 2011 at Noon. My plan is to get something in a playable
 state by the end of the competition. I do not intend to place but rather just use this as a learning opportunity.
 
 Placed 4th in the competition (Yes I am considering 4th a place because there were 4 prizes). There was a total of 12 submissions and many that did not make the deadline and failed
@@ -53,6 +53,7 @@ Fix major problems with the game and implement some of the features that got scr
 []Couple extra guards run in from the exit point if you are detected
 []Add in random sneezing if you stand within the same tile too long
 []Put doors in	-wasn't going to put these in but should put locked doors in that only guards can walk through
+	[*]Alter engine's A* algorithms to handle variable terrain costs in preparation for locked doors
 [*]Design an algorithm for automatically generating bounding boxes
 [*]Every guard gets there own AI thread ATM, this is unncessary. Change the AI manager to be single threaded and guards put a request to the manager when they need a new path
 [*]Alternate flow to go from a "game over state"(regardless of win/loose etc) to the map selection screen
@@ -60,10 +61,11 @@ Fix major problems with the game and implement some of the features that got scr
 [*]Rewrite guard movement code, it is a giant mess from the competition and only works for left/right movement (in the sense of walking down the missle of a tile)
 []Write an input manager
 [*]Pull the game over screen out of the GameDisplay....I crammed this into that display due to crunch at the end of the competition...now do it properly
-[*]Change exit tile to be written in white and than load it's colour throw the XML loader
-	-Didn't want this to be dynamic so made it so that it always renders white. The problem was for certain colours of the walls the exit tile would render black and not red(desired)
+[*]Change exit tile to be written in white and than load it's colour threw the XML loader
+	-Didn't want this to be dynamic so made it so that it always renders red. The problem was for certain colours of the walls the exit tile would render black and not red(desired)
 [*]Move bounding boxes down to represent the feet in the tile now as we are now sort of taking on a 2.5D perspective
 	-Also did the treasure
+[]Switch AI to use the Walker algorithm with no cutting corners opposed to the current MazeSolver algorithm. Guards should be able to move in all 8 directions instead of just 4 cardinal
 
 ============================
 	Polish(Phase 2)
@@ -101,11 +103,9 @@ ISSUES
 		[]Tile smasher...smash each tile into 9 tiles from an AI perspective
 [*]With the new manager the AI can sometimes bounce back and forth several times before actually thinking it caught the player
 [*]AI cannot get the player if they are against an outer wall
-[*]If you agro the AI with the new algorithm for their walking paths they will get stucks
+[*]If you agro the AI with the new algorithm for their walking paths they will get stuck
 [*]Clicking on the Return to Main button near where the Exit button spawns will exit the game....if I get to transitions that should fix the issue
 [*]Radius detection bounding spehere is not computing correctly on the south/east side
-[*]Appears the sound API crashes the game sometimes with no stack trace or anything....appears to only be in debug mode
-	-Corrected this by building my own sound API that stops sfxs when the game is shutting down
 [*]Nasty flash when you hit replay			-caused by the reset() call
 	[]Solving this makes the score reset to the levels time before the transition out, it was either this or a nasty flash...I think the flash was a lot worse
 [*]Major bug in the tile editor, the width is padded + 1, once the editor is fixed you need to remap all 3 maps, and rip out the padding all over the code.
@@ -127,7 +127,7 @@ ISSUES
 		Time
 ============================
 Planning: 2 hours
-Programming:	44 hours
+Programming:	55 hours
 Map Creation(Including creating editor via scripting engine):	8 hours	
 Art: 5.75 hours	
 Sound:	2 hours	
