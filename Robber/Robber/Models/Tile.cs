@@ -35,7 +35,7 @@ namespace Robber {
 		public Tile(Texture2D texture, Point index, Color renderColour)
 		:base(index, texture) {
 			StaticDrawable2DParams parms = new StaticDrawable2DParams();
-			parms.Position = base.WorldPosition;
+			parms.Position = new Vector2(base.WorldPosition.X, base.WorldPosition.Y  + GameDisplay.BOARD_OFFSET_Y);
 			parms.Texture = texture;
 			parms.LightColour = renderColour;
 			this.image = new StaticDrawable2D(parms);

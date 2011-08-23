@@ -18,29 +18,18 @@ namespace Robber {
 			this.index = new Point(x, y);
 		}
 
-	/*	public Placement(Point index, Vector2 position) {
-			this.worldPosition = position;
-			this.index = index;
-		}*/
-
 		public Placement(Point index)
 			:this(index, 0) {
 		}
 
 		public Placement(Point index, int buffer) {
 			this.index = index;
-			this.worldPosition = new Vector2(index.X * ResourceManager.TILE_SIZE + buffer, index.Y * ResourceManager.TILE_SIZE + buffer);
+			this.worldPosition = new Vector2(index.X * ResourceManager.TILE_SIZE + buffer, index.Y * ResourceManager.TILE_SIZE + buffer + GameDisplay.BOARD_OFFSET_Y);
 		}
-
-		/*public static Placement getPlacement(Vector2 point) {
-			int x = (int)point.X / ResourceManager.TILE_SIZE;
-			int y = (int)point.Y / ResourceManager.TILE_SIZE;
-			return new Placement(new Point(x, y));
-		}*/
 
 		public static Point getIndex(Vector2 point) {
 			int x = (int)point.X / ResourceManager.TILE_SIZE;
-			int y = (int)point.Y / ResourceManager.TILE_SIZE ;
+			int y = (int)(point.Y - GameDisplay.BOARD_OFFSET_Y)/ ResourceManager.TILE_SIZE ;
 			return new Point(x,y);
 		}
 	}

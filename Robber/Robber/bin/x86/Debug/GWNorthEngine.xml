@@ -175,6 +175,56 @@
             Gets or sets the end position of the line
             </summary>
         </member>
+        <member name="T:GWNorthEngine.AI.AStar.BaseCosts">
+            <summary>
+            Base governing implementation of the cost module for determining tiles costs
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.AI.AStar.BaseCosts.#ctor(System.Single)">
+            <summary>
+            Builsd the basic cost class
+            </summary>
+            <param name="diagonalMultiplier">Multiplier used for diagonal movement determination</param>
+        </member>
+        <member name="M:GWNorthEngine.AI.AStar.BaseCosts.getDiagonalCost(System.Int32)">
+            <summary>
+            Determines the diagonal cost associated with a tile
+            </summary>
+            <param name="currentPositionsCost">Value if the tile were a straight move not a diagonal move</param>
+            <returns>Diagonal cost of the tile</returns>
+        </member>
+        <member name="M:GWNorthEngine.AI.AStar.BaseCosts.getCost(GWNorthEngine.AI.AStar.PathFinder.TypeOfSpace)">
+            <summary>
+            Determines the cost of a tile based on its type
+            </summary>
+            <param name="space"></param>
+            <returns></returns>
+        </member>
+        <member name="P:GWNorthEngine.AI.AStar.BaseCosts.StandardCost">
+            <summary>
+            Cost of a standard Walkable tile
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.AI.AStar.BaseCosts.VariableTerrainLowCost">
+            <summary>
+            Cost of a Variable Terrain Low Cost tile
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.AI.AStar.BaseCosts.VariableTerrainMediumCost">
+            <summary>
+            Cost of a Variable Terrain Medium Cost tile
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.AI.AStar.BaseCosts.VariableTerrainHighCost">
+            <summary>
+            Cost of a Variable Terrain High Cost tile
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.AI.AStar.BaseCosts.DiagonalMultiplier">
+            <summary>
+            Gets or sets the Diagonal Multiplier used for determining the cost of diagonal moves
+            </summary>
+        </member>
         <member name="T:GWNorthEngine.Utils.LoadingUtils">
             <summary>
             Contains helper methods for loading data from the file system
@@ -644,6 +694,36 @@
             Can generate moves in any direction
             </summary>
         </member>
+        <member name="T:GWNorthEngine.AI.AStar.DefaultCosts">
+            <summary>
+            Default Cost implementation for variable terrain
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.AI.AStar.DefaultCosts.#ctor">
+            <summary>
+            Constructs the DefaultClass implementation with a diagonal multiplier of 1.5f
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.AI.AStar.DefaultCosts.StandardCost">
+            <summary>
+            Cost of a standard Walkable tile (cost: 10)
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.AI.AStar.DefaultCosts.VariableTerrainLowCost">
+            <summary>
+            Cost of a Variable Terrain Low Cost tile (cost: StandardCost * 2)
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.AI.AStar.DefaultCosts.VariableTerrainMediumCost">
+            <summary>
+            Cost of a Variable Terrain Medium Cost tile (cost: StandardCost * 3)
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.AI.AStar.DefaultCosts.VariableTerrainHighCost">
+            <summary>
+            Cost of a Variable Terrain High Cost tile (cost: StandardCost * 4)
+            </summary>
+        </member>
         <member name="T:GWNorthEngine.Utils.StringUtils">
             <summary>
             Helper methods for manipulating string values
@@ -698,6 +778,26 @@
         <member name="F:GWNorthEngine.Tools.TilePlacer.TileValues.Climbers">
             <summary>
             Tiles that you can climb
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Tools.TilePlacer.TileValues.Walkable">
+            <summary>
+            Moveable piece on the board
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Tools.TilePlacer.TileValues.VariableTerrainLowCost">
+            <summary>
+            Variable terrain with a higher cost than standard with an extra cost that is low
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Tools.TilePlacer.TileValues.VariableTerrainMediumCost">
+            <summary>
+            Variable terrain with a higher cost than standard with an extra cost that is medium
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Tools.TilePlacer.TileValues.VariableTerrainHighCost">
+            <summary>
+            Variable terrain with a higher cost than standard with an extra cost that is high
             </summary>
         </member>
         <member name="T:GWNorthEngine.Scripting.ScriptManager">
@@ -2325,86 +2425,6 @@
         <member name="P:GWNorthEngine.Model.StaticDrawable2D.Texture">
             <summary>
             Gets or sets the Texture of the static drawable object
-            </summary>
-        </member>
-        <member name="T:GWNorthEngine.AI.AStar.BaseCosts">
-            <summary>
-            Base governing implementation of the cost module for determining tiles costs
-            </summary>
-        </member>
-        <member name="M:GWNorthEngine.AI.AStar.BaseCosts.#ctor(System.Single)">
-            <summary>
-            Builsd the basic cost class
-            </summary>
-            <param name="diagonalMultiplier">Multiplier used for diagonal movement determination</param>
-        </member>
-        <member name="M:GWNorthEngine.AI.AStar.BaseCosts.getDiagonalCost(System.Int32)">
-            <summary>
-            Determines the diagonal cost associated with a tile
-            </summary>
-            <param name="currentPositionsCost">Value if the tile were a straight move not a diagonal move</param>
-            <returns>Diagonal cost of the tile</returns>
-        </member>
-        <member name="M:GWNorthEngine.AI.AStar.BaseCosts.getCost(GWNorthEngine.AI.AStar.PathFinder.TypeOfSpace)">
-            <summary>
-            Determines the cost of a tile based on its type
-            </summary>
-            <param name="space"></param>
-            <returns></returns>
-        </member>
-        <member name="P:GWNorthEngine.AI.AStar.BaseCosts.StandardCost">
-            <summary>
-            Cost of a standard Walkable tile
-            </summary>
-        </member>
-        <member name="P:GWNorthEngine.AI.AStar.BaseCosts.VariableTerrainLowCost">
-            <summary>
-            Cost of a Variable Terrain Low Cost tile
-            </summary>
-        </member>
-        <member name="P:GWNorthEngine.AI.AStar.BaseCosts.VariableTerrainMediumCost">
-            <summary>
-            Cost of a Variable Terrain Medium Cost tile
-            </summary>
-        </member>
-        <member name="P:GWNorthEngine.AI.AStar.BaseCosts.VariableTerrainHighCost">
-            <summary>
-            Cost of a Variable Terrain High Cost tile
-            </summary>
-        </member>
-        <member name="P:GWNorthEngine.AI.AStar.BaseCosts.DiagonalMultiplier">
-            <summary>
-            Gets or sets the Diagonal Multiplier used for determining the cost of diagonal moves
-            </summary>
-        </member>
-        <member name="T:GWNorthEngine.AI.AStar.DefaultCosts">
-            <summary>
-            Default Cost implementation for variable terrain
-            </summary>
-        </member>
-        <member name="M:GWNorthEngine.AI.AStar.DefaultCosts.#ctor">
-            <summary>
-            Constructs the DefaultClass implementation with a diagonal multiplier of 1.5f
-            </summary>
-        </member>
-        <member name="P:GWNorthEngine.AI.AStar.DefaultCosts.StandardCost">
-            <summary>
-            Cost of a standard Walkable tile (cost: 10)
-            </summary>
-        </member>
-        <member name="P:GWNorthEngine.AI.AStar.DefaultCosts.VariableTerrainLowCost">
-            <summary>
-            Cost of a Variable Terrain Low Cost tile (cost: StandardCost * 2)
-            </summary>
-        </member>
-        <member name="P:GWNorthEngine.AI.AStar.DefaultCosts.VariableTerrainMediumCost">
-            <summary>
-            Cost of a Variable Terrain Medium Cost tile (cost: StandardCost * 3)
-            </summary>
-        </member>
-        <member name="P:GWNorthEngine.AI.AStar.DefaultCosts.VariableTerrainHighCost">
-            <summary>
-            Cost of a Variable Terrain High Cost tile (cost: StandardCost * 4)
             </summary>
         </member>
     </members>

@@ -35,14 +35,14 @@ namespace Robber {
 		private SoundEffect payDaySfx;
 		private SoundEffect treasureSfx;
 		private float payDayDelay;
-		private const float DELAY_PAY_DAY_EMOTE = 5000f;
-
 		private ContentManager content;
+		private const float DELAY_PAY_DAY_EMOTE = 5000f;
 #if DEBUG
 		private bool showAI = false;
 		private bool showCD = false;
 		private bool showWayPoints = false;
 #endif
+		public const float BOARD_OFFSET_Y = 15f;
 		#endregion Class variables
 
 		#region Class propeties
@@ -73,12 +73,12 @@ namespace Robber {
 			Text2DParams textParms = new Text2DParams();
 			textParms.Font = ResourceManager.getInstance().Font;
 			textParms.LightColour = ResourceManager.TEXT_COLOUR;
-			textParms.Position = new Vector2(350f, 575f);
+			textParms.Position = new Vector2(727f, 115f);
 			this.treasureText = new Text2D(textParms);
 
 			StaticDrawable2DParams staticParms = new StaticDrawable2DParams();
 			staticParms = new StaticDrawable2DParams();
-			staticParms.Position = new Vector2(325f, 573f);
+			staticParms.Position = new Vector2(702f, 113f);
 			staticParms.Texture = LoadingUtils.loadTexture2D(content, "Treasure1");
 			this.treasure = new StaticDrawable2D(staticParms);
 

@@ -51,6 +51,7 @@ Fix major problems with the game and implement some of the features that got scr
 [*]Change all data to xml based
 []Add in garbage cans to hide in and clear agro**
 []Couple extra guards run in from the exit point if you are detected
+	-Don't implement this until a lot more is figured out such as what happens if you go into a garbage can?
 []Add in random sneezing if you stand within the same tile too long
 []Put doors in	-wasn't going to put these in but should put locked doors in that only guards can walk through
 	[*]Alter engine's A* algorithms to handle variable terrain costs in preparation for locked doors
@@ -89,7 +90,9 @@ Replace the programmer art with less crappy programmer art and make the game not
 [*]Map select screen
 [*]Change sprite direction determination for up and down, base it on last direction
 []More maps		-Biggest complaint from the competition was there was only 3 levels and 2 were very similar
-[]Compaign mode & Arcade mode
+[]Compaign mode?
+[]Arcade mode
+[]Sub mode of time attack or normal? Time attack makes you compete against a fast clock, otherwise you get a default time such as 5 minutes to solve the puzzle
 []Cinematic of Rob falling through the roof
 
 ===========================
@@ -127,7 +130,7 @@ ISSUES
 		Time
 ============================
 Planning: 2 hours
-Programming:	55 hours
+Programming:	55 hours	4-18pm-
 Map Creation(Including creating editor via scripting engine):	8 hours	
 Art: 5.75 hours	
 Sound:	2 hours	
