@@ -92,7 +92,7 @@ Replace the programmer art with less crappy programmer art and make the game not
 []More maps		-Biggest complaint from the competition was there was only 3 levels and 2 were very similar
 []Compaign mode?
 []Arcade mode
-[]Sub mode of time attack or normal? Time attack makes you compete against a fast clock, otherwise you get a default time such as 5 minutes to solve the puzzle
+[*]Sub mode of time attack or normal? Time attack makes you compete against a fast clock, otherwise you get a default time such as 5 minutes to solve the puzzle
 []Cinematic of Rob falling through the roof
 
 ===========================
@@ -130,7 +130,7 @@ ISSUES
 		Time
 ============================
 Planning: 2 hours
-Programming:	55 hours	4-18pm-
+Programming:	56.75 hours
 Map Creation(Including creating editor via scripting engine):	8 hours	
 Art: 5.75 hours	
 Sound:	2 hours	

@@ -18,7 +18,7 @@ namespace Robber {
 	public class MapSeletMenu : Display {
 	#region Class variables
 		private List<MapSelection> mapSelections;
-		private ColouredButton exitToMainButton;
+		private ColouredButton returnToModeSelectButton;
 		private StaticDrawable2D title;
 		private SoundEffect outroSfx;
 		private StaticDrawable2D noPreviewImage;
@@ -39,9 +39,9 @@ namespace Robber {
 			buttonParms.StartX = 580;
 			buttonParms.Width = 205;
 			buttonParms.StartY = 557;
-			buttonParms.Text = "Exit To Main Menu";
-			buttonParms.TextsPosition = new Vector2(590f, buttonParms.StartY - 2);
-			this.exitToMainButton = new ColouredButton(buttonParms);
+			buttonParms.Text = "Mode Selection";
+			buttonParms.TextsPosition = new Vector2(605f, buttonParms.StartY - 2);
+			this.returnToModeSelectButton = new ColouredButton(buttonParms);
 
 			// read in our map names from the Maps directory
 			string[] maps = Directory.GetFiles(ResourceManager.MAP_FOLDER, "*.png");
@@ -81,9 +81,9 @@ namespace Robber {
 			foreach (MapSelection selection in this.mapSelections) {
 				selection.update(elapsed);
 			}
-			this.exitToMainButton.processActorsMovement(mousePos);
+			this.returnToModeSelectButton.processActorsMovement(mousePos);
 			// mouse over sfx
-			if (this.exitToMainButton.isActorOver(mousePos)) {
+			if (this.returnToModeSelectButton.isActorOver(mousePos)) {
 				if (!base.previousMouseOverButton) {
 					SoundManager.getInstance().sfxEngine.playSoundEffect(ResourceManager.getInstance().MouseOverSfx);
 				}
@@ -106,8 +106,8 @@ namespace Robber {
 			}
 			if (StateManager.getInstance().CurrentTransitionState == StateManager.TransitionState.None) {
 				if (base.currentMouseState.LeftButton == ButtonState.Pressed && base.prevousMouseState.LeftButton == ButtonState.Released) {
-					if (this.exitToMainButton.isActorOver(mousePos)) {
-						StateManager.getInstance().CurrentGameState = StateManager.GameState.MainMenu;
+					if (this.returnToModeSelectButton.isActorOver(mousePos)) {
+						StateManager.getInstance().CurrentGameState = StateManager.GameState.ModeSelect;
 						StateManager.getInstance().CurrentTransitionState = StateManager.TransitionState.TransitionOut;
 					} else {
 						foreach (MapSelection selection in this.mapSelections) {
@@ -124,10 +124,10 @@ namespace Robber {
 				}
 			} else if (StateManager.getInstance().CurrentTransitionState == StateManager.TransitionState.TransitionIn) {
 				this.title.LightColour = base.fadeIn(Color.White);
-				this.exitToMainButton.updateColours(base.fadeIn(ResourceManager.TEXT_COLOUR));
+				this.returnToModeSelectButton.updateColours(base.fadeIn(ResourceManager.TEXT_COLOUR));
 				this.noPreviewImage.LightColour = base.fadeIn(ResourceManager.TEXT_COLOUR);
-				if (this.exitToMainButton.isActorOver(mousePos)) {
-					this.exitToMainButton.updateColours(base.fadeIn(ResourceManager.MOUSE_OVER_COLOUR));
+				if (this.returnToModeSelectButton.isActorOver(mousePos)) {
+					this.returnToModeSelectButton.updateColours(base.fadeIn(ResourceManager.MOUSE_OVER_COLOUR));
 				}
 				foreach (MapSelection selection in this.mapSelections) {
 					if (selection.PreviewButton.isActorOver(mousePos)) {
@@ -139,10 +139,10 @@ namespace Robber {
 				}
 			} else if (StateManager.getInstance().CurrentTransitionState == StateManager.TransitionState.TransitionOut) {
 				this.title.LightColour = base.fadeOut(Color.White);
-				this.exitToMainButton.updateColours(base.fadeOut(ResourceManager.TEXT_COLOUR));
+				this.returnToModeSelectButton.updateColours(base.fadeOut(ResourceManager.TEXT_COLOUR));
 				this.noPreviewImage.LightColour = base.fadeOut(ResourceManager.TEXT_COLOUR);
-				if (this.exitToMainButton.isActorOver(mousePos)) {
-					this.exitToMainButton.updateColours(base.fadeOut(ResourceManager.MOUSE_OVER_COLOUR));
+				if (this.returnToModeSelectButton.isActorOver(mousePos)) {
+					this.returnToModeSelectButton.updateColours(base.fadeOut(ResourceManager.MOUSE_OVER_COLOUR));
 				}
 				foreach (MapSelection selection in this.mapSelections) {
 					if (selection.PreviewButton.isActorOver(mousePos)) {
@@ -182,14 +182,14 @@ namespace Robber {
 			if (!foundMouseOver) {
 				this.noPreviewImage.render(spriteBatch);
 			}
-			this.exitToMainButton.render(spriteBatch);
+			this.returnToModeSelectButton.render(spriteBatch);
 		}
 		#endregion Support methods
 
 		#region Destructor
 		public override void dispose() {
-			if (this.exitToMainButton != null) {
-				this.exitToMainButton.dispose();
+			if (this.returnToModeSelectButton != null) {
+				this.returnToModeSelectButton.dispose();
 			}
 			if (this.title != null) {
 				this.title.dispose();

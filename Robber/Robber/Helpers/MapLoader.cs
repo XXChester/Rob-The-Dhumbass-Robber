@@ -153,10 +153,12 @@ namespace Robber {
 				// do nothign else with the error as the map is obviously in development stages
 			}
 
-			try {
-				time = (float)(((float[])loadObject<float>(doc, MapEditor.XML_TIME, new string[] { MapEditor.XML_MINUTES }))[0]);
-			} catch (Exception) {
-				// do nothign else with the error as the map is obviously in development stages
+			if (StateManager.getInstance().GameMode == StateManager.Mode.TimeAttack) {
+				try {
+					time = (float)(((float[])loadObject<float>(doc, MapEditor.XML_TIME, new string[] { MapEditor.XML_MINUTES }))[0]);
+				} catch (Exception) {
+					// do nothing else with the error as the map is obviously in development stages
+				}
 			}
 		}
 

@@ -7,6 +7,7 @@ namespace Robber {
 	public class StateManager {
 		public enum GameState {
 			MainMenu,
+			ModeSelect,
 			InGameMenu,
 			InitGame,
 			Reset,
@@ -15,6 +16,11 @@ namespace Robber {
 			GameOver,
 			MapSelection,
 			Exit
+		}
+
+		public enum Mode {
+			Normal,
+			TimeAttack
 		}
 
 		public enum TransitionState {
@@ -37,6 +43,7 @@ namespace Robber {
 		#region Class properties
 		public string MapInformation { get; set; }
 		public GameOverType TypeOfGameOver { get; set; }
+		public Mode GameMode { get; set; }
 		public TransitionState CurrentTransitionState { get; set; }
 		public TransitionState PreviousTransitionState { get; set; }
 		public GameState PreviousGameState { get; set; }
@@ -57,11 +64,16 @@ namespace Robber {
 
 		#region Constructor
 		public StateManager() {
-			//this.CurrentGameState = GameState.MainMenu;
-			//this.CurrentGameState = GameState.MapSelection;
-			this.CurrentGameState = GameState.InitGame;
-			this.MapInformation = "Map1";
+			// defaults
 			this.CurrentTransitionState = TransitionState.TransitionIn;
+			this.CurrentGameState = GameState.MainMenu;
+			this.GameMode = Mode.Normal;
+
+			// test settings
+			this.CurrentGameState = GameState.ModeSelect;
+			//this.GameMode = Mode.TimeAttack;
+			//this.CurrentGameState = GameState.InitGame;
+			//this.MapInformation = "Map1";
 		}
 		#endregion Constructor
 

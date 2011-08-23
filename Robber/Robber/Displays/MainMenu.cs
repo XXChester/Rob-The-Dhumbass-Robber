@@ -23,7 +23,6 @@ namespace Robber {
 		private StaticDrawable2D title;
 		private SoundEffect introSfx;
 		private SoundEffect idleSfx;
-		private SoundEffect outroSfx;
 		private float timeIdle;
 		private const float PLAY_IDLE_AT = 30000f;
 		#endregion Class variables
@@ -69,7 +68,6 @@ namespace Robber {
 			// load sound effects
 			this.introSfx = LoadingUtils.loadSoundEffect(content, "Introduction");
 			this.idleSfx = LoadingUtils.loadSoundEffect(content, "Rules");
-			this.outroSfx = LoadingUtils.loadSoundEffect(content, "WhereWeGonnaRob");
 			SoundManager.getInstance().sfxEngine.playSoundEffect(this.introSfx);
 #if WINDOWS
 #if DEBUG
@@ -100,8 +98,7 @@ namespace Robber {
 				if (base.currentMouseState.LeftButton == ButtonState.Pressed && base.prevousMouseState.LeftButton == ButtonState.Released) {
 					if (this.playButton.isActorOver(mousePos)) {
 						StateManager.getInstance().CurrentTransitionState = StateManager.TransitionState.TransitionOut;
-						StateManager.getInstance().CurrentGameState = StateManager.GameState.MapSelection;
-						SoundManager.getInstance().sfxEngine.playSoundEffect(this.outroSfx);
+						StateManager.getInstance().CurrentGameState = StateManager.GameState.ModeSelect;
 					} else if (this.exitButton.isActorOver(mousePos)) {
 						StateManager.getInstance().CurrentGameState = StateManager.GameState.Exit;
 					}
@@ -176,9 +173,6 @@ namespace Robber {
 			}
 			if (this.idleSfx != null) {
 				this.idleSfx.Dispose();
-			}
-			if (this.outroSfx != null) {
-				this.outroSfx.Dispose();
 			}
 		}
 		#endregion Destructor

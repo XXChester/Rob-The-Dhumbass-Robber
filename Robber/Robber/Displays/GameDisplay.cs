@@ -60,13 +60,13 @@ namespace Robber {
 			buttonParms.LinesTexture = ResourceManager.getInstance().ButtonLineTexture;
 			buttonParms.MouseOverColour = ResourceManager.MOUSE_OVER_COLOUR;
 			buttonParms.RegularColour = ResourceManager.TEXT_COLOUR;
-			buttonParms.StartX = 693;
+			buttonParms.StartX = 700;
 			buttonParms.Width = 75;
 			buttonParms.StartY = 557;
 
 			// start button
 			buttonParms.Text = "Start";
-			buttonParms.TextsPosition = new Vector2(704f, buttonParms.StartY - 2f);
+			buttonParms.TextsPosition = new Vector2(711f, buttonParms.StartY - 2f);
 			this.startButton = new ColouredButton(buttonParms);
 
 			// HUD
@@ -106,7 +106,7 @@ namespace Robber {
 			List<string> guardStates = new List<string>();
 			List<Point> treasureLocations = new List<Point>();
 			List<Point> wayPoints = new List<Point>();
-			float time = 0f;
+			float time = 5f;//default of 5 minutes
 			
 			try {
 				XmlDocument doc = new XmlDocument();
@@ -247,11 +247,15 @@ namespace Robber {
 				foreach (Guard guard in this.guards) {
 					guard.updateColours(colour);
 				}
-				this.timer.updateColours(base.fadeIn(ResourceManager.TEXT_COLOUR));
 				this.startButton.updateColours(base.fadeIn(ResourceManager.TEXT_COLOUR));
 				if (this.startButton.isActorOver(mousePos)) {
 					this.startButton.updateColours(base.fadeIn(ResourceManager.MOUSE_OVER_COLOUR));
 				}
+
+				// HUD
+				this.treasure.LightColour = colour;
+				this.treasureText.LightColour = base.fadeIn(ResourceManager.TEXT_COLOUR);
+				this.timer.updateColours(base.fadeIn(ResourceManager.TEXT_COLOUR));
 			} else if (StateManager.getInstance().CurrentTransitionState == StateManager.TransitionState.TransitionOut) {
 				Color colour = base.fadeOut(Color.White);
 				this.map.updateColours(base.fadeOut(this.map.FloorColour), base.fadeOut(this.map.WallColour));
@@ -262,12 +266,15 @@ namespace Robber {
 				foreach (Guard guard in this.guards) {
 					guard.updateColours(colour);
 				}
-				this.timer.updateColours(base.fadeOut(ResourceManager.TEXT_COLOUR));
-
 				this.startButton.updateColours(base.fadeOut(ResourceManager.TEXT_COLOUR));
 				if (this.startButton.isActorOver(mousePos)) {
 					this.startButton.updateColours(base.fadeOut(ResourceManager.MOUSE_OVER_COLOUR));
 				}
+
+				// HUD
+				this.treasure.LightColour = colour;
+				this.treasureText.LightColour = base.fadeOut(ResourceManager.TEXT_COLOUR);
+				this.timer.updateColours(base.fadeOut(ResourceManager.TEXT_COLOUR));
 			}
 
 			// if our transition is up
@@ -322,7 +329,8 @@ namespace Robber {
 					guard.render(spriteBatch);
 				}
 				this.timer.render(spriteBatch);
-				if (StateManager.getInstance().CurrentGameState == StateManager.GameState.Reset || StateManager.getInstance().CurrentGameState == StateManager.GameState.Waiting) {
+				if (StateManager.getInstance().CurrentGameState == StateManager.GameState.Reset || StateManager.getInstance().CurrentGameState == StateManager.GameState.Waiting || 
+					(StateManager.getInstance().CurrentGameState == StateManager.GameState.InGameMenu && StateManager.getInstance().PreviousGameState == StateManager.GameState.Waiting)) {
 					this.startButton.render(spriteBatch);
 				}
 #if DEBUG
