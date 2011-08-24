@@ -43,7 +43,7 @@ namespace Robber {
 		public void updateColours(Color floorColour, Color wallColour) {
 			foreach (Tile tile in this.tiles) {
 				if (tile != null) {
-					if (Tile.TILE_NAME_EXIT.Equals(tile.Texture.Name)) {
+					if (Tile.COLOUR_OVERRIDE_TILES.Contains<string>(tile.Texture.Name)) {
 						tile.updateColours(Color.White);
 					} else {
 						tile.updateColours(wallColour);

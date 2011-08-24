@@ -190,9 +190,6 @@ namespace Robber {
 
 		protected override void updateLocation(float elapsed) {
 			this.ring.updatePosition(base.activeSprite.Position);
-			if (base.previousPlacement.index != base.Placement.index) {
-				AIManager.getInstance().Board[base.Placement.index.Y, base.Placement.index.X] = PathFinder.TypeOfSpace.Unwalkable;
-			}
 			Point endNode = AIManager.getInstance().findEndNode();
 			if (this.closestsPoint == endNode) {
 				StateManager.getInstance().CurrentGameState = StateManager.GameState.GameOver;

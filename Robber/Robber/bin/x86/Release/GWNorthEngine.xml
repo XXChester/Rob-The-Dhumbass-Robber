@@ -175,6 +175,56 @@
             Gets or sets the end position of the line
             </summary>
         </member>
+        <member name="T:GWNorthEngine.AI.AStar.BaseCosts">
+            <summary>
+            Base governing implementation of the cost module for determining tiles costs
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.AI.AStar.BaseCosts.#ctor(System.Single)">
+            <summary>
+            Builsd the basic cost class
+            </summary>
+            <param name="diagonalMultiplier">Multiplier used for diagonal movement determination</param>
+        </member>
+        <member name="M:GWNorthEngine.AI.AStar.BaseCosts.getDiagonalCost(System.Int32)">
+            <summary>
+            Determines the diagonal cost associated with a tile
+            </summary>
+            <param name="currentPositionsCost">Value if the tile were a straight move not a diagonal move</param>
+            <returns>Diagonal cost of the tile</returns>
+        </member>
+        <member name="M:GWNorthEngine.AI.AStar.BaseCosts.getCost(GWNorthEngine.AI.AStar.PathFinder.TypeOfSpace)">
+            <summary>
+            Determines the cost of a tile based on its type
+            </summary>
+            <param name="space"></param>
+            <returns></returns>
+        </member>
+        <member name="P:GWNorthEngine.AI.AStar.BaseCosts.StandardCost">
+            <summary>
+            Cost of a standard Walkable tile
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.AI.AStar.BaseCosts.VariableTerrainLowCost">
+            <summary>
+            Cost of a Variable Terrain Low Cost tile
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.AI.AStar.BaseCosts.VariableTerrainMediumCost">
+            <summary>
+            Cost of a Variable Terrain Medium Cost tile
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.AI.AStar.BaseCosts.VariableTerrainHighCost">
+            <summary>
+            Cost of a Variable Terrain High Cost tile
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.AI.AStar.BaseCosts.DiagonalMultiplier">
+            <summary>
+            Gets or sets the Diagonal Multiplier used for determining the cost of diagonal moves
+            </summary>
+        </member>
         <member name="T:GWNorthEngine.Utils.LoadingUtils">
             <summary>
             Contains helper methods for loading data from the file system
@@ -494,6 +544,21 @@
             Random number generator used to break ties in the path
             </summary>
         </member>
+        <member name="F:GWNorthEngine.AI.AStar.PathFinder.restrictionType">
+            <summary>
+            Type of restriction against the board on moves that we can generate
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.AI.AStar.PathFinder.costs">
+            <summary>
+            Costs associated with the board's tiles
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.AI.AStar.PathFinder.ABSOLUTE_PARENT_POSITION">
+            <summary>
+            Constant that defines the parent at the start of the linked list of path nodes
+            </summary>
+        </member>
         <member name="M:GWNorthEngine.AI.AStar.PathFinder.#ctor(System.Int32,System.Int32,GWNorthEngine.AI.AStar.PathFinder.RestrictionType)">
             <summary>
             Builds a base A* PathFinder instance for on the fly processing
@@ -516,13 +581,22 @@
             <param name="parent">Parent node of the new nodes to be processed</param>
             <param name="parentsIndex">Index of the parent in the open list</param>
         </member>
-        <member name="M:GWNorthEngine.AI.AStar.PathFinder.getDistance(Microsoft.Xna.Framework.Point,System.Int32@,System.Int32@)">
+        <member name="M:GWNorthEngine.AI.AStar.PathFinder.getDistance(Microsoft.Xna.Framework.Point,GWNorthEngine.AI.AStar.PathNode,System.Int32@,System.Int32@)">
             <summary>
             Retrieves the start distance and the end distance from the current position
             </summary>
             <param name="currentPosition">Current position we are at in the search</param>
+            <param name="parentNode">Node that will be the parent of this position we are determining the distance for</param>
             <param name="startDistance">Output the distance from the start</param>
             <param name="endDistance">Output the distance from the end</param>
+        </member>
+        <member name="M:GWNorthEngine.AI.AStar.PathFinder.getDistanceToStart(Microsoft.Xna.Framework.Point,GWNorthEngine.AI.AStar.PathNode)">
+            <summary>
+            Gets the distance from the start based on the path we have already found and its associated costs
+            </summary>
+            <param name="currentPosition">Current tile position we are at</param>
+            <param name="parentNode">Node that will be the parent of this position we are determining the distance for</param>
+            <returns>G cost of the A* algorithm (The distance from the start)</returns>
         </member>
         <member name="M:GWNorthEngine.AI.AStar.PathFinder.getDistance(Microsoft.Xna.Framework.Point,Microsoft.Xna.Framework.Point)">
             <summary>
@@ -560,6 +634,11 @@
             Gets the path leading from the starting position to the ending position if there is one
             </summary>
         </member>
+        <member name="P:GWNorthEngine.AI.AStar.PathFinder.Costs">
+            <summary>
+            Gets or sets the class used to generate costs of the boards tiles
+            </summary>
+        </member>
         <member name="T:GWNorthEngine.AI.AStar.PathFinder.TypeOfSpace">
             <summary>
             Type of spaces the board can contain
@@ -585,6 +664,21 @@
             Goal position on the board
             </summary>
         </member>
+        <member name="F:GWNorthEngine.AI.AStar.PathFinder.TypeOfSpace.VariableTerrainLowCost">
+            <summary>
+            Variable terrain with a higher cost than standard with an extra cost that is low
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.AI.AStar.PathFinder.TypeOfSpace.VariableTerrainMediumCost">
+            <summary>
+            Variable terrain with a higher cost than standard with an extra cost that is medium
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.AI.AStar.PathFinder.TypeOfSpace.VariableTerrainHighCost">
+            <summary>
+            Variable terrain with a higher cost than standard with an extra cost that is high
+            </summary>
+        </member>
         <member name="T:GWNorthEngine.AI.AStar.PathFinder.RestrictionType">
             <summary>
             Restriction type used for searching of the next node
@@ -595,10 +689,66 @@
             Can only generates moves in a zig zag pattern, cannot cut corners or move diagonally
             </summary>
         </member>
-        <member name="F:GWNorthEngine.AI.AStar.PathFinder.RestrictionType.All">
+        <member name="F:GWNorthEngine.AI.AStar.PathFinder.RestrictionType.None">
             <summary>
             Can generate moves in any direction
             </summary>
+        </member>
+        <member name="T:GWNorthEngine.AI.AStar.DefaultCosts">
+            <summary>
+            Default Cost implementation for variable terrain
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.AI.AStar.DefaultCosts.#ctor">
+            <summary>
+            Constructs the DefaultClass implementation with a diagonal multiplier of 1.5f
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.AI.AStar.DefaultCosts.StandardCost">
+            <summary>
+            Cost of a standard Walkable tile (cost: 10)
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.AI.AStar.DefaultCosts.VariableTerrainLowCost">
+            <summary>
+            Cost of a Variable Terrain Low Cost tile (cost: StandardCost * 2)
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.AI.AStar.DefaultCosts.VariableTerrainMediumCost">
+            <summary>
+            Cost of a Variable Terrain Medium Cost tile (cost: StandardCost * 3)
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.AI.AStar.DefaultCosts.VariableTerrainHighCost">
+            <summary>
+            Cost of a Variable Terrain High Cost tile (cost: StandardCost * 4)
+            </summary>
+        </member>
+        <member name="T:GWNorthEngine.Utils.StringUtils">
+            <summary>
+            Helper methods for manipulating string values
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Utils.StringUtils.scrubPathAndExtFromFileName(System.String)">
+            <summary>
+            Stribs the file path and extension (if they exist) off of a file name
+            </summary>
+            <param name="fileName">filename to alter</param>
+            <returns>filename with the path and extension ripped off if they were present</returns>
+        </member>
+        <member name="M:GWNorthEngine.Utils.StringUtils.scrubPathFromFileName(System.String)">
+            <summary>
+            Scrubs the directory information off of a file name
+            </summary>
+            <param name="fileName">filename to alter</param>
+            <returns>filename with the path ripped off if it were present</returns>
+        </member>
+        <member name="M:GWNorthEngine.Utils.StringUtils.scrubExtensionFromFilename(System.String)">
+            <summary>
+            Scrubs the file extension from a file name
+            </summary>
+            <param name="fileName">filename to alter</param>
+            <returns>filename with the extension ripped off if it were present</returns>
         </member>
         <member name="T:GWNorthEngine.Tools.TilePlacer.TileValues">
             <summary>
@@ -620,7 +770,7 @@
             Tile that you cannot pass through
             </summary>
         </member>
-        <member name="F:GWNorthEngine.Tools.TilePlacer.TileValues.StandOns">
+        <member name="F:GWNorthEngine.Tools.TilePlacer.TileValues.SpawnPoint">
             <summary>
             Tiles that you stand on
             </summary>
@@ -628,6 +778,26 @@
         <member name="F:GWNorthEngine.Tools.TilePlacer.TileValues.Climbers">
             <summary>
             Tiles that you can climb
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Tools.TilePlacer.TileValues.Walkable">
+            <summary>
+            Moveable piece on the board
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Tools.TilePlacer.TileValues.VariableTerrainLowCost">
+            <summary>
+            Variable terrain with a higher cost than standard with an extra cost that is low
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Tools.TilePlacer.TileValues.VariableTerrainMediumCost">
+            <summary>
+            Variable terrain with a higher cost than standard with an extra cost that is medium
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Tools.TilePlacer.TileValues.VariableTerrainHighCost">
+            <summary>
+            Variable terrain with a higher cost than standard with an extra cost that is high
             </summary>
         </member>
         <member name="T:GWNorthEngine.Scripting.ScriptManager">
@@ -757,11 +927,6 @@
             <param name="startDistance">Distance from the start</param>
             <param name="endDistance">Distance from the end</param>
         </member>
-        <member name="M:GWNorthEngine.AI.AStar.PathNode.calculateFScore">
-            <summary>
-            Calculates and assigns the FScore of a node based on its G and H scores
-            </summary>
-        </member>
         <member name="M:GWNorthEngine.AI.AStar.PathNode.fScoresEqual(GWNorthEngine.AI.AStar.PathNode)">
             <summary>
             Determines if two Nodes have an equal F score and H score
@@ -777,17 +942,17 @@
         </member>
         <member name="P:GWNorthEngine.AI.AStar.PathNode.H">
             <summary>
-            Get or sets the H score of a node
+            Get or sets the H score of a node (Estimated cost to move to the destination point from the current position)
             </summary>
         </member>
         <member name="P:GWNorthEngine.AI.AStar.PathNode.G">
             <summary>
-            Gets or sets the G score of a node
+            Gets or sets the G score of a node (Cost to move from the starting point to the current position)
             </summary>
         </member>
         <member name="P:GWNorthEngine.AI.AStar.PathNode.FScore">
             <summary>
-            Gets or sets the total F score of a node
+            Gets the total F score of a node
             </summary>
         </member>
         <member name="P:GWNorthEngine.AI.AStar.PathNode.Position">
@@ -947,14 +1112,13 @@
             Models the data that is a direct result from loading a TilePlacer map
             </summary>
         </member>
-        <member name="M:GWNorthEngine.Tools.TilePlacer.LoadResult.#ctor(System.Int32,System.Int32,GWNorthEngine.Tools.TilePlacer.MapTile[0:,0:],GWNorthEngine.Tools.TilePlacer.TileValues[0:,0:])">
+        <member name="M:GWNorthEngine.Tools.TilePlacer.LoadResult.#ctor(System.Int32,System.Int32,GWNorthEngine.Tools.TilePlacer.Layer[])">
             <summary>
             Constructs a LoadResult object
             </summary>
             <param name="height">Height of the map</param>
             <param name="width">Width of the map</param>
-            <param name="mapTiles">MapTile objects that make the map</param>
-            <param name="tileValues">TileValues of the types of tiles that make up the map</param>
+            <param name="layers">Layers of MapTile objects that make the map</param>
         </member>
         <member name="P:GWNorthEngine.Tools.TilePlacer.LoadResult.Height">
             <summary>
@@ -966,14 +1130,9 @@
             Gets or sets the width of the map
             </summary>
         </member>
-        <member name="P:GWNorthEngine.Tools.TilePlacer.LoadResult.MapTiles">
+        <member name="P:GWNorthEngine.Tools.TilePlacer.LoadResult.Layers">
             <summary>
-            Gets or sets the MapTile array representation of the map
-            </summary>
-        </member>
-        <member name="P:GWNorthEngine.Tools.TilePlacer.LoadResult.TileValues">
-            <summary>
-            Gets or sets the TileValues array representation of the map
+            Gets or sets the Layers of the map
             </summary>
         </member>
         <member name="T:GWNorthEngine.Model.Params.BaseAnimationManagerParams">
@@ -1620,6 +1779,11 @@
             Music engine, handles playing a play list
             </summary>
         </member>
+        <member name="F:GWNorthEngine.Audio.MusicEngine.internalTrackNumber">
+            <summary>
+            This should only be used within the music engine and NEVER for an update, use the TrackNumber property for updates
+            </summary>
+        </member>
         <member name="M:GWNorthEngine.Audio.MusicEngine.#ctor(GWNorthEngine.Audio.Params.MusicEngineParams)">
             <summary>
             Builds a MusicEngine based on the data passed in via the parameter object
@@ -1668,9 +1832,19 @@
             Unpauses the current track
             </summary>
         </member>
+        <member name="M:GWNorthEngine.Audio.MusicEngine.update">
+            <summary>
+            Progresses the sound track alongs its path at the end of a sound
+            </summary>
+        </member>
         <member name="M:GWNorthEngine.Audio.MusicEngine.dispose">
             <summary>
             Cleans up resources used by the music engine
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Audio.MusicEngine.TrackNumber">
+            <summary>
+            Gets the track number we are sitting at
             </summary>
         </member>
         <member name="P:GWNorthEngine.Audio.MusicEngine.currentTrack">
@@ -1978,6 +2152,27 @@
             UnloadContent will be called once per game and is the place to unload all content
             </summary>
         </member>
+        <member name="T:GWNorthEngine.Tools.TilePlacer.Layer">
+            <summary>
+            Models the data that makes up a layer of a full map
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Tools.TilePlacer.Layer.#ctor(GWNorthEngine.Tools.TilePlacer.MapTile[0:,0:])">
+            <summary>
+            Constructs a Layer based off the xml loaded via the MapLoader
+            </summary>
+            <param name="tiles">Array of MapTile objects loaded from the xml</param>
+        </member>
+        <member name="M:GWNorthEngine.Tools.TilePlacer.Layer.dispose">
+            <summary>
+            Cleans up the tiles
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Tools.TilePlacer.Layer.Tiles">
+            <summary>
+            Gets or sets the tiles used to draw the map
+            </summary>
+        </member>
         <member name="T:GWNorthEngine.Scripting.Utils.ScriptUtils">
             <summary>
             Helpful methods for scripting
@@ -2044,15 +2239,15 @@
             <param name="height">Height of the map</param>
             <param name="width">Width of the map</param>
         </member>
-        <member name="M:GWNorthEngine.Tools.TilePlacer.MapLoader.loadMap(Microsoft.Xna.Framework.Content.ContentManager,System.Xml.XmlDocument,System.Int32,GWNorthEngine.Tools.TilePlacer.MapTile[0:,0:]@,GWNorthEngine.Tools.TilePlacer.TileValues[0:,0:]@)">
+        <member name="M:GWNorthEngine.Tools.TilePlacer.MapLoader.loadLayer(Microsoft.Xna.Framework.Content.ContentManager,System.Xml.Linq.XElement,System.Int32,System.Int32)">
             <summary>
-            Loads the tiles of a map
+            Loads a layer from the xml
             </summary>
-            <param name="content">ContentManager used to load textures for the map</param>
-            <param name="map">XmlDocument object containing the tile information</param>
-            <param name="width">Width of the map</param>
-            <param name="mapTiles">MapTiles[,] loaded via the xml</param>
-            <param name="tileValues">TileValues[,] loaded via the xml</param>
+            <param name="content">ContentManager object to load textures</param>
+            <param name="xmlLayer">XML of the layer to load</param>
+            <param name="height">Height of the layer</param>
+            <param name="width">Width of the layer</param>
+            <returns>Layer object</returns>
         </member>
         <member name="M:GWNorthEngine.Tools.TilePlacer.MapLoader.load(Microsoft.Xna.Framework.Content.ContentManager,System.String)">
             <summary>
@@ -2231,32 +2426,6 @@
             <summary>
             Gets or sets the Texture of the static drawable object
             </summary>
-        </member>
-        <member name="T:GWNorthEngine.Utils.StringUtils">
-            <summary>
-            Helper methods for manipulating string values
-            </summary>
-        </member>
-        <member name="M:GWNorthEngine.Utils.StringUtils.scrubPathAndExtFromFileName(System.String)">
-            <summary>
-            Stribs the file path and extension (if they exist) off of a file name
-            </summary>
-            <param name="fileName">filename to alter</param>
-            <returns>filename with the path and extension ripped off if they were present</returns>
-        </member>
-        <member name="M:GWNorthEngine.Utils.StringUtils.scrubPathFromFileName(System.String)">
-            <summary>
-            Scrubs the directory information off of a file name
-            </summary>
-            <param name="fileName">filename to alter</param>
-            <returns>filename with the path ripped off if it were present</returns>
-        </member>
-        <member name="M:GWNorthEngine.Utils.StringUtils.scrubExtensionFromFilename(System.String)">
-            <summary>
-            Scrubs the file extension from a file name
-            </summary>
-            <param name="fileName">filename to alter</param>
-            <returns>filename with the extension ripped off if it were present</returns>
         </member>
     </members>
 </doc>

@@ -48,6 +48,7 @@ namespace Robber {
 			for (int i = 0; i < maps.Length; i++) {
 				maps[i] = StringUtils.scrubPathAndExtFromFileName(maps[i]);
 			}
+			Array.Reverse(maps);
 
 			// load up our map selections via the names from the dierctory
 			this.mapSelections = new List<MapSelection>(maps.Length);

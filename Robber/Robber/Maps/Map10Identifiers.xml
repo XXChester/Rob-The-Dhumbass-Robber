@@ -1,0 +1,34 @@
+<MapIdentifier>
+	<LevelInformation>
+		<Time>
+			<Minutes></Minutes>
+		</Time>
+		<Colours>
+			<Floor>
+				<R></R>
+				<G></G>
+				<B></B>
+			</Floor>
+			<Walls>
+				<R></R>
+				<G></G>
+				<B></B>
+			</Walls>
+		</Colours>
+	</LevelInformation>
+	<PlayerInformation>
+		
+	</PlayerInformation>
+	<TreasureInformation>
+		
+	</TreasureInformation>
+	<EntryInformation>
+		
+	</EntryInformation>
+	<GuardInformation>
+		
+	</GuardInformation>
+	<WaypointInformation>
+		
+	</WaypointInformation>
+</MapIdentifier>

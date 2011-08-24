@@ -354,10 +354,11 @@ namespace Robber {
 			if (this.showWayPoints) {
 				List<Point> wayPoints = AIManager.getInstance().WayPoints;
 				foreach (Point wayPoint in wayPoints) {
-					spriteBatch.Draw(ResourceManager.getInstance().DebugChip, new Placement(wayPoint).worldPosition, Color.Blue);
+					spriteBatch.Draw(ResourceManager.getInstance().DebugChip, new Placement(wayPoint).worldPosition, Color.Purple);
 				}
 			}
 			if (this.showAI) {
+				// draw where we cannot walk
 				for (int y = 0; y < 18; y++) {
 					for (int x = 0; x < 21; x++) {
 						if (AIManager.getInstance().Board[y, x] == PathFinder.TypeOfSpace.Unwalkable) {

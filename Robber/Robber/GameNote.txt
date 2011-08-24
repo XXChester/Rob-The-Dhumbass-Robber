@@ -81,8 +81,10 @@ Replace the programmer art with less crappy programmer art and make the game not
 [*]Change the tile placer program to write multiple layers so that the floor is not hardcoded to a white square, it can now have a real texture applied
 []Upgrade floor tile graphics
 []Upgrade radius ring graphic
+[]Uprade door tile graphic
 [*]Sfx emotes
 [*]Sfx
+[]Door Sfx
 []Rotate idle sfxs
 [*]Change map previews to load from Maps directory instead of through the content pipeline
 [*]Multiple maps read from directory		-Hard coded at this time because I don't have time to figure out how to change the content pipeline, making it very easy to add maps though
@@ -125,14 +127,15 @@ ISSUES
    at Microsoft.Xna.Framework.Audio.AudioRendererShutdownHandler.AppExitingEventHandler(Object sender, EventArgs args)
 	-Problem with the XNA framework when you manually(correctly) dispose of sound effects on closing. The solution is to let the ContentManager handle the disposale of SFX's
 		-This did not solve the problem either
+[*]AI is marking its waypoint as unwalkable so when units are passing through one (can see this on map 6 mostly) they avoid the space even though its empty
 
 ============================
 		Time
 ============================
 Planning: 2 hours
 Programming:	56.75 hours
-Map Creation(Including creating editor via scripting engine):	8 hours	
-Art: 5.75 hours	
+Map Creation(Including creating editor via scripting engine):	9.75 hours
+Art: 6 hours	
 Sound:	2 hours	
 Deployment: .5 hours
 Alpha-testing:2 hours

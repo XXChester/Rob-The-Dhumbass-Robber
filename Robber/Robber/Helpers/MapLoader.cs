@@ -85,9 +85,10 @@ namespace Robber {
 			int height = loadResult.Height;
 			int width = loadResult.Width;
 			// For now, just grap the first layers tiles, we will use the other layers at a later date for the floor etc
-			MapTile[,] mapTiles = loadResult.Layers[0].Tiles;
+			int layer = 1;
+			MapTile[,] mapTiles = loadResult.Layers[layer].Tiles;
 			Tile[,] tiles = GWNorthEngine.Tools.TilePlacer.MapLoader.initTiles<Tile>(mapTiles, delegate(MapTile tile) {
-				if (Tile.TILE_NAME_EXIT.Equals(tile.Texture.Name)) {
+				if (Tile.COLOUR_OVERRIDE_TILES.Contains<string>(tile.Texture.Name)) {
 					return new Tile(tile.Texture, tile.Index, Color.White);
 				} else {
 					return new Tile(tile.Texture, tile.Index, wallColour);
@@ -99,7 +100,7 @@ namespace Robber {
 				for (int x = 0; x < width; x++) {
 					// override so the AI can walk the outter wall
 					if (tiles[y, x] != null && mapAsUnwalkable(tiles[y, x].Texture.Name, y, x, height, width)) {
-						tileSpaces[y, x] = Translator.translateTileValueToAStarType(loadResult.Layers[0].Tiles[y,x].TileValue);
+						tileSpaces[y, x] = Translator.translateTileValueToAStarType(loadResult.Layers[layer].Tiles[y, x].TileValue);
 					} else {
 						tileSpaces[y, x] = PathFinder.TypeOfSpace.Walkable;
 					}

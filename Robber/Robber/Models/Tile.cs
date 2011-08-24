@@ -18,14 +18,22 @@ namespace Robber {
 		#region Class variables
 		private StaticDrawable2D image;
 		public const string TILE_NAME_TOP = "TopWall";
+		public const string TILE_NAME_TOP_DOOR = "TopDoor";
 		public const string TILE_NAME_RIGHT = "RightWall";
+		public const string TILE_NAME_RIGHT_DOOR = "RightDoor";
 		public const string TILE_NAME_BOTTOM = "BottomWall";
+		public const string TILE_NAME_BOTTOM_DOOR = "BottomDoor";
 		public const string TILE_NAME_LEFT = "LeftWall";
+		public const string TILE_NAME_LEFT_DOOR = "LeftDoor";
 		public const string TILE_NAME_TOP_LEFTT = "TopLeft";
 		public const string TILE_NAME_TOP_RIGHT = "TopRight";
 		public const string TILE_NAME_BOTTOM_RIGHT = "BottomRight";
 		public const string TILE_NAME_BOTTOM_LEFT = "BottomLeft";
 		public const string TILE_NAME_EXIT = "ExitTile";
+
+		public static string[] COLOUR_OVERRIDE_TILES = new string[] {
+			TILE_NAME_LEFT_DOOR, TILE_NAME_RIGHT_DOOR, TILE_NAME_BOTTOM_DOOR, TILE_NAME_TOP_DOOR, TILE_NAME_EXIT
+		};
 		#endregion Class variables
 
 		#region Class propeties

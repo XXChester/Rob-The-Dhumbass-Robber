@@ -17,15 +17,19 @@ namespace Robber {
 			float thickness = 3f;
 			switch (texture.Name) {
 				case Tile.TILE_NAME_TOP:
+				case Tile.TILE_NAME_TOP_DOOR:
 					bboxes.Add(Helper.getBBox(placement.worldPosition, new Vector2(topRight.X, topRight.Y + thickness)));
 					break;
 				case Tile.TILE_NAME_RIGHT:
+				case Tile.TILE_NAME_RIGHT_DOOR:
 					bboxes.Add(Helper.getBBox(new Vector2(topRight.X - thickness, topRight.Y), bottomRight));
 					break;
 				case Tile.TILE_NAME_BOTTOM:
+				case Tile.TILE_NAME_BOTTOM_DOOR:
 					bboxes.Add(Helper.getBBox(new Vector2(bottomLeft.X, bottomLeft.Y - thickness), bottomRight));
 					break;
 				case Tile.TILE_NAME_LEFT:
+				case Tile.TILE_NAME_LEFT_DOOR:
 					bboxes.Add(Helper.getBBox(placement.worldPosition, new Vector2(bottomLeft.X + thickness, bottomLeft.Y)));
 					break;
 				case Tile.TILE_NAME_TOP_LEFTT:
