@@ -53,7 +53,7 @@ Fix major problems with the game and implement some of the features that got scr
 []Couple extra guards run in from the exit point if you are detected
 	-Don't implement this until a lot more is figured out such as what happens if you go into a garbage can?
 []Add in random sneezing if you stand within the same tile too long
-[]Put doors in	-wasn't going to put these in but should put locked doors in that only guards can walk through
+[*]Put doors in	-wasn't going to put these in but should put locked doors in that only guards can walk through
 	[*]Alter engine's A* algorithms to handle variable terrain costs in preparation for locked doors
 [*]Design an algorithm for automatically generating bounding boxes
 [*]Every guard gets there own AI thread ATM, this is unncessary. Change the AI manager to be single threaded and guards put a request to the manager when they need a new path
