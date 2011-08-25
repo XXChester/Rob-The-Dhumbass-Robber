@@ -314,4 +314,10 @@
 			<Y>4</Y>
 		</WayPoint>
 	</WaypointInformation>
+	<DumpsterInformation>
+		<Dumpster>
+			<X>20</X>
+			<Y>3</Y>
+		</Dumpster>
+	</DumpsterInformation>
 </MapIdentifier>

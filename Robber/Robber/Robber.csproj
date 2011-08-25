@@ -78,6 +78,9 @@
   <PropertyGroup>
     <SignManifests>true</SignManifests>
   </PropertyGroup>
+  <PropertyGroup>
+    <NoWin32Manifest>true</NoWin32Manifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="GWNorthEngine">
       <HintPath>..\..\..\..\..\..\Team Work\GWNorthEngine\bin\x86\Debug\GWNorthEngine.dll</HintPath>
@@ -138,6 +141,7 @@
     <Compile Include="Managers\CollisionManager.cs" />
     <Compile Include="Displays\Display.cs" />
     <Compile Include="Managers\SoundManager.cs" />
+    <Compile Include="Models\Dumpster.cs" />
     <Compile Include="Models\Floor.cs" />
     <Compile Include="Displays\GameDisplay.cs" />
     <Compile Include="Models\Guard.cs" />
@@ -168,6 +172,9 @@
     <Content Include="GameNote.txt" />
     <Content Include="GameThumbnail.png" />
     <None Include="Log.log" />
+    <Content Include="Maps\Map4.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Maps\Map5.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -235,9 +242,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Maps\Map3.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Maps\Map4.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Story.txt" />

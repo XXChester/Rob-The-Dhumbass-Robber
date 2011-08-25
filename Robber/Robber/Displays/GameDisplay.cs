@@ -24,6 +24,7 @@ namespace Robber {
 		private Player player;
 		private Person[] guards;
 		private Treasure[] treasures;
+		private Dumpster[] dumpsters;
 		private ColouredButton startButton;
 		private Timer timer;
 		private List<Point> entryExitPoints;
@@ -34,6 +35,8 @@ namespace Robber {
 		private SoundEffect introSfx;
 		private SoundEffect payDaySfx;
 		private SoundEffect treasureSfx;
+		private SoundEffect dumpsterCrashSfx;
+		private SoundEffect dumpsterCloseSfx;
 		private float payDayDelay;
 		private ContentManager content;
 		private const float DELAY_PAY_DAY_EMOTE = 5000f;
@@ -88,6 +91,8 @@ namespace Robber {
 			this.payDaySfx = LoadingUtils.loadSoundEffect(content, "PayDay");
 			this.treasureSfx = LoadingUtils.loadSoundEffect(content, "TreasureCollect");
 			this.guardDetectedSfx = LoadingUtils.loadSoundEffect(content, "Policia");
+			this.dumpsterCrashSfx = LoadingUtils.loadSoundEffect(content, "DumpsterCrash");
+			this.dumpsterCloseSfx = LoadingUtils.loadSoundEffect(content, "DumpsterClose");
 		}
 		#endregion Constructor
 
@@ -105,6 +110,7 @@ namespace Robber {
 			List<string> guardDirectins = new List<string>();
 			List<string> guardStates = new List<string>();
 			List<Point> treasureLocations = new List<Point>();
+			List<Point> dumpsterLocations = new List<Point>();
 			List<Point> wayPoints = new List<Point>();
 			float time = 5f;//default of 5 minutes
 			
@@ -119,7 +125,10 @@ namespace Robber {
 				
 				// load the treasure information
 				MapLoader.loadGenericPointList(doc, MapEditor.MappingState.Treasure, out treasureLocations);
-				
+
+				// load the dumpster information
+				MapLoader.loadGenericPointList(doc, MapEditor.MappingState.Dumpster, out dumpsterLocations);
+
 				// load the entry information
 				MapLoader.loadGenericPointList(doc, MapEditor.MappingState.GuardEntry, out entryExitPoints);
 				
@@ -148,6 +157,15 @@ namespace Robber {
 			for (int i = 0; i < treasureSize; i++) {
 				treasureFileName = "Treasure" + random.Next(1, 3);
 				this.treasures[i] = new Treasure(this.content, treasureFileName, new Placement(treasureLocations[i]));
+			}
+
+			// load dumpsters at starting points
+			int dumpsterSize = dumpsterLocations.Count;
+			this.dumpsters = new Dumpster[dumpsterSize];
+			for (int i = 0; i < dumpsterSize; i++) {
+				this.dumpsters[i] = new Dumpster(this.content, "DumpsterOpen", "DumpsterClosed", new Placement(dumpsterLocations[i]));
+				// ensure these places are unwalkable by the guards
+				AIManager.getInstance().Board[dumpsterLocations[i].Y, dumpsterLocations[i].X] = PathFinder.TypeOfSpace.Unwalkable;
 			}
 
 			// load guard(s) at starting points
@@ -206,12 +224,12 @@ namespace Robber {
 				this.player.update(elapsed);
 				foreach (Guard guard in this.guards) {
 					guard.update(elapsed);
-					if (guard.BoundingBox.Intersects(this.player.BoundingBox)) {
+					if (guard.BoundingBox.Intersects(this.player.BoundingBox) && !this.player.Hiding) {
 						StateManager.getInstance().CurrentGameState = StateManager.GameState.GameOver;
 						StateManager.getInstance().TypeOfGameOver = StateManager.GameOverType.Guards;
 						SoundManager.getInstance().sfxEngine.playSoundEffect(ResourceManager.getInstance().PrisonCellSfx);
 						break;
-					} else if (guard.Ring.BoundingSphere.Intersects(this.player.BoundingBox)) {
+					} else if (guard.Ring.BoundingSphere.Intersects(this.player.BoundingBox) && !this.player.Hiding) {
 						// did we JUST get detected?
 						if (!AIManager.getInstance().PlayerDetected) {
 							SoundManager.getInstance().sfxEngine.playSoundEffect(this.guardDetectedSfx);
@@ -233,6 +251,24 @@ namespace Robber {
 						break;
 					}
 				}
+				
+				// are we trying to enter a dumpster
+				if (base.currentKeyBoardState.IsKeyDown(Keys.Space) && base.previousKeyBoardState.IsKeyUp(Keys.Space)) {
+					// check if we are close to a dumpster
+					foreach (Dumpster dumpster in dumpsters) {
+						if (dumpster.BoundingBox.Intersects(this.player.BoundingBox) && dumpster.AcceptingOccupants) {
+							this.player.Hiding = !this.player.Hiding;// reverse the bool
+							if (!this.player.Hiding) {
+								// make this dumpster unusable again
+								dumpster.AcceptingOccupants = false;
+								SoundManager.getInstance().sfxEngine.playSoundEffect(this.dumpsterCloseSfx);
+							} else {
+								SoundManager.getInstance().sfxEngine.playSoundEffect(this.dumpsterCrashSfx);
+							}
+							break;
+						}
+					}
+				}
 			}
 
 			// Transitions
@@ -242,6 +278,9 @@ namespace Robber {
 				this.map.updateColours(base.fadeIn(this.map.FloorColour), base.fadeIn(this.map.WallColour));
 				foreach (Treasure treasure in this.treasures) {
 					treasure.updateColours(colour);
+				}
+				foreach (Dumpster dumpster in this.dumpsters) {
+					dumpster.updateColours(colour);
 				}
 				this.player.updateColours(colour);
 				foreach (Guard guard in this.guards) {
@@ -261,6 +300,9 @@ namespace Robber {
 				this.map.updateColours(base.fadeOut(this.map.FloorColour), base.fadeOut(this.map.WallColour));
 				foreach (Treasure treasure in this.treasures) {
 					treasure.updateColours(colour);
+				}
+				foreach (Dumpster dumpster in this.dumpsters) {
+					dumpster.updateColours(colour);
 				}
 				this.player.updateColours(colour);
 				foreach (Guard guard in this.guards) {
@@ -324,6 +366,9 @@ namespace Robber {
 				foreach (Treasure treasure in this.treasures) {
 					treasure.render(spriteBatch);
 				}
+				foreach (Dumpster dumpster in this.dumpsters) {
+					dumpster.render(spriteBatch);
+				}
 				this.player.render(spriteBatch);
 				foreach (Guard guard in this.guards) {
 					guard.render(spriteBatch);
@@ -349,6 +394,9 @@ namespace Robber {
 				}
 				foreach (Treasure treasure in this.treasures) {
 					DebugUtils.drawBoundingBox(spriteBatch, treasure.BoundingBox, debugColour, ResourceManager.getInstance().ButtonLineTexture);
+				}
+				foreach (Dumpster dumpster in this.dumpsters) {
+					DebugUtils.drawBoundingBox(spriteBatch, dumpster.BoundingBox, debugColour, ResourceManager.getInstance().ButtonLineTexture);
 				}
 			}
 			if (this.showWayPoints) {
@@ -389,6 +437,11 @@ namespace Robber {
 					treasure.dispose();
 				}
 			}
+			if (this.dumpsters != null) {
+				foreach (Dumpster dumpster in this.dumpsters) {
+					dumpster.dispose();
+				}
+			}
 			if (this.treasure != null) {
 				this.treasure.dispose();
 			}
@@ -409,6 +462,12 @@ namespace Robber {
 			}
 			if (this.guardDetectedSfx != null) {
 				this.guardDetectedSfx.Dispose();
+			}
+			if (this.dumpsterCrashSfx != null) {
+				this.dumpsterCrashSfx.Dispose();
+			}
+			if (this.dumpsterCloseSfx != null) {
+				this.dumpsterCloseSfx.Dispose();
 			}
 
 			// AI

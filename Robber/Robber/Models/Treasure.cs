@@ -12,30 +12,36 @@ using Microsoft.Xna.Framework.Media;
 namespace Robber {
 	public class Treasure : Item, IRenderable {
 		#region Class variables
-
+		private bool pickedUp;
 		#endregion Class variables
-		public bool PickedUp { get; set; }
-		#region Class propeties
 
+		#region Class propeties
+		public bool PickedUp {
+			get { return this.pickedUp; }
+			set {
+				this.pickedUp = value;
+				if (value) {
+					base.BoundingBox = Helper.destroyBB();
+				}
+			}
+		}
 		#endregion Class properties
 
 		#region Constructor
 		public Treasure(ContentManager content, string textureName, Placement startingPlacement)
-			: base(content, textureName, startingPlacement) {
-				this.PickedUp = false;
+			: base(content, textureName, startingPlacement, true) {
+				this.pickedUp = false;
 		}
 		#endregion Constructor
 
 		#region Support methods
 		public void update(float elapsed) {
-			if (this.PickedUp) {
-				base.BoundingBox = Helper.destroyBB();
-			}
+			// do nothing
 		}
 
-		public void render(SpriteBatch spriteBatch) {
-			if (!this.PickedUp) {
-				base.image.render(spriteBatch);
+		public override void render(SpriteBatch spriteBatch) {
+			if (!this.pickedUp) {
+				base.render(spriteBatch);
 			}
 		}
 		#endregion Support methods

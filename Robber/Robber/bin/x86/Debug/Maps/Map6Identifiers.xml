@@ -154,4 +154,10 @@
 			<Y>15</Y>
 		</WayPoint>
 	</WaypointInformation>
+	<DumpsterInformation>
+		<Dumpster>
+			<X>20</X>
+			<Y>7</Y>
+		</Dumpster>
+	</DumpsterInformation>
 </MapIdentifier>

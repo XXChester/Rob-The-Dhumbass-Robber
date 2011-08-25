@@ -1,7 +1,7 @@
 <MapIdentifier>
 	<LevelInformation>
 		<Time>
-			<Minutes>.9</Minutes>
+			<Minutes>1</Minutes>
 		</Time>
 		<Colours>
 			<Floor>
@@ -154,4 +154,10 @@
 			<Y>13</Y>
 		</WayPoint>
 	</WaypointInformation>
+	<DumpsterInformation>
+		<Dumpster>
+			<X>5</X>
+			<Y>17</Y>
+		</Dumpster>
+	</DumpsterInformation>
 </MapIdentifier>

@@ -49,7 +49,7 @@ Raw version of the game functional with programmer art
 Fix major problems with the game and implement some of the features that got scrapped due to time
 [*]Create in game editor for placing guards, treasure etc
 [*]Change all data to xml based
-[]Add in garbage cans to hide in and clear agro**
+[*]Add in garbage cans to hide in
 []Couple extra guards run in from the exit point if you are detected
 	-Don't implement this until a lot more is figured out such as what happens if you go into a garbage can?
 []Add in random sneezing if you stand within the same tile too long
@@ -80,12 +80,15 @@ Replace the programmer art with less crappy programmer art and make the game not
 [*]Robber and guard sprites
 [*]Change the tile placer program to write multiple layers so that the floor is not hardcoded to a white square, it can now have a real texture applied
 []Upgrade floor tile graphics
-[]Upgrade radius ring graphic
-[]Uprade door tile graphic
+[*]Upgrade radius ring graphic
+[*]Uprade door tile graphic
+[]Need a graphic for mode select screen
+[*]Need a sfx on entry to the mode select screen
 [*]Sfx emotes
 [*]Sfx
-[]Door Sfx
-[]Rotate idle sfxs
+[*]Door Sfx
+[*]Garbage Sfx
+[*]Rotate idle sfxs
 [*]Change map previews to load from Maps directory instead of through the content pipeline
 [*]Multiple maps read from directory		-Hard coded at this time because I don't have time to figure out how to change the content pipeline, making it very easy to add maps though
 	[*]Hard coded but very easy to add new ones		-Can create and map indentifiers for a new map in about 30minutes
@@ -132,11 +135,11 @@ ISSUES
 ============================
 		Time
 ============================
-Planning: 2 hours
-Programming:	56.75 hours
-Map Creation(Including creating editor via scripting engine):	9.75 hours
-Art: 6 hours	
-Sound:	2 hours	
+Planning: 2 hours		
+Programming:	59 hours	
+Map Creation(Including creating editor via scripting engine):	9.75 hours	7:45pm-7:51pm
+Art: 6.75 hours	
+Sound:	2.75 hours		
 Deployment: .5 hours
 Alpha-testing:2 hours
 Total Time:

@@ -22,9 +22,11 @@ namespace Robber {
 		private StaticDrawable2D backGround;
 		private StaticDrawable2D title;
 		private SoundEffect introSfx;
-		private SoundEffect idleSfx;
+		private SoundEffect[] idleSfxs;
+		private SoundEffect outroSfx;
 		private float timeIdle;
-		private const float PLAY_IDLE_AT = 30000f;
+		private int idleLastPlayed;
+		private const float PLAY_IDLE_AT = 5000f;//20000f;
 		#endregion Class variables
 
 		#region Class propeties
@@ -67,8 +69,15 @@ namespace Robber {
 
 			// load sound effects
 			this.introSfx = LoadingUtils.loadSoundEffect(content, "Introduction");
-			this.idleSfx = LoadingUtils.loadSoundEffect(content, "Rules");
-			SoundManager.getInstance().sfxEngine.playSoundEffect(this.introSfx);
+			this.outroSfx = LoadingUtils.loadSoundEffect(content, "LetsGo");
+			this.idleSfxs = new SoundEffect[3];
+			this.idleSfxs[0] = LoadingUtils.loadSoundEffect(content, "Rules");
+			this.idleSfxs[1] = LoadingUtils.loadSoundEffect(content, "HaventGotAllDay");
+			this.idleSfxs[2] = LoadingUtils.loadSoundEffect(content, "LetsRobSomething");
+			// tired of hearing this when debugging and not starting in this state
+			if (StateManager.getInstance().CurrentGameState == StateManager.GameState.MainMenu) {
+				SoundManager.getInstance().sfxEngine.playSoundEffect(this.introSfx);
+			}
 #if WINDOWS
 #if DEBUG
 			ScriptManager.getInstance().registerObject(((ColouredButton)this.playButton).Text, "playText");
@@ -99,6 +108,7 @@ namespace Robber {
 					if (this.playButton.isActorOver(mousePos)) {
 						StateManager.getInstance().CurrentTransitionState = StateManager.TransitionState.TransitionOut;
 						StateManager.getInstance().CurrentGameState = StateManager.GameState.ModeSelect;
+						SoundManager.getInstance().sfxEngine.playSoundEffect(this.outroSfx);
 					} else if (this.exitButton.isActorOver(mousePos)) {
 						StateManager.getInstance().CurrentGameState = StateManager.GameState.Exit;
 					}
@@ -140,7 +150,13 @@ namespace Robber {
 			}
 			this.timeIdle += elapsed;
 			if (this.timeIdle >= PLAY_IDLE_AT) {
-				SoundManager.getInstance().sfxEngine.playSoundEffect(this.idleSfx);
+				Random rand = new Random();
+				int idleToPlay = this.idleLastPlayed;
+				do {
+					idleToPlay = rand.Next(this.idleSfxs.Length);
+				} while (idleToPlay == this.idleLastPlayed);
+				SoundManager.getInstance().sfxEngine.playSoundEffect(this.idleSfxs[idleToPlay]);
+				this.idleLastPlayed = idleToPlay;
 				this.timeIdle = 0f;
 			}
 			base.update(elapsed);
@@ -171,8 +187,13 @@ namespace Robber {
 			if (this.introSfx != null) {
 				this.introSfx.Dispose();
 			}
-			if (this.idleSfx != null) {
-				this.idleSfx.Dispose();
+			if (this.outroSfx != null) {
+				this.outroSfx.Dispose();
+			}
+			if (this.idleSfxs != null) {
+				foreach (SoundEffect sfx in this.idleSfxs) {
+					sfx.Dispose();
+				}
 			}
 		}
 		#endregion Destructor

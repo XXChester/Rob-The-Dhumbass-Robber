@@ -20,7 +20,6 @@ namespace Robber {
 		private List<MapSelection> mapSelections;
 		private ColouredButton returnToModeSelectButton;
 		private StaticDrawable2D title;
-		private SoundEffect outroSfx;
 		private StaticDrawable2D noPreviewImage;
 		#endregion Class variables
 
@@ -68,9 +67,6 @@ namespace Robber {
 			staticParms.Scale = new Vector2(.8f, .8f);
 			staticParms.LightColour = ResourceManager.TEXT_COLOUR;
 			this.noPreviewImage = new StaticDrawable2D(staticParms);
-
-			// sound effects
-			this.outroSfx = LoadingUtils.loadSoundEffect(content, "LetsGo");
 		}
 		#endregion Constructor
 
@@ -117,7 +113,6 @@ namespace Robber {
 								StateManager.getInstance().CurrentGameState = StateManager.GameState.InitGame;
 								StateManager.getInstance().CurrentTransitionState = StateManager.TransitionState.TransitionOut;
 								StateManager.getInstance().MapInformation = selection.MapName;
-								SoundManager.getInstance().sfxEngine.playSoundEffect(this.outroSfx);
 								break;
 							}
 						}
@@ -200,9 +195,6 @@ namespace Robber {
 			}
 			if (this.noPreviewImage != null) {
 				this.noPreviewImage.dispose();
-			}
-			if (this.outroSfx != null) {
-				this.outroSfx.Dispose();
 			}
 		}
 		#endregion Destructor

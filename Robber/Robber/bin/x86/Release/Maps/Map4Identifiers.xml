@@ -210,4 +210,14 @@
 			<Y>9</Y>
 		</WayPoint>
 	</WaypointInformation>
+	<DumpsterInformation>
+		<Dumpster>
+			<X>6</X>
+			<Y>6</Y>
+		</Dumpster>
+		<Dumpster>
+			<X>11</X>
+			<Y>14</Y>
+		</Dumpster>
+	</DumpsterInformation>
 </MapIdentifier>

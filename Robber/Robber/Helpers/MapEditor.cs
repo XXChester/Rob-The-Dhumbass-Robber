@@ -13,7 +13,8 @@ namespace Robber {
 			GuardPosition,
 			GuardEntry,
 			Treasure,
-			WayPoint
+			WayPoint,
+			Dumpster
 		};
 		//singleton variable
 		private static MapEditor instance = new MapEditor();
@@ -27,6 +28,7 @@ namespace Robber {
 		private const string COMMAND_GUARD_ENTRY = "guardentry";
 		private const string COMMAND_TREASURE = "treasure";
 		private const string COMMAND_WAY_POINTS = "waypoint";
+		public const string COMMAND_DUMPSTER = "dumpster";
 		public static string XML_X = "X";
 		public static string XML_Y = "Y";
 		public static string XML_R = "R";
@@ -71,6 +73,7 @@ namespace Robber {
 			Console.WriteLine("Guard entry point / Exit point - " + COMMAND_GUARD_ENTRY);
 			Console.WriteLine("Treasure - " + COMMAND_TREASURE);
 			Console.WriteLine("Guard way points - " + COMMAND_WAY_POINTS);
+			Console.WriteLine("Dumpsters - " + COMMAND_DUMPSTER);
 		}
 
 		public void editMap(string value) {
@@ -94,6 +97,9 @@ namespace Robber {
 					break;
 				case COMMAND_WAY_POINTS:
 					this.mappingState = MappingState.WayPoint;
+					break;
+				case COMMAND_DUMPSTER:
+					this.mappingState = MappingState.Dumpster;
 					break;
 				default:
 					Console.WriteLine("Failed to recognize your command, try using the editMapHelp()");

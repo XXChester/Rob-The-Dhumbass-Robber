@@ -4,7 +4,7 @@
     <Height>18</Height>
     <Width>21</Width>
   </Size>
-	<Layer />
+  <Layer />
   <Layer>
     <Tile>
       <Index>0</Index>
@@ -114,7 +114,7 @@
     <Tile>
       <Index>21</Index>
       <FileName>LeftWall.png</FileName>
-      <Value>0</Value>
+      <Value>1</Value>
     </Tile>
     <Tile>
       <Index>41</Index>
@@ -124,7 +124,7 @@
     <Tile>
       <Index>42</Index>
       <FileName>LeftWall.png</FileName>
-      <Value>0</Value>
+      <Value>1</Value>
     </Tile>
     <Tile>
       <Index>44</Index>
@@ -184,7 +184,7 @@
     <Tile>
       <Index>63</Index>
       <FileName>LeftWall.png</FileName>
-      <Value>0</Value>
+      <Value>1</Value>
     </Tile>
     <Tile>
       <Index>65</Index>
@@ -197,6 +197,16 @@
       <Value>1</Value>
     </Tile>
     <Tile>
+      <Index>78</Index>
+      <FileName>LeftDoor.png</FileName>
+      <Value>5</Value>
+    </Tile>
+    <Tile>
+      <Index>81</Index>
+      <FileName>RightDoor.png</FileName>
+      <Value>5</Value>
+    </Tile>
+    <Tile>
       <Index>83</Index>
       <FileName>RightWall.png</FileName>
       <Value>1</Value>
@@ -204,7 +214,7 @@
     <Tile>
       <Index>84</Index>
       <FileName>LeftWall.png</FileName>
-      <Value>0</Value>
+      <Value>1</Value>
     </Tile>
     <Tile>
       <Index>86</Index>
@@ -234,7 +244,7 @@
     <Tile>
       <Index>105</Index>
       <FileName>LeftWall.png</FileName>
-      <Value>0</Value>
+      <Value>1</Value>
     </Tile>
     <Tile>
       <Index>107</Index>
@@ -304,7 +314,7 @@
     <Tile>
       <Index>126</Index>
       <FileName>LeftWall.png</FileName>
-      <Value>0</Value>
+      <Value>1</Value>
     </Tile>
     <Tile>
       <Index>146</Index>
@@ -314,7 +324,7 @@
     <Tile>
       <Index>147</Index>
       <FileName>LeftWall.png</FileName>
-      <Value>0</Value>
+      <Value>1</Value>
     </Tile>
     <Tile>
       <Index>167</Index>
@@ -324,7 +334,7 @@
     <Tile>
       <Index>168</Index>
       <FileName>LeftWall.png</FileName>
-      <Value>0</Value>
+      <Value>1</Value>
     </Tile>
     <Tile>
       <Index>182</Index>
@@ -359,7 +369,7 @@
     <Tile>
       <Index>189</Index>
       <FileName>LeftWall.png</FileName>
-      <Value>0</Value>
+      <Value>1</Value>
     </Tile>
     <Tile>
       <Index>202</Index>
@@ -509,7 +519,7 @@
     <Tile>
       <Index>273</Index>
       <FileName>LeftWall.png</FileName>
-      <Value>0</Value>
+      <Value>1</Value>
     </Tile>
     <Tile>
       <Index>286</Index>
@@ -539,7 +549,7 @@
     <Tile>
       <Index>294</Index>
       <FileName>LeftWall.png</FileName>
-      <Value>0</Value>
+      <Value>1</Value>
     </Tile>
     <Tile>
       <Index>296</Index>
@@ -614,7 +624,7 @@
     <Tile>
       <Index>315</Index>
       <FileName>LeftWall.png</FileName>
-      <Value>0</Value>
+      <Value>1</Value>
     </Tile>
     <Tile>
       <Index>328</Index>
@@ -644,7 +654,7 @@
     <Tile>
       <Index>336</Index>
       <FileName>LeftWall.png</FileName>
-      <Value>0</Value>
+      <Value>1</Value>
     </Tile>
     <Tile>
       <Index>341</Index>
@@ -654,7 +664,7 @@
     <Tile>
       <Index>342</Index>
       <FileName>ExitTile.png</FileName>
-      <Value>2</Value>
+      <Value>0</Value>
     </Tile>
     <Tile>
       <Index>343</Index>
@@ -699,7 +709,7 @@
     <Tile>
       <Index>363</Index>
       <FileName>ExitTile.png</FileName>
-      <Value>2</Value>
+      <Value>0</Value>
     </Tile>
     <Tile>
       <Index>364</Index>
@@ -772,4 +782,6 @@
       <Value>1</Value>
     </Tile>
   </Layer>
+  <Layer />
+  <Layer />
 </Map>

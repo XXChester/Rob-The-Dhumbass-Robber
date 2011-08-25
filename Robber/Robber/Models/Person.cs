@@ -155,7 +155,7 @@ namespace Robber {
 			this.previousPlacement = this.Placement;
 		}
 
-		public void render(SpriteBatch spriteBatch) {
+		public virtual void render(SpriteBatch spriteBatch) {
 			if (this.activeSprite != null) {
 				this.activeSprite.render(spriteBatch);
 			}

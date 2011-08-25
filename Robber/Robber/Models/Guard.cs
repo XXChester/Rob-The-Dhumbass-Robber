@@ -35,6 +35,7 @@ namespace Robber {
 		private Stack<Point> path;
 		private MovementDirection movementDirection;
 		private PathRequest.FoundPathCallBack callBackDelegate;
+		private SoundEffect openDoorSfx;
 		private const float MOVEMENT_SPEED_WALK = 60f / 1000f;
 		private const float MOVEMENT_SPEED_RUN = 155f / 1000f;
 		#endregion Class variables
@@ -88,6 +89,7 @@ namespace Robber {
 			}
 
 			this.ring = new RadiusRing(content, base.activeSprite.Position);
+			this.openDoorSfx = LoadingUtils.loadSoundEffect(content, "OpenDoor");
 		}
 		#endregion Constructor
 
@@ -241,6 +243,13 @@ namespace Robber {
 
 			// call the generic code before continuing
 			base.updateLocation(elapsed);
+
+			if (base.previousPlacement.index != base.Placement.index) {
+				// if we are a door tile play the sfx
+				if (AIManager.getInstance().Board[base.Placement.index.Y, base.Placement.index.X] == PathFinder.TypeOfSpace.VariableTerrainLowCost) {
+					SoundManager.getInstance().sfxEngine.playSoundEffect(this.openDoorSfx);
+				}
+			}
 		}
 
 		public new void render(SpriteBatch spriteBatch) {
@@ -264,6 +273,9 @@ namespace Robber {
 		public new void dispose() {
 			if (this.ring != null) {
 				this.ring.dispose();
+			}
+			if (this.openDoorSfx != null) {
+				this.openDoorSfx.Dispose();
 			}
 			base.dispose();
 		}

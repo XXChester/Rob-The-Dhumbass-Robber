@@ -17,8 +17,8 @@ namespace Robber {
 	public class RadiusRing : IRenderable {
 		#region Class variables
 		private StaticDrawable2D ring;
-		private readonly Vector2 SCALE = new Vector2(7f, 7f);
 		private readonly Color COLOUR = Color.Red;
+		private readonly float TEXTURE_WIDTH;
 		#endregion Class variables
 
 		#region Class propeties
@@ -31,9 +31,9 @@ namespace Robber {
 			StaticDrawable2DParams ringParams = new StaticDrawable2DParams();
 			ringParams.Position = position;
 			ringParams.Texture = LoadingUtils.loadTexture2D(content, "RadiusRing");
-			ringParams.Scale = SCALE;
+			TEXTURE_WIDTH = ringParams.Texture.Width;
 			ringParams.LightColour = COLOUR;
-			ringParams.Origin = new Vector2(ResourceManager.TILE_SIZE / 2f, ResourceManager.TILE_SIZE / 2f);
+			ringParams.Origin = new Vector2(TEXTURE_WIDTH / 2f);
 			this.ring = new StaticDrawable2D(ringParams);
 			updateBoundingSphere(position);
 		}
@@ -41,7 +41,7 @@ namespace Robber {
 
 		#region Support methods
 		private void updateBoundingSphere(Vector2 position) {
-			this.BoundingSphere = new BoundingSphere(new Vector3(position, 0f), ResourceManager.TILE_SIZE * 3.5f);
+			this.BoundingSphere = new BoundingSphere(new Vector3(position, 0f), TEXTURE_WIDTH / 2f);
 		}
 		
 		public void updatePosition(Vector2 newPosition) {

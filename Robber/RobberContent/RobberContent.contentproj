@@ -185,13 +185,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="RadiusRing.png">
-      <Name>RadiusRing</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="ExitTile.png">
       <Name>ExitTile</Name>
       <Importer>TextureImporter</Importer>
@@ -211,8 +204,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FootSteps.mp3">
-      <Name>FootSteps</Name>
+    <Compile Include="FootSteps3.mp3">
+      <Name>FootSteps3</Name>
       <Importer>Mp3Importer</Importer>
       <Processor>SoundEffectProcessor</Processor>
     </Compile>
@@ -263,6 +256,65 @@
     </Compile>
     <Compile Include="TopDoor.png">
       <Name>TopDoor</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DumpsterClosed.png">
+      <Name>DumpsterClosed</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="DumpsterOpen.png">
+      <Name>DumpsterOpen</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DumpsterCrash.mp3">
+      <Name>DumpsterCrash</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DumpsterClose.mp3">
+      <Name>DumpsterClose</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="HaventGotAllDay.mp3">
+      <Name>HaventGotAllDay</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="LetsRobSomething.mp3">
+      <Name>LetsRobSomething</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="OpenDoor.mp3">
+      <Name>OpenDoor</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="FootSteps.mp3">
+      <Name>FootSteps</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="RadiusRing.png">
+      <Name>RadiusRing</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

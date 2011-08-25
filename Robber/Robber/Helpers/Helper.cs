@@ -26,7 +26,7 @@ namespace Robber {
 		}
 
 		public static BoundingBox destroyBB() {
-			return new BoundingBox(new Vector3(-1), new Vector3(-1));
+			return new BoundingBox(new Vector3(-100), new Vector3(-100));
 		}
 	}
 }
