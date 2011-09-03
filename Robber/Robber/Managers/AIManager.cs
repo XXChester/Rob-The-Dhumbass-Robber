@@ -110,7 +110,7 @@ namespace Robber {
 				if (movementDirection == Guard.MovementDirection.Clockwise) {
 					index = 0;
 				} else {
-					index = this.WayPoints.Count - 1;
+					index = this.WayPoints.Count;
 				}
 			}
 			if (movementDirection == Guard.MovementDirection.Clockwise) {

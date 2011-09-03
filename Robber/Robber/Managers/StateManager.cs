@@ -11,7 +11,7 @@ namespace Robber {
 			InGameMenu,
 			InitGame,
 			Reset,
-			Waiting,//This stage is great for mapping a new mops Identifers, uncomment what you are mapping in Map.cs's update method and click away
+			Waiting,
 			Active,
 			GameOver,
 			MapSelection,
@@ -71,9 +71,9 @@ namespace Robber {
 
 			// test settings
 			//this.CurrentGameState = GameState.ModeSelect;
-			//this.GameMode = Mode.TimeAttack;
+			this.GameMode = Mode.TimeAttack;
 			this.CurrentGameState = GameState.InitGame;
-			this.MapInformation = "Map1";
+			this.MapInformation = "Map10";
 		}
 		#endregion Constructor
 

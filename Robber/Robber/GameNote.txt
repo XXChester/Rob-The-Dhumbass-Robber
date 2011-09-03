@@ -131,13 +131,15 @@ ISSUES
 	-Problem with the XNA framework when you manually(correctly) dispose of sound effects on closing. The solution is to let the ContentManager handle the disposale of SFX's
 		-This did not solve the problem either
 [*]AI is marking its waypoint as unwalkable so when units are passing through one (can see this on map 6 mostly) they avoid the space even though its empty
+[*]Problem with AI grabbing wrong waypoint when direction is counter clockwise and starting location is not on
+	a waypoint. Should be grabbing the last node but is grabbing 2nd last
 
 ============================
 		Time
 ============================
 Planning: 2 hours		
 Programming:	59 hours	
-Map Creation(Including creating editor via scripting engine):	9.75 hours	7:45pm-7:51pm
+Map Creation(Including creating editor via scripting engine):	12 hours
 Art: 6.75 hours	
 Sound:	2.75 hours		
 Deployment: .5 hours
