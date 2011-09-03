@@ -99,7 +99,6 @@ namespace Robber {
 		#region Support methods
 		public void reset() {
 			string mapInformation = Directory.GetCurrentDirectory() + "\\" + ResourceManager.MAP_FOLDER + StateManager.getInstance().MapInformation;
-			CollisionManager.getInstance().MapBoundingBoxes = new List<BoundingBox>();
 
 			XmlReader xmlReader = XmlReader.Create(mapInformation + "Identifiers.xml");
 			this.entryExitPoints = new List<Point>();
@@ -117,6 +116,7 @@ namespace Robber {
 			try {
 				XmlDocument doc = new XmlDocument();
 				doc.Load(xmlReader);
+
 				// load the map information
 				MapLoader.loadLevelInformation(doc, ref wallColour, ref floorColour, ref time);
 				
@@ -324,9 +324,9 @@ namespace Robber {
 				if (StateManager.getInstance().CurrentTransitionState == StateManager.TransitionState.TransitionIn) {
 					StateManager.getInstance().CurrentTransitionState = StateManager.TransitionState.None;
 					if (StateManager.getInstance().PreviousGameState == StateManager.GameState.MapSelection) {
-							SoundManager.getInstance().sfxEngine.playSoundEffect(this.introSfx);
+						StateManager.getInstance().CurrentGameState = StateManager.GameState.Waiting;
+						SoundManager.getInstance().sfxEngine.playSoundEffect(this.introSfx);
 					}
-					StateManager.getInstance().CurrentGameState = StateManager.GameState.Waiting;
 				} else if (StateManager.getInstance().CurrentTransitionState == StateManager.TransitionState.TransitionOut) {
 					StateManager.getInstance().CurrentTransitionState = StateManager.TransitionState.TransitionIn;
 				}
@@ -387,9 +387,6 @@ namespace Robber {
 					DebugUtils.drawBoundingSphere(spriteBatch, guard.Ring.BoundingSphere, debugColour, ResourceManager.getInstance().DebugRing);
 				}
 				foreach (BoundingBox box in CollisionManager.getInstance().MapBoundingBoxes) {
-					DebugUtils.drawBoundingBox(spriteBatch, box, debugColour, ResourceManager.getInstance().ButtonLineTexture);
-				}
-				foreach (BoundingBox box in CollisionManager.getInstance().FloorCenterBoxes) {
 					DebugUtils.drawBoundingBox(spriteBatch, box, debugColour, ResourceManager.getInstance().ButtonLineTexture);
 				}
 				foreach (Treasure treasure in this.treasures) {

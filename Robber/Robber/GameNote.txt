@@ -115,9 +115,9 @@ ISSUES
 [*]Clicking on the Return to Main button near where the Exit button spawns will exit the game....if I get to transitions that should fix the issue
 [*]Radius detection bounding spehere is not computing correctly on the south/east side
 [*]Nasty flash when you hit replay			-caused by the reset() call
-	[]Solving this makes the score reset to the levels time before the transition out, it was either this or a nasty flash...I think the flash was a lot worse
+[*]Score resets as soon as you click replay on game over
 [*]Major bug in the tile editor, the width is padded + 1, once the editor is fixed you need to remap all 3 maps, and rip out the padding all over the code.
-[]Memory leak when the game goes to game over
+[*]Minor Memory leak when the game goes to game over
 [*]In level 1 once the AI makes a complete round and are back at the beginning they both start to walk in same direction. Counter-clockwise guy gets the right waypoint but longest path
 [*]AI manager rarely throws an InvalidOperation exception on startup due to the collection being modified...even though it is wrapped in a lock statement
 [*]AI is throwing an excepton on resets for Map4
@@ -133,12 +133,14 @@ ISSUES
 [*]AI is marking its waypoint as unwalkable so when units are passing through one (can see this on map 6 mostly) they avoid the space even though its empty
 [*]Problem with AI grabbing wrong waypoint when direction is counter clockwise and starting location is not on
 	a waypoint. Should be grabbing the last node but is grabbing 2nd last
+[*]Hitting escape in the game and than returning to the game causes the game to play for the rest of the transition in but than pause
+
 
 ============================
 		Time
 ============================
 Planning: 2 hours		
-Programming:	59 hours	
+Programming:	59.5 hours	
 Map Creation(Including creating editor via scripting engine):	12.25 hours
 Art: 6.75 hours	
 Sound:	2.75 hours		

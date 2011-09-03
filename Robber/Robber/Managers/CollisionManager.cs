@@ -12,7 +12,6 @@ namespace Robber {
 
 		#region Class properties
 		public List<BoundingBox> MapBoundingBoxes{ get; set; }
-		public List<BoundingBox> FloorCenterBoxes { get; set; }
 		#endregion Class properties
 
 		#region Support methods
@@ -33,10 +32,6 @@ namespace Robber {
 
 		public bool wallCollisionFound(BoundingBox bbox) {
 			return wasCollision(bbox, this.MapBoundingBoxes);
-		}
-
-		public bool floorCenterCollisionFound(BoundingBox bbox) {
-			return wasCollision(bbox, this.FloorCenterBoxes);
 		}
 		
 		public bool collisionFound(BoundingSphere bphere) {

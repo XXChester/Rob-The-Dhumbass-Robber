@@ -26,7 +26,6 @@ namespace Robber {
 		public Floor(ref int HEIGHT, ref int WIDTH, Texture2D floorTexture, Color renderColour) {
 			int width = WIDTH;
 			this.tiles = new Tile[HEIGHT, width];
-			CollisionManager.getInstance().FloorCenterBoxes = new List<BoundingBox>();
 			floorColour = renderColour;
 			for (int y = 0; y < HEIGHT; y++) {
 				for (int x = 0; x < width; x++) {

@@ -122,7 +122,7 @@ namespace Robber {
 					}
 				}
 			}
-			CollisionManager.getInstance().MapBoundingBoxes.AddRange(tileBBoxes);
+			CollisionManager.getInstance().MapBoundingBoxes = tileBBoxes;
 
 			return map;
 		}

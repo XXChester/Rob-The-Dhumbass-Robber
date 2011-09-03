@@ -57,11 +57,13 @@ namespace Robber {
 			this.inGameMenu = new InGameMenu(Content);
 			this.gameDisplay = new GameDisplay(Content);
 			this.mapSelectionMenu = new MapSeletMenu(GraphicsDevice, Content);
-			this.gameOverDisplay = new GameOverMenu(Content, delegate() {
-				return ((GameDisplay)this.gameDisplay).Score;
-			}, delegate() {
-				((GameDisplay)this.gameDisplay).reset();
-			});
+			this.gameOverDisplay = new GameOverMenu(Content, 
+				delegate() {
+					return ((GameDisplay)this.gameDisplay).Score;
+				}, delegate() {
+					((GameDisplay)this.gameDisplay).reset();
+				}
+			);
 		}
 
 		/// <summary>

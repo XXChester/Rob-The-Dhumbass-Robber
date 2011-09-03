@@ -90,8 +90,6 @@ namespace Robber {
 					if (this.replayButton.isActorOver(mousePos)) {
 						StateManager.getInstance().CurrentGameState = StateManager.GameState.Reset;
 						StateManager.getInstance().CurrentTransitionState = StateManager.TransitionState.TransitionOut;
-						this.resetCallBack.Invoke();
-						Console.WriteLine("Reset");
 					} else if (this.mapSelectionButton.isActorOver(mousePos)) {
 						StateManager.getInstance().CurrentGameState = StateManager.GameState.MapSelection;
 						StateManager.getInstance().CurrentTransitionState = StateManager.TransitionState.TransitionOut;
@@ -145,6 +143,10 @@ namespace Robber {
 					StateManager.getInstance().CurrentTransitionState = StateManager.TransitionState.None;
 				} else if (StateManager.getInstance().CurrentTransitionState == StateManager.TransitionState.TransitionOut) {
 					StateManager.getInstance().CurrentTransitionState = StateManager.TransitionState.TransitionIn;
+					if (StateManager.getInstance().CurrentGameState == StateManager.GameState.Reset) {
+						this.resetCallBack.Invoke();
+						Console.WriteLine("Reset");
+					}
 				}
 			}
 			#endregion Transitions
