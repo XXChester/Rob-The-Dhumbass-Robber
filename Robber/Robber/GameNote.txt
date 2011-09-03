@@ -139,7 +139,7 @@ ISSUES
 ============================
 Planning: 2 hours		
 Programming:	59 hours	
-Map Creation(Including creating editor via scripting engine):	12 hours
+Map Creation(Including creating editor via scripting engine):	12.25 hours
 Art: 6.75 hours	
 Sound:	2.75 hours		
 Deployment: .5 hours

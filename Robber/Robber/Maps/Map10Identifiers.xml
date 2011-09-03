@@ -5,14 +5,14 @@
 		</Time>
 		<Colours>
 			<Floor>
-				<R></R>
-				<G></G>
-				<B></B>
+				<R>137</R>
+				<G>67</G>
+				<B>21</B>
 			</Floor>
 			<Walls>
-				<R></R>
-				<G></G>
-				<B></B>
+				<R>0</R>
+				<G>0</G>
+				<B>0</B>
 			</Walls>
 		</Colours>
 	</LevelInformation>
