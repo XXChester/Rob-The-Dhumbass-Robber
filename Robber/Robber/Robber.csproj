@@ -132,6 +132,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Displays\InstructionsMenu.cs" />
     <Compile Include="Displays\ModeSelectMenu.cs" />
     <Compile Include="Displays\GameOverMenu.cs" />
     <Compile Include="Helpers\CollisionDetectionGenerator.cs" />

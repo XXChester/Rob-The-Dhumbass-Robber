@@ -16,12 +16,12 @@ using GWNorthEngine.AI.AStar;
 using GWNorthEngine.Scripting;
 using GWNorthEngine.Input;
 namespace Robber {
-	public class InGameMenu : Display {
+	public class InstructionsMenu : Display {
 		#region Class variables
-		private ColouredButton returnToGameButton;
-		private ColouredButton exitToMainButton;
+		private ColouredButton returnToMainButton;
 		private StaticDrawable2D backGround;
 		private StaticDrawable2D title;
+		private SoundEffect outroSfx;
 		#endregion Class variables
 
 		#region Class propeties
@@ -29,38 +29,35 @@ namespace Robber {
 		#endregion Class properties
 
 		#region Constructor
-		public InGameMenu(ContentManager content) {
+		public InstructionsMenu(ContentManager content) {
 			ColouredButtonParams buttonParms = new ColouredButtonParams();
 			buttonParms.Font = ResourceManager.getInstance().Font;
 			buttonParms.Height = 25;
 			buttonParms.LinesTexture = ResourceManager.getInstance().ButtonLineTexture;
 			buttonParms.MouseOverColour = ResourceManager.MOUSE_OVER_COLOUR;
 			buttonParms.RegularColour = ResourceManager.TEXT_COLOUR;
-			buttonParms.StartX = 580;
-			buttonParms.Width = 205;
+			buttonParms.StartX = 560;
+			buttonParms.Width = 225;
 
-			// play button
-			buttonParms.StartY = 515;
-			buttonParms.Text = "Return to Game";
-			buttonParms.TextsPosition = new Vector2(610f, buttonParms.StartY - 2f);
-			this.returnToGameButton = new ColouredButton(buttonParms);
-
-			// exit button
+			// return button
 			buttonParms.StartY = 557;
-			buttonParms.Text = "Exit To Main Menu";
-			buttonParms.TextsPosition = new Vector2(590f, buttonParms.StartY - 2);
-			this.exitToMainButton = new ColouredButton(buttonParms);
+			buttonParms.Text = "Return To Main Menu";
+			buttonParms.TextsPosition = new Vector2(570f, buttonParms.StartY - 2);
+			this.returnToMainButton = new ColouredButton(buttonParms);
 
 			// title
 			StaticDrawable2DParams staticParms = new StaticDrawable2DParams();
 			staticParms.Position = new Vector2(0f, 0f);
-			staticParms.Texture = LoadingUtils.loadTexture2D(content, "Paused");
+			staticParms.Texture = LoadingUtils.loadTexture2D(content, "Instructions");
 			this.title = new StaticDrawable2D(staticParms);
 
 			// background
-			staticParms.Position = new Vector2(-10f, 0f);
-			staticParms.Texture = LoadingUtils.loadTexture2D(content, "BackGround1");
+			staticParms.Position = new Vector2(80f, 25f);
+			staticParms.Texture = LoadingUtils.loadTexture2D(content, "HowToPlay");
 			this.backGround = new StaticDrawable2D(staticParms);
+
+			// sound effects
+			this.outroSfx = LoadingUtils.loadSoundEffect(content, "WhereWeGonnaRob");
 		}
 		#endregion Constructor
 
@@ -68,10 +65,9 @@ namespace Robber {
 		public override void update(float elapsed) {
 			Vector2 mousePos = InputManager.getInstance().MousePosition;
 
-			this.returnToGameButton.processActorsMovement(mousePos);
-			this.exitToMainButton.processActorsMovement(mousePos);
+			this.returnToMainButton.processActorsMovement(mousePos);
 			// mouse over sfx
-			if (this.returnToGameButton.isActorOver(mousePos) || this.exitToMainButton.isActorOver(mousePos)) {
+			if (this.returnToMainButton.isActorOver(mousePos)) {
 				if (!base.previousMouseOverButton) {
 						SoundManager.getInstance().sfxEngine.playSoundEffect(ResourceManager.getInstance().MouseOverSfx);
 				}
@@ -81,10 +77,7 @@ namespace Robber {
 			}
 			if (StateManager.getInstance().CurrentTransitionState == StateManager.TransitionState.None) {
 				if (InputManager.getInstance().wasLeftButtonPressed()) {
-					if (this.returnToGameButton.isActorOver(mousePos)) {
-						StateManager.getInstance().CurrentGameState = StateManager.getInstance().PreviousGameState;
-						StateManager.getInstance().CurrentTransitionState = StateManager.TransitionState.TransitionOut;
-					} else if (this.exitToMainButton.isActorOver(mousePos)) {
+					if (this.returnToMainButton.isActorOver(mousePos)) {
 						StateManager.getInstance().CurrentGameState = StateManager.GameState.MainMenu;
 						StateManager.getInstance().CurrentTransitionState = StateManager.TransitionState.TransitionOut;
 					}
@@ -92,22 +85,16 @@ namespace Robber {
 			} else if (StateManager.getInstance().CurrentTransitionState == StateManager.TransitionState.TransitionIn) {
 				this.backGround.LightColour = base.fadeIn(Color.White);
 				this.title.LightColour = base.fadeIn(Color.White);
-				this.returnToGameButton.updateColours(base.fadeIn(ResourceManager.TEXT_COLOUR));
-				this.exitToMainButton.updateColours(base.fadeIn(ResourceManager.TEXT_COLOUR));
-				if (this.returnToGameButton.isActorOver(mousePos)) {
-						this.returnToGameButton.updateColours(base.fadeIn(ResourceManager.MOUSE_OVER_COLOUR));
-				} else if (this.exitToMainButton.isActorOver(mousePos)) {
-					this.exitToMainButton.updateColours(base.fadeIn(ResourceManager.MOUSE_OVER_COLOUR));
+				this.returnToMainButton.updateColours(base.fadeIn(ResourceManager.TEXT_COLOUR));
+				if (this.returnToMainButton.isActorOver(mousePos)) {
+					this.returnToMainButton.updateColours(base.fadeIn(ResourceManager.MOUSE_OVER_COLOUR));
 				}
 			} else if (StateManager.getInstance().CurrentTransitionState == StateManager.TransitionState.TransitionOut) {
 				this.backGround.LightColour = base.fadeOut(Color.White);
 				this.title.LightColour = base.fadeOut(Color.White);
-				this.returnToGameButton.updateColours(base.fadeOut(ResourceManager.TEXT_COLOUR));
-				this.exitToMainButton.updateColours(base.fadeOut(ResourceManager.TEXT_COLOUR));
-				if (this.returnToGameButton.isActorOver(mousePos)) {
-					this.returnToGameButton.updateColours(base.fadeOut(ResourceManager.MOUSE_OVER_COLOUR));
-				} else if (this.exitToMainButton.isActorOver(mousePos)) {
-					this.exitToMainButton.updateColours(base.fadeOut(ResourceManager.MOUSE_OVER_COLOUR));
+				this.returnToMainButton.updateColours(base.fadeOut(ResourceManager.TEXT_COLOUR));
+				if (this.returnToMainButton.isActorOver(mousePos)) {
+					this.returnToMainButton.updateColours(base.fadeOut(ResourceManager.MOUSE_OVER_COLOUR));
 				}
 			}
 			// if our transition time is up change our state
@@ -130,24 +117,23 @@ namespace Robber {
 		public override void render(SpriteBatch spriteBatch) {
 			this.backGround.render(spriteBatch);
 			this.title.render(spriteBatch);
-			this.returnToGameButton.render(spriteBatch);
-			this.exitToMainButton.render(spriteBatch);
+			this.returnToMainButton.render(spriteBatch);
 		}
 		#endregion Support methods
 
 		#region Destructor
 		public override void dispose() {
-			if (this.returnToGameButton != null) {
-				this.returnToGameButton.dispose();
-			}
-			if (this.exitToMainButton != null) {
-				this.exitToMainButton.dispose();
+			if (this.returnToMainButton != null) {
+				this.returnToMainButton.dispose();
 			}
 			if (this.backGround != null) {
 				this.backGround.dispose();
 			}
 			if (this.title != null) {
 				this.title.dispose();
+			}
+			if (this.outroSfx != null) {
+				this.outroSfx.Dispose();
 			}
 		}
 		#endregion Destructor

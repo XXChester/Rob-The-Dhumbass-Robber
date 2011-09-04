@@ -30,7 +30,6 @@ namespace Robber {
 		#region Class properties
 		public SpriteFont Font { get; set; }
 		public Texture2D ButtonLineTexture { get; set; }
-		public Texture2D TitleTexture { get; set; }
 		public SoundEffect MouseOverSfx { get; set; }
 		public SoundEffect FootStepsSfx { get; set; }
 		public SoundEffect PrisonCellSfx { get; set; }
@@ -48,7 +47,6 @@ namespace Robber {
 		public void init(GraphicsDevice device, ContentManager content) {
 			this.Font = LoadingUtils.loadSpriteFont(content, "Font");
 			this.ButtonLineTexture = TextureUtils.create2DColouredTexture(device, 2, 2, Color.White);
-			this.TitleTexture = LoadingUtils.loadTexture2D(content, "Title");
 			this.MouseOverSfx = LoadingUtils.loadSoundEffect(content, "MouseOverButton");
 			this.FootStepsSfx = LoadingUtils.loadSoundEffect(content, "FootSteps");
 			this.PrisonCellSfx = LoadingUtils.loadSoundEffect(content, "CellDoor");
@@ -63,9 +61,6 @@ namespace Robber {
 		public void dispose() {
 			if (this.ButtonLineTexture != null) {
 				this.ButtonLineTexture.Dispose();
-			}
-			if (this.TitleTexture != null) {
-				this.TitleTexture.Dispose();
 			}
 			if (this.MouseOverSfx != null) {
 				this.MouseOverSfx.Dispose();

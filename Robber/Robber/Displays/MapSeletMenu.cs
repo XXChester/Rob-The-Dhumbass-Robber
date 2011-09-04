@@ -17,7 +17,7 @@ using GWNorthEngine.Scripting;
 using GWNorthEngine.Input;
 namespace Robber {
 	public class MapSeletMenu : Display {
-	#region Class variables
+		#region Class variables
 		private List<MapSelection> mapSelections;
 		private ColouredButton returnToModeSelectButton;
 		private StaticDrawable2D title;
@@ -63,8 +63,8 @@ namespace Robber {
 
 			// title
 			StaticDrawable2DParams staticParms = new StaticDrawable2DParams();
-			staticParms.Position = new Vector2(0f, -20f);
-			staticParms.Texture = ResourceManager.getInstance().TitleTexture;
+			staticParms.Position = new Vector2(0f, 0f);
+			staticParms.Texture = LoadingUtils.loadTexture2D(content, "MapSelection");
 			this.title = new StaticDrawable2D(staticParms);
 
 			// no preview image

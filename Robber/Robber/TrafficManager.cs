@@ -23,8 +23,9 @@ namespace Robber {
 		private Display mainMenu;
 		private Display modeSelectMenu;
 		private Display mapSelectionMenu;
-		private Display gameDisplay;
 		private Display inGameMenu;
+		private Display instructionMenu;
+		private Display gameDisplay;
 		private Display gameOverDisplay;
 		private Display activeDisplay;
 
@@ -54,6 +55,7 @@ namespace Robber {
 			this.mainMenu = new MainMenu(Content);
 			this.modeSelectMenu = new ModeSelectMenu(Content);
 			this.inGameMenu = new InGameMenu(Content);
+			this.instructionMenu = new InstructionsMenu(Content);
 			this.gameDisplay = new GameDisplay(Content);
 			this.mapSelectionMenu = new MapSeletMenu(GraphicsDevice, Content);
 			this.gameOverDisplay = new GameOverMenu(Content, 
@@ -74,6 +76,7 @@ namespace Robber {
 			this.mainMenu.dispose();
 			this.modeSelectMenu.dispose();
 			this.inGameMenu.dispose();
+			this.instructionMenu.dispose();
 			this.mapSelectionMenu.dispose();
 			this.gameOverDisplay.dispose();
 			this.activeDisplay.dispose();
@@ -118,8 +121,18 @@ namespace Robber {
 				} else if (StateManager.getInstance().PreviousGameState == StateManager.GameState.ModeSelect &&
 					StateManager.getInstance().CurrentTransitionState == StateManager.TransitionState.TransitionOut) {
 					this.activeDisplay = this.modeSelectMenu;
+				} else if (StateManager.getInstance().PreviousGameState == StateManager.GameState.Instructions &&
+					StateManager.getInstance().CurrentTransitionState == StateManager.TransitionState.TransitionOut) {
+					this.activeDisplay = this.instructionMenu;
 				} else {
 					this.activeDisplay = this.mainMenu;
+				}
+			} else if (StateManager.getInstance().CurrentGameState == StateManager.GameState.Instructions) {
+				if (StateManager.getInstance().PreviousGameState == StateManager.GameState.MainMenu &&
+					StateManager.getInstance().CurrentTransitionState == StateManager.TransitionState.TransitionOut) {
+					this.activeDisplay = this.mainMenu;
+				} else {
+					this.activeDisplay = this.instructionMenu;
 				}
 			} else if (StateManager.getInstance().CurrentGameState == StateManager.GameState.ModeSelect) {
 				if (StateManager.getInstance().PreviousGameState == StateManager.GameState.MainMenu &&

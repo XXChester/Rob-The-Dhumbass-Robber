@@ -61,13 +61,14 @@ namespace Robber {
 
 			// title
 			StaticDrawable2DParams staticParms = new StaticDrawable2DParams();
-			staticParms.Position = new Vector2(0f, -20f);
-			staticParms.Texture = ResourceManager.getInstance().TitleTexture;
+			staticParms.Position = new Vector2(0f, 0f);
+			staticParms.Texture = LoadingUtils.loadTexture2D(content, "ModeSelection");
 			this.title = new StaticDrawable2D(staticParms);
 
 			// background
-			staticParms.Position = new Vector2(-10f, 0f);
-			staticParms.Texture = LoadingUtils.loadTexture2D(content, "BackGround1");
+			staticParms.Position = new Vector2(15f, 150f);
+			staticParms.Scale = new Vector2(.75f, .75f);
+			staticParms.Texture = LoadingUtils.loadTexture2D(content, "ModeHelp");
 			this.backGround = new StaticDrawable2D(staticParms);
 
 			// sound effects
@@ -153,7 +154,7 @@ namespace Robber {
 		}
 
 		public override void render(SpriteBatch spriteBatch) {
-			//this.backGround.render(spriteBatch);
+			this.backGround.render(spriteBatch);
 			this.title.render(spriteBatch);
 			this.normalButton.render(spriteBatch);
 			this.timeAttackButton.render(spriteBatch);

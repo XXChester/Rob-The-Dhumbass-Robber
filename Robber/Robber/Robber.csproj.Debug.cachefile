@@ -44,6 +44,12 @@ Content\LetsRobSomething.xnb
 Content\OpenDoor.xnb
 Content\FootSteps.xnb
 Content\BasicExitTile.xnb
+Content\Instructions.xnb
+Content\MapSelection.xnb
+Content\ModeSelection.xnb
+Content\Paused.xnb
+Content\ModeHelp.xnb
+Content\HowToPlay.xnb
 Maps\Map10.png
 Maps\Map10.xml
 Maps\Map9.png

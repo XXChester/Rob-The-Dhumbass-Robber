@@ -62,7 +62,9 @@ Fix major problems with the game and implement some of the features that got scr
 [*]Move bounding boxes down to represent the feet in the tile now as we are now sort of taking on a 2.5D perspective
 []Need a graphic for mode select screen
 []Need a graphic for the main menu screen
-[]How to play screen
+[*]How to play screen
+[]Need a new graphic for the main menu since most of the information on that screen is now redundant
+	-thinking like a big robber sprite creeping around and a guard on the either side sleeping or something
 [*]Refactor the floor and map objects into a MapWalls and MapFloor object and load the tiles from the layers respectively
 
 ============================
@@ -150,9 +152,9 @@ Replace the programmer art with less crappy programmer art and make the game not
 		Time
 ============================
 Planning: 2 hours		
-Programming:	61.75 hours
+Programming:	61.75 hours	1:25am-1:50am
 Map Creation(Including creating editor via scripting engine):	12.25 hours
-Art: 6.75 hours	
+Art: 6.75 hours		11:45pm-1:25am
 Sound:	2.75 hours		
 Deployment: .5 hours
 Alpha-testing:2 hours

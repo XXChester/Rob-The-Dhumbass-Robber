@@ -18,6 +18,7 @@ namespace Robber {
 	public class MainMenu : Display {
 		#region Class variables
 		private ColouredButton playButton;
+		private ColouredButton instructionsButton;
 		private ColouredButton exitButton;
 		private StaticDrawable2D backGround;
 		private StaticDrawable2D title;
@@ -26,7 +27,7 @@ namespace Robber {
 		private SoundEffect outroSfx;
 		private float timeIdle;
 		private int idleLastPlayed;
-		private const float PLAY_IDLE_AT = 5000f;//20000f;
+		private const float PLAY_IDLE_AT = 20000f;
 		#endregion Class variables
 
 		#region Class propeties
@@ -41,25 +42,31 @@ namespace Robber {
 			buttonParms.LinesTexture = ResourceManager.getInstance().ButtonLineTexture;
 			buttonParms.MouseOverColour = ResourceManager.MOUSE_OVER_COLOUR;
 			buttonParms.RegularColour = ResourceManager.TEXT_COLOUR;
-			buttonParms.StartX = 693;
-			buttonParms.Width = 75;
+			buttonParms.StartX = 640;
+			buttonParms.Width = 150;
 
 			// play button
-			buttonParms.StartY = 515;
+			buttonParms.StartY = 473;
 			buttonParms.Text = "Play";
-			buttonParms.TextsPosition = new Vector2(710f, buttonParms.StartY - 2f);
+			buttonParms.TextsPosition = new Vector2(690f, buttonParms.StartY - 2f);
 			this.playButton = new ColouredButton(buttonParms);
+
+			// instructions button
+			buttonParms.StartY = 515;
+			buttonParms.Text = "Instructions";
+			buttonParms.TextsPosition = new Vector2(650f, buttonParms.StartY - 2f);
+			this.instructionsButton = new ColouredButton(buttonParms);
 
 			// exit button
 			buttonParms.StartY = 557;
 			buttonParms.Text = "Exit";
-			buttonParms.TextsPosition = new Vector2(710f, buttonParms.StartY - 2);
+			buttonParms.TextsPosition = new Vector2(690f, buttonParms.StartY - 2);
 			this.exitButton = new ColouredButton(buttonParms);
 			
 			// title
 			StaticDrawable2DParams staticParms = new StaticDrawable2DParams();
 			staticParms.Position = new Vector2(0f, -20f);
-			staticParms.Texture = ResourceManager.getInstance().TitleTexture;
+			staticParms.Texture = LoadingUtils.loadTexture2D(content, "Title");
 			this.title = new StaticDrawable2D(staticParms);
 
 			// background
@@ -91,6 +98,7 @@ namespace Robber {
 			Vector2 mousePos = InputManager.getInstance().MousePosition;
 
 			this.playButton.processActorsMovement(mousePos);
+			this.instructionsButton.processActorsMovement(mousePos);
 			this.exitButton.processActorsMovement(mousePos);
 			// mouse over sfx
 			if (this.playButton.isActorOver(mousePos) || this.exitButton.isActorOver(mousePos)) {
@@ -107,6 +115,9 @@ namespace Robber {
 						StateManager.getInstance().CurrentTransitionState = StateManager.TransitionState.TransitionOut;
 						StateManager.getInstance().CurrentGameState = StateManager.GameState.ModeSelect;
 						SoundManager.getInstance().sfxEngine.playSoundEffect(this.outroSfx);
+					} else if (this.instructionsButton.isActorOver(mousePos)) {
+						StateManager.getInstance().CurrentTransitionState = StateManager.TransitionState.TransitionOut;
+						StateManager.getInstance().CurrentGameState = StateManager.GameState.Instructions;
 					} else if (this.exitButton.isActorOver(mousePos)) {
 						StateManager.getInstance().CurrentGameState = StateManager.GameState.Exit;
 					}
@@ -114,13 +125,20 @@ namespace Robber {
 			} else if (StateManager.getInstance().CurrentTransitionState == StateManager.TransitionState.TransitionIn) {
 				if (this.playButton.isActorOver(mousePos)) {
 					this.playButton.updateColours(base.fadeIn(ResourceManager.MOUSE_OVER_COLOUR));
+					this.instructionsButton.updateColours(base.fadeIn(ResourceManager.TEXT_COLOUR));
 					this.exitButton.updateColours(base.fadeIn(ResourceManager.TEXT_COLOUR));
 				} else if (this.exitButton.isActorOver(mousePos)) {
 					this.exitButton.updateColours(base.fadeIn(ResourceManager.MOUSE_OVER_COLOUR));
+					this.instructionsButton.updateColours(base.fadeIn(ResourceManager.TEXT_COLOUR));
 					this.playButton.updateColours(base.fadeIn(ResourceManager.TEXT_COLOUR));
+				} else if (this.instructionsButton.isActorOver(mousePos)) {
+					this.instructionsButton.updateColours(base.fadeIn(ResourceManager.MOUSE_OVER_COLOUR));
+					this.playButton.updateColours(base.fadeIn(ResourceManager.TEXT_COLOUR));
+					this.exitButton.updateColours(base.fadeIn(ResourceManager.TEXT_COLOUR));
 				} else {
 					this.playButton.updateColours(base.fadeIn(ResourceManager.TEXT_COLOUR));
 					this.exitButton.updateColours(base.fadeIn(ResourceManager.TEXT_COLOUR));
+					this.instructionsButton.updateColours(base.fadeIn(ResourceManager.TEXT_COLOUR));
 				}
 				this.backGround.LightColour = base.fadeIn(Color.White);
 				this.title.LightColour = base.fadeIn(Color.White);
@@ -128,12 +146,19 @@ namespace Robber {
 				if (this.playButton.isActorOver(mousePos)) {
 					this.playButton.updateColours(base.fadeOut(ResourceManager.MOUSE_OVER_COLOUR));
 					this.exitButton.updateColours(base.fadeOut(ResourceManager.TEXT_COLOUR));
+					this.instructionsButton.updateColours(base.fadeOut(ResourceManager.TEXT_COLOUR));
 				} else if (this.exitButton.isActorOver(mousePos)) {
 					this.exitButton.updateColours(base.fadeOut(ResourceManager.MOUSE_OVER_COLOUR));
 					this.playButton.updateColours(base.fadeOut(ResourceManager.TEXT_COLOUR));
+					this.instructionsButton.updateColours(base.fadeOut(ResourceManager.TEXT_COLOUR));
+				} else if (this.instructionsButton.isActorOver(mousePos)) {
+					this.playButton.updateColours(base.fadeOut(ResourceManager.TEXT_COLOUR));
+					this.exitButton.updateColours(base.fadeOut(ResourceManager.TEXT_COLOUR));
+					this.instructionsButton.updateColours(base.fadeOut(ResourceManager.MOUSE_OVER_COLOUR));
 				} else {
 					this.playButton.updateColours(base.fadeOut(ResourceManager.TEXT_COLOUR));
 					this.exitButton.updateColours(base.fadeOut(ResourceManager.TEXT_COLOUR));
+					this.instructionsButton.updateColours(base.fadeOut(ResourceManager.TEXT_COLOUR));
 				}
 				this.backGround.LightColour = base.fadeOut(Color.White);
 				this.title.LightColour = base.fadeOut(Color.White);
@@ -164,6 +189,7 @@ namespace Robber {
 			this.backGround.render(spriteBatch);
 			this.title.render(spriteBatch);
 			this.playButton.render(spriteBatch);
+			this.instructionsButton.render(spriteBatch);
 			this.exitButton.render(spriteBatch);
 		}
 		#endregion Support methods
@@ -172,6 +198,9 @@ namespace Robber {
 		public override void dispose() {
 			if (this.playButton != null) {
 				this.playButton.dispose();
+			}
+			if (this.instructionsButton != null) {
+				this.instructionsButton.dispose();
 			}
 			if (this.exitButton != null) {
 				this.exitButton.dispose();

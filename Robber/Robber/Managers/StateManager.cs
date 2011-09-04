@@ -15,6 +15,7 @@ namespace Robber {
 			Active,
 			GameOver,
 			MapSelection,
+			Instructions,
 			Exit
 		}
 
@@ -70,11 +71,12 @@ namespace Robber {
 			this.GameMode = Mode.Normal;
 
 			// test settings
+			//this.CurrentGameState = GameState.Instructions;
 			//this.CurrentGameState = GameState.ModeSelect;
 			//this.CurrentGameState = GameState.MapSelection;
-			this.GameMode = Mode.TimeAttack;
-			this.CurrentGameState = GameState.InitGame;
-			this.MapInformation = "Map8";
+			//this.GameMode = Mode.TimeAttack;
+			//this.CurrentGameState = GameState.InitGame;
+			//this.MapInformation = "Map7";
 		}
 		#endregion Constructor
 

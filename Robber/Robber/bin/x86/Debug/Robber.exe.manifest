@@ -105,14 +105,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Robber.exe" size="72192">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Robber.exe" size="74240">
       <assemblyIdentity name="Robber" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>wuykU91QVv1ywyzowGneG7eS+XQ=</dsig:DigestValue>
+        <dsig:DigestValue>ImM3qChuxj4PmFK48D40Qwj1opE=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -296,6 +296,15 @@
       <dsig:DigestValue>OxFixozKnpB8FCBsfe5ajwQRxr0=</dsig:DigestValue>
     </hash>
   </file>
+  <file name="Content\HowToPlay.xnb" size="1556539">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>ZkAdh518RyIYuzpQapc84ryvhHk=</dsig:DigestValue>
+    </hash>
+  </file>
   <file name="Content\Info.xnb" size="1920187">
     <hash>
       <dsig:Transforms>
@@ -303,6 +312,15 @@
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
       <dsig:DigestValue>3A9DZ92ws8hP/9pOjYScflmVibc=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Content\Instructions.xnb" size="1920187">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>aYLsNIt5JsU1ktTaBH/oif9KFds=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Content\Introduction.xnb" size="373353">
@@ -359,6 +377,33 @@
       <dsig:DigestValue>Q0bWNx//tjc92FSyQ7Rt6agbius=</dsig:DigestValue>
     </hash>
   </file>
+  <file name="Content\MapSelection.xnb" size="1920187">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>RTVQyLjfICskBZGQrdz7B8e9w84=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Content\ModeHelp.xnb" size="1556539">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>W3ion8Ok3cJ/QpyemphIJ97LOVM=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Content\ModeSelection.xnb" size="1920187">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>KR88KEnsKEPw69hkW3A+th89GuM=</dsig:DigestValue>
+    </hash>
+  </file>
   <file name="Content\MouseOverButton.xnb" size="27753">
     <hash>
       <dsig:Transforms>
@@ -384,6 +429,15 @@
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
       <dsig:DigestValue>5MAPv6xIAjyXKHZnkUOGCIs5OWo=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Content\Paused.xnb" size="1920187">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>JWFR/bXrTbdEZ4QPPGK7+se+GrU=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Content\PayDay.xnb" size="433257">
