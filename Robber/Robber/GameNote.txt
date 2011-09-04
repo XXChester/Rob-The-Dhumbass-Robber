@@ -32,8 +32,6 @@ Raw version of the game functional with programmer art
 [*]Make guards patrol the halls
 [*]Make the guards chase the player if he is seen
 [*]Major bug with the AI walking through Non-walkable spaces
-[]Put in collision detection with each of the guards so they don't stack		
-		-Removed this as it was causing problems because the guards only generate paths to way points once, not every new square
 [*]Put in collision detection with the player
 [*]Clean up AI so that it always walks down the middle of the square not the edge
 [*]Clean up collision detection so that it doesn't bounce you around...instead you just don't move if it will result in a collision...provisional CD opposed to reaction CD
@@ -50,9 +48,6 @@ Fix major problems with the game and implement some of the features that got scr
 [*]Create in game editor for placing guards, treasure etc
 [*]Change all data to xml based
 [*]Add in garbage cans to hide in
-[]Couple extra guards run in from the exit point if you are detected
-	-Don't implement this until a lot more is figured out such as what happens if you go into a garbage can?
-[]Add in random sneezing if you stand within the same tile too long
 [*]Put doors in	-wasn't going to put these in but should put locked doors in that only guards can walk through
 	[*]Alter engine's A* algorithms to handle variable terrain costs in preparation for locked doors
 [*]Design an algorithm for automatically generating bounding boxes
@@ -60,29 +55,28 @@ Fix major problems with the game and implement some of the features that got scr
 [*]Alternate flow to go from a "game over state"(regardless of win/loose etc) to the map selection screen
 [*]Guards and player actually start in the middle of their square, not on the left edge in the middle
 [*]Rewrite guard movement code, it is a giant mess from the competition and only works for left/right movement (in the sense of walking down the missle of a tile)
-[]Write an input manager
+[*]Write an input manager
 [*]Pull the game over screen out of the GameDisplay....I crammed this into that display due to crunch at the end of the competition...now do it properly
 [*]Change exit tile to be written in white and than load it's colour threw the XML loader
 	-Didn't want this to be dynamic so made it so that it always renders red. The problem was for certain colours of the walls the exit tile would render black and not red(desired)
 [*]Move bounding boxes down to represent the feet in the tile now as we are now sort of taking on a 2.5D perspective
-	-Also did the treasure
-[]Switch AI to use the Walker algorithm with no cutting corners opposed to the current MazeSolver algorithm. Guards should be able to move in all 8 directions instead of just 4 cardinal
+[]Need a graphic for mode select screen
+[]Need a graphic for the main menu screen
+[]How to play screen
+[*]Refactor the floor and map objects into a MapWalls and MapFloor object and load the tiles from the layers respectively
 
 ============================
 	Polish(Phase 2)
 ============================
 Replace the programmer art with less crappy programmer art and make the game not only maintain its functionality but also add a nice playable environment and add additional functionality
-[]LOS Detection triangle
 [*]Make timer have decimal places
 [*]Delay the start of the level so the user can have a look at the layout	***
-[]Pause at waypoints??	-Not certain I want this still
 [*]Screen fades in and out (Transitions)
 [*]Robber and guard sprites
 [*]Change the tile placer program to write multiple layers so that the floor is not hardcoded to a white square, it can now have a real texture applied
 []Upgrade floor tile graphics
 [*]Upgrade radius ring graphic
 [*]Uprade door tile graphic
-[]Need a graphic for mode select screen
 [*]Need a sfx on entry to the mode select screen
 [*]Sfx emotes
 [*]Sfx
@@ -94,14 +88,14 @@ Replace the programmer art with less crappy programmer art and make the game not
 	[*]Hard coded but very easy to add new ones		-Can create and map indentifiers for a new map in about 30minutes
 [*]Map select screen
 [*]Change sprite direction determination for up and down, base it on last direction
-[]More maps		-Biggest complaint from the competition was there was only 3 levels and 2 were very similar
+[*]More maps		-Biggest complaint from the competition was there was only 3 levels and 2 were very similar
 []Compaign mode?
 []Arcade mode
 [*]Sub mode of time attack or normal? Time attack makes you compete against a fast clock, otherwise you get a default time such as 5 minutes to solve the puzzle
 []Cinematic of Rob falling through the roof
 
 ===========================
-ISSUES
+		ISSUES
 ==========================
 [*]AI can sometimes walk through walls		--All the logic is correct it is just the AI is not walking down the middle of the square which it needs to
 	[*]Cleaned up a bit but needs another pass
@@ -134,13 +128,29 @@ ISSUES
 [*]Problem with AI grabbing wrong waypoint when direction is counter clockwise and starting location is not on
 	a waypoint. Should be grabbing the last node but is grabbing 2nd last
 [*]Hitting escape in the game and than returning to the game causes the game to play for the rest of the transition in but than pause
+[*]Need a comparator for the maps directory. Default string one thinks the order should be Map1, Map10, Map2...etc
 
+
+===========================
+	Removed features
+===========================
+[]Put in collision detection with each of the guards so they don't stack		
+	-Removed this as it was causing problems because the guards only generate paths to way points once, not every new square
+[]Couple extra guards run in from the exit point if you are detected
+	-Don't implement this until a lot more is figured out such as what happens if you go into a garbage can?
+[]Add in random sneezing if you stand within the same tile too long
+[]LOS Detection triangle
+[]Radius sphere is for noise detection
+[]Switch AI to use the Walker algorithm with no cutting corners opposed to the current MazeSolver algorithm. Guards should be able to move in all 8 directions instead of just 4 cardinal
+	-Removed because the game works fine with 4 cardinal directions
+[]Pause at waypoints??	
+	-Not certain I want this still
 
 ============================
 		Time
 ============================
 Planning: 2 hours		
-Programming:	59.5 hours	
+Programming:	61.75 hours
 Map Creation(Including creating editor via scripting engine):	12.25 hours
 Art: 6.75 hours	
 Sound:	2.75 hours		

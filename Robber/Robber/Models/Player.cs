@@ -13,6 +13,7 @@ using GWNorthEngine.AI.AStar;
 using GWNorthEngine.Model;
 using GWNorthEngine.Model.Params;
 using GWNorthEngine.Scripting;
+using GWNorthEngine.Input;
 namespace Robber {
 	public class Player : Person{
 		#region Class variables
@@ -36,20 +37,17 @@ namespace Robber {
 		#region Support methods
 		protected override void updateDirection(float elapsed) {
 			if (!this.Hiding) {
-				if (this.currentKeyBoardState.IsKeyDown(Keys.Left)) {
+				if (InputManager.getInstance().isKeyDown(Keys.Left)) {
 					base.direction = Person.Direction.Left;
-				} else if (this.currentKeyBoardState.IsKeyDown(Keys.Up)) {
+				} else if (InputManager.getInstance().isKeyDown(Keys.Up)) {
 					base.direction = Person.Direction.Up;
-				} else if (this.currentKeyBoardState.IsKeyDown(Keys.Right)) {
+				} else if (InputManager.getInstance().isKeyDown(Keys.Right)) {
 					base.direction = Person.Direction.Right;
-				} else if (this.currentKeyBoardState.IsKeyDown(Keys.Down)) {
+				} else if (InputManager.getInstance().isKeyDown(Keys.Down)) {
 					base.direction = Person.Direction.Down;
 				} else {
 					// if none of our direction keys are down than we are not moving
-					if (base.previousKeyBoardState.IsKeyDown(Keys.Left) || base.previousKeyBoardState.IsKeyDown(Keys.Up) || base.previousKeyBoardState.IsKeyDown(Keys.Right) ||
-						base.previousKeyBoardState.IsKeyDown(Keys.Down)) {
-						base.direction = Person.Direction.None;
-					}
+					base.direction = Person.Direction.None;
 				}
 
 				//play movement sfx

@@ -965,6 +965,162 @@
             Gets or sets the nodes parent node
             </summary>
         </member>
+        <member name="T:GWNorthEngine.Input.InputManager">
+            <summary>
+            Manager that handles the states of different input devices
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Input.InputManager.#ctor">
+            <summary>
+            Sets the default values of the input manager
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Input.InputManager.getInstance">
+            <summary>
+            Retrieves the singleton instance
+            </summary>
+            <returns>InputManager</returns>
+        </member>
+        <member name="M:GWNorthEngine.Input.InputManager.update">
+            <summary>
+            Main loop that updates all of the devices
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Input.InputManager.wasKeyPressed(Microsoft.Xna.Framework.Input.Keys)">
+            <summary>
+            Determines if a key was just pressed down
+            </summary>
+            <param name="key">Key that we are checking for</param>
+            <returns>True if the key was just pressed, otherwise false</returns>
+        </member>
+        <member name="M:GWNorthEngine.Input.InputManager.wasKeyReleased(Microsoft.Xna.Framework.Input.Keys)">
+            <summary>
+            Determines if a key was just released
+            </summary>
+            <param name="key">Key that we are checking for</param>
+            <returns>True if the key was just released, otherwise false</returns>
+        </member>
+        <member name="M:GWNorthEngine.Input.InputManager.isKeyDown(Microsoft.Xna.Framework.Input.Keys)">
+            <summary>
+            Determines if a key is held down
+            </summary>
+            <param name="key">Key that we are checking for</param>
+            <returns>True if the key is held, otherwise false</returns>
+        </member>
+        <member name="M:GWNorthEngine.Input.InputManager.wasButtonPressed(GWNorthEngine.Input.MouseButton)">
+            <summary>
+            Determines if a button was just pressed down
+            </summary>
+            <param name="button">Button that we are checking for</param>
+            <returns>True if the button was just pressed, otherwise false</returns>
+        </member>
+        <member name="M:GWNorthEngine.Input.InputManager.wasButtonReleased(GWNorthEngine.Input.MouseButton)">
+            <summary>
+            Determines if a button was just released
+            </summary>
+            <param name="button">Button that we are checking for</param>
+            <returns>True if the button was just released, otherwise false</returns>
+        </member>
+        <member name="M:GWNorthEngine.Input.InputManager.isButtonDown(GWNorthEngine.Input.MouseButton)">
+            <summary>
+            Determines if a button is held down
+            </summary>
+            <param name="button">Button that we are checking for</param>
+            <returns>True if the button is held down, otherwise false</returns>
+        </member>
+        <member name="M:GWNorthEngine.Input.InputManager.wasLeftButtonPressed">
+            <summary>
+            Determines if the left mouse button was just pressed down
+            </summary>
+            <returns>True if the button was just pressed, otherwise false</returns>
+        </member>
+        <member name="M:GWNorthEngine.Input.InputManager.wasLeftButtonReleased">
+            <summary>
+            Determines if the left mouse button was just released
+            </summary>
+            <returns>True if the button was just released, otherwise false</returns>
+        </member>
+        <member name="M:GWNorthEngine.Input.InputManager.isLeftButtonDown">
+            <summary>
+            Determines if the left mouse button is held down
+            </summary>
+            <returns>True if the button is held down, otherwise false</returns>
+        </member>
+        <member name="M:GWNorthEngine.Input.InputManager.wasRightButtonPressed">
+            <summary>
+            Determines if the right mouse button was just pressed down
+            </summary>
+            <returns>True if the button was just pressed, otherwise false</returns>
+        </member>
+        <member name="M:GWNorthEngine.Input.InputManager.wasRightButtonReleased">
+            <summary>
+            Determines if the left mouse button was just released
+            </summary>
+            <returns>True if the button was just released, otherwise false</returns>
+        </member>
+        <member name="M:GWNorthEngine.Input.InputManager.isRightButtonDown">
+            <summary>
+            Determines if the right mouse button is held down
+            </summary>
+            <returns>True if the button is held down, otherwise false</returns>
+        </member>
+        <member name="M:GWNorthEngine.Input.InputManager.wasMiddleButtonPressed">
+            <summary>
+            Determines if the middle mouse button was just pressed down
+            </summary>
+            <returns>True if the button was just pressed, otherwise false</returns>
+        </member>
+        <member name="M:GWNorthEngine.Input.InputManager.wasMiddleButtonReleased">
+            <summary>
+            Determines if the left mouse button was just released
+            </summary>
+            <returns>True if the button was just released, otherwise false</returns>
+        </member>
+        <member name="M:GWNorthEngine.Input.InputManager.isMiddleButtonDown">
+            <summary>
+            Determines if the middle mouse button is held down
+            </summary>
+            <returns>True if the button is held down, otherwise false</returns>
+        </member>
+        <member name="M:GWNorthEngine.Input.InputManager.wasButtonPressed(Microsoft.Xna.Framework.PlayerIndex,Microsoft.Xna.Framework.Input.Buttons)">
+            <summary>
+            Determines if a specific player just pressed a buton
+            </summary>
+            <param name="playerIndex">Player we are checking</param>
+            <param name="button">Button that we are checking</param>
+            <returns>True if the player's button was just pressed, otherwise false</returns>
+        </member>
+        <member name="M:GWNorthEngine.Input.InputManager.wasButtonReleased(Microsoft.Xna.Framework.PlayerIndex,Microsoft.Xna.Framework.Input.Buttons)">
+            <summary>
+            Determines if a specific player's buton was just released
+            </summary>
+            <param name="playerIndex">Player we are checking</param>
+            <param name="button">Button that we are checking</param>
+            <returns>True if the player's button was just released, otherwise false</returns>
+        </member>
+        <member name="M:GWNorthEngine.Input.InputManager.isButtonDown(Microsoft.Xna.Framework.PlayerIndex,Microsoft.Xna.Framework.Input.Buttons)">
+            <summary>
+            Determines if a specific player is holding a button down
+            </summary>
+            <param name="playerIndex">Player we are checking</param>
+            <param name="button">Button that we are checking</param>
+            <returns>True if the player's button is held down, otherwise false</returns>
+        </member>
+        <member name="P:GWNorthEngine.Input.InputManager.MouseX">
+            <summary>
+            Returns the mouses X position
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Input.InputManager.MouseY">
+            <summary>
+            Returns the mouses Y position
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Input.InputManager.MousePosition">
+            <summary>
+            Returns a Vector2 of the mouses position
+            </summary>
+        </member>
         <member name="T:GWNorthEngine.Model.BaseParticle2D">
             <summary>
             Models the basis of every particle
@@ -1230,6 +1386,12 @@
             <summary>
             Resets the sprite
             </summary>
+        </member>
+        <member name="M:GWNorthEngine.Model.Animated2DSprite.reset(System.Boolean)">
+            <summary>
+            Resets the sprite with the option to make the animation sequence fire as soon as a "Play" state is entered
+            </summary>
+            <param name="cockAnimation">Option to make an animation fire as soon as a "Play" state is entered</param>
         </member>
         <member name="M:GWNorthEngine.Model.Animated2DSprite.update(System.Single)">
             <summary>
@@ -2337,6 +2499,15 @@
             </summary>
             <param name="maxFrameCount">Max frames used to reset reverse sprites</param>
         </member>
+        <member name="M:GWNorthEngine.Model.AnimationManager.resetAnimation(System.Int32,System.Boolean)">
+            <summary>
+            Resets the animation sequence that the AnimationManager is controlling and has an option to set the animation so that it will
+            fire as soon the state is changed to a "play" state
+            </summary>
+            <param name="maxFrameCount">Max frames used to reset reverse sprites</param>
+            <param name="cockAnimation">Determines if we are setting the animation up to fire right away as soon as a "Play" state is entered or whether
+            we want it set to replay the whole wait time</param>
+        </member>
         <member name="M:GWNorthEngine.Model.AnimationManager.update(System.Single,System.Int32)">
             <summary>
             Handles whether it is time to update the animation step or not
@@ -2425,6 +2596,26 @@
         <member name="P:GWNorthEngine.Model.StaticDrawable2D.Texture">
             <summary>
             Gets or sets the Texture of the static drawable object
+            </summary>
+        </member>
+        <member name="T:GWNorthEngine.Input.MouseButton">
+            <summary>
+            Enum to represent available Mouse buttons which are used in the InputManager
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Input.MouseButton.Left">
+            <summary>
+            Left mouse button
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Input.MouseButton.Right">
+            <summary>
+            Right mouse button
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Input.MouseButton.Middle">
+            <summary>
+            Middle mouse button
             </summary>
         </member>
     </members>

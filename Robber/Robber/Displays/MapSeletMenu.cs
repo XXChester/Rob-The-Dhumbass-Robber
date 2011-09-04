@@ -14,6 +14,7 @@ using GWNorthEngine.Model.Params;
 using GWNorthEngine.Utils;
 using GWNorthEngine.AI.AStar;
 using GWNorthEngine.Scripting;
+using GWNorthEngine.Input;
 namespace Robber {
 	public class MapSeletMenu : Display {
 	#region Class variables
@@ -37,7 +38,7 @@ namespace Robber {
 			buttonParms.RegularColour = ResourceManager.TEXT_COLOUR;
 			buttonParms.StartX = 580;
 			buttonParms.Width = 205;
-			buttonParms.StartY = 557;
+			buttonParms.StartY = 530;
 			buttonParms.Text = "Mode Selection";
 			buttonParms.TextsPosition = new Vector2(605f, buttonParms.StartY - 2);
 			this.returnToModeSelectButton = new ColouredButton(buttonParms);
@@ -47,12 +48,17 @@ namespace Robber {
 			for (int i = 0; i < maps.Length; i++) {
 				maps[i] = StringUtils.scrubPathAndExtFromFileName(maps[i]);
 			}
-			Array.Reverse(maps);
+			Array.Sort(maps, new MapComparer());
 
 			// load up our map selections via the names from the dierctory
 			this.mapSelections = new List<MapSelection>(maps.Length);
 			for (int i = 0; i < maps.Length; i++) {
-				this.mapSelections.Add(new MapSelection(device, maps[i], i, buttonParms.Width, buttonParms.Height, buttonParms.StartX, buttonParms.StartY));
+				// if the maps number is double digits we need to offset it a bit
+				if (maps[i].Length == 4) {
+					this.mapSelections.Add(new MapSelection(device, maps[i], i, buttonParms.Width, buttonParms.Height, buttonParms.StartX, buttonParms.StartY));
+				} else {
+					this.mapSelections.Add(new MapSelection(device, maps[i], i, buttonParms.Width, buttonParms.Height, buttonParms.StartX - 4, buttonParms.StartY));
+				}
 			}
 
 			// title
@@ -72,9 +78,7 @@ namespace Robber {
 
 		#region Support methods
 		public override void update(float elapsed) {
-			base.currentKeyBoardState = Keyboard.GetState();
-			base.currentMouseState = Mouse.GetState();
-			Vector2 mousePos = new Vector2(base.currentMouseState.X, base.currentMouseState.Y);
+			Vector2 mousePos = InputManager.getInstance().MousePosition;
 			foreach (MapSelection selection in this.mapSelections) {
 				selection.update(elapsed);
 			}
@@ -102,7 +106,7 @@ namespace Robber {
 				}
 			}
 			if (StateManager.getInstance().CurrentTransitionState == StateManager.TransitionState.None) {
-				if (base.currentMouseState.LeftButton == ButtonState.Pressed && base.prevousMouseState.LeftButton == ButtonState.Released) {
+				if (InputManager.getInstance().wasLeftButtonPressed()) {
 					if (this.returnToModeSelectButton.isActorOver(mousePos)) {
 						StateManager.getInstance().CurrentGameState = StateManager.GameState.ModeSelect;
 						StateManager.getInstance().CurrentTransitionState = StateManager.TransitionState.TransitionOut;
@@ -158,7 +162,7 @@ namespace Robber {
 				}
 			}
 			if (StateManager.getInstance().CurrentTransitionState == StateManager.TransitionState.None) {
-				if (Keyboard.GetState().IsKeyDown(Keys.Escape) && this.previousKeyBoardState.IsKeyUp(Keys.Escape)) {
+				if (InputManager.getInstance().wasKeyPressed(Keys.Escape)) {
 					StateManager.getInstance().CurrentGameState = StateManager.getInstance().PreviousGameState;
 					StateManager.getInstance().CurrentTransitionState = StateManager.TransitionState.TransitionOut;
 				}
@@ -168,10 +172,11 @@ namespace Robber {
 
 		public override void render(SpriteBatch spriteBatch) {
 			this.title.render(spriteBatch);
+			//TODO: This should be in the update loop, render should just render not have any logic
 			bool foundMouseOver = false;
 			foreach (MapSelection selection in this.mapSelections) {
 				selection.render(spriteBatch);
-				if (selection.PreviewButton.isActorOver(new Vector2(base.currentMouseState.X, base.currentMouseState.Y))) {
+				if (selection.PreviewButton.isActorOver(InputManager.getInstance().MousePosition)) {
 					foundMouseOver = true;
 				}
 			}

@@ -7,13 +7,13 @@ using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using GWNorthEngine.Model;
 using GWNorthEngine.Model.Params;
 using GWNorthEngine.Utils;
 using GWNorthEngine.AI.AStar;
 using GWNorthEngine.Scripting;
+using GWNorthEngine.Input;
 namespace Robber {
 	public class MainMenu : Display {
 		#region Class variables
@@ -88,9 +88,7 @@ namespace Robber {
 
 		#region Support methods
 		public override void update(float elapsed) {
-			base.currentKeyBoardState = Keyboard.GetState();
-			base.currentMouseState = Mouse.GetState();
-			Vector2 mousePos = new Vector2(base.currentMouseState.X, base.currentMouseState.Y);
+			Vector2 mousePos = InputManager.getInstance().MousePosition;
 
 			this.playButton.processActorsMovement(mousePos);
 			this.exitButton.processActorsMovement(mousePos);
@@ -104,7 +102,7 @@ namespace Robber {
 				base.previousMouseOverButton = false;
 			}
 			if (StateManager.getInstance().CurrentTransitionState == StateManager.TransitionState.None) {
-				if (base.currentMouseState.LeftButton == ButtonState.Pressed && base.prevousMouseState.LeftButton == ButtonState.Released) {
+				if (InputManager.getInstance().wasLeftButtonPressed()) {
 					if (this.playButton.isActorOver(mousePos)) {
 						StateManager.getInstance().CurrentTransitionState = StateManager.TransitionState.TransitionOut;
 						StateManager.getInstance().CurrentGameState = StateManager.GameState.ModeSelect;

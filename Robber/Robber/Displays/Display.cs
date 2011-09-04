@@ -3,16 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
 using GWNorthEngine.Utils;
+using GWNorthEngine.Input;
 namespace Robber {
 	public abstract class Display {
 		#region Class variables
-		protected KeyboardState currentKeyBoardState;
-		protected KeyboardState previousKeyBoardState;
-		protected MouseState currentMouseState;
-		protected MouseState prevousMouseState;
 		protected bool previousMouseOverButton;
 		private float currentTransitionTime;
 		private const float TRANSITION_TIME = 600f;
@@ -59,8 +55,6 @@ namespace Robber {
 		}
 
 		public virtual void update(float elapsed) {
-			this.prevousMouseState = Mouse.GetState();
-			this.previousKeyBoardState = this.currentKeyBoardState;
 			if (resetTransitionTimes()) {
 				this.currentTransitionTime = 0f;
 			} else {

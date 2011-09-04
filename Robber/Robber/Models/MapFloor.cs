@@ -7,38 +7,32 @@ using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using GWNorthEngine.Model;
 using GWNorthEngine.Model.Params;
 namespace Robber {
-	public class Floor : IRenderable {
+	public class MapFloor : IRenderable {
 		#region Class variables
 		private Tile[,] tiles;
-		public static Color floorColour = Color.White;
 		#endregion Class variables
 
 		#region Class propeties
-
+		public Color Colour { get; set; }
 		#endregion Class properties
 
 		#region Constructor
-		public Floor(ref int HEIGHT, ref int WIDTH, Texture2D floorTexture, Color renderColour) {
-			int width = WIDTH;
-			this.tiles = new Tile[HEIGHT, width];
-			floorColour = renderColour;
-			for (int y = 0; y < HEIGHT; y++) {
-				for (int x = 0; x < width; x++) {
-					this.tiles[y, x] = new Tile(floorTexture, new Point(x, y), renderColour);
-				}
-			}
+		public MapFloor(Tile[,] tiles, Color renderColour) {
+			this.tiles = tiles;
+			this.Colour = renderColour;
 		}
 		#endregion Constructor
 
 		#region Support methods
 		public void updateColours(Color colour) {
 			foreach (Tile tile in this.tiles) {
-				tile.updateColours(colour);
+				if (tile != null) {
+					tile.updateColours(colour);
+				}
 			}
 		}
 
@@ -49,7 +43,9 @@ namespace Robber {
 		public void render(SpriteBatch spriteBatch) {
 			if (this.tiles != null) {
 				foreach (Tile tile in this.tiles) {
-					tile.render(spriteBatch);
+					if (tile != null) {
+						tile.render(spriteBatch);
+					}
 				}
 			}
 		}
@@ -59,7 +55,9 @@ namespace Robber {
 		public void dispose() {
 			if (this.tiles != null) {
 				foreach (Tile tile in this.tiles) {
-					tile.dispose();
+					if (tile != null) {
+						tile.dispose();
+					}
 				}
 			}
 		}

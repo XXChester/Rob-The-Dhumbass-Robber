@@ -17,10 +17,12 @@ using GWNorthEngine.Utils;
 using GWNorthEngine.AI.AStar;
 using GWNorthEngine.Scripting;
 using GWNorthEngine.Tools.TilePlacer;
+using GWNorthEngine.Input;
 namespace Robber {
 	public class GameDisplay : Display{
 		#region Class variables
-		private Map map;
+		private MapWalls mapWalls;
+		private MapFloor mapFloor;
 		private Player player;
 		private Person[] guards;
 		private Treasure[] treasures;
@@ -141,7 +143,7 @@ namespace Robber {
 				xmlReader.Close();
 			}
 			// load our map
-			this.map = MapLoader.load(content, mapInformation + Constants.FILE_EXTENSION, floorColour, wallColour);
+			MapLoader.load(content, mapInformation + Constants.FILE_EXTENSION, floorColour, wallColour, out mapWalls, out mapFloor);
 
 			// let our AI manager know about the maps way points
 			AIManager.getInstance().WayPoints = wayPoints;
@@ -181,15 +183,13 @@ namespace Robber {
 		}
 
 		public override void update(float elapsed) {
-			base.currentKeyBoardState = Keyboard.GetState();
-			base.currentMouseState = Mouse.GetState();
 			if (this.player != null) {
 				this.treasureText.WrittenText = " x " + this.player.CapturedTreasures;
 			}
-			if (this.map != null) {
-				this.map.update(elapsed);
+			if (this.mapWalls != null) {
+				this.mapWalls.update(elapsed);
 			}
-			Vector2 mousePos = new Vector2(base.currentMouseState.X, base.currentMouseState.Y);
+			Vector2 mousePos = InputManager.getInstance().MousePosition;
 			if (StateManager.getInstance().CurrentGameState == StateManager.GameState.Waiting) {
 				this.startButton.processActorsMovement(mousePos);
 				// mouse over sfx
@@ -201,7 +201,7 @@ namespace Robber {
 				} else {
 					base.previousMouseOverButton = false;
 				}
-				if (base.currentMouseState.LeftButton == ButtonState.Pressed && base.prevousMouseState.LeftButton == ButtonState.Released) {
+				if (InputManager.getInstance().wasLeftButtonPressed()) {
 					if (this.startButton.isActorOver(mousePos)) {
 						StateManager.getInstance().CurrentGameState = StateManager.GameState.Active;
 					}
@@ -253,7 +253,7 @@ namespace Robber {
 				}
 				
 				// are we trying to enter a dumpster
-				if (base.currentKeyBoardState.IsKeyDown(Keys.Space) && base.previousKeyBoardState.IsKeyUp(Keys.Space)) {
+				if (InputManager.getInstance().wasKeyPressed(Keys.Space)) {
 					// check if we are close to a dumpster
 					foreach (Dumpster dumpster in dumpsters) {
 						if (dumpster.BoundingBox.Intersects(this.player.BoundingBox) && dumpster.AcceptingOccupants) {
@@ -275,7 +275,8 @@ namespace Robber {
 			#region Transitions
 			if (StateManager.getInstance().CurrentTransitionState == StateManager.TransitionState.TransitionIn) {
 				Color colour = base.fadeIn(Color.White);
-				this.map.updateColours(base.fadeIn(this.map.FloorColour), base.fadeIn(this.map.WallColour));
+				this.mapWalls.updateColours(base.fadeIn(this.mapWalls.Colour));
+				this.mapFloor.updateColours(base.fadeIn(this.mapFloor.Colour));
 				foreach (Treasure treasure in this.treasures) {
 					treasure.updateColours(colour);
 				}
@@ -297,7 +298,8 @@ namespace Robber {
 				this.timer.updateColours(base.fadeIn(ResourceManager.TEXT_COLOUR));
 			} else if (StateManager.getInstance().CurrentTransitionState == StateManager.TransitionState.TransitionOut) {
 				Color colour = base.fadeOut(Color.White);
-				this.map.updateColours(base.fadeOut(this.map.FloorColour), base.fadeOut(this.map.WallColour));
+				this.mapWalls.updateColours(base.fadeOut(this.mapWalls.Colour));
+				this.mapFloor.updateColours(base.fadeOut(this.mapFloor.Colour));
 				foreach (Treasure treasure in this.treasures) {
 					treasure.updateColours(colour);
 				}
@@ -335,7 +337,7 @@ namespace Robber {
 			if (StateManager.getInstance().CurrentTransitionState == StateManager.TransitionState.None &&
 				StateManager.getInstance().CurrentGameState == StateManager.GameState.Waiting ||
 				StateManager.getInstance().CurrentGameState == StateManager.GameState.Active) {
-				if (base.currentKeyBoardState.IsKeyDown(Keys.Escape) && base.previousKeyBoardState.IsKeyUp(Keys.Escape)) {
+				if (InputManager.getInstance().wasKeyPressed(Keys.Escape)) {
 					StateManager.getInstance().CurrentGameState = StateManager.GameState.InGameMenu;
 					StateManager.getInstance().CurrentTransitionState = StateManager.TransitionState.TransitionOut;
 				}
@@ -343,13 +345,13 @@ namespace Robber {
 			#endregion Transitions
 			this.payDayDelay += elapsed;
 #if DEBUG
-			if (base.currentKeyBoardState.IsKeyDown(Keys.D1) && base.previousKeyBoardState.IsKeyUp(Keys.D1)) {
+			if (InputManager.getInstance().wasKeyPressed(Keys.D1)) {
 				this.showAI = !this.showAI;
-			} else if (base.currentKeyBoardState.IsKeyDown(Keys.D2) && base.previousKeyBoardState.IsKeyUp(Keys.D2)) {
+			} else if (InputManager.getInstance().wasKeyPressed(Keys.D2)) {
 				this.showCD = !this.showCD;
-			} else if (base.currentKeyBoardState.IsKeyDown(Keys.D3) && base.previousKeyBoardState.IsKeyUp(Keys.D3)) {
+			} else if (InputManager.getInstance().wasKeyPressed(Keys.D3)) {
 				this.showWayPoints = !this.showWayPoints;
-			} else if (base.currentKeyBoardState.IsKeyDown(Keys.R) && base.previousKeyBoardState.IsKeyUp(Keys.R)) {
+			} else if (InputManager.getInstance().wasKeyPressed(Keys.R)) {
 				StateManager.getInstance().CurrentGameState = StateManager.GameState.Waiting;
 				reset();
 			}
@@ -360,24 +362,26 @@ namespace Robber {
 		}
 
 		public override void render(SpriteBatch spriteBatch) {
-				this.map.render(spriteBatch);
-				this.treasureText.render(spriteBatch);
-				this.treasure.render(spriteBatch);
-				foreach (Treasure treasure in this.treasures) {
-					treasure.render(spriteBatch);
-				}
-				foreach (Dumpster dumpster in this.dumpsters) {
-					dumpster.render(spriteBatch);
-				}
-				this.player.render(spriteBatch);
-				foreach (Guard guard in this.guards) {
-					guard.render(spriteBatch);
-				}
-				this.timer.render(spriteBatch);
-				if (StateManager.getInstance().CurrentGameState == StateManager.GameState.Reset || StateManager.getInstance().CurrentGameState == StateManager.GameState.Waiting || 
-					(StateManager.getInstance().CurrentGameState == StateManager.GameState.InGameMenu && StateManager.getInstance().PreviousGameState == StateManager.GameState.Waiting)) {
-					this.startButton.render(spriteBatch);
-				}
+			// render the floor, treasure, than walls
+			this.mapFloor.render(spriteBatch);
+			this.treasureText.render(spriteBatch);
+			this.treasure.render(spriteBatch);
+			foreach (Treasure treasure in this.treasures) {
+				treasure.render(spriteBatch);
+			}
+			this.mapWalls.render(spriteBatch);
+			foreach (Dumpster dumpster in this.dumpsters) {
+				dumpster.render(spriteBatch);
+			}
+			this.player.render(spriteBatch);
+			foreach (Guard guard in this.guards) {
+				guard.render(spriteBatch);
+			}
+			this.timer.render(spriteBatch);
+			if (StateManager.getInstance().CurrentGameState == StateManager.GameState.Reset || StateManager.getInstance().CurrentGameState == StateManager.GameState.Waiting ||
+				(StateManager.getInstance().CurrentGameState == StateManager.GameState.InGameMenu && StateManager.getInstance().PreviousGameState == StateManager.GameState.Waiting)) {
+				this.startButton.render(spriteBatch);
+			}
 #if DEBUG
 			if (this.showCD) {
 				Color debugColour = Color.Green;
@@ -418,8 +422,11 @@ namespace Robber {
 
 		#region Destructor
 		public override void dispose() {
-			if (this.map != null) {
-				this.map.dispose();
+			if (this.mapWalls != null) {
+				this.mapWalls.dispose();
+			}
+			if (this.mapFloor != null) {
+				this.mapFloor.dispose();
 			}
 			if (this.player != null) {
 				this.player.dispose();

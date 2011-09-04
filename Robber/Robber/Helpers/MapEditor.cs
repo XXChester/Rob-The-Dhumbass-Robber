@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
 using GWNorthEngine.Scripting;
+using GWNorthEngine.Input;
 namespace Robber {
 	public class MapEditor {
 		public enum MappingState {
@@ -20,7 +20,6 @@ namespace Robber {
 		private static MapEditor instance = new MapEditor();
 
 		#region Class variables
-		private MouseState previous;
 		private MappingState mappingState;
 		private const string COMMAND_NONE = "none";
 		private const string COMMAND_PLAYER_POSITION = "playerposition";
@@ -112,10 +111,10 @@ namespace Robber {
 		}
 
 		public void update() {
-			if (Mouse.GetState().LeftButton == ButtonState.Pressed && this.previous.LeftButton == ButtonState.Released && Mouse.GetState().Y >= 0 && Mouse.GetState().X >= 0) {
+			if (InputManager.getInstance().wasLeftButtonPressed() && 
+				InputManager.getInstance().MouseY >= 0 && InputManager.getInstance().MouseX >= 0) {
 				StringBuilder xml = new StringBuilder();
-				Vector2 worldPosition = new Vector2(Mouse.GetState().X, Mouse.GetState().Y);
-				Point indexPosition = Placement.getIndex(new Vector2(Mouse.GetState().X, Mouse.GetState().Y));
+				Point indexPosition = Placement.getIndex(InputManager.getInstance().MousePosition);
 
 				switch (this.mappingState) {
 					case MappingState.GuardPosition:
@@ -142,7 +141,6 @@ namespace Robber {
 					ScriptManager.getInstance().log(xml.ToString());
 				}
 			}
-			this.previous = Mouse.GetState();
 		}
 		#endregion Support methods
 	}

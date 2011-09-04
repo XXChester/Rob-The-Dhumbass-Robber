@@ -7,7 +7,6 @@ using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using GWNorthEngine.Model;
 using GWNorthEngine.Model.Params;
@@ -31,8 +30,6 @@ namespace Robber {
 		protected float movementSpeed;
 		protected Direction direction;
 		protected Direction previousDirection;
-		protected KeyboardState currentKeyBoardState;
-		protected KeyboardState previousKeyBoardState;
 		protected Placement previousPlacement;
 		private const float FRAME_RATE = 200f;
 		#endregion Class variables
@@ -78,9 +75,7 @@ namespace Robber {
 			if (this.previousDirection != this.direction) {
 				if (this.direction == Direction.None) {
 					// we are no longer moving so stop our sprite
-					this.activeSprite.reset();
-					this.activeSprite.AnimationManager.State = AnimationManager.AnimationState.Paused;
-					this.activeSprite.AnimationManager.TotalElapsed = FRAME_RATE;// make it so that as soon as we start to move the sprite starts to walk
+					this.activeSprite.reset(true);
 				} else {
 					this.activeSprite.AnimationManager.State = AnimationManager.AnimationState.PlayForward;
 				}
@@ -144,14 +139,12 @@ namespace Robber {
 		}
 
 		public void update(float elapsed) {
-			this.currentKeyBoardState = Keyboard.GetState();
 			if (this.activeSprite != null) {
 				this.activeSprite.update(elapsed);
 			}
 			updateSpritesVisuals(elapsed);
 			updateLocation(elapsed);
 			this.previousDirection = this.direction;
-			this.previousKeyBoardState = this.currentKeyBoardState;
 			this.previousPlacement = this.Placement;
 		}
 

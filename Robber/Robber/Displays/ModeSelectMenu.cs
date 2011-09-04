@@ -14,6 +14,7 @@ using GWNorthEngine.Model.Params;
 using GWNorthEngine.Utils;
 using GWNorthEngine.AI.AStar;
 using GWNorthEngine.Scripting;
+using GWNorthEngine.Input;
 namespace Robber {
 	public class ModeSelectMenu : Display {
 		#region Class variables
@@ -76,9 +77,7 @@ namespace Robber {
 
 		#region Support methods
 		public override void update(float elapsed) {
-			base.currentKeyBoardState = Keyboard.GetState();
-			base.currentMouseState = Mouse.GetState();
-			Vector2 mousePos = new Vector2(base.currentMouseState.X, base.currentMouseState.Y);
+			Vector2 mousePos = InputManager.getInstance().MousePosition;
 
 			this.normalButton.processActorsMovement(mousePos);
 			this.timeAttackButton.processActorsMovement(mousePos);
@@ -93,7 +92,7 @@ namespace Robber {
 				base.previousMouseOverButton = false;
 			}
 			if (StateManager.getInstance().CurrentTransitionState == StateManager.TransitionState.None) {
-				if (base.currentMouseState.LeftButton == ButtonState.Pressed && base.prevousMouseState.LeftButton == ButtonState.Released) {
+				if (InputManager.getInstance().wasLeftButtonPressed()) {
 					if (this.returnToMainButton.isActorOver(mousePos)) {
 						StateManager.getInstance().CurrentGameState = StateManager.GameState.MainMenu;
 						StateManager.getInstance().CurrentTransitionState = StateManager.TransitionState.TransitionOut;
@@ -145,7 +144,7 @@ namespace Robber {
 				}
 			}
 			if (StateManager.getInstance().CurrentTransitionState == StateManager.TransitionState.None) {
-				if (Keyboard.GetState().IsKeyDown(Keys.Escape) && this.previousKeyBoardState.IsKeyUp(Keys.Escape)) {
+				if (InputManager.getInstance().wasKeyPressed(Keys.Escape)) {
 					StateManager.getInstance().CurrentGameState = StateManager.getInstance().PreviousGameState;
 					StateManager.getInstance().CurrentTransitionState = StateManager.TransitionState.TransitionOut;
 				}

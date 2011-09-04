@@ -34,7 +34,6 @@ Content\PayDay.xnb
 Content\Rules.xnb
 Content\MouseOverButton.xnb
 Content\TreasureCollect.xnb
-Content\FootSteps3.xnb
 Content\WhereWeGonnaRob.xnb
 Content\Policia.xnb
 Content\CellDoor.xnb
@@ -44,6 +43,7 @@ Content\HaventGotAllDay.xnb
 Content\LetsRobSomething.xnb
 Content\OpenDoor.xnb
 Content\FootSteps.xnb
+Content\BasicExitTile.xnb
 Maps\Map10.png
 Maps\Map10.xml
 Maps\Map9.png

@@ -10,7 +10,6 @@ using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using GWNorthEngine.Utils;
 using GWNorthEngine.AI.AStar;
@@ -78,53 +77,71 @@ namespace Robber {
 			return loadObject<T>(doc, header.ToString(), new string[] { MapEditor.XML_X, MapEditor.XML_Y });
 		}
 
-		public static Map load(ContentManager content, string mapName, Color floorColour, Color wallColour) {
-			Map map = null;
-			// load the map
-			LoadResult loadResult = GWNorthEngine.Tools.TilePlacer.MapLoader.load(content, mapName);
+		private static MapWalls loadMapWalls(Color wallColour, LoadResult loadResult) {
 			int height = loadResult.Height;
 			int width = loadResult.Width;
-			// For now, just grap the first layers tiles, we will use the other layers at a later date for the floor etc
-			int layer = 1;
-			MapTile[,] mapTiles = loadResult.Layers[layer].Tiles;
-			Tile[,] tiles = GWNorthEngine.Tools.TilePlacer.MapLoader.initTiles<Tile>(mapTiles, delegate(MapTile tile) {
+			int wallLayer = 1;
+			MapTile[,] mapWallTiles = loadResult.Layers[wallLayer].Tiles;
+			// load visual aspect of the walls
+			Tile[,] wallTiles = GWNorthEngine.Tools.TilePlacer.MapLoader.initTiles<Tile>(mapWallTiles, delegate(MapTile tile) {
 				if (Tile.COLOUR_OVERRIDE_TILES.Contains<string>(tile.Texture.Name)) {
 					return new Tile(tile.Texture, tile.Index, Color.White);
 				} else {
 					return new Tile(tile.Texture, tile.Index, wallColour);
 				}
 			});
+
 			// load the AI for the map
-			PathFinder.TypeOfSpace[,] tileSpaces = new PathFinder.TypeOfSpace[height, width];
+			PathFinder.TypeOfSpace[,] aiSpaceTypes = new PathFinder.TypeOfSpace[height, width];
 			for (int y = 0; y < height; y++) {
 				for (int x = 0; x < width; x++) {
 					// override so the AI can walk the outter wall
-					if (tiles[y, x] != null && mapAsUnwalkable(tiles[y, x].Texture.Name, y, x, height, width)) {
-						tileSpaces[y, x] = Translator.translateTileValueToAStarType(loadResult.Layers[layer].Tiles[y, x].TileValue);
+					if (wallTiles[y, x] != null && mapAsUnwalkable(wallTiles[y, x].Texture.Name, y, x, height, width)) {
+						aiSpaceTypes[y, x] = Translator.translateTileValueToAStarType(loadResult.Layers[wallLayer].Tiles[y, x].TileValue);
 					} else {
-						tileSpaces[y, x] = PathFinder.TypeOfSpace.Walkable;
+						aiSpaceTypes[y, x] = PathFinder.TypeOfSpace.Walkable;
 					}
 				}
 			}
 
-			map = new Map(content, tiles, height, width, floorColour, wallColour);
 			AIManager.getInstance().init(height, width);
-			AIManager.getInstance().Board = tileSpaces;
+			AIManager.getInstance().Board = aiSpaceTypes;
 
 			// generate the collision detection
 			Placement tilesPlacement;
 			List<BoundingBox> tileBBoxes = new List<BoundingBox>();
 			for (int y = 0; y < height; y++) {
 				for (int x = 0; x < width; x++) {
-					if (mapTiles[y, x] != null) {
+					if (mapWallTiles[y, x] != null) {
 						tilesPlacement = new Placement(new Point(x, y));
-						tileBBoxes.AddRange(CollisionDetectionGenerator.generateBoundingBoxesForTexture(mapTiles[tilesPlacement.index.Y, tilesPlacement.index.X].Texture, tilesPlacement));
+						tileBBoxes.AddRange(CollisionDetectionGenerator.generateBoundingBoxesForTexture(mapWallTiles[tilesPlacement.index.Y, tilesPlacement.index.X].Texture, tilesPlacement));
 					}
 				}
 			}
 			CollisionManager.getInstance().MapBoundingBoxes = tileBBoxes;
+			return new MapWalls(wallTiles, wallColour);
+		}
 
-			return map;
+		private static MapFloor loadMapFloor(Color floorColour, LoadResult loadResult) {
+			int height = loadResult.Height;
+			int width = loadResult.Width;
+			int floorLayer = 0;
+			MapTile[,] mapFloorTiles = loadResult.Layers[floorLayer].Tiles;
+			Tile[,] floorTiles = GWNorthEngine.Tools.TilePlacer.MapLoader.initTiles<Tile>(mapFloorTiles, delegate(MapTile tile) {
+				if (Tile.COLOUR_OVERRIDE_TILES.Contains<string>(tile.Texture.Name)) {
+					return new Tile(tile.Texture, tile.Index, Color.White);
+				} else {
+					return new Tile(tile.Texture, tile.Index, floorColour);
+				}
+			});
+			return new MapFloor(floorTiles, floorColour);
+		}
+
+
+		public static void load(ContentManager content, string mapName, Color floorColour, Color wallColour, out MapWalls walls, out MapFloor floor) {
+			LoadResult loadResult = GWNorthEngine.Tools.TilePlacer.MapLoader.load(content, mapName);
+			walls = loadMapWalls(wallColour, loadResult);
+			floor = loadMapFloor(floorColour, loadResult);
 		}
 
 		public static void loadGenericPointList(XmlDocument doc, MapEditor.MappingState header, out List<Point> positions) {

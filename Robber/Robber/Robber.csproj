@@ -135,14 +135,15 @@
     <Compile Include="Displays\ModeSelectMenu.cs" />
     <Compile Include="Displays\GameOverMenu.cs" />
     <Compile Include="Helpers\CollisionDetectionGenerator.cs" />
+    <Compile Include="Helpers\MapComparer.cs" />
     <Compile Include="Helpers\MapEditor.cs" />
     <Compile Include="Helpers\PathRequest.cs" />
     <Compile Include="Managers\AIManager.cs" />
-    <Compile Include="Managers\CollisionManager.cs" />
     <Compile Include="Displays\Display.cs" />
+    <Compile Include="Managers\CollisionManager.cs" />
     <Compile Include="Managers\SoundManager.cs" />
     <Compile Include="Models\Dumpster.cs" />
-    <Compile Include="Models\Floor.cs" />
+    <Compile Include="Models\MapFloor.cs" />
     <Compile Include="Displays\GameDisplay.cs" />
     <Compile Include="Models\Guard.cs" />
     <Compile Include="Helpers\Helper.cs" />
@@ -150,7 +151,7 @@
     <Compile Include="Models\IRenderable.cs" />
     <Compile Include="Models\Item.cs" />
     <Compile Include="Displays\MainMenu.cs" />
-    <Compile Include="Models\Map.cs" />
+    <Compile Include="Models\MapWalls.cs" />
     <Compile Include="Helpers\MapLoader.cs" />
     <Compile Include="Models\MapSelection.cs" />
     <Compile Include="Displays\MapSeletMenu.cs" />

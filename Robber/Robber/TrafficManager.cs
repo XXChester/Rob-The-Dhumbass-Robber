@@ -8,11 +8,12 @@ using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using Microsoft.Xna.Framework.Input;
 using GWNorthEngine.Engine;
 using GWNorthEngine.Engine.Params;
 using GWNorthEngine.Scripting;
+using GWNorthEngine.Input;
 namespace Robber {
 	/// <summary>
 	/// This is the main type for your game
@@ -26,8 +27,6 @@ namespace Robber {
 		private Display inGameMenu;
 		private Display gameOverDisplay;
 		private Display activeDisplay;
-		private KeyboardState previousKeyBoardState;
-		private MouseState previousMouseState;
 
 		public TrafficManager() {
 			BaseRendererParams baseParms = new BaseRendererParams();
@@ -91,12 +90,13 @@ namespace Robber {
 		/// <param name="gameTime">Provides a snapshot of timing values.</param>
 		protected override void Update(GameTime gameTime) {
 #if DEBUG
-			base.Window.Title = "Rob, The Dumb Ass Robber...FPS: " + FrameRate.getInstance().calculateFrameRate(gameTime) + "    X:" + Mouse.GetState().X + " Y:" + Mouse.GetState().Y;
+			base.Window.Title = "Rob, The Dumb Ass Robber...FPS: " + FrameRate.getInstance().calculateFrameRate(gameTime) + "    X:" + 
+				InputManager.getInstance().MouseX + " Y:" + InputManager.getInstance().MouseY;
 #endif
 
 			// Allows the game to exit
 			if (StateManager.getInstance().CurrentGameState == StateManager.GameState.MainMenu) {
-				if (Keyboard.GetState().IsKeyDown(Keys.Escape) && this.previousKeyBoardState.IsKeyUp(Keys.Escape)) {
+				if (InputManager.getInstance().wasKeyPressed(Keys.Escape)) {
 					this.Exit();
 				}
 			} else if (StateManager.getInstance().CurrentGameState == StateManager.GameState.Exit) {
@@ -214,8 +214,6 @@ namespace Robber {
 
 			float elapsed = gameTime.ElapsedGameTime.Milliseconds;
 			this.activeDisplay.update(elapsed);
-			this.previousKeyBoardState = Keyboard.GetState();
-			this.previousMouseState = Mouse.GetState();
 			SoundManager.getInstance().update();
 			base.Update(gameTime);
 		}

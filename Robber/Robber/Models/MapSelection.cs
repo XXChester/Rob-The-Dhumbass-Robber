@@ -7,13 +7,13 @@ using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using GWNorthEngine.Model;
 using GWNorthEngine.Model.Params;
 using GWNorthEngine.Utils;
 using GWNorthEngine.AI.AStar;
 using GWNorthEngine.Scripting;
+using GWNorthEngine.Input;
 namespace Robber {
 	public class MapSelection : IRenderable {
 		#region Class variables
@@ -57,11 +57,11 @@ namespace Robber {
 		}
 
 		public void update(float elapsed) {
-			this.PreviewButton.processActorsMovement(new Vector2(Mouse.GetState().X, Mouse.GetState().Y));
+			this.PreviewButton.processActorsMovement(InputManager.getInstance().MousePosition);
 		}
 
 		public void render(SpriteBatch spriteBatch) {
-			if (this.PreviewButton.isActorOver(new Vector2(Mouse.GetState().X, Mouse.GetState().Y))) {
+			if (this.PreviewButton.isActorOver(InputManager.getInstance().MousePosition)) {
 				this.previewImage.render(spriteBatch);
 			}
 			this.PreviewButton.render(spriteBatch);
