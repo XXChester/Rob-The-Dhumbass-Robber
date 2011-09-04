@@ -73,6 +73,7 @@ namespace Robber {
 			// test settings
 			//this.CurrentGameState = GameState.Instructions;
 			//this.CurrentGameState = GameState.ModeSelect;
+			this.CurrentGameState = GameState.InGameMenu;
 			//this.CurrentGameState = GameState.MapSelection;
 			//this.GameMode = Mode.TimeAttack;
 			//this.CurrentGameState = GameState.InitGame;

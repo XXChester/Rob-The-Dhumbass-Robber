@@ -105,14 +105,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Robber.exe" size="74240">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Robber.exe" size="76800">
       <assemblyIdentity name="Robber" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>ImM3qChuxj4PmFK48D40Qwj1opE=</dsig:DigestValue>
+        <dsig:DigestValue>eEvF30vM4OihWxET/mTiWQkaJFY=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -314,6 +314,15 @@
       <dsig:DigestValue>3A9DZ92ws8hP/9pOjYScflmVibc=</dsig:DigestValue>
     </hash>
   </file>
+  <file name="Content\InGameMenu.xnb" size="1920187">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>qgcjwq+PuqKhU/rXUMMFJehW+hY=</dsig:DigestValue>
+    </hash>
+  </file>
   <file name="Content\Instructions.xnb" size="1920187">
     <hash>
       <dsig:Transforms>
@@ -375,6 +384,15 @@
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
       <dsig:DigestValue>Q0bWNx//tjc92FSyQ7Rt6agbius=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Content\MainMenu.xnb" size="1920187">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>wMEBq57JWgkr39+b3mHPKPckA1E=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Content\MapSelection.xnb" size="1920187">
@@ -456,6 +474,15 @@
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
       <dsig:DigestValue>z+GoKRiPdYvMZ1bgv8tgUZuDFnA=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Content\QuestionParticle.xnb" size="16571">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>tUakvrdMQjzZVp0gO8iBv2sXp6g=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Content\RadiusRing.xnb" size="200891">

@@ -22,6 +22,7 @@ namespace Robber {
 		private ColouredButton exitToMainButton;
 		private StaticDrawable2D backGround;
 		private StaticDrawable2D title;
+		private QuestionMarkEmitter particleEmitter;
 		#endregion Class variables
 
 		#region Class propeties
@@ -59,8 +60,12 @@ namespace Robber {
 
 			// background
 			staticParms.Position = new Vector2(-10f, 0f);
-			staticParms.Texture = LoadingUtils.loadTexture2D(content, "BackGround1");
+			staticParms.Texture = LoadingUtils.loadTexture2D(content, "InGameMenu");
 			this.backGround = new StaticDrawable2D(staticParms);
+
+			// setup the particle emitter
+			this.particleEmitter = new QuestionMarkEmitter(content);
+			
 		}
 		#endregion Constructor
 
@@ -80,6 +85,7 @@ namespace Robber {
 				base.previousMouseOverButton = false;
 			}
 			if (StateManager.getInstance().CurrentTransitionState == StateManager.TransitionState.None) {
+				this.particleEmitter.Emitt = true;
 				if (InputManager.getInstance().wasLeftButtonPressed()) {
 					if (this.returnToGameButton.isActorOver(mousePos)) {
 						StateManager.getInstance().CurrentGameState = StateManager.getInstance().PreviousGameState;
@@ -90,6 +96,7 @@ namespace Robber {
 					}
 				}
 			} else if (StateManager.getInstance().CurrentTransitionState == StateManager.TransitionState.TransitionIn) {
+				this.particleEmitter.Emitt = false;
 				this.backGround.LightColour = base.fadeIn(Color.White);
 				this.title.LightColour = base.fadeIn(Color.White);
 				this.returnToGameButton.updateColours(base.fadeIn(ResourceManager.TEXT_COLOUR));
@@ -100,6 +107,7 @@ namespace Robber {
 					this.exitToMainButton.updateColours(base.fadeIn(ResourceManager.MOUSE_OVER_COLOUR));
 				}
 			} else if (StateManager.getInstance().CurrentTransitionState == StateManager.TransitionState.TransitionOut) {
+				this.particleEmitter.Emitt = false;
 				this.backGround.LightColour = base.fadeOut(Color.White);
 				this.title.LightColour = base.fadeOut(Color.White);
 				this.returnToGameButton.updateColours(base.fadeOut(ResourceManager.TEXT_COLOUR));
@@ -124,12 +132,14 @@ namespace Robber {
 					StateManager.getInstance().CurrentTransitionState = StateManager.TransitionState.TransitionOut;
 				}
 			}
+			this.particleEmitter.update(elapsed);
 			base.update(elapsed);
 		}
 
 		public override void render(SpriteBatch spriteBatch) {
 			this.backGround.render(spriteBatch);
 			this.title.render(spriteBatch);
+			this.particleEmitter.render(spriteBatch);
 			this.returnToGameButton.render(spriteBatch);
 			this.exitToMainButton.render(spriteBatch);
 		}
@@ -148,6 +158,9 @@ namespace Robber {
 			}
 			if (this.title != null) {
 				this.title.dispose();
+			}
+			if (this.particleEmitter != null) {
+				this.particleEmitter.dispose();
 			}
 		}
 		#endregion Destructor

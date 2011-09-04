@@ -71,7 +71,7 @@ namespace Robber {
 
 			// background
 			staticParms.Position = new Vector2(0f, 0f);
-			staticParms.Texture = LoadingUtils.loadTexture2D(content, "Info");
+			staticParms.Texture = LoadingUtils.loadTexture2D(content, "MainMenu");
 			this.backGround = new StaticDrawable2D(staticParms);
 
 			// load sound effects
