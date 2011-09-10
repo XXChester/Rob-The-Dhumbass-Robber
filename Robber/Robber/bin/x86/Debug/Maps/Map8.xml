@@ -7,7 +7,7 @@
   <Layer>
     <Tile>
       <Index>0</Index>
-      <FileName>BasicTile.png</FileName>
+      <FileName>BasicTopLeft.png</FileName>
       <Value>0</Value>
     </Tile>
     <Tile>
@@ -27,12 +27,12 @@
     </Tile>
     <Tile>
       <Index>4</Index>
-      <FileName>BasicTile.png</FileName>
+      <FileName>BasicTopRight.png</FileName>
       <Value>0</Value>
     </Tile>
     <Tile>
       <Index>5</Index>
-      <FileName>BasicTile.png</FileName>
+      <FileName>BasicTopLeft.png</FileName>
       <Value>0</Value>
     </Tile>
     <Tile>
@@ -82,12 +82,12 @@
     </Tile>
     <Tile>
       <Index>15</Index>
-      <FileName>BasicTile.png</FileName>
+      <FileName>BasicTopRight.png</FileName>
       <Value>0</Value>
     </Tile>
     <Tile>
       <Index>16</Index>
-      <FileName>BasicTile.png</FileName>
+      <FileName>BasicTopLeft.png</FileName>
       <Value>0</Value>
     </Tile>
     <Tile>
@@ -107,7 +107,7 @@
     </Tile>
     <Tile>
       <Index>20</Index>
-      <FileName>BasicTile.png</FileName>
+      <FileName>BasicTopRight.png</FileName>
       <Value>0</Value>
     </Tile>
     <Tile>
@@ -322,7 +322,7 @@
     </Tile>
     <Tile>
       <Index>63</Index>
-      <FileName>BasicTile.png</FileName>
+      <FileName>BasicBotLeft.png</FileName>
       <Value>0</Value>
     </Tile>
     <Tile>
@@ -342,7 +342,7 @@
     </Tile>
     <Tile>
       <Index>67</Index>
-      <FileName>BasicTile.png</FileName>
+      <FileName>BasicBotRight.png</FileName>
       <Value>0</Value>
     </Tile>
     <Tile>
@@ -402,7 +402,7 @@
     </Tile>
     <Tile>
       <Index>79</Index>
-      <FileName>BasicTile.png</FileName>
+      <FileName>BasicBotLeft.png</FileName>
       <Value>0</Value>
     </Tile>
     <Tile>
@@ -422,12 +422,12 @@
     </Tile>
     <Tile>
       <Index>83</Index>
-      <FileName>BasicTile.png</FileName>
+      <FileName>BasicBotRight.png</FileName>
       <Value>0</Value>
     </Tile>
     <Tile>
       <Index>84</Index>
-      <FileName>BasicTile.png</FileName>
+      <FileName>BasicTopLeft.png</FileName>
       <Value>0</Value>
     </Tile>
     <Tile>
@@ -527,7 +527,7 @@
     </Tile>
     <Tile>
       <Index>104</Index>
-      <FileName>BasicTile.png</FileName>
+      <FileName>BasicTopRight.png</FileName>
       <Value>0</Value>
     </Tile>
     <Tile>
@@ -687,7 +687,7 @@
     </Tile>
     <Tile>
       <Index>136</Index>
-      <FileName>BasicTile.png</FileName>
+      <FileName>BasicTopLeft.png</FileName>
       <Value>0</Value>
     </Tile>
     <Tile>
@@ -697,7 +697,7 @@
     </Tile>
     <Tile>
       <Index>138</Index>
-      <FileName>BasicTile.png</FileName>
+      <FileName>BasicTopRight.png</FileName>
       <Value>0</Value>
     </Tile>
     <Tile>
@@ -787,7 +787,7 @@
     </Tile>
     <Tile>
       <Index>156</Index>
-      <FileName>BasicTile.png</FileName>
+      <FileName>BasicBotRight.png</FileName>
       <Value>0</Value>
     </Tile>
     <Tile>
@@ -887,7 +887,7 @@
     </Tile>
     <Tile>
       <Index>176</Index>
-      <FileName>BasicExitTile.png</FileName>
+      <FileName>BasicDoubleLeftExit.png</FileName>
       <Value>0</Value>
     </Tile>
     <Tile>
@@ -997,12 +997,12 @@
     </Tile>
     <Tile>
       <Index>198</Index>
-      <FileName>BasicTile.png</FileName>
+      <FileName>BasicTopRight.png</FileName>
       <Value>0</Value>
     </Tile>
     <Tile>
       <Index>199</Index>
-      <FileName>BasicTile.png</FileName>
+      <FileName>BasicBotLeft.png</FileName>
       <Value>0</Value>
     </Tile>
     <Tile>
@@ -1012,7 +1012,7 @@
     </Tile>
     <Tile>
       <Index>201</Index>
-      <FileName>BasicTile.png</FileName>
+      <FileName>BasicBotRight.png</FileName>
       <Value>0</Value>
     </Tile>
     <Tile>
@@ -1107,7 +1107,7 @@
     </Tile>
     <Tile>
       <Index>220</Index>
-      <FileName>BasicTile.png</FileName>
+      <FileName>BasicTopRight.png</FileName>
       <Value>0</Value>
     </Tile>
     <Tile>
@@ -1117,7 +1117,7 @@
     </Tile>
     <Tile>
       <Index>222</Index>
-      <FileName>BasicTile.png</FileName>
+      <FileName>BasicTopLeft.png</FileName>
       <Value>0</Value>
     </Tile>
     <Tile>
@@ -1372,7 +1372,7 @@
     </Tile>
     <Tile>
       <Index>273</Index>
-      <FileName>BasicTile.png</FileName>
+      <FileName>BasicBotLeft.png</FileName>
       <Value>0</Value>
     </Tile>
     <Tile>
@@ -1472,12 +1472,12 @@
     </Tile>
     <Tile>
       <Index>293</Index>
-      <FileName>BasicTile.png</FileName>
+      <FileName>BasicBotRight.png</FileName>
       <Value>0</Value>
     </Tile>
     <Tile>
       <Index>294</Index>
-      <FileName>BasicTile.png</FileName>
+      <FileName>BasicTopLeft.png</FileName>
       <Value>0</Value>
     </Tile>
     <Tile>
@@ -1497,7 +1497,7 @@
     </Tile>
     <Tile>
       <Index>298</Index>
-      <FileName>BasicTile.png</FileName>
+      <FileName>BasicTopRight.png</FileName>
       <Value>0</Value>
     </Tile>
     <Tile>
@@ -1557,7 +1557,7 @@
     </Tile>
     <Tile>
       <Index>310</Index>
-      <FileName>BasicTile.png</FileName>
+      <FileName>BasicTopLeft.png</FileName>
       <Value>0</Value>
     </Tile>
     <Tile>
@@ -1577,7 +1577,7 @@
     </Tile>
     <Tile>
       <Index>314</Index>
-      <FileName>BasicTile.png</FileName>
+      <FileName>BasicTopRight.png</FileName>
       <Value>0</Value>
     </Tile>
     <Tile>
@@ -1792,7 +1792,7 @@
     </Tile>
     <Tile>
       <Index>357</Index>
-      <FileName>BasicTile.png</FileName>
+      <FileName>BasicBotLeft.png</FileName>
       <Value>0</Value>
     </Tile>
     <Tile>
@@ -1812,12 +1812,12 @@
     </Tile>
     <Tile>
       <Index>361</Index>
-      <FileName>BasicTile.png</FileName>
+      <FileName>BasicBotRight.png</FileName>
       <Value>0</Value>
     </Tile>
     <Tile>
       <Index>362</Index>
-      <FileName>BasicTile.png</FileName>
+      <FileName>BasicBotLeft.png</FileName>
       <Value>0</Value>
     </Tile>
     <Tile>
@@ -1867,12 +1867,12 @@
     </Tile>
     <Tile>
       <Index>372</Index>
-      <FileName>BasicTile.png</FileName>
+      <FileName>BasicBotRight.png</FileName>
       <Value>0</Value>
     </Tile>
     <Tile>
       <Index>373</Index>
-      <FileName>BasicTile.png</FileName>
+      <FileName>BasicBotLeft.png</FileName>
       <Value>0</Value>
     </Tile>
     <Tile>
@@ -1892,7 +1892,7 @@
     </Tile>
     <Tile>
       <Index>377</Index>
-      <FileName>BasicTile.png</FileName>
+      <FileName>BasicBotRight.png</FileName>
       <Value>0</Value>
     </Tile>
   </Layer>

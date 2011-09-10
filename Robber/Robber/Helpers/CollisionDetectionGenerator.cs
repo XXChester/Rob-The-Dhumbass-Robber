@@ -32,7 +32,7 @@ namespace Robber {
 				case Tile.TILE_NAME_LEFT_DOOR:
 					bboxes.Add(Helper.getBBox(placement.worldPosition, new Vector2(bottomLeft.X + thickness, bottomLeft.Y)));
 					break;
-				case Tile.TILE_NAME_TOP_LEFTT:
+				case Tile.TILE_NAME_TOP_LEFT:
 					bboxes.Add(Helper.getBBox(placement.worldPosition, new Vector2(topRight.X, topRight.Y + thickness)));
 					bboxes.Add(Helper.getBBox(placement.worldPosition, new Vector2(bottomLeft.X + thickness, bottomLeft.Y)));
 					break;

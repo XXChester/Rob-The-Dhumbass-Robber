@@ -60,7 +60,7 @@ Fix major problems with the game and implement some of the features that got scr
 [*]Change exit tile to be written in white and than load it's colour threw the XML loader
 	-Didn't want this to be dynamic so made it so that it always renders red. The problem was for certain colours of the walls the exit tile would render black and not red(desired)
 [*]Move bounding boxes down to represent the feet in the tile now as we are now sort of taking on a 2.5D perspective
-[]Need a graphic for mode select screen
+[*]Need a graphic for mode select screen
 [*]How to play screen
 [*]Need a new graphic for the main menu since most of the information on that screen is now redundant
 [*]In game menu needs a new graphic
@@ -75,7 +75,7 @@ Replace the programmer art with less crappy programmer art and make the game not
 [*]Screen fades in and out (Transitions)
 [*]Robber and guard sprites
 [*]Change the tile placer program to write multiple layers so that the floor is not hardcoded to a white square, it can now have a real texture applied
-[]Upgrade floor tile graphics
+[*]Upgrade floor tile graphics
 [*]Upgrade radius ring graphic
 [*]Uprade door tile graphic
 [*]Need a sfx on entry to the mode select screen
@@ -93,7 +93,6 @@ Replace the programmer art with less crappy programmer art and make the game not
 []Compaign mode?
 []Arcade mode
 [*]Sub mode of time attack or normal? Time attack makes you compete against a fast clock, otherwise you get a default time such as 5 minutes to solve the puzzle
-[]Cinematic of Rob falling through the roof
 
 ===========================
 		ISSUES
@@ -101,9 +100,6 @@ Replace the programmer art with less crappy programmer art and make the game not
 [*]AI can sometimes walk through walls		--All the logic is correct it is just the AI is not walking down the middle of the square which it needs to
 	[*]Cleaned up a bit but needs another pass
 	-What a nightmare this was, there were a couple MAJOR bugs in the code. In total between during competition trying to fix this and post-comp probably spent about 10 hours debugging it
-	[]When the player walks into a tile that is a wall the AI will walk right through it, implement one or the other or both of the below
-		[]Make it so if the player walks against a wall the Tile that the player is on (from an AI perspective) will not update, so the AI will know there is a wall there
-		[]Tile smasher...smash each tile into 9 tiles from an AI perspective
 [*]With the new manager the AI can sometimes bounce back and forth several times before actually thinking it caught the player
 [*]AI cannot get the player if they are against an outer wall
 [*]If you agro the AI with the new algorithm for their walking paths they will get stuck
@@ -135,6 +131,7 @@ Replace the programmer art with less crappy programmer art and make the game not
 ===========================
 	Removed features
 ===========================
+Most of these features were due to scope creep anyway
 []Put in collision detection with each of the guards so they don't stack		
 	-Removed this as it was causing problems because the guards only generate paths to way points once, not every new square
 []Couple extra guards run in from the exit point if you are detected
@@ -146,14 +143,21 @@ Replace the programmer art with less crappy programmer art and make the game not
 	-Removed because the game works fine with 4 cardinal directions
 []Pause at waypoints??	
 	-Not certain I want this still
+[]When the player walks into a tile that is a wall the AI will walk right through it, implement one or the other or both of the below
+	[]Make it so if the player walks against a wall the Tile that the player is on (from an AI perspective) will not update, so the AI will know there is a wall there
+	[]Tile smasher...smash each tile into 9 tiles from an AI perspective
+	-Had the tile smasher 75% implemented and the code with the guard movement etc became a disaster so removed all of the tile breaker and will
+		let this bug remain in the game. This will be a watching point in my next game.
+[]Cinematic of Rob falling through the roof
+	-Not interested in making an animation for this
 
 ============================
 		Time
 ============================
 Planning: 2 hours		
-Programming:	62.75 hours	
-Map Creation(Including creating editor via scripting engine):	12.25 hours
-Art: 10hours			
+Programming:	67.25 hours
+Map Creation(Including creating editor via scripting engine):	13.5 hours	
+Art: 10.25 hours			
 Sound:	2.75 hours		
 Deployment: .5 hours
 Alpha-testing:2 hours

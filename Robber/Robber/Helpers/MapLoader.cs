@@ -23,7 +23,7 @@ namespace Robber {
 			height -= 1;
 			bool map = true;
 			if (y == 0 || y == height || x == 0 || x == width) {
-				if (textureName != Tile.TILE_NAME_BOTTOM_LEFT && textureName != Tile.TILE_NAME_BOTTOM_RIGHT && textureName != Tile.TILE_NAME_TOP_LEFTT && 
+				if (textureName != Tile.TILE_NAME_BOTTOM_LEFT && textureName != Tile.TILE_NAME_BOTTOM_RIGHT && textureName != Tile.TILE_NAME_TOP_LEFT && 
 					textureName != Tile.TILE_NAME_TOP_RIGHT) {
 					map = false;
 				} else {
@@ -85,9 +85,9 @@ namespace Robber {
 			// load visual aspect of the walls
 			Tile[,] wallTiles = GWNorthEngine.Tools.TilePlacer.MapLoader.initTiles<Tile>(mapWallTiles, delegate(MapTile tile) {
 				if (Tile.COLOUR_OVERRIDE_TILES.Contains<string>(tile.Texture.Name)) {
-					return new Tile(tile.Texture, tile.Index, Color.White);
+					return new Tile(tile.Texture, tile.Index, Color.White, tile.TileValue);
 				} else {
-					return new Tile(tile.Texture, tile.Index, wallColour);
+					return new Tile(tile.Texture, tile.Index, wallColour, tile.TileValue);
 				}
 			});
 
@@ -97,7 +97,7 @@ namespace Robber {
 				for (int x = 0; x < width; x++) {
 					// override so the AI can walk the outter wall
 					if (wallTiles[y, x] != null && mapAsUnwalkable(wallTiles[y, x].Texture.Name, y, x, height, width)) {
-						aiSpaceTypes[y, x] = Translator.translateTileValueToAStarType(loadResult.Layers[wallLayer].Tiles[y, x].TileValue);
+						aiSpaceTypes[y, x] = Translator.translateTileValueToAStarType(wallTiles[y, x].TileValue);
 					} else {
 						aiSpaceTypes[y, x] = PathFinder.TypeOfSpace.Walkable;
 					}

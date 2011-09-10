@@ -24,7 +24,7 @@ namespace Robber {
 		public const string TILE_NAME_BOTTOM_DOOR = "BottomDoor";
 		public const string TILE_NAME_LEFT = "LeftWall";
 		public const string TILE_NAME_LEFT_DOOR = "LeftDoor";
-		public const string TILE_NAME_TOP_LEFTT = "TopLeft";
+		public const string TILE_NAME_TOP_LEFT = "TopLeft";
 		public const string TILE_NAME_TOP_RIGHT = "TopRight";
 		public const string TILE_NAME_BOTTOM_RIGHT = "BottomRight";
 		public const string TILE_NAME_BOTTOM_LEFT = "BottomLeft";
@@ -40,9 +40,13 @@ namespace Robber {
 
 		#region Constructor
 		public Tile(Texture2D texture, Point index, Color renderColour)
-		:base(index, texture) {
+			:this(texture, index, renderColour, TileValues.Unknown) {
+		}
+
+		public Tile(Texture2D texture, Point index, Color renderColour, TileValues tileValue)
+			: base(index, texture, tileValue, new Vector2(1f)) {
 			StaticDrawable2DParams parms = new StaticDrawable2DParams();
-			parms.Position = new Vector2(base.WorldPosition.X, base.WorldPosition.Y  + GameDisplay.BOARD_OFFSET_Y);
+			parms.Position = new Vector2(base.WorldPosition.X, base.WorldPosition.Y + GameDisplay.BOARD_OFFSET_Y);
 			parms.Texture = texture;
 			parms.LightColour = renderColour;
 			this.image = new StaticDrawable2D(parms);
