@@ -93,6 +93,11 @@ Replace the programmer art with less crappy programmer art and make the game not
 []Compaign mode?
 []Arcade mode
 [*]Sub mode of time attack or normal? Time attack makes you compete against a fast clock, otherwise you get a default time such as 5 minutes to solve the puzzle
+[*]Re-org maps into a scaling difficulty
+[*]Change police detection sfx
+[*]Change detection via timer sfx
+[*]Time colours based on remaining
+[*]Left pad timer so it is always positioned in the same spot
 
 ===========================
 		ISSUES
@@ -120,12 +125,14 @@ Replace the programmer art with less crappy programmer art and make the game not
    at Microsoft.Xna.Framework.Audio.MicrophoneUnsafeNativeMethods.ShutdownCaptureEngine()
    at Microsoft.Xna.Framework.Audio.AudioRendererShutdownHandler.AppExitingEventHandler(Object sender, EventArgs args)
 	-Problem with the XNA framework when you manually(correctly) dispose of sound effects on closing. The solution is to let the ContentManager handle the disposale of SFX's
-		-This did not solve the problem either
+	-This didn't solve the problem either
 [*]AI is marking its waypoint as unwalkable so when units are passing through one (can see this on map 6 mostly) they avoid the space even though its empty
 [*]Problem with AI grabbing wrong waypoint when direction is counter clockwise and starting location is not on
 	a waypoint. Should be grabbing the last node but is grabbing 2nd last
 [*]Hitting escape in the game and than returning to the game causes the game to play for the rest of the transition in but than pause
 [*]Need a comparator for the maps directory. Default string one thinks the order should be Map1, Map10, Map2...etc
+[*]Getting caught and replaying via the replay button, you cannot start
+[*]Stationary guards don't activate if you are detected
 
 
 ===========================
@@ -143,7 +150,7 @@ Most of these features were due to scope creep anyway
 	-Removed because the game works fine with 4 cardinal directions
 []Pause at waypoints??	
 	-Not certain I want this still
-[]When the player walks into a tile that is a wall the AI will walk right through it, implement one or the other or both of the below
+[]When the player walks into a tile that is a wall the AI will walk right through it (on chase mode), implement one or the other or both of the below
 	[]Make it so if the player walks against a wall the Tile that the player is on (from an AI perspective) will not update, so the AI will know there is a wall there
 	[]Tile smasher...smash each tile into 9 tiles from an AI perspective
 	-Had the tile smasher 75% implemented and the code with the guard movement etc became a disaster so removed all of the tile breaker and will
@@ -155,11 +162,11 @@ Most of these features were due to scope creep anyway
 		Time
 ============================
 Planning: 2 hours		
-Programming:	67.25 hours
-Map Creation(Including creating editor via scripting engine):	13.5 hours	
+Programming:	68.25 hours		
+Level Design(Including creating editor via scripting engine):	15 hours	
 Art: 10.25 hours			
-Sound:	2.75 hours		
+Sound:	3.75 hours		
 Deployment: .5 hours
-Alpha-testing:2 hours
+Alpha-testing:4 hours		
 Total Time:
 	

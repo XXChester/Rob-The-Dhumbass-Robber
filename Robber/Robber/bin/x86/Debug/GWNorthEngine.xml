@@ -339,6 +339,11 @@
             </summary>
             <param name="parms"></param>
         </member>
+        <member name="M:GWNorthEngine.Audio.BaseSoundEngine.update">
+            <summary>
+            Monitors current Sound instances and flags them for cleanup if they have finished playing
+            </summary>
+        </member>
         <member name="M:GWNorthEngine.Audio.BaseSoundEngine.dispose">
             <summary>
             Cleans up resources used by the SoundEngine
@@ -371,6 +376,13 @@
             </summary>
             <param name="sfx">SoundEffect to play</param>
         </member>
+        <member name="M:GWNorthEngine.Audio.SFXEngine.playSoundEffect(Microsoft.Xna.Framework.Audio.SoundEffect,System.Boolean)">
+            <summary>
+            Plays a sound effect with the generic data of the SFXEngine such as volume, etc
+            </summary>
+            <param name="sfx">SoundEffect to play</param>
+            <param name="loop">Determines whether to loop the sound effect</param>
+        </member>
         <member name="M:GWNorthEngine.Audio.SFXEngine.playSoundEffect(Microsoft.Xna.Framework.Audio.SoundEffect,System.Single)">
             <summary>
             Plays a sound effect with a specific volume
@@ -378,7 +390,15 @@
             <param name="sfx">SoundEffect to play</param>
             <param name="volume">Volume to play the sound effect at</param>
         </member>
-        <member name="M:GWNorthEngine.Audio.SFXEngine.playSoundEffect(Microsoft.Xna.Framework.Audio.SoundEffect,System.Single,System.Single,System.Single)">
+        <member name="M:GWNorthEngine.Audio.SFXEngine.playSoundEffect(Microsoft.Xna.Framework.Audio.SoundEffect,System.Single,System.Boolean)">
+            <summary>
+            Plays a sound effect with a specific volume
+            </summary>
+            <param name="sfx">SoundEffect to play</param>
+            <param name="volume">Volume to play the sound effect at</param>
+            <param name="loop">Determines whether to loop the sound effect</param>
+        </member>
+        <member name="M:GWNorthEngine.Audio.SFXEngine.playSoundEffect(Microsoft.Xna.Framework.Audio.SoundEffect,System.Single,System.Single,System.Single,System.Boolean)">
             <summary>
             Plays a sound effect at a specific volume, pan and pitch
             </summary>
@@ -386,12 +406,20 @@
             <param name="volume">Volume to play the sound effect at</param>
             <param name="pan">Pan to play the sound effect at</param>
             <param name="pitch">Pitch to play the sound effect at</param>
+            <param name="loop">Determines whether to loop the sound effect</param>
         </member>
         <member name="M:GWNorthEngine.Audio.SFXEngine.stop(System.String)">
             <summary>
             Stops all sound effects that match the name passed in and are not already stopped
             </summary>
             <param name="name">Name of the sound effect we are trying to stop</param>
+        </member>
+        <member name="M:GWNorthEngine.Audio.SFXEngine.isPlaying(System.String)">
+            <summary>
+            Determines if a SoundEffect is playing based on its name
+            </summary>
+            <param name="name">Name to look up</param>
+            <returns>True if the sound if playing, otherwise false</returns>
         </member>
         <member name="M:GWNorthEngine.Audio.SFXEngine.update">
             <summary>

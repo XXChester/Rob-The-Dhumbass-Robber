@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading;
 using Microsoft.Xna.Framework;
 using GWNorthEngine.AI.AStar;
+using GWNorthEngine.Scripting;
 namespace Robber {
 	public class AIManager {
 		#region Class variables
@@ -40,30 +41,37 @@ namespace Robber {
 			do {
 				Thread.Sleep(10);
 
-				if (this.pathRequests.Count >= 1) {
-					// clone the current requests
-					Queue<PathRequest> clonedRequests = null;
-					lock (this.pathRequests) {
-						clonedRequests = new Queue<PathRequest>(this.pathRequests);
-					}
-
-					// process the requests
-					PathRequest request = null;
-					Stack<Point> path = null;
-					List<int> processedRequests = new List<int>();
-					for (int i = 0; i < clonedRequests.Count; i++) {
-						request = clonedRequests.Dequeue();
-						if (request != null) {
-							path = new Stack<Point>(findPath(request.Start, request.End));
-							request.CallBack.Invoke(path);
+				try {
+					if (this.pathRequests.Count >= 1) {
+						// clone the current requests
+						Queue<PathRequest> clonedRequests = null;
+						lock (this.pathRequests) {
+							clonedRequests = new Queue<PathRequest>(this.pathRequests);
 						}
-						processedRequests.Add(i);
-					}
 
-					// remove the requests from the master list so we do not run them again
-					for (int i = processedRequests.Count - 1; i >= 0; i--) {
-						this.pathRequests.RemoveAt(processedRequests[i]);
+						// process the requests
+						PathRequest request = null;
+						Stack<Point> path = null;
+						List<int> processedRequests = new List<int>();
+						for (int i = 0; i < clonedRequests.Count; i++) {
+							request = clonedRequests.Dequeue();
+							if (request != null) {
+								path = new Stack<Point>(findPath(request.Start, request.End));
+								request.CallBack.Invoke(path);
+							}
+							processedRequests.Add(i);
+						}
+
+						// remove the requests from the master list so we do not run them again
+						for (int i = processedRequests.Count - 1; i >= 0; i--) {
+							this.pathRequests.RemoveAt(processedRequests[i]);
+						}
 					}
+				} catch (Exception e) {
+					Console.WriteLine(e.StackTrace);
+#if (DEBUG)
+					ScriptManager.getInstance().log(e.StackTrace);
+#endif
 				}
 			} while (this.running);
 		}

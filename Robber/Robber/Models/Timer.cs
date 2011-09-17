@@ -19,14 +19,23 @@ namespace Robber {
 		private Text2D firstPart;
 		private Text2D secondPart;
 		private Text2D timeText;
+		private Text2D thirdPart;
+		private Color activeTimeColour;
 		private SoundEffect guardsAlertedSfx;
 		private float time;
+		private float initialTime;
 		private const string FIRST_PART = "Time Until";
 		private const string SECOND_PART = "Detection;";
+		private const string THIRD_PART = "Seconds";
+		private const string DETECTED_SFX_NAME = "Alarm";
+		public readonly Color HIGH_TIME = Color.Green;
+		public readonly Color MEDIUM_TIME = Color.Yellow;
+		public readonly Color LOW_TIME = Color.Red;
 		#endregion Class variables
 
 		#region Class propeties
 		public float Time { get { return this.time; } }
+		public Color ActiveTimeColour { get { return this.activeTimeColour; } }
 		#endregion Class properties
 
 		#region Constructor
@@ -42,37 +51,61 @@ namespace Robber {
 			parms.WrittenText = SECOND_PART;
 			this.secondPart = new Text2D(parms);
 
-			parms.Position = new Vector2(702f, 63f);
+			parms.Position = new Vector2(700f, 87f);
+			parms.WrittenText = THIRD_PART;
+			this.thirdPart = new Text2D(parms);
+
+			parms.Position = new Vector2(700f, 63f);
 			parms.WrittenText = "0";
+			parms.LightColour = HIGH_TIME;
 			this.timeText = new Text2D(parms);
+			this.activeTimeColour = HIGH_TIME;
 			
 			//sfxs
-			this.guardsAlertedSfx = LoadingUtils.loadSoundEffect(content, "GuardsAlerted");
+			this.guardsAlertedSfx = LoadingUtils.loadSoundEffect(content, DETECTED_SFX_NAME);
 #if WINDOWS
 #if DEBUG
 			ScriptManager.getInstance().registerObject(this.firstPart, "first");
 			ScriptManager.getInstance().registerObject(this.secondPart, "second");
-			ScriptManager.getInstance().registerObject(this.timeText, "third");
+			ScriptManager.getInstance().registerObject(this.timeText, "time");
+			ScriptManager.getInstance().registerObject(this.thirdPart, "third");
 #endif
 #endif
 		}
 		#endregion Constructor
 
 		#region Support methods
-		public void updateColours(Color colour) {
-			this.firstPart.LightColour = colour;
-			this.secondPart.LightColour = colour;
-			this.timeText.LightColour = colour;
+		private string padTimer() {
+			string padding = "";
+			int s1 = (int)(this.time / 1000f);
+			string s2 = ((int)(this.time / 1000f)).ToString();
+			int s3 = s2.Length;
+			int timeLength = ((int)(this.time / 1000f)).ToString().Length;
+			int paddingRequired = 3 - timeLength;// we always want a 6 digit timer
+			for (int i = 0; i < paddingRequired; i++) {
+				padding += "0";
+			}
+			return padding;
+		}
+
+		public void updateColours(Color textColour, Color timeColour) {
+			this.firstPart.LightColour = textColour;
+			this.secondPart.LightColour = textColour;
+			this.timeText.LightColour = timeColour;
+			this.thirdPart.LightColour = textColour;
 		}
 
 		public void reset(float timeUntilDetection) {
 			this.time = timeUntilDetection * 60f * 1000f;// passed in as minutes, convert to seconds, convert to miliseconds
+			this.initialTime = this.time;
 			float seconds = this.time / 1000f;
 			if (this.time % 1000f == 0f) {
-				this.timeText.WrittenText = seconds.ToString() + ".000";
+				this.timeText.WrittenText = padTimer() + seconds.ToString() + ".000";
 			} else {
-				this.timeText.WrittenText = seconds.ToString();
+				this.timeText.WrittenText = padTimer() + seconds.ToString();
 			}
+			this.activeTimeColour = HIGH_TIME;
+			this.timeText.LightColour = this.activeTimeColour;
 		}
 
 		public void update(float elapsed) {
@@ -83,10 +116,26 @@ namespace Robber {
 				}
 				//Alert the authorities
 				AIManager.getInstance().PlayerDetected = true;
-				this.timeText.WrittenText = "0";
+				this.timeText.WrittenText = "000.000";
+				if (!SoundManager.getInstance().sfxEngine.isPlaying(DETECTED_SFX_NAME) && 
+					StateManager.getInstance().CurrentGameState == StateManager.GameState.Active) {
+					// keep the alarm blaring until the player is caught
+					SoundManager.getInstance().sfxEngine.playSoundEffect(this.guardsAlertedSfx);
+				}
 			} else {
 				float seconds = this.time / 1000f;
-				this.timeText.WrittenText = seconds.ToString();
+				this.timeText.WrittenText = padTimer() + seconds.ToString();
+				float factor = this.initialTime / this.time;
+				if (factor >= 3f) {
+					this.activeTimeColour = LOW_TIME;
+					this.timeText.LightColour = this.activeTimeColour;
+				} else if (factor >= 1.5f) {
+					this.activeTimeColour = MEDIUM_TIME;
+					this.timeText.LightColour = this.activeTimeColour;
+				} else {
+					this.activeTimeColour = HIGH_TIME;
+					this.timeText.LightColour = this.activeTimeColour;
+				}
 			}
 		}
 
@@ -94,14 +143,15 @@ namespace Robber {
 			this.firstPart.render(spriteBatch);
 			this.secondPart.render(spriteBatch);
 			this.timeText.render(spriteBatch);
+			this.thirdPart.render(spriteBatch);
 		}
 		#endregion Support methods
 
 		#region Destructor
 		public void dispose() {
-			if (this.guardsAlertedSfx != null) {
+			/*if (this.guardsAlertedSfx != null) {
 				this.guardsAlertedSfx.Dispose();
-			}
+			}*/
 		}
 		#endregion Destructor
 	}

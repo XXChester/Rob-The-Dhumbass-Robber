@@ -259,3 +259,21 @@ Changed to edit: WayPoint
 x 348 y 122
 x 390 y 96
 x 441, y 122
+Changed to edit: Dumpster
+		<Dumpster>
+			<X>22</X>
+			<Y>17</Y>
+		</Dumpster>
+		<Dumpster>
+			<X>16</X>
+			<Y>9</Y>
+		</Dumpster>
+Changed to edit: GuardPosition
+		<Guard>
+			<State></State>
+			<Direction></Direction>
+			<Position>
+				<X>9</X>
+				<Y>2</Y>
+			</Position>
+		</Guard>

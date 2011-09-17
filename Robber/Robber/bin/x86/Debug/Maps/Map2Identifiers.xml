@@ -1,17 +1,17 @@
 <MapIdentifier>
 	<LevelInformation>
 		<Time>
-			<Minutes>1</Minutes>
+			<Minutes>.6</Minutes>
 		</Time>
 		<Colours>
 			<Floor>
-				<R>81</R>
-				<G>81</G>
-				<B>81</B>
-			</Floor>
-			<Walls>
 				<R>255</R>
 				<G>255</G>
+				<B>255</B>
+			</Floor>
+			<Walls>
+				<R>0</R>
+				<G>0</G>
 				<B>255</B>
 			</Walls>
 		</Colours>
@@ -218,8 +218,8 @@
 	</TreasureInformation>
 	<EntryInformation>
 		<GuardEntry>
-			<X>20</X>
-			<Y>10</Y>
+			<X>0</X>
+			<Y>14</Y>
 		</GuardEntry>
 	</EntryInformation>
 	<GuardInformation>
@@ -315,9 +315,6 @@
 		</WayPoint>
 	</WaypointInformation>
 	<DumpsterInformation>
-		<Dumpster>
-			<X>20</X>
-			<Y>3</Y>
-		</Dumpster>
+	
 	</DumpsterInformation>
 </MapIdentifier>

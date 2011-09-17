@@ -35,6 +35,7 @@ namespace Robber {
 		private MovementDirection movementDirection;
 		private PathRequest.FoundPathCallBack callBackDelegate;
 		private SoundEffect openDoorSfx;
+		private SoundEffect prisonCellSfx;
 		private const float MOVEMENT_SPEED_WALK = 60f / 1000f;
 		private const float MOVEMENT_SPEED_RUN = 155f / 1000f;
 		#endregion Class variables
@@ -47,7 +48,9 @@ namespace Robber {
 		public Guard(ContentManager content, Placement startingLocation, string state, string movementDirection)
 			: base(content, "Guard", startingLocation, MOVEMENT_SPEED_WALK) {
 			this.callBackDelegate = delegate(Stack<Point> path) {
-				this.path = path;
+				if (this != null) {
+					this.path = path;
+				}
 			};
 			// figure out our direction
 			if (movementDirection == MovementDirection.Clockwise.ToString()) {
@@ -84,11 +87,13 @@ namespace Robber {
 					}
 				});
 			} else if (this.currentState == State.Standing || this.currentState == State.NotSpawned) {
-				this.closestsPoint = new Point(-1, -1);
+				// set the closest point to our guards location
+				this.closestsPoint = base.Placement.index;
 			}
 
 			this.ring = new RadiusRing(content, base.activeSprite.Position);
 			this.openDoorSfx = LoadingUtils.loadSoundEffect(content, "OpenDoor");
+			this.prisonCellSfx = LoadingUtils.loadSoundEffect(content, "CellDoor");
 		}
 		#endregion Constructor
 
@@ -123,14 +128,11 @@ namespace Robber {
 		private void updateState(State newState) {
 			if (newState == State.Chase) {
 				base.movementSpeed = MOVEMENT_SPEED_RUN;
-				base.leftSprite.AnimationManager.FrameRate = 150f;
-			} else if (newState == State.Patrol) {
-				base.movementSpeed = MOVEMENT_SPEED_WALK;
-				base.leftSprite.AnimationManager.FrameRate = 200f;
+				base.leftSprite.AnimationManager.FrameRate = 100f;
 			} else if (newState == State.Standing) {
 				base.direction = Direction.None;
 				base.leftSprite.AnimationManager.FrameRate = 0f;
-			}
+			} //else get the default
 			this.currentState = newState;
 		}
 
@@ -154,36 +156,32 @@ namespace Robber {
 
 		protected override void updateDirection(float elapsed) {
 			// figure out what direction our closests point is
-			if (this.closestsPoint.X == -1 && this.closestsPoint.Y == -1) {
-				base.direction = Direction.None;
+			Point temp = new Point(base.Placement.index.X - this.closestsPoint.X, base.Placement.index.Y - this.closestsPoint.Y);
+			if (temp.X <= -1) {
+				base.direction = Direction.Right;
+			} else if (temp.X >= 1) {
+				base.direction = Direction.Left;
+			} else if (temp.Y <= -1) {
+				base.direction = Direction.Down;
+			} else if (temp.Y >= 1) {
+				base.direction = Direction.Up;
 			} else {
-				Point temp = new Point(base.Placement.index.X - this.closestsPoint.X, base.Placement.index.Y - this.closestsPoint.Y);
-				if (temp.X <= -1) {
-					base.direction = Direction.Right;
-				} else if (temp.X >= 1) {
-					base.direction = Direction.Left;
-				} else if (temp.Y <= -1) {
-					base.direction = Direction.Down;
-				} else if (temp.Y >= 1) {
-					base.direction = Direction.Up;
+				Vector2 middleOfSquare = getMiddleOfCurrentSquare();
+				Vector2 middleOfSprite = getMiddleOfSprite();
+				Vector2 difference = Vector2.Subtract(middleOfSquare, middleOfSprite);
+				if (Vector2.Zero == difference) {
+					base.direction = Direction.None;
+					generateMove();
 				} else {
-					Vector2 middleOfSquare = getMiddleOfCurrentSquare();
-					Vector2 middleOfSprite = getMiddleOfSprite();
-					Vector2 difference = Vector2.Subtract(middleOfSquare, middleOfSprite);
-					if (Vector2.Zero == difference) {
-						base.direction = Direction.None;
-						generateMove();
-					} else {
-						// find the direction of the middle
-						if (difference.X < 0) {
-							base.direction = Direction.Left;
-						} else if (difference.X > 0) {
-							base.direction = Direction.Right;
-						} else if (difference.Y > 0) {
-							base.direction = Direction.Down;
-						} else if (difference.Y < 0) {
-							base.direction = Direction.Up;
-						}
+					// find the direction of the middle
+					if (difference.X < 0) {
+						base.direction = Direction.Left;
+					} else if (difference.X > 0) {
+						base.direction = Direction.Right;
+					} else if (difference.Y > 0) {
+						base.direction = Direction.Down;
+					} else if (difference.Y < 0) {
+						base.direction = Direction.Up;
 					}
 				}
 			}
@@ -195,7 +193,7 @@ namespace Robber {
 			if (this.closestsPoint == endNode) {
 				StateManager.getInstance().CurrentGameState = StateManager.GameState.GameOver;
 				StateManager.getInstance().TypeOfGameOver = StateManager.GameOverType.Guards;
-				SoundManager.getInstance().sfxEngine.playSoundEffect(ResourceManager.getInstance().PrisonCellSfx);
+				SoundManager.getInstance().sfxEngine.playSoundEffect(this.prisonCellSfx);
 			}
 
 			if (this.direction != Direction.None) {
@@ -269,13 +267,18 @@ namespace Robber {
 		#endregion Support methods
 
 		#region Destructor
-		public new void dispose() {
+		public override void dispose() {
 			if (this.ring != null) {
 				this.ring.dispose();
 			}
+			//sfxs
+			/*
 			if (this.openDoorSfx != null) {
 				this.openDoorSfx.Dispose();
 			}
+			if (this.PrisonCellSfx != null) {
+				this.PrisonCellSfx.Dispose();
+			}*/
 			base.dispose();
 		}
 		#endregion Destructor

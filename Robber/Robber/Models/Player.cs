@@ -14,9 +14,11 @@ using GWNorthEngine.Model;
 using GWNorthEngine.Model.Params;
 using GWNorthEngine.Scripting;
 using GWNorthEngine.Input;
+using GWNorthEngine.Utils;
 namespace Robber {
 	public class Player : Person{
 		#region Class variables
+		private SoundEffect footStepsSfx;
 		private float footStepSFXDelay;
 		private const float MOVEMENT_SPEED = 150f / 1000f;//. player always runs
 		private const float FOOT_STEP_SFX_DELAY = 600f;
@@ -31,6 +33,7 @@ namespace Robber {
 		public Player(ContentManager content, Placement startingLocation)
 			: base(content, "Rob", startingLocation, MOVEMENT_SPEED) {
 
+			this.footStepsSfx = LoadingUtils.loadSoundEffect(content, "FootSteps");
 		}
 		#endregion Constructor
 
@@ -53,7 +56,7 @@ namespace Robber {
 				//play movement sfx
 				if (base.direction != Direction.None) {
 					if (this.footStepSFXDelay >= FOOT_STEP_SFX_DELAY) {
-						SoundManager.getInstance().sfxEngine.playSoundEffect(ResourceManager.getInstance().FootStepsSfx);
+						SoundManager.getInstance().sfxEngine.playSoundEffect(this.footStepsSfx);
 						this.footStepSFXDelay = 0f;
 					}
 				}
@@ -99,7 +102,14 @@ namespace Robber {
 		#endregion Support methods
 
 		#region Destructor
-
+		public override void dispose() {
+			//sfxs
+			/*
+			if (this.FootStepsSfx != null) {
+				this.FootStepsSfx.Dispose();
+			}*/
+			base.dispose();
+		}
 		#endregion Destructor
 	}
 }

@@ -31,7 +31,10 @@ namespace Robber {
 			this.image = new StaticDrawable2D(parms);
 			this.placement = startingPlacement;
 			if (smallBoundingBox) {
-				this.BoundingBox = Helper.getSmallerBBox(new Vector2(parms.Position.X, parms.Position.Y - 1f), 3.7f);
+				float size = (float)(ResourceManager.TILE_SIZE / 2.5);
+				Vector2 bboxPositionMin = Vector2.Subtract(parms.Position, new Vector2(size));
+				Vector2 bboxPositionMax = Vector2.Add(parms.Position, new Vector2(size));
+				this.BoundingBox = Helper.getBBox(bboxPositionMin, bboxPositionMax);
 			} else {
 				Vector2 bboxPositionMin = startingPlacement.worldPosition;
 				Vector2 bboxPositionMax = Vector2.Add(startingPlacement.worldPosition, new Vector2(ResourceManager.TILE_SIZE));

@@ -31,8 +31,6 @@ namespace Robber {
 		public SpriteFont Font { get; set; }
 		public Texture2D ButtonLineTexture { get; set; }
 		public SoundEffect MouseOverSfx { get; set; }
-		public SoundEffect FootStepsSfx { get; set; }
-		public SoundEffect PrisonCellSfx { get; set; }
 #if DEBUG
 		public Texture2D DebugChip { get; set; }
 		public Texture2D DebugRing { get; set; }
@@ -48,8 +46,6 @@ namespace Robber {
 			this.Font = LoadingUtils.loadSpriteFont(content, "Font");
 			this.ButtonLineTexture = TextureUtils.create2DColouredTexture(device, 2, 2, Color.White);
 			this.MouseOverSfx = LoadingUtils.loadSoundEffect(content, "MouseOverButton");
-			this.FootStepsSfx = LoadingUtils.loadSoundEffect(content, "FootSteps");
-			this.PrisonCellSfx = LoadingUtils.loadSoundEffect(content, "CellDoor");
 #if DEBUG
 			this.DebugChip = TextureUtils.create2DColouredTexture(device, 32, 32, Color.White);
 			this.DebugRing = TextureUtils.create2DRingTexture(device, 112, Color.White);
@@ -62,15 +58,11 @@ namespace Robber {
 			if (this.ButtonLineTexture != null) {
 				this.ButtonLineTexture.Dispose();
 			}
-			if (this.MouseOverSfx != null) {
+
+			// sfxs
+			/*if (this.MouseOverSfx != null) {
 				this.MouseOverSfx.Dispose();
-			}
-			if (this.FootStepsSfx != null) {
-				this.FootStepsSfx.Dispose();
-			}
-			if (this.PrisonCellSfx != null) {
-				this.PrisonCellSfx.Dispose();
-			}
+			}*/
 #if DEBUG
 			if (this.DebugChip != null) {
 				this.DebugChip.Dispose();

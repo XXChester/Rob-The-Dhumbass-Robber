@@ -31,7 +31,7 @@ namespace Robber {
 		protected Direction direction;
 		protected Direction previousDirection;
 		protected Placement previousPlacement;
-		private const float FRAME_RATE = 200f;
+		private const float FRAME_RATE = 150f;
 		#endregion Class variables
 
 		#region Class propeties
@@ -156,7 +156,7 @@ namespace Robber {
 		#endregion Support methods
 
 		#region Destructor
-		public void dispose() {
+		public virtual void dispose() {
 			if (this.leftSprite!= null) {
 				this.leftSprite.dispose();
 			}

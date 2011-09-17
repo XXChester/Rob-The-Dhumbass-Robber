@@ -32,16 +32,13 @@ namespace Robber {
 		private List<Point> entryExitPoints;
 		private Text2D treasureText;
 		private StaticDrawable2D treasure;
-		private SoundEffect cantTouchThisSfx;
 		private SoundEffect guardDetectedSfx;
 		private SoundEffect introSfx;
 		private SoundEffect payDaySfx;
 		private SoundEffect treasureSfx;
 		private SoundEffect dumpsterCrashSfx;
 		private SoundEffect dumpsterCloseSfx;
-		private float payDayDelay;
 		private ContentManager content;
-		private const float DELAY_PAY_DAY_EMOTE = 5000f;
 #if DEBUG
 		private bool showAI = false;
 		private bool showCD = false;
@@ -51,7 +48,16 @@ namespace Robber {
 		#endregion Class variables
 
 		#region Class propeties
-		public float Score { get { return (this.player.CapturedTreasures * 100 + this.timer.Time); } }
+		public float Score { 
+			get {
+				// scores are calculated differently dependent on the game mode
+				if (StateManager.getInstance().GameMode == StateManager.Mode.TimeAttack) {
+					return (this.player.CapturedTreasures * 1000 + this.timer.Time);
+				} else {
+					return (this.player.CapturedTreasures * 10 + (int)(this.timer.Time / 4));
+				}
+			} 
+		}
 		#endregion Class properties
 
 		#region Constructor
@@ -78,21 +84,20 @@ namespace Robber {
 			Text2DParams textParms = new Text2DParams();
 			textParms.Font = ResourceManager.getInstance().Font;
 			textParms.LightColour = ResourceManager.TEXT_COLOUR;
-			textParms.Position = new Vector2(727f, 115f);
+			textParms.Position = new Vector2(727f, 150f);
 			this.treasureText = new Text2D(textParms);
 
 			StaticDrawable2DParams staticParms = new StaticDrawable2DParams();
 			staticParms = new StaticDrawable2DParams();
-			staticParms.Position = new Vector2(702f, 113f);
+			staticParms.Position = new Vector2(702f, 148f);
 			staticParms.Texture = LoadingUtils.loadTexture2D(content, "Treasure1");
 			this.treasure = new StaticDrawable2D(staticParms);
 
 			// load sound effects
-			this.cantTouchThisSfx = LoadingUtils.loadSoundEffect(content, "CantTouchThis");
 			this.introSfx = LoadingUtils.loadSoundEffect(content, "LevelEntry");
 			this.payDaySfx = LoadingUtils.loadSoundEffect(content, "PayDay");
 			this.treasureSfx = LoadingUtils.loadSoundEffect(content, "TreasureCollect");
-			this.guardDetectedSfx = LoadingUtils.loadSoundEffect(content, "Policia");
+			this.guardDetectedSfx = LoadingUtils.loadSoundEffect(content, "GuardDetection");
 			this.dumpsterCrashSfx = LoadingUtils.loadSoundEffect(content, "DumpsterCrash");
 			this.dumpsterCloseSfx = LoadingUtils.loadSoundEffect(content, "DumpsterClose");
 		}
@@ -180,6 +185,7 @@ namespace Robber {
 			}
 			this.timer.reset(time);
 			this.treasureText.WrittenText = "x " + this.player.CapturedTreasures;
+			StateManager.getInstance().CurrentGameState = StateManager.GameState.Waiting;
 		}
 
 		public override void update(float elapsed) {
@@ -213,7 +219,7 @@ namespace Robber {
 						StateManager.getInstance().CurrentGameState = StateManager.GameState.GameOver;
 						if (this.player.CapturedTreasures >= 1) {
 							StateManager.getInstance().TypeOfGameOver = StateManager.GameOverType.Player;
-							SoundManager.getInstance().sfxEngine.playSoundEffect(this.cantTouchThisSfx);
+							SoundManager.getInstance().sfxEngine.playSoundEffect(this.payDaySfx);
 						} else {
 							StateManager.getInstance().TypeOfGameOver = StateManager.GameOverType.None;
 						}
@@ -224,12 +230,7 @@ namespace Robber {
 				this.player.update(elapsed);
 				foreach (Guard guard in this.guards) {
 					guard.update(elapsed);
-					if (guard.BoundingBox.Intersects(this.player.BoundingBox) && !this.player.Hiding) {
-						StateManager.getInstance().CurrentGameState = StateManager.GameState.GameOver;
-						StateManager.getInstance().TypeOfGameOver = StateManager.GameOverType.Guards;
-						SoundManager.getInstance().sfxEngine.playSoundEffect(ResourceManager.getInstance().PrisonCellSfx);
-						break;
-					} else if (guard.Ring.BoundingSphere.Intersects(this.player.BoundingBox) && !this.player.Hiding) {
+					if (guard.Ring.BoundingSphere.Intersects(this.player.BoundingBox) && !this.player.Hiding) {
 						// did we JUST get detected?
 						if (!AIManager.getInstance().PlayerDetected) {
 							SoundManager.getInstance().sfxEngine.playSoundEffect(this.guardDetectedSfx);
@@ -243,10 +244,6 @@ namespace Robber {
 					if (treasure.BoundingBox.Intersects(this.player.BoundingBox)) {
 						treasure.PickedUp = true;
 						this.player.CapturedTreasures++;
-						if (this.payDayDelay >= DELAY_PAY_DAY_EMOTE) {
-							SoundManager.getInstance().sfxEngine.playSoundEffect(this.payDaySfx);
-							this.payDayDelay = 0f;
-						}
 						SoundManager.getInstance().sfxEngine.playSoundEffect(this.treasureSfx, .5f);
 						break;
 					}
@@ -295,7 +292,7 @@ namespace Robber {
 				// HUD
 				this.treasure.LightColour = colour;
 				this.treasureText.LightColour = base.fadeIn(ResourceManager.TEXT_COLOUR);
-				this.timer.updateColours(base.fadeIn(ResourceManager.TEXT_COLOUR));
+				this.timer.updateColours(base.fadeIn(ResourceManager.TEXT_COLOUR), base.fadeIn(this.timer.ActiveTimeColour));
 			} else if (StateManager.getInstance().CurrentTransitionState == StateManager.TransitionState.TransitionOut) {
 				Color colour = base.fadeOut(Color.White);
 				this.mapWalls.updateColours(base.fadeOut(this.mapWalls.Colour));
@@ -318,7 +315,7 @@ namespace Robber {
 				// HUD
 				this.treasure.LightColour = colour;
 				this.treasureText.LightColour = base.fadeOut(ResourceManager.TEXT_COLOUR);
-				this.timer.updateColours(base.fadeOut(ResourceManager.TEXT_COLOUR));
+				this.timer.updateColours(base.fadeOut(ResourceManager.TEXT_COLOUR), base.fadeOut(this.timer.ActiveTimeColour));
 			}
 
 			// if our transition is up
@@ -343,7 +340,6 @@ namespace Robber {
 				}
 			}
 			#endregion Transitions
-			this.payDayDelay += elapsed;
 #if DEBUG
 			if (InputManager.getInstance().wasKeyPressed(Keys.D1)) {
 				this.showAI = !this.showAI;
@@ -352,7 +348,6 @@ namespace Robber {
 			} else if (InputManager.getInstance().wasKeyPressed(Keys.D3)) {
 				this.showWayPoints = !this.showWayPoints;
 			} else if (InputManager.getInstance().wasKeyPressed(Keys.R)) {
-				StateManager.getInstance().CurrentGameState = StateManager.GameState.Waiting;
 				reset();
 			}
 			// map editor
@@ -452,9 +447,7 @@ namespace Robber {
 			this.timer.dispose();
 
 			// sfxs
-			if (this.cantTouchThisSfx != null) {
-				this.cantTouchThisSfx.Dispose();
-			}
+			/*
 			if (this.introSfx != null) {
 				this.introSfx.Dispose();
 			}
@@ -472,7 +465,7 @@ namespace Robber {
 			}
 			if (this.dumpsterCloseSfx != null) {
 				this.dumpsterCloseSfx.Dispose();
-			}
+			}*/
 
 			// AI
 			AIManager.getInstance().dispose();

@@ -211,7 +211,9 @@ namespace Robber {
 			if (this.title != null) {
 				this.title.dispose();
 			}
-			if (this.introSfx != null) {
+			
+			//sfxs
+			/*if (this.introSfx != null) {
 				this.introSfx.Dispose();
 			}
 			if (this.outroSfx != null) {
@@ -221,7 +223,7 @@ namespace Robber {
 				foreach (SoundEffect sfx in this.idleSfxs) {
 					sfx.Dispose();
 				}
-			}
+			}*/
 		}
 		#endregion Destructor
 	}

@@ -146,7 +146,7 @@ namespace Robber {
 			}
 			if (StateManager.getInstance().CurrentTransitionState == StateManager.TransitionState.None) {
 				if (InputManager.getInstance().wasKeyPressed(Keys.Escape)) {
-					StateManager.getInstance().CurrentGameState = StateManager.getInstance().PreviousGameState;
+					StateManager.getInstance().CurrentGameState = StateManager.GameState.MainMenu;
 					StateManager.getInstance().CurrentTransitionState = StateManager.TransitionState.TransitionOut;
 				}
 			}
@@ -179,9 +179,12 @@ namespace Robber {
 			if (this.title != null) {
 				this.title.dispose();
 			}
+
+			// sfxs
+			/*
 			if (this.outroSfx != null) {
 				this.outroSfx.Dispose();
-			}
+			}*/
 		}
 		#endregion Destructor
 	}

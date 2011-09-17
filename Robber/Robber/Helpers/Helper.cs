@@ -5,10 +5,6 @@ using System.Text;
 using Microsoft.Xna.Framework;
 namespace Robber {
 	public static class Helper {
-		public static BoundingBox getSmallerBBox(Vector2 pos, float shrinkBy) {
-			return getSmallerBBox(pos, shrinkBy, shrinkBy);
-		}
-
 		public static BoundingBox getSmallerBBox(Vector2 pos, float shrinkBy, float extraPush) {
 			Vector2 min = new Vector2(pos.X - ResourceManager.TILE_SIZE / shrinkBy, pos.Y - ResourceManager.TILE_SIZE / shrinkBy + ResourceManager.TILE_SIZE / extraPush);
 			Vector2 max = new Vector2(pos.X + ResourceManager.TILE_SIZE / shrinkBy, pos.Y + ResourceManager.TILE_SIZE / shrinkBy + ResourceManager.TILE_SIZE / extraPush);

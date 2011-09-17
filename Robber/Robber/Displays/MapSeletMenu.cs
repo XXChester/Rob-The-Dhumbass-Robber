@@ -163,7 +163,7 @@ namespace Robber {
 			}
 			if (StateManager.getInstance().CurrentTransitionState == StateManager.TransitionState.None) {
 				if (InputManager.getInstance().wasKeyPressed(Keys.Escape)) {
-					StateManager.getInstance().CurrentGameState = StateManager.getInstance().PreviousGameState;
+					StateManager.getInstance().CurrentGameState = StateManager.GameState.ModeSelect;
 					StateManager.getInstance().CurrentTransitionState = StateManager.TransitionState.TransitionOut;
 				}
 			}

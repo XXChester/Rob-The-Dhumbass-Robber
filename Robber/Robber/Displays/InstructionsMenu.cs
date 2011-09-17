@@ -132,9 +132,13 @@ namespace Robber {
 			if (this.title != null) {
 				this.title.dispose();
 			}
+
+			//sfx
+			/*
 			if (this.outroSfx != null) {
 				this.outroSfx.Dispose();
 			}
+			 */
 		}
 		#endregion Destructor
 	}
