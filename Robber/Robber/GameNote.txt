@@ -98,6 +98,9 @@ Replace the programmer art with less crappy programmer art and make the game not
 [*]Change detection via timer sfx
 [*]Time colours based on remaining
 [*]Left pad timer so it is always positioned in the same spot
+[]Instead of a visual cinematic do the following
+	[]Alter intro SFX to include wood breaking etc at the beginning
+	[]On transition in have a particle emitter emit a couple dust particles
 
 ===========================
 		ISSUES
@@ -133,7 +136,7 @@ Replace the programmer art with less crappy programmer art and make the game not
 [*]Need a comparator for the maps directory. Default string one thinks the order should be Map1, Map10, Map2...etc
 [*]Getting caught and replaying via the replay button, you cannot start
 [*]Stationary guards don't activate if you are detected
-[]Treasure bounding boxes are not centered
+[*]Treasure bounding boxes are not centered
 
 
 ===========================
@@ -162,11 +165,11 @@ Most of these features were due to scope creep anyway
 ============================
 		Time
 ============================
-Planning: 2 hours		
+Planning: 2 hours		1:30pm-1:34pm
 Programming:	68.25 hours		
 Level Design(Including creating editor via scripting engine):	15 hours	
 Art: 10.25 hours			
-Sound:	3.75 hours		
+Sound:	4.25 hours		1:34pm-
 Deployment: .5 hours
 Alpha-testing:4 hours		
 Total Time:

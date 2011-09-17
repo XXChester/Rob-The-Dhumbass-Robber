@@ -27,7 +27,7 @@ namespace Robber {
 		private const string FIRST_PART = "Time Until";
 		private const string SECOND_PART = "Detection;";
 		private const string THIRD_PART = "Seconds";
-		private const string DETECTED_SFX_NAME = "Alarm";
+		public const string DETECTED_SFX_NAME = "Alarm";
 		public readonly Color HIGH_TIME = Color.Green;
 		public readonly Color MEDIUM_TIME = Color.Yellow;
 		public readonly Color LOW_TIME = Color.Red;
@@ -112,16 +112,11 @@ namespace Robber {
 			this.time -= elapsed;
 			if (this.time <= 0f) {
 				if (!AIManager.getInstance().PlayerDetected) {
-					SoundManager.getInstance().sfxEngine.playSoundEffect(this.guardsAlertedSfx);
+					SoundManager.getInstance().sfxEngine.playSoundEffect(this.guardsAlertedSfx, true);
 				}
 				//Alert the authorities
 				AIManager.getInstance().PlayerDetected = true;
 				this.timeText.WrittenText = "000.000";
-				if (!SoundManager.getInstance().sfxEngine.isPlaying(DETECTED_SFX_NAME) && 
-					StateManager.getInstance().CurrentGameState == StateManager.GameState.Active) {
-					// keep the alarm blaring until the player is caught
-					SoundManager.getInstance().sfxEngine.playSoundEffect(this.guardsAlertedSfx);
-				}
 			} else {
 				float seconds = this.time / 1000f;
 				this.timeText.WrittenText = padTimer() + seconds.ToString();

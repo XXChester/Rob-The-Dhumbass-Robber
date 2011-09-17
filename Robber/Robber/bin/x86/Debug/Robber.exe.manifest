@@ -105,24 +105,24 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Robber.exe" size="76288">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Robber.exe" size="76800">
       <assemblyIdentity name="Robber" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>3rDW4+yLvb7z+QgYGbBZEnb4jls=</dsig:DigestValue>
+        <dsig:DigestValue>3hQZ38L4/39Xl3GmCxK2p9dm+Ms=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
-  <file name="Content\Alarm.xnb" size="92265">
+  <file name="Content\Alarm.xnb" size="83477">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>R4NOmv4HUF5e829xglg4T3ZIHRU=</dsig:DigestValue>
+      <dsig:DigestValue>kfDS5j0gFx6E+q/uavBFBrTAvMo=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Content\BackGround1.xnb" size="1920187">
@@ -788,7 +788,7 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>2j3P67lmdwsluzfQo7lk9xeEIBY=</dsig:DigestValue>
+      <dsig:DigestValue>ebeKsaiwwAsGE0LInI/kfd1qHbc=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Maps\Map3.png" size="35470">

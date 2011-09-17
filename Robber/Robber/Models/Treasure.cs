@@ -33,7 +33,7 @@ namespace Robber {
 
 			float size = (float)(ResourceManager.TILE_SIZE / 2.5);
 			Vector2 bboxPositionMin = Vector2.Subtract(base.image.Position, new Vector2(size));
-			Vector2 bboxPositionMax = Vector2.Add(base.image.Position, new Vector2(size));
+			Vector2 bboxPositionMax = Vector2.Add(base.image.Position, new Vector2(size - 2, size));// x needs to be scaled in a bit
 			base.BoundingBox = Helper.getBBox(bboxPositionMin, bboxPositionMax);
 		}
 		#endregion Constructor

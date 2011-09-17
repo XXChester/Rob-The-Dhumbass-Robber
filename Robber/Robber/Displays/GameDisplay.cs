@@ -316,6 +316,11 @@ namespace Robber {
 				this.treasure.LightColour = colour;
 				this.treasureText.LightColour = base.fadeOut(ResourceManager.TEXT_COLOUR);
 				this.timer.updateColours(base.fadeOut(ResourceManager.TEXT_COLOUR), base.fadeOut(this.timer.ActiveTimeColour));
+
+				// if the alarm is blaring, turn it off
+				if (SoundManager.getInstance().sfxEngine.isPlaying(Timer.DETECTED_SFX_NAME)) {
+					SoundManager.getInstance().sfxEngine.stop(Timer.DETECTED_SFX_NAME);
+				}
 			}
 
 			// if our transition is up
