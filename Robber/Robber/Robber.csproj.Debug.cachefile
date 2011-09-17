@@ -43,6 +43,7 @@ Content\BasicDoubleLeft.xnb
 Content\BasicDoubleRight.xnb
 Content\BasicDoubleTop.xnb
 Content\BasicDoubleLeftExit.xnb
+Content\Dust1.xnb
 Content\Font.xnb
 Content\GuardsAlerted.xnb
 Content\Introduction.xnb
@@ -62,6 +63,7 @@ Content\OpenDoor.xnb
 Content\FootSteps.xnb
 Content\GuardDetection.xnb
 Content\Alarm.xnb
+Content\Dust1.png
 Maps\Map10.png
 Maps\Map10.xml
 Maps\Map9.png

@@ -16,7 +16,7 @@ namespace Robber {
 		private float elapsedEmittingTime;
 		private int lastUsedIndex;
 		private const float SPAWN_DELAY = 500f;
-		private const float TIME_TO_LIVE = 2000f;
+		private const float TIME_TO_LIVE = 2500f;
 		private readonly Color COLOUR = Color.LightGreen;
 		private readonly Random RANDOM;
 		private readonly Vector2 MOVEMENT_SPEED = new Vector2(0f, -20f / 1000);//speed per second
@@ -62,16 +62,8 @@ namespace Robber {
 					indexesUpForRemoval.Add(i);
 				}
 			}
-			for (int i = 0; i < indexesUpForRemoval.Count; i++) {
+			for (int i = indexesUpForRemoval.Count - 1; i >= 0; i--) {
 				this.questionMarkParticles.RemoveAt(indexesUpForRemoval[i]);
-			}
-
-			// update our existing particles positions
-			for (int i = 0; i < this.questionMarkParticles.Count; i++) {
-				smokeParticle = this.questionMarkParticles[i];
-				if (smokeParticle != null) {
-					smokeParticle.Position = smokeParticle.Position + (smokeParticle.Direction * elapsed);
-				}
 			}
 
 			// add any new particles if required

@@ -98,9 +98,9 @@ Replace the programmer art with less crappy programmer art and make the game not
 [*]Change detection via timer sfx
 [*]Time colours based on remaining
 [*]Left pad timer so it is always positioned in the same spot
-[]Instead of a visual cinematic do the following
-	[]Alter intro SFX to include wood breaking etc at the beginning
-	[]On transition in have a particle emitter emit a couple dust particles
+[*]Instead of a visual cinematic do the following
+	[*]Alter intro SFX to include wood breaking etc at the beginning
+	[*]On transition in have a particle emitter emit a couple dust particles
 
 ===========================
 		ISSUES
@@ -165,11 +165,11 @@ Most of these features were due to scope creep anyway
 ============================
 		Time
 ============================
-Planning: 2 hours		1:30pm-1:34pm
+Planning: 2 hours		1:30pm-1:34pm	2:30pm-2:37pm	2:53pm-3:33pm
 Programming:	68.25 hours		
 Level Design(Including creating editor via scripting engine):	15 hours	
-Art: 10.25 hours			
-Sound:	4.25 hours		1:34pm-
+Art: 10.25 hours			2:40pm-2:53pm
+Sound:	4.25 hours		1:34pm- 2:30pm
 Deployment: .5 hours
 Alpha-testing:4 hours		
 Total Time:

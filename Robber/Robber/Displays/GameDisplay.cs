@@ -32,6 +32,7 @@ namespace Robber {
 		private List<Point> entryExitPoints;
 		private Text2D treasureText;
 		private StaticDrawable2D treasure;
+		private DustParticleEmitter dustEmitter;
 		private SoundEffect guardDetectedSfx;
 		private SoundEffect introSfx;
 		private SoundEffect payDaySfx;
@@ -44,6 +45,7 @@ namespace Robber {
 		private bool showCD = false;
 		private bool showWayPoints = false;
 #endif
+		private const string LEVEL_ENTRY_SFX_NAME = "LevelEntry";
 		public const float BOARD_OFFSET_Y = 15f;
 		#endregion Class variables
 
@@ -93,8 +95,10 @@ namespace Robber {
 			staticParms.Texture = LoadingUtils.loadTexture2D(content, "Treasure1");
 			this.treasure = new StaticDrawable2D(staticParms);
 
+			this.dustEmitter = new DustParticleEmitter(content);
+
 			// load sound effects
-			this.introSfx = LoadingUtils.loadSoundEffect(content, "LevelEntry");
+			this.introSfx = LoadingUtils.loadSoundEffect(content, LEVEL_ENTRY_SFX_NAME);
 			this.payDaySfx = LoadingUtils.loadSoundEffect(content, "PayDay");
 			this.treasureSfx = LoadingUtils.loadSoundEffect(content, "TreasureCollect");
 			this.guardDetectedSfx = LoadingUtils.loadSoundEffect(content, "GuardDetection");
@@ -185,6 +189,7 @@ namespace Robber {
 			}
 			this.timer.reset(time);
 			this.treasureText.WrittenText = "x " + this.player.CapturedTreasures;
+			this.dustEmitter.PlayerPosition = Vector2.Add(this.player.Placement.worldPosition, new Vector2(ResourceManager.TILE_SIZE / 2, 0f));
 			StateManager.getInstance().CurrentGameState = StateManager.GameState.Waiting;
 		}
 
@@ -195,6 +200,7 @@ namespace Robber {
 			if (this.mapWalls != null) {
 				this.mapWalls.update(elapsed);
 			}
+			this.dustEmitter.update(elapsed);
 			Vector2 mousePos = InputManager.getInstance().MousePosition;
 			if (StateManager.getInstance().CurrentGameState == StateManager.GameState.Waiting) {
 				this.startButton.processActorsMovement(mousePos);
@@ -271,6 +277,16 @@ namespace Robber {
 			// Transitions
 			#region Transitions
 			if (StateManager.getInstance().CurrentTransitionState == StateManager.TransitionState.TransitionIn) {
+				// start our intro sound effect if we just started to transition
+				if (StateManager.getInstance().PreviousGameState == StateManager.GameState.MapSelection &&
+					!SoundManager.getInstance().sfxEngine.isPlaying(LEVEL_ENTRY_SFX_NAME)) {
+					StateManager.getInstance().CurrentGameState = StateManager.GameState.Waiting;
+					SoundManager.getInstance().sfxEngine.playSoundEffect(this.introSfx);
+					// initially create some particles
+					for (int i = 0; i < 100; i++) {
+						this.dustEmitter.createParticle();
+					}
+				}
 				Color colour = base.fadeIn(Color.White);
 				this.mapWalls.updateColours(base.fadeIn(this.mapWalls.Colour));
 				this.mapFloor.updateColours(base.fadeIn(this.mapFloor.Colour));
@@ -329,7 +345,6 @@ namespace Robber {
 					StateManager.getInstance().CurrentTransitionState = StateManager.TransitionState.None;
 					if (StateManager.getInstance().PreviousGameState == StateManager.GameState.MapSelection) {
 						StateManager.getInstance().CurrentGameState = StateManager.GameState.Waiting;
-						SoundManager.getInstance().sfxEngine.playSoundEffect(this.introSfx);
 					}
 				} else if (StateManager.getInstance().CurrentTransitionState == StateManager.TransitionState.TransitionOut) {
 					StateManager.getInstance().CurrentTransitionState = StateManager.TransitionState.TransitionIn;
@@ -382,6 +397,7 @@ namespace Robber {
 				(StateManager.getInstance().CurrentGameState == StateManager.GameState.InGameMenu && StateManager.getInstance().PreviousGameState == StateManager.GameState.Waiting)) {
 				this.startButton.render(spriteBatch);
 			}
+			this.dustEmitter.render(spriteBatch);
 #if DEBUG
 			if (this.showCD) {
 				Color debugColour = Color.Green;
@@ -450,6 +466,7 @@ namespace Robber {
 				this.treasure.dispose();
 			}
 			this.timer.dispose();
+			this.dustEmitter.dispose();
 
 			// sfxs
 			/*
