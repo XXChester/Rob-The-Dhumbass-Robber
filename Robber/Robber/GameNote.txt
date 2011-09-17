@@ -133,6 +133,7 @@ Replace the programmer art with less crappy programmer art and make the game not
 [*]Need a comparator for the maps directory. Default string one thinks the order should be Map1, Map10, Map2...etc
 [*]Getting caught and replaying via the replay button, you cannot start
 [*]Stationary guards don't activate if you are detected
+[]Treasure bounding boxes are not centered
 
 
 ===========================

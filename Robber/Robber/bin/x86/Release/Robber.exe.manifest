@@ -112,7 +112,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>MUbYsRFcLHgxZx9l66Ga8GXOYcM=</dsig:DigestValue>
+        <dsig:DigestValue>HzC4KxLQK6wnDxs0Vz/58/WP0G8=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -788,7 +788,7 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>ebeKsaiwwAsGE0LInI/kfd1qHbc=</dsig:DigestValue>
+      <dsig:DigestValue>2j3P67lmdwsluzfQo7lk9xeEIBY=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Maps\Map3.png" size="35470">

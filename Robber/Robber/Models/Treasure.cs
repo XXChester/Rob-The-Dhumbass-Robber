@@ -28,8 +28,13 @@ namespace Robber {
 
 		#region Constructor
 		public Treasure(ContentManager content, string textureName, Placement startingPlacement)
-			: base(content, textureName, startingPlacement, true) {
-				this.pickedUp = false;
+			: base(content, textureName, startingPlacement) {
+			this.pickedUp = false;
+
+			float size = (float)(ResourceManager.TILE_SIZE / 2.5);
+			Vector2 bboxPositionMin = Vector2.Subtract(base.image.Position, new Vector2(size));
+			Vector2 bboxPositionMax = Vector2.Add(base.image.Position, new Vector2(size));
+			base.BoundingBox = Helper.getBBox(bboxPositionMin, bboxPositionMax);
 		}
 		#endregion Constructor
 

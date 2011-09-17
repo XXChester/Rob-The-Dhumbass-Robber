@@ -32,13 +32,17 @@ namespace Robber {
 
 		#region Constructor
 		public Dumpster(ContentManager content, string openDumpsterTextureName, string closedDumpsterTextureName, Placement startingPlacement)
-			: base(content, openDumpsterTextureName, startingPlacement, false) {
+			: base(content, openDumpsterTextureName, startingPlacement) {
 			this.acceptingOccupants = true;
 			StaticDrawable2DParams parms = new StaticDrawable2DParams();
 			parms.Texture = LoadingUtils.loadTexture2D(content, closedDumpsterTextureName);
 			parms.Origin = new Vector2(ResourceManager.TILE_SIZE / 2f);
 			parms.Position = new Vector2(startingPlacement.worldPosition.X + parms.Origin.X, startingPlacement.worldPosition.Y + parms.Origin.Y);
 			this.closedDumpster = new StaticDrawable2D(parms);
+
+			Vector2 bboxPositionMin = startingPlacement.worldPosition;
+			Vector2 bboxPositionMax = Vector2.Add(startingPlacement.worldPosition, new Vector2(ResourceManager.TILE_SIZE));
+			base.BoundingBox = Helper.getBBox(bboxPositionMin, bboxPositionMax);
 		}
 		#endregion Constructor
 

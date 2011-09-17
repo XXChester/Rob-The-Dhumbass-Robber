@@ -12,7 +12,7 @@ using GWNorthEngine.Model;
 using GWNorthEngine.Model.Params;
 using GWNorthEngine.Utils;
 namespace Robber {
-	public class Item {
+	public abstract class Item {
 		#region Class variables
 		protected StaticDrawable2D image;
 		private Placement placement;
@@ -23,23 +23,13 @@ namespace Robber {
 		#endregion Class properties
 
 		#region Constructor
-		public Item(ContentManager content, string textureName, Placement startingPlacement, bool smallBoundingBox) {
+		public Item(ContentManager content, string textureName, Placement startingPlacement) {
 			StaticDrawable2DParams parms = new StaticDrawable2DParams();
 			parms.Texture = LoadingUtils.loadTexture2D(content, textureName);
 			parms.Origin = new Vector2(ResourceManager.TILE_SIZE / 2f);
 			parms.Position = new Vector2(startingPlacement.worldPosition.X + parms.Origin.X, startingPlacement.worldPosition.Y + parms.Origin.Y);
 			this.image = new StaticDrawable2D(parms);
 			this.placement = startingPlacement;
-			if (smallBoundingBox) {
-				float size = (float)(ResourceManager.TILE_SIZE / 2.5);
-				Vector2 bboxPositionMin = Vector2.Subtract(parms.Position, new Vector2(size));
-				Vector2 bboxPositionMax = Vector2.Add(parms.Position, new Vector2(size));
-				this.BoundingBox = Helper.getBBox(bboxPositionMin, bboxPositionMax);
-			} else {
-				Vector2 bboxPositionMin = startingPlacement.worldPosition;
-				Vector2 bboxPositionMax = Vector2.Add(startingPlacement.worldPosition, new Vector2(ResourceManager.TILE_SIZE));
-				this.BoundingBox = Helper.getBBox(bboxPositionMin, bboxPositionMax);
-			}
 		}
 		#endregion Constructor
 
