@@ -165,11 +165,11 @@ Most of these features were due to scope creep anyway
 ============================
 		Time
 ============================
-Planning: 2 hours		1:30pm-1:34pm	2:30pm-2:37pm	2:53pm-3:33pm
-Programming:	68.25 hours		
+Planning: 2 hours		
+Programming:	70 hours		
 Level Design(Including creating editor via scripting engine):	15 hours	
-Art: 10.25 hours			2:40pm-2:53pm
-Sound:	4.25 hours		1:34pm- 2:30pm
+Art: 10.5 hours	
+Sound:	5.25 hours	
 Deployment: .5 hours
 Alpha-testing:4 hours		
 Total Time:

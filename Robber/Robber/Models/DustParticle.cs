@@ -4,8 +4,8 @@ using GWNorthEngine.Model.Params;
 namespace Robber {
 	public class DustParticle : BaseParticle2D {
 		#region Class variables
-		private readonly Vector2 SCALE_BY = new Vector2(1f / 1000f, .75f / 1000f);//scale per second
-		private readonly float ROTATION_SPEED = 20f / 1000f;//rotation per second
+		private readonly Vector2 SCALE_BY = new Vector2(100f / 1000f, 100f / 1000f);//scale per second
+		private readonly float ROTATION_SPEED = 50f / 1000f;//rotation per second
 		#endregion Class variables
 
 		#region Constructor

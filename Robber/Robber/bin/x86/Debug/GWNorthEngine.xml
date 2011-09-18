@@ -482,6 +482,21 @@
             <param name="value">string version of the data</param>
             <returns>Object translated to</returns>
         </member>
+        <member name="T:GWNorthEngine.Model.Params.BaseParticle2DEmitterParams">
+            <summary>
+            Object containing the data required to build a BaseParticle2DEmitter object
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Params.BaseParticle2DEmitterParams.SpawnDelay">
+            <summary>
+            Gets or sets the rate which a particle should be created at
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Params.BaseParticle2DEmitterParams.ParticleTexture">
+            <summary>
+            Gets or sets the texture used for particle generation
+            </summary>
+        </member>
         <member name="T:GWNorthEngine.Model.Params.ColouredButtonParams">
             <summary>
             Params object containing the data required to build a coloured button
@@ -2170,6 +2185,69 @@
             </summary>
             <param name="parent">Parent node of the new nodes to be processed</param>
             <param name="parentsIndex">Index of the parent in the open list</param>
+        </member>
+        <member name="T:GWNorthEngine.Model.BaseParticle2DEmitter">
+            <summary>
+            Models the basis of every particle emitter
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Model.BaseParticle2DEmitter.elapsedSpawnTime">
+            <summary>
+            Elapsed time since the last particle was spawned
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Model.BaseParticle2DEmitter.spawnDelay">
+            <summary>
+            Spawn delay to create new particles
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Model.BaseParticle2DEmitter.particleTexture">
+            <summary>
+            Texture the particles are using
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Model.BaseParticle2DEmitter.particleParams">
+            <summary>
+            Basic params object used to create the particle
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Model.BaseParticle2DEmitter.particles">
+            <summary>
+            List of emitted particles
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Model.BaseParticle2DEmitter.RANDOM">
+            <summary>
+            Random number generator
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Model.BaseParticle2DEmitter.#ctor(GWNorthEngine.Model.Params.BaseParticle2DEmitterParams)">
+            <summary>
+            Builds the base particle emitter
+            </summary>
+            <param name="parms">BaseParticle2DEmitterParams object containing the data required to build the particle emitter</param>
+        </member>
+        <member name="M:GWNorthEngine.Model.BaseParticle2DEmitter.createParticle">
+            <summary>
+            Default implementation of creating a particle...default implementation is setting the elapsedSpawnTime back to 0f;
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Model.BaseParticle2DEmitter.update(System.Single)">
+            <summary>
+            Updates the particle emitter and its particles. Also handles the removal of old particles
+            </summary>
+            <param name="elapsed"></param>
+        </member>
+        <member name="M:GWNorthEngine.Model.BaseParticle2DEmitter.render(Microsoft.Xna.Framework.Graphics.SpriteBatch)">
+            <summary>
+            Renders the emitters active particles
+            </summary>
+            <param name="spriteBatch"></param>
+        </member>
+        <member name="M:GWNorthEngine.Model.BaseParticle2DEmitter.dispose">
+            <summary>
+            Disposes of the emitters texture used to generate the particles
+            </summary>
         </member>
         <member name="T:GWNorthEngine.Engine.Params.BaseRendererParams">
             <summary>

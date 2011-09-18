@@ -7,18 +7,13 @@ using GWNorthEngine.Model;
 using GWNorthEngine.Model.Params;
 using GWNorthEngine.Utils;
 namespace Robber {
-	public class DustParticleEmitter : IRenderable {
+	public class DustParticleEmitter : BaseParticle2DEmitter {
 		#region Class variables
-		private Texture2D particleTexture;
-		private BaseParticle2DParams particleParms;
 		private List<QuestionMarkParticle> dustParticles;
-		private float elapsedSpawnTime;
-		private float elapsedEmittingTime;
-		private const float SPAWN_DELAY = 10f;
-		private const float TIME_TO_LIVE = 2000f;
 		private readonly Color COLOUR = new Color(210, 200, 190);
-		private readonly Random RANDOM;
+		private const float TIME_TO_LIVE = 2000f;
 		private const int MAX_RANGE_FROM_EMITTER = 32;
+		public const float SPAWN_DELAY = 10f;
 		#endregion Class variables
 
 		#region Class properties
@@ -26,23 +21,20 @@ namespace Robber {
 		#endregion Class properties
 
 		#region Constructor
-		public DustParticleEmitter(ContentManager content) {
-			this.particleTexture = LoadingUtils.loadTexture2D(content, "Dust1");
-			this.particleParms = new BaseParticle2DParams();
-			this.particleParms.Scale = new Vector2(.25f);
-			this.particleParms.Origin = new Vector2(32f, 32f);
-			this.particleParms.Texture = this.particleTexture;
-			this.particleParms.LightColour = COLOUR;
-			this.particleParms.TimeToLive = TIME_TO_LIVE;
-			this.dustParticles = new List<QuestionMarkParticle>();
-			this.elapsedSpawnTime = SPAWN_DELAY;
-			this.elapsedEmittingTime = 0f;
-			this.RANDOM = new Random();
+		public DustParticleEmitter(BaseParticle2DEmitterParams parms)
+			:base(parms) {
+			BaseParticle2DParams particleParams = new BaseParticle2DParams();
+			particleParams.Scale = new Vector2(.25f);
+			particleParams.Origin = new Vector2(32f, 32f);
+			particleParams.Texture = parms.ParticleTexture;
+			particleParams.LightColour = COLOUR;
+			particleParams.TimeToLive = TIME_TO_LIVE;
+			base.particleParams = particleParams;
 		}
 		#endregion Constructor
 
 		#region Support methods
-		public void createParticle() {
+		public override void createParticle() {
 			int positionX = this.RANDOM.Next(MAX_RANGE_FROM_EMITTER);
 			int positionY = this.RANDOM.Next(MAX_RANGE_FROM_EMITTER);
 			int directionX = this.RANDOM.Next(2);
@@ -60,44 +52,10 @@ namespace Robber {
 				y = PlayerPosition.Y - positionY;
 			}
 
-			this.particleParms.Position = new Vector2(x, y);
-			this.dustParticles.Add(new QuestionMarkParticle(this.particleParms));
-			this.elapsedSpawnTime = 0f;
-		}
-
-		public void update(float elapsed) {
-			this.elapsedSpawnTime += elapsed;
-			this.elapsedEmittingTime += elapsed;
-			List<int> indexesUpForRemoval = new List<int>();
-			BaseParticle2D smokeParticle = null;
-			for (int i = 0; i < this.dustParticles.Count; i++) {
-				smokeParticle = this.dustParticles[i];
-				smokeParticle.update(elapsed);
-				if (smokeParticle.TimeAlive >= smokeParticle.TimeToLive) {
-					// mark the particle for removal to avoid concurrent access violations
-					indexesUpForRemoval.Add(i);
-				}
-			}
-			for (int i = indexesUpForRemoval.Count - 1; i >= 0; i--) {
-				this.dustParticles.RemoveAt(indexesUpForRemoval[i]);
-			}
-		}
-
-		public void render(SpriteBatch spriteBatch) {
-			if (this.dustParticles != null) {
-				foreach (BaseParticle2D smokeParticle in this.dustParticles) {
-					smokeParticle.render(spriteBatch);
-				}
-			}
+			base.particleParams.Position = new Vector2(x, y);
+			base.particles.Add(new QuestionMarkParticle(base.particleParams));
+			base.createParticle();
 		}
 		#endregion Support methods
-
-		#region Destructor
-		public void dispose() {
-			if (this.particleTexture != null) {
-				this.particleTexture.Dispose();
-			}
-		}
-		#endregion Destructor
 	}
 }

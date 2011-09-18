@@ -95,7 +95,11 @@ namespace Robber {
 			staticParms.Texture = LoadingUtils.loadTexture2D(content, "Treasure1");
 			this.treasure = new StaticDrawable2D(staticParms);
 
-			this.dustEmitter = new DustParticleEmitter(content);
+			//dust particle emitter
+			BaseParticle2DEmitterParams particleEmitterParams = new BaseParticle2DEmitterParams();
+			particleEmitterParams.ParticleTexture = LoadingUtils.loadTexture2D(content, "Dust1");
+			particleEmitterParams.SpawnDelay = DustParticleEmitter.SPAWN_DELAY;
+			this.dustEmitter = new DustParticleEmitter(particleEmitterParams);
 
 			// load sound effects
 			this.introSfx = LoadingUtils.loadSoundEffect(content, LEVEL_ENTRY_SFX_NAME);

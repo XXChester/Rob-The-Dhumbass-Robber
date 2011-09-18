@@ -64,7 +64,10 @@ namespace Robber {
 			this.backGround = new StaticDrawable2D(staticParms);
 
 			// setup the particle emitter
-			this.particleEmitter = new QuestionMarkEmitter(content);
+			BaseParticle2DEmitterParams particleEmitterParams = new BaseParticle2DEmitterParams();
+			particleEmitterParams.ParticleTexture = LoadingUtils.loadTexture2D(content, "QuestionParticle");
+			particleEmitterParams.SpawnDelay = QuestionMarkEmitter.SPAWN_DELAY;
+			this.particleEmitter = new QuestionMarkEmitter(particleEmitterParams);
 			
 		}
 		#endregion Constructor

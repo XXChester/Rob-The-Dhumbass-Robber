@@ -93,26 +93,26 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="GWNorthEngine.dll" size="67072">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="GWNorthEngine.dll" size="68096">
       <assemblyIdentity name="GWNorthEngine" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>bea1YI6PYudaT0jeq4QwMyCvSN8=</dsig:DigestValue>
+        <dsig:DigestValue>XOvqJYzsPEV3HPI8OcP4ODYu5/k=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Robber.exe" size="68096">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Robber.exe" size="68608">
       <assemblyIdentity name="Robber" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>Y/M0R+Tm2Z8Az7q0diHlwagFOqY=</dsig:DigestValue>
+        <dsig:DigestValue>pAQ5w9wMzTC4GKp+0qNwy5UvhJc=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -321,6 +321,24 @@
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
       <dsig:DigestValue>Tnfx2+0cH2zVkHo+H2ZeLDY2Gv4=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Content\Dust1.png" size="2248">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>e7gINPOIM70Wq+t9qP2CCCYwvgA=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Content\Dust1.xnb" size="1892">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>vxOz9Hef8oYqOrbeaxPaHqq633k=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Content\ExitTile.xnb" size="838">
@@ -788,7 +806,7 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>ebeKsaiwwAsGE0LInI/kfd1qHbc=</dsig:DigestValue>
+      <dsig:DigestValue>2j3P67lmdwsluzfQo7lk9xeEIBY=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Maps\Map3.png" size="35470">
