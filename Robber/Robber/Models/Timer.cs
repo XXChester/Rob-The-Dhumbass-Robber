@@ -75,17 +75,34 @@ namespace Robber {
 		#endregion Constructor
 
 		#region Support methods
-		private string padTimer() {
-			string padding = "";
-			int s1 = (int)(this.time / 1000f);
-			string s2 = ((int)(this.time / 1000f)).ToString();
-			int s3 = s2.Length;
+		private string formatTimer() {
+			float seconds = this.time / 1000f;
+			// Strings are mutable so use a StringBuilder as it is faster and cheaper
+			StringBuilder sb = new StringBuilder();
+			// left padding
 			int timeLength = ((int)(this.time / 1000f)).ToString().Length;
 			int paddingRequired = 3 - timeLength;// we always want a 6 digit timer
 			for (int i = 0; i < paddingRequired; i++) {
-				padding += "0";
+				sb.Append("0");
 			}
-			return padding;
+
+			sb.Append(seconds.ToString());
+
+			// right padding
+			string localTime = (this.time / 1000f).ToString();
+			if (localTime.IndexOf('.') != -1) {
+				timeLength = localTime.Substring(localTime.IndexOf('.') + 1).Length;
+				paddingRequired = 3 - timeLength;
+			} else {// no decimal so pad 3
+				sb.Append(".");// need to add the decimal
+				paddingRequired = 3;
+			}
+
+			for (int i = 0; i < paddingRequired; i++) {
+				sb.Append("0");
+			}
+
+			return sb.ToString();
 		}
 
 		public void updateColours(Color textColour, Color timeColour) {
@@ -100,26 +117,26 @@ namespace Robber {
 			this.initialTime = this.time;
 			float seconds = this.time / 1000f;
 			if (this.time % 1000f == 0f) {
-				this.timeText.WrittenText = padTimer() + seconds.ToString() + ".000";
+				this.timeText.WrittenText = formatTimer();
 			} else {
-				this.timeText.WrittenText = padTimer() + seconds.ToString();
+				this.timeText.WrittenText = formatTimer();
 			}
 			this.activeTimeColour = HIGH_TIME;
 			this.timeText.LightColour = this.activeTimeColour;
 		}
 
 		public void update(float elapsed) {
-			this.time -= elapsed;
+			this.time = MathHelper.Clamp(this.time - elapsed, 0f, this.time);// add the elapsed to the timer but ensure we do not negate past 0
 			if (this.time <= 0f) {
 				if (!AIManager.getInstance().PlayerDetected) {
 					SoundManager.getInstance().sfxEngine.playSoundEffect(this.guardsAlertedSfx, true);
 				}
 				//Alert the authorities
 				AIManager.getInstance().PlayerDetected = true;
-				this.timeText.WrittenText = "000.000";
+				this.timeText.WrittenText = formatTimer();
 			} else {
 				float seconds = this.time / 1000f;
-				this.timeText.WrittenText = padTimer() + seconds.ToString();
+				this.timeText.WrittenText = formatTimer();
 				float factor = this.initialTime / this.time;
 				if (factor >= 3f) {
 					this.activeTimeColour = LOW_TIME;

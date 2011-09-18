@@ -2249,6 +2249,11 @@
             Disposes of the emitters texture used to generate the particles
             </summary>
         </member>
+        <member name="P:GWNorthEngine.Model.BaseParticle2DEmitter.Particles">
+            <summary>
+            Gets or sets the emitters particle list
+            </summary>
+        </member>
         <member name="T:GWNorthEngine.Engine.Params.BaseRendererParams">
             <summary>
             Object containing the data required to build the BaseRenderer

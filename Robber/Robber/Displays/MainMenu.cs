@@ -162,6 +162,8 @@ namespace Robber {
 				}
 				this.backGround.LightColour = base.fadeOut(Color.White);
 				this.title.LightColour = base.fadeOut(Color.White);
+				//reset the idle timer
+				this.timeIdle = 0f;
 			}
 			// if our transition time is up change our state
 			if (base.transitionTimeElapsed()) {
@@ -171,6 +173,7 @@ namespace Robber {
 					StateManager.getInstance().CurrentTransitionState = StateManager.TransitionState.TransitionIn;
 				}
 			}
+
 			this.timeIdle += elapsed;
 			if (this.timeIdle >= PLAY_IDLE_AT) {
 				Random rand = new Random();

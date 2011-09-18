@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1">
-  <asmv1:assemblyIdentity name="Robber.exe" version="1.0.0.18" publicKeyToken="0000000000000000" language="en" processorArchitecture="x86" type="win32" />
+  <asmv1:assemblyIdentity name="Robber.exe" version="2.0.0.19" publicKeyToken="0000000000000000" language="en" processorArchitecture="x86" type="win32" />
   <description asmv2:iconFile="Game.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
@@ -93,26 +93,26 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="GWNorthEngine.dll" size="68096">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="GWNorthEngine.dll" size="68608">
       <assemblyIdentity name="GWNorthEngine" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>XOvqJYzsPEV3HPI8OcP4ODYu5/k=</dsig:DigestValue>
+        <dsig:DigestValue>H6RwShilPMCDUJf4+e54TpH0mOI=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Robber.exe" size="68608">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Robber.exe" size="69120">
       <assemblyIdentity name="Robber" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>pAQ5w9wMzTC4GKp+0qNwy5UvhJc=</dsig:DigestValue>
+        <dsig:DigestValue>fLb95oPYhpmHU8yvr5uim4NPrdQ=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -755,7 +755,7 @@
       <dsig:DigestValue>U8axUHZAmKFZ/TFcH8PJj1dlU6g=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Maps\Map10.xml" size="65414" writeableType="applicationData">
+  <file name="Maps\Map10.xml" size="65414">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
@@ -764,7 +764,7 @@
       <dsig:DigestValue>peOjxUMFrgG9Qg+T7nMm8XBFmV8=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Maps\Map10Identifiers.xml" size="4175" writeableType="applicationData">
+  <file name="Maps\Map10Identifiers.xml" size="4175">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
@@ -845,7 +845,7 @@
       <dsig:DigestValue>fvCzVPmP5ijV7QskTZ2PEw513fk=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Maps\Map4.xml" size="55283" writeableType="applicationData">
+  <file name="Maps\Map4.xml" size="55283">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
@@ -854,7 +854,7 @@
       <dsig:DigestValue>qZGoWvf02gHiw+hCJYHVos4HAOc=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Maps\Map4Identifiers.xml" size="2715" writeableType="applicationData">
+  <file name="Maps\Map4Identifiers.xml" size="2715">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
@@ -872,7 +872,7 @@
       <dsig:DigestValue>T8bB6Ff6VugKEXhhZ9Y6mqxpWOQ=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Maps\Map5.xml" size="56554" writeableType="applicationData">
+  <file name="Maps\Map5.xml" size="56554">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
@@ -881,7 +881,7 @@
       <dsig:DigestValue>QIRR+7U2rz3uif8X9Pbrjg0Y71M=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Maps\Map5Identifiers.xml" size="3479" writeableType="applicationData">
+  <file name="Maps\Map5Identifiers.xml" size="3479">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
@@ -899,7 +899,7 @@
       <dsig:DigestValue>t5tLxFBAnN5cLh2sej8aqOW7wTQ=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Maps\Map6.xml" size="57374" writeableType="applicationData">
+  <file name="Maps\Map6.xml" size="57374">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
@@ -908,7 +908,7 @@
       <dsig:DigestValue>+OJtZGd6IHeTENLQStOVEbOjEmU=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Maps\Map6Identifiers.xml" size="2627" writeableType="applicationData">
+  <file name="Maps\Map6Identifiers.xml" size="2627">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
@@ -926,7 +926,7 @@
       <dsig:DigestValue>YjQvJ2Q1AyMyAxbLG4a2k2alZfg=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Maps\Map7.xml" size="62839" writeableType="applicationData">
+  <file name="Maps\Map7.xml" size="62839">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
@@ -935,7 +935,7 @@
       <dsig:DigestValue>oBUOdUxnZK1LNPsaOE5BCYpN8Wk=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Maps\Map7Identifiers.xml" size="4797" writeableType="applicationData">
+  <file name="Maps\Map7Identifiers.xml" size="4797">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
@@ -953,7 +953,7 @@
       <dsig:DigestValue>nzXDhKmqbsTmlflBwaDr48Etm2k=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Maps\Map8.xml" size="61013" writeableType="applicationData">
+  <file name="Maps\Map8.xml" size="61013">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
@@ -962,7 +962,7 @@
       <dsig:DigestValue>Cr2npGOlwsu9XYBGwZYMJ1d2gB8=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Maps\Map8Identifiers.xml" size="2600" writeableType="applicationData">
+  <file name="Maps\Map8Identifiers.xml" size="2600">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
@@ -980,7 +980,7 @@
       <dsig:DigestValue>Lz2yi3DnB11s8ppoXAacIQJusb8=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Maps\Map9.xml" size="62495" writeableType="applicationData">
+  <file name="Maps\Map9.xml" size="62495">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
@@ -989,7 +989,7 @@
       <dsig:DigestValue>KvdW/YEBrJuMNxgJ/ehs90lN3wQ=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Maps\Map9Identifiers.xml" size="3498" writeableType="applicationData">
+  <file name="Maps\Map9Identifiers.xml" size="3498">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />

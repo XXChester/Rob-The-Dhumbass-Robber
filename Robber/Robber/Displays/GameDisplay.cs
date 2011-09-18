@@ -332,6 +332,8 @@ namespace Robber {
 					this.startButton.updateColours(base.fadeOut(ResourceManager.MOUSE_OVER_COLOUR));
 				}
 
+				this.dustEmitter.updateColours(base.fadeOut(DustParticleEmitter.COLOUR));
+
 				// HUD
 				this.treasure.LightColour = colour;
 				this.treasureText.LightColour = base.fadeOut(ResourceManager.TEXT_COLOUR);
@@ -352,6 +354,8 @@ namespace Robber {
 					}
 				} else if (StateManager.getInstance().CurrentTransitionState == StateManager.TransitionState.TransitionOut) {
 					StateManager.getInstance().CurrentTransitionState = StateManager.TransitionState.TransitionIn;
+					// clear out the particles
+					this.dustEmitter.Particles.Clear();
 				}
 			}
 

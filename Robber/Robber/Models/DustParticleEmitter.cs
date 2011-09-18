@@ -9,11 +9,10 @@ using GWNorthEngine.Utils;
 namespace Robber {
 	public class DustParticleEmitter : BaseParticle2DEmitter {
 		#region Class variables
-		private List<QuestionMarkParticle> dustParticles;
-		private readonly Color COLOUR = new Color(210, 200, 190);
-		private const float TIME_TO_LIVE = 2000f;
+		private const float TIME_TO_LIVE = 4000f;
 		private const int MAX_RANGE_FROM_EMITTER = 32;
 		public const float SPAWN_DELAY = 10f;
+		public static Color COLOUR = new Color(210, 200, 190);
 		#endregion Class variables
 
 		#region Class properties
@@ -34,6 +33,14 @@ namespace Robber {
 		#endregion Constructor
 
 		#region Support methods
+		public void updateColours(Color colour) {
+			if (base.particles != null) {
+				foreach (BaseParticle2D particle in base.particles) {
+					particle.LightColour = colour;
+				}
+			}
+		}
+
 		public override void createParticle() {
 			int positionX = this.RANDOM.Next(MAX_RANGE_FROM_EMITTER);
 			int positionY = this.RANDOM.Next(MAX_RANGE_FROM_EMITTER);

@@ -137,6 +137,10 @@ Replace the programmer art with less crappy programmer art and make the game not
 [*]Getting caught and replaying via the replay button, you cannot start
 [*]Stationary guards don't activate if you are detected
 [*]Treasure bounding boxes are not centered
+[*]Map3 timer is not in 6 digits in time attack on load
+[*]Fast transitions from map to map will show the previous maps dust particles
+[*]Idle SFX's timer does not reset to 0f on transition away so if I wait 18seconds than come back an idle sfx fires right away
+[*]Dust does not transition out
 
 
 ===========================
@@ -166,11 +170,11 @@ Most of these features were due to scope creep anyway
 		Time
 ============================
 Planning: 2 hours		
-Programming:	70 hours		
+Programming:	70.5 hours
 Level Design(Including creating editor via scripting engine):	15 hours	
 Art: 10.5 hours	
 Sound:	5.25 hours	
 Deployment: .5 hours
-Alpha-testing:4 hours		
+Alpha-testing:4.5 hours	
 Total Time:
 	
