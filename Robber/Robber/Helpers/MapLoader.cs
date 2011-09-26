@@ -92,14 +92,14 @@ namespace Robber {
 			});
 
 			// load the AI for the map
-			PathFinder.TypeOfSpace[,] aiSpaceTypes = new PathFinder.TypeOfSpace[height, width];
+			BasePathFinder.TypeOfSpace[,] aiSpaceTypes = new BasePathFinder.TypeOfSpace[height, width];
 			for (int y = 0; y < height; y++) {
 				for (int x = 0; x < width; x++) {
 					// override so the AI can walk the outter wall
 					if (wallTiles[y, x] != null && mapAsUnwalkable(wallTiles[y, x].Texture.Name, y, x, height, width)) {
 						aiSpaceTypes[y, x] = Translator.translateTileValueToAStarType(wallTiles[y, x].TileValue);
 					} else {
-						aiSpaceTypes[y, x] = PathFinder.TypeOfSpace.Walkable;
+						aiSpaceTypes[y, x] = BasePathFinder.TypeOfSpace.Walkable;
 					}
 				}
 			}

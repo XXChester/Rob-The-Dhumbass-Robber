@@ -175,56 +175,6 @@
             Gets or sets the end position of the line
             </summary>
         </member>
-        <member name="T:GWNorthEngine.AI.AStar.BaseCosts">
-            <summary>
-            Base governing implementation of the cost module for determining tiles costs
-            </summary>
-        </member>
-        <member name="M:GWNorthEngine.AI.AStar.BaseCosts.#ctor(System.Single)">
-            <summary>
-            Builsd the basic cost class
-            </summary>
-            <param name="diagonalMultiplier">Multiplier used for diagonal movement determination</param>
-        </member>
-        <member name="M:GWNorthEngine.AI.AStar.BaseCosts.getDiagonalCost(System.Int32)">
-            <summary>
-            Determines the diagonal cost associated with a tile
-            </summary>
-            <param name="currentPositionsCost">Value if the tile were a straight move not a diagonal move</param>
-            <returns>Diagonal cost of the tile</returns>
-        </member>
-        <member name="M:GWNorthEngine.AI.AStar.BaseCosts.getCost(GWNorthEngine.AI.AStar.PathFinder.TypeOfSpace)">
-            <summary>
-            Determines the cost of a tile based on its type
-            </summary>
-            <param name="space"></param>
-            <returns></returns>
-        </member>
-        <member name="P:GWNorthEngine.AI.AStar.BaseCosts.StandardCost">
-            <summary>
-            Cost of a standard Walkable tile
-            </summary>
-        </member>
-        <member name="P:GWNorthEngine.AI.AStar.BaseCosts.VariableTerrainLowCost">
-            <summary>
-            Cost of a Variable Terrain Low Cost tile
-            </summary>
-        </member>
-        <member name="P:GWNorthEngine.AI.AStar.BaseCosts.VariableTerrainMediumCost">
-            <summary>
-            Cost of a Variable Terrain Medium Cost tile
-            </summary>
-        </member>
-        <member name="P:GWNorthEngine.AI.AStar.BaseCosts.VariableTerrainHighCost">
-            <summary>
-            Cost of a Variable Terrain High Cost tile
-            </summary>
-        </member>
-        <member name="P:GWNorthEngine.AI.AStar.BaseCosts.DiagonalMultiplier">
-            <summary>
-            Gets or sets the Diagonal Multiplier used for determining the cost of diagonal moves
-            </summary>
-        </member>
         <member name="T:GWNorthEngine.Utils.LoadingUtils">
             <summary>
             Contains helper methods for loading data from the file system
@@ -532,214 +482,59 @@
             Gets or sets the Texts position
             </summary>
         </member>
-        <member name="T:GWNorthEngine.AI.AStar.PathFinder">
-            <summary>
-            Abstract class containing the common information for basic A* Pathfinding
-            </summary>
-        </member>
-        <member name="F:GWNorthEngine.AI.AStar.PathFinder.HEIGHT">
-            <summary>
-            Height of the board
-            </summary>
-        </member>
-        <member name="F:GWNorthEngine.AI.AStar.PathFinder.WIDTH">
-            <summary>
-            Width of the board
-            </summary>
-        </member>
-        <member name="F:GWNorthEngine.AI.AStar.PathFinder.directions">
-            <summary>
-            Directions we can generate moves in
-            </summary>
-        </member>
-        <member name="F:GWNorthEngine.AI.AStar.PathFinder.board">
-            <summary>
-            A* readable board representation
-            </summary>
-        </member>
-        <member name="F:GWNorthEngine.AI.AStar.PathFinder.openList">
-            <summary>
-            List of open nodes
-            </summary>
-        </member>
-        <member name="F:GWNorthEngine.AI.AStar.PathFinder.closedList">
-            <summary>
-            List of closed nodes
-            </summary>
-        </member>
-        <member name="F:GWNorthEngine.AI.AStar.PathFinder.path">
-            <summary>
-            Path to the target from the starting position
-            </summary>
-        </member>
-        <member name="F:GWNorthEngine.AI.AStar.PathFinder.end">
-            <summary>
-            Ending position in the board[,]
-            </summary>
-        </member>
-        <member name="F:GWNorthEngine.AI.AStar.PathFinder.start">
-            <summary>
-            Starting position in the board[,]
-            </summary>
-        </member>
-        <member name="F:GWNorthEngine.AI.AStar.PathFinder.tieBreakerRandom">
-            <summary>
-            Random number generator used to break ties in the path
-            </summary>
-        </member>
-        <member name="F:GWNorthEngine.AI.AStar.PathFinder.restrictionType">
-            <summary>
-            Type of restriction against the board on moves that we can generate
-            </summary>
-        </member>
-        <member name="F:GWNorthEngine.AI.AStar.PathFinder.costs">
-            <summary>
-            Costs associated with the board's tiles
-            </summary>
-        </member>
-        <member name="F:GWNorthEngine.AI.AStar.PathFinder.ABSOLUTE_PARENT_POSITION">
-            <summary>
-            Constant that defines the parent at the start of the linked list of path nodes
-            </summary>
-        </member>
-        <member name="M:GWNorthEngine.AI.AStar.PathFinder.#ctor(System.Int32,System.Int32,GWNorthEngine.AI.AStar.PathFinder.RestrictionType)">
-            <summary>
-            Builds a base A* PathFinder instance for on the fly processing
-            </summary>
-            <param name="height">Height of the board</param>
-            <param name="width">Width of the board</param>
-            <param name="restrictionType">Movement restriction type</param>
-        </member>
-        <member name="M:GWNorthEngine.AI.AStar.PathFinder.#ctor(GWNorthEngine.AI.AStar.PathFinder.TypeOfSpace[0:,0:],GWNorthEngine.AI.AStar.PathFinder.RestrictionType)">
-            <summary>
-            Builds a base A* PathFinder instance for static processing
-            </summary>
-            <param name="board">A* representation of the board</param>
-            <param name="restrictionType">Movement restriction type</param>
-        </member>
-        <member name="M:GWNorthEngine.AI.AStar.PathFinder.findPath(GWNorthEngine.AI.AStar.PathNode,System.Int32)">
-            <summary>
-            Finds a path based within the board if one is available
-            </summary>
-            <param name="parent">Parent node of the new nodes to be processed</param>
-            <param name="parentsIndex">Index of the parent in the open list</param>
-        </member>
-        <member name="M:GWNorthEngine.AI.AStar.PathFinder.getDistance(Microsoft.Xna.Framework.Point,GWNorthEngine.AI.AStar.PathNode,System.Int32@,System.Int32@)">
-            <summary>
-            Retrieves the start distance and the end distance from the current position
-            </summary>
-            <param name="currentPosition">Current position we are at in the search</param>
-            <param name="parentNode">Node that will be the parent of this position we are determining the distance for</param>
-            <param name="startDistance">Output the distance from the start</param>
-            <param name="endDistance">Output the distance from the end</param>
-        </member>
-        <member name="M:GWNorthEngine.AI.AStar.PathFinder.getDistanceToStart(Microsoft.Xna.Framework.Point,GWNorthEngine.AI.AStar.PathNode)">
-            <summary>
-            Gets the distance from the start based on the path we have already found and its associated costs
-            </summary>
-            <param name="currentPosition">Current tile position we are at</param>
-            <param name="parentNode">Node that will be the parent of this position we are determining the distance for</param>
-            <returns>G cost of the A* algorithm (The distance from the start)</returns>
-        </member>
-        <member name="M:GWNorthEngine.AI.AStar.PathFinder.getDistance(Microsoft.Xna.Framework.Point,Microsoft.Xna.Framework.Point)">
-            <summary>
-            Retrieves the distance from the current position and the specified position
-            </summary>
-            <param name="currentPosition">Current position we are at</param>
-            <param name="comparePosition">Posiiton we are looking for the distance from</param>
-            <returns></returns>
-        </member>
-        <member name="M:GWNorthEngine.AI.AStar.PathFinder.getStartAndEnd">
-            <summary>
-            Figures out the starting and ending positions in the board
-            </summary>
-        </member>
-        <member name="M:GWNorthEngine.AI.AStar.PathFinder.checkForTieBreakerAndResolvePath(System.Collections.Generic.List{GWNorthEngine.AI.AStar.PathNode}@)">
-            <summary>
-            Determines a path when there are 2 nodes with the same FScore
-            </summary>
-            <param name="surrondingCosts">Surronding nodes that we are looking at</param>
-            <returns>Index of the node to use to carry on the search</returns>
-        </member>
-        <member name="M:GWNorthEngine.AI.AStar.PathFinder.findPath">
-            <summary>
-            Finds a path from the starting position to the ending position if one exists
-            </summary>
-        </member>
-        <member name="M:GWNorthEngine.AI.AStar.PathFinder.findPath(GWNorthEngine.AI.AStar.PathFinder.TypeOfSpace[0:,0:])">
-            <summary>
-            Finds a path from the starting position to the ending position if one exists
-            </summary>
-            <param name="board">Board to search through</param>
-        </member>
-        <member name="P:GWNorthEngine.AI.AStar.PathFinder.Path">
-            <summary>
-            Gets the path leading from the starting position to the ending position if there is one
-            </summary>
-        </member>
-        <member name="P:GWNorthEngine.AI.AStar.PathFinder.Costs">
-            <summary>
-            Gets or sets the class used to generate costs of the boards tiles
-            </summary>
-        </member>
-        <member name="T:GWNorthEngine.AI.AStar.PathFinder.TypeOfSpace">
-            <summary>
-            Type of spaces the board can contain
-            </summary>
-        </member>
-        <member name="F:GWNorthEngine.AI.AStar.PathFinder.TypeOfSpace.Start">
-            <summary>
-            Starting position on the board
-            </summary>
-        </member>
-        <member name="F:GWNorthEngine.AI.AStar.PathFinder.TypeOfSpace.Unwalkable">
-            <summary>
-            Non-moveable piece on the board
-            </summary>
-        </member>
-        <member name="F:GWNorthEngine.AI.AStar.PathFinder.TypeOfSpace.Walkable">
-            <summary>
-            Moveable piece on the board
-            </summary>
-        </member>
-        <member name="F:GWNorthEngine.AI.AStar.PathFinder.TypeOfSpace.End">
-            <summary>
-            Goal position on the board
-            </summary>
-        </member>
-        <member name="F:GWNorthEngine.AI.AStar.PathFinder.TypeOfSpace.VariableTerrainLowCost">
-            <summary>
-            Variable terrain with a higher cost than standard with an extra cost that is low
-            </summary>
-        </member>
-        <member name="F:GWNorthEngine.AI.AStar.PathFinder.TypeOfSpace.VariableTerrainMediumCost">
-            <summary>
-            Variable terrain with a higher cost than standard with an extra cost that is medium
-            </summary>
-        </member>
-        <member name="F:GWNorthEngine.AI.AStar.PathFinder.TypeOfSpace.VariableTerrainHighCost">
-            <summary>
-            Variable terrain with a higher cost than standard with an extra cost that is high
-            </summary>
-        </member>
-        <member name="T:GWNorthEngine.AI.AStar.PathFinder.RestrictionType">
-            <summary>
-            Restriction type used for searching of the next node
-            </summary>
-        </member>
-        <member name="F:GWNorthEngine.AI.AStar.PathFinder.RestrictionType.Restricted">
-            <summary>
-            Can only generates moves in a zig zag pattern, cannot cut corners or move diagonally
-            </summary>
-        </member>
-        <member name="F:GWNorthEngine.AI.AStar.PathFinder.RestrictionType.None">
-            <summary>
-            Can generate moves in any direction
-            </summary>
-        </member>
         <member name="T:GWNorthEngine.AI.AStar.DefaultCosts">
             <summary>
             Default Cost implementation for variable terrain
+            </summary>
+        </member>
+        <member name="T:GWNorthEngine.AI.AStar.BaseCosts">
+            <summary>
+            Base governing implementation of the cost module for determining tiles costs
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.AI.AStar.BaseCosts.#ctor(System.Single)">
+            <summary>
+            Builsd the basic cost class
+            </summary>
+            <param name="diagonalMultiplier">Multiplier used for diagonal movement determination</param>
+        </member>
+        <member name="M:GWNorthEngine.AI.AStar.BaseCosts.getDiagonalCost(System.Int32)">
+            <summary>
+            Determines the diagonal cost associated with a tile
+            </summary>
+            <param name="currentPositionsCost">Value if the tile were a straight move not a diagonal move</param>
+            <returns>Diagonal cost of the tile</returns>
+        </member>
+        <member name="M:GWNorthEngine.AI.AStar.BaseCosts.getCost(GWNorthEngine.AI.AStar.BasePathFinder.TypeOfSpace)">
+            <summary>
+            Determines the cost of a tile based on its type
+            </summary>
+            <param name="space"></param>
+            <returns></returns>
+        </member>
+        <member name="P:GWNorthEngine.AI.AStar.BaseCosts.StandardCost">
+            <summary>
+            Cost of a standard Walkable tile
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.AI.AStar.BaseCosts.VariableTerrainLowCost">
+            <summary>
+            Cost of a Variable Terrain Low Cost tile
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.AI.AStar.BaseCosts.VariableTerrainMediumCost">
+            <summary>
+            Cost of a Variable Terrain Medium Cost tile
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.AI.AStar.BaseCosts.VariableTerrainHighCost">
+            <summary>
+            Cost of a Variable Terrain High Cost tile
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.AI.AStar.BaseCosts.DiagonalMultiplier">
+            <summary>
+            Gets or sets the Diagonal Multiplier used for determining the cost of diagonal moves
             </summary>
         </member>
         <member name="M:GWNorthEngine.AI.AStar.DefaultCosts.#ctor">
@@ -2134,58 +1929,6 @@
             Gets or sets the BaseAnimationManagerParams object for the sprite
             </summary>
         </member>
-        <member name="T:GWNorthEngine.AI.AStar.Walker">
-            <summary>
-            Child path finding class that moves in a any direction and can optionally cut corners
-            </summary>
-        </member>
-        <member name="M:GWNorthEngine.AI.AStar.Walker.#ctor(System.Int32,System.Int32,System.Boolean)">
-            <summary>
-            Builds a Walker instance based on the height, width and ability to cut corners. Used for on the fly path calculation
-            </summary>
-            <param name="height">Height of the board</param>
-            <param name="width">Width of the board</param>
-            <param name="allowedToCutCorners">Ability to cut across corners</param>
-        </member>
-        <member name="M:GWNorthEngine.AI.AStar.Walker.#ctor(GWNorthEngine.AI.AStar.PathFinder.TypeOfSpace[0:,0:],System.Boolean)">
-            <summary>
-            Builds a Walker instance based on the board and ability to cut corners. Used for one off path calculation
-            </summary>
-            <param name="board">A* representation of the board</param>
-            <param name="allowedToCutCorners">Ability to cut across corners</param>
-        </member>
-        <member name="M:GWNorthEngine.AI.AStar.Walker.findPath(GWNorthEngine.AI.AStar.PathNode,System.Int32)">
-            <summary>
-            Finds a path based within the board if one is available
-            </summary>
-            <param name="parent">Parent node of the new nodes to be processed</param>
-            <param name="parentsIndex">Index of the parent in the open list</param>
-        </member>
-        <member name="T:GWNorthEngine.AI.AStar.MazeSolver">
-            <summary>
-            Child path finding class that moves in a zig zag pattern and cannot cut corners
-            </summary>
-        </member>
-        <member name="M:GWNorthEngine.AI.AStar.MazeSolver.#ctor(System.Int32,System.Int32)">
-            <summary>
-            Builds a MazeSolver instance based on the height and width passed in. Used for on the fly path calculation
-            </summary>
-            <param name="height">Height of the board</param>
-            <param name="width">Width of the board</param>
-        </member>
-        <member name="M:GWNorthEngine.AI.AStar.MazeSolver.#ctor(GWNorthEngine.AI.AStar.PathFinder.TypeOfSpace[0:,0:])">
-            <summary>
-            Builds a MazeSolver instance based on a board. Used for one off path calculation
-            </summary>
-            <param name="board">A* representation of the board</param>
-        </member>
-        <member name="M:GWNorthEngine.AI.AStar.MazeSolver.findPath(GWNorthEngine.AI.AStar.PathNode,System.Int32)">
-            <summary>
-            Finds a path based within the board if one is available
-            </summary>
-            <param name="parent">Parent node of the new nodes to be processed</param>
-            <param name="parentsIndex">Index of the parent in the open list</param>
-        </member>
         <member name="T:GWNorthEngine.Model.BaseParticle2DEmitter">
             <summary>
             Models the basis of every particle emitter
@@ -2727,6 +2470,273 @@
         <member name="F:GWNorthEngine.Input.MouseButton.Middle">
             <summary>
             Middle mouse button
+            </summary>
+        </member>
+        <member name="T:GWNorthEngine.AI.AStar.Params.BasePathFinderParams">
+            <summary>
+            Contains the common data required to build a A* Pathfinder
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.AI.AStar.Params.BasePathFinderParams.#ctor">
+            <summary>
+             Builds the default settings for setting up a PathFinder. The default settings are listed below.
+             AllowCornerCutting:				False
+             DirectionRestrictionType:			Restricted
+             Costs:								new DefaultCosts()
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.AI.AStar.Params.BasePathFinderParams.Height">
+            <summary>
+            Gets or sets the height of the AI representation of the board
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.AI.AStar.Params.BasePathFinderParams.Width">
+            <summary>
+            Gets or sets the width of the AI representation of the board
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.AI.AStar.Params.BasePathFinderParams.AllowCornerCutting">
+            <summary>
+            Gets or sets whether corner cutting is allowed or not
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.AI.AStar.Params.BasePathFinderParams.DirectionRestrictionType">
+            <summary>
+            Gets or sets the Directional Restriction Type on the algorithm
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.AI.AStar.Params.BasePathFinderParams.Costs">
+            <summary>
+            Gets or sets the governing costs object used by the algorithm
+            </summary>
+        </member>
+        <member name="T:GWNorthEngine.AI.AStar.DefaultPathFinder">
+            <summary>
+            Default path finding class
+            </summary>
+        </member>
+        <member name="T:GWNorthEngine.AI.AStar.BasePathFinder">
+            <summary>
+            Abstract class containing the common information for basic A* Pathfinding
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.AI.AStar.BasePathFinder.directions">
+            <summary>
+            Directions we can generate moves in
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.AI.AStar.BasePathFinder.board">
+            <summary>
+            A* readable board representation
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.AI.AStar.BasePathFinder.allowedToCutCorners">
+            <summary>
+            Determines if corner cutting is allowed
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.AI.AStar.BasePathFinder.openList">
+            <summary>
+            List of open nodes
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.AI.AStar.BasePathFinder.closedList">
+            <summary>
+            List of closed nodes
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.AI.AStar.BasePathFinder.path">
+            <summary>
+            Path to the target from the starting position
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.AI.AStar.BasePathFinder.end">
+            <summary>
+            Ending position in the board[,]
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.AI.AStar.BasePathFinder.start">
+            <summary>
+            Starting position in the board[,]
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.AI.AStar.BasePathFinder.tieBreakerRandom">
+            <summary>
+            Random number generator used to break ties in the path
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.AI.AStar.BasePathFinder.directionRestrictionType">
+            <summary>
+            Type of restriction against the board on moves that we can generate
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.AI.AStar.BasePathFinder.costs">
+            <summary>
+            Costs associated with the board's tiles
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.AI.AStar.BasePathFinder.HEIGHT">
+            <summary>
+            Height of the board
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.AI.AStar.BasePathFinder.WIDTH">
+            <summary>
+            Width of the board
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.AI.AStar.BasePathFinder.DIRECTIONS_LENGTH">
+            <summary>
+            Length of directions we have
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.AI.AStar.BasePathFinder.ABSOLUTE_PARENT_POSITION">
+            <summary>
+            Constant that defines the parent at the start of the linked list of path nodes
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.AI.AStar.BasePathFinder.#ctor(GWNorthEngine.AI.AStar.Params.BasePathFinderParams)">
+            <summary>
+            Builds a BasePathFinder
+            </summary>
+            <param name="parms">BasePathFinderParams object containing the data requried to build the pathfinder</param>
+        </member>
+        <member name="M:GWNorthEngine.AI.AStar.BasePathFinder.findPath(GWNorthEngine.AI.AStar.PathNode,System.Int32)">
+            <summary>
+            Finds a path based within the board if one is available
+            </summary>
+            <param name="parent">Parent node of the new nodes to be processed</param>
+            <param name="parentsIndex">Index of the parent in the open list</param>
+        </member>
+        <member name="M:GWNorthEngine.AI.AStar.BasePathFinder.getDistance(Microsoft.Xna.Framework.Point,GWNorthEngine.AI.AStar.PathNode,System.Int32@,System.Int32@)">
+            <summary>
+            Retrieves the start distance and the end distance from the current position
+            </summary>
+            <param name="currentPosition">Current position we are at in the search</param>
+            <param name="parentNode">Node that will be the parent of this position we are determining the distance for</param>
+            <param name="startDistance">Output the distance from the start</param>
+            <param name="endDistance">Output the distance from the end</param>
+        </member>
+        <member name="M:GWNorthEngine.AI.AStar.BasePathFinder.getDistanceToStart(Microsoft.Xna.Framework.Point,GWNorthEngine.AI.AStar.PathNode)">
+            <summary>
+            Gets the distance from the start based on the path we have already found and its associated costs
+            </summary>
+            <param name="currentPosition">Current tile position we are at</param>
+            <param name="parentNode">Node that will be the parent of this position we are determining the distance for</param>
+            <returns>G cost of the A* algorithm (The distance from the start)</returns>
+        </member>
+        <member name="M:GWNorthEngine.AI.AStar.BasePathFinder.getDistance(Microsoft.Xna.Framework.Point,Microsoft.Xna.Framework.Point)">
+            <summary>
+            Retrieves the distance from the current position and the specified position
+            </summary>
+            <param name="currentPosition">Current position we are at</param>
+            <param name="comparePosition">Posiiton we are looking for the distance from</param>
+            <returns></returns>
+        </member>
+        <member name="M:GWNorthEngine.AI.AStar.BasePathFinder.getStartAndEnd">
+            <summary>
+            Figures out the starting and ending positions in the board
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.AI.AStar.BasePathFinder.checkForTieBreakerAndResolvePath(System.Collections.Generic.List{GWNorthEngine.AI.AStar.PathNode}@)">
+            <summary>
+            Determines a path when there are 2 nodes with the same FScore
+            </summary>
+            <param name="surrondingCosts">Surronding nodes that we are looking at</param>
+            <returns>Index of the node to use to carry on the search</returns>
+        </member>
+        <member name="M:GWNorthEngine.AI.AStar.BasePathFinder.findPath">
+            <summary>
+            Finds a path from the starting position to the ending position if one exists
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.AI.AStar.BasePathFinder.findPath(GWNorthEngine.AI.AStar.BasePathFinder.TypeOfSpace[0:,0:])">
+            <summary>
+            Finds a path from the starting position to the ending position if one exists
+            </summary>
+            <param name="board">Board to search through</param>
+        </member>
+        <member name="P:GWNorthEngine.AI.AStar.BasePathFinder.Path">
+            <summary>
+            Gets the path leading from the starting position to the ending position if there is one
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.AI.AStar.BasePathFinder.Costs">
+            <summary>
+            Gets or sets the class used to generate costs of the boards tiles
+            </summary>
+        </member>
+        <member name="T:GWNorthEngine.AI.AStar.BasePathFinder.TypeOfSpace">
+            <summary>
+            Type of spaces the board can contain
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.AI.AStar.BasePathFinder.TypeOfSpace.Start">
+            <summary>
+            Starting position on the board
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.AI.AStar.BasePathFinder.TypeOfSpace.Unwalkable">
+            <summary>
+            Non-moveable piece on the board
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.AI.AStar.BasePathFinder.TypeOfSpace.Walkable">
+            <summary>
+            Moveable piece on the board
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.AI.AStar.BasePathFinder.TypeOfSpace.End">
+            <summary>
+            Goal position on the board
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.AI.AStar.BasePathFinder.TypeOfSpace.VariableTerrainLowCost">
+            <summary>
+            Variable terrain with a higher cost than standard with an extra cost that is low
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.AI.AStar.BasePathFinder.TypeOfSpace.VariableTerrainMediumCost">
+            <summary>
+            Variable terrain with a higher cost than standard with an extra cost that is medium
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.AI.AStar.BasePathFinder.TypeOfSpace.VariableTerrainHighCost">
+            <summary>
+            Variable terrain with a higher cost than standard with an extra cost that is high
+            </summary>
+        </member>
+        <member name="T:GWNorthEngine.AI.AStar.BasePathFinder.RestrictionType">
+            <summary>
+            Restriction type used for searching of the next node
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.AI.AStar.BasePathFinder.RestrictionType.Restricted">
+            <summary>
+            Can only generates moves in a zig zag pattern, cannot cut corners or move diagonally
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.AI.AStar.BasePathFinder.RestrictionType.None">
+            <summary>
+            Can generate moves in any direction
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.AI.AStar.DefaultPathFinder.#ctor(GWNorthEngine.AI.AStar.Params.DefaultPathfinderParams)">
+            <summary>
+            Builds a DefaultPathFinder
+            </summary>
+            <param name="parms">DefaultPathFinderParams object containing the data required to build the PathFinder</param>
+        </member>
+        <member name="M:GWNorthEngine.AI.AStar.DefaultPathFinder.findPath(GWNorthEngine.AI.AStar.PathNode,System.Int32)">
+            <summary>
+            Finds a path based within the board if one is available
+            </summary>
+            <param name="parent">Parent node of the new nodes to be processed</param>
+            <param name="parentsIndex">Index of the parent in the open list</param>
+        </member>
+        <member name="T:GWNorthEngine.AI.AStar.Params.DefaultPathfinderParams">
+            <summary>
+            Contains data required to build a A* PathFinder
             </summary>
         </member>
     </members>

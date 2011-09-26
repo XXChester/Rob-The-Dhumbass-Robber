@@ -5,20 +5,21 @@ using System.Text;
 using System.Threading;
 using Microsoft.Xna.Framework;
 using GWNorthEngine.AI.AStar;
+using GWNorthEngine.AI.AStar.Params;
 using GWNorthEngine.Scripting;
 namespace Robber {
 	public class AIManager {
 		#region Class variables
 		// singleton instance
 		private static AIManager instance = new AIManager();
-		private PathFinder pathFinder;
+		private BasePathFinder pathFinder;
 		private Thread thread;
 		private bool running;
 		private List<PathRequest> pathRequests;
 		#endregion Class variables
 
 		#region Class properties
-		public PathFinder.TypeOfSpace[,] Board { get; set; }
+		public BasePathFinder.TypeOfSpace[,] Board { get; set; }
 		public List<Point> WayPoints { get; set; }
 		public bool PlayerDetected { get; set; }
 		#endregion Class properties
@@ -68,9 +69,9 @@ namespace Robber {
 						}
 					}
 				} catch (Exception e) {
-					Console.WriteLine(e.StackTrace);
+					Console.WriteLine(e.Message + "\n" + e.StackTrace);
 #if (DEBUG)
-					ScriptManager.getInstance().log(e.StackTrace);
+					ScriptManager.getInstance().log(e.Message + "\n" + e.StackTrace);
 #endif
 				}
 			} while (this.running);
@@ -83,10 +84,10 @@ namespace Robber {
 
 		private List<Point> findPath(Point start, Point end) {
 			// backup the board first
-			PathFinder.TypeOfSpace previousStartSpot = this.Board[start.Y, start.X];
-			PathFinder.TypeOfSpace previousEndSpot = this.Board[end.Y, end.X];
-			this.Board[start.Y, start.X] = PathFinder.TypeOfSpace.Start;
-			this.Board[end.Y, end.X] = PathFinder.TypeOfSpace.End;
+			BasePathFinder.TypeOfSpace previousStartSpot = this.Board[start.Y, start.X];
+			BasePathFinder.TypeOfSpace previousEndSpot = this.Board[end.Y, end.X];
+			this.Board[start.Y, start.X] = BasePathFinder.TypeOfSpace.Start;
+			this.Board[end.Y, end.X] = BasePathFinder.TypeOfSpace.End;
 			List<Point> path = new List<Point>();
 			this.pathFinder.findPath(this.Board);
 			path = this.pathFinder.Path;
@@ -97,7 +98,10 @@ namespace Robber {
 		}
 
 		public void init(int height, int width) {
-			this.pathFinder = new MazeSolver(height, width);
+			DefaultPathfinderParams parms = new DefaultPathfinderParams();
+			parms.Height = height;
+			parms.Width = width;
+			this.pathFinder = new DefaultPathFinder(parms);
 			this.PlayerDetected = false;
 		}
 
@@ -141,7 +145,7 @@ namespace Robber {
 			Point end = new Point();
 			for (int y = 0; y <= this.Board.GetUpperBound(0); y++) {
 				for (int x = 0; x <= this.Board.GetUpperBound(1); x++) {
-					if (this.Board[y, x] == PathFinder.TypeOfSpace.End) {
+					if (this.Board[y, x] == BasePathFinder.TypeOfSpace.End) {
 						end = new Point(x, y);
 						break;
 					}

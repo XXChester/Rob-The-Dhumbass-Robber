@@ -180,7 +180,7 @@ namespace Robber {
 			for (int i = 0; i < dumpsterSize; i++) {
 				this.dumpsters[i] = new Dumpster(this.content, "DumpsterOpen", "DumpsterClosed", new Placement(dumpsterLocations[i]));
 				// ensure these places are unwalkable by the guards
-				AIManager.getInstance().Board[dumpsterLocations[i].Y, dumpsterLocations[i].X] = PathFinder.TypeOfSpace.Unwalkable;
+				AIManager.getInstance().Board[dumpsterLocations[i].Y, dumpsterLocations[i].X] = BasePathFinder.TypeOfSpace.Unwalkable;
 			}
 
 			// load guard(s) at starting points
@@ -434,7 +434,7 @@ namespace Robber {
 				// draw where we cannot walk
 				for (int y = 0; y < 18; y++) {
 					for (int x = 0; x < 21; x++) {
-						if (AIManager.getInstance().Board[y, x] == PathFinder.TypeOfSpace.Unwalkable) {
+						if (AIManager.getInstance().Board[y, x] == BasePathFinder.TypeOfSpace.Unwalkable) {
 							spriteBatch.Draw(ResourceManager.getInstance().DebugChip, new Placement(new Point(x, y)).worldPosition, Color.Red);
 						}
 					}

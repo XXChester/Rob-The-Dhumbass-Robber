@@ -243,7 +243,7 @@ namespace Robber {
 
 			if (base.previousPlacement.index != base.Placement.index) {
 				// if we are a door tile play the sfx
-				if (AIManager.getInstance().Board[base.Placement.index.Y, base.Placement.index.X] == PathFinder.TypeOfSpace.VariableTerrainLowCost) {
+				if (AIManager.getInstance().Board[base.Placement.index.Y, base.Placement.index.X] == BasePathFinder.TypeOfSpace.VariableTerrainLowCost) {
 					SoundManager.getInstance().sfxEngine.playSoundEffect(this.openDoorSfx);
 				}
 			}

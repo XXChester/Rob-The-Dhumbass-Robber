@@ -25,7 +25,7 @@ namespace Robber {
 		#region Class variables
 		protected Animated2DSprite rightSprite;
 		protected Animated2DSprite leftSprite;
-		protected PathFinder.TypeOfSpace previousTypeOfSpace;
+		protected BasePathFinder.TypeOfSpace previousTypeOfSpace;
 		protected Animated2DSprite activeSprite;
 		protected float movementSpeed;
 		protected Direction direction;
