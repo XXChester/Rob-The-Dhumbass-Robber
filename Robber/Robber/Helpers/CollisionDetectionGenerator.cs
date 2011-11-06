@@ -49,57 +49,6 @@ namespace Robber {
 					bboxes.Add(Helper.getBBox(placement.worldPosition, new Vector2(bottomLeft.X + thickness, bottomLeft.Y)));
 					break;
 			}
-
-			/*int width = texture.Width;
-			int height = texture.Height;
-			// get the colours from the texture
-			Color[] colours = new Color[height * width];
-			texture.GetData<Color>(colours);
-
-			// transform to a 2D array so it is easier to use
-			Color[,] colours2D = new Color[height, width];
-			for (int i = 0; i < colours.Length; i++) {
-				colours2D[i / width, i % width] = colours[i];
-			}*/
-
-			
-
-			/*BACKUP
-			for (int x = 0; x <= colours2D.GetUpperBound(1); x++) {
-				pixelColour = colours2D[0, x];
-				if (tileFloorColour.Equals(pixelColour) || (x + 1 == ResourceManager.TILE_SIZE)) {
-					badPixelStartX = x;
-					// now find how deep it goes
-					for (int y = 0; y <= colours2D.GetUpperBound(0); y++) {
-						pixelColour = colours2D[y, x];
-						if (tileFloorColour.Equals(pixelColour)) {
-							badPixelStartY = y;
-							break;
-						}
-					}
-					break;
-				}
-			}
-			bboxes.Add(Helper.getBBox(placement.worldPosition,  new Vector2(badPixelStartX + placement.worldPosition.X, badPixelStartY + placement.worldPosition.Y)));
-
-			// find our vertical walls
-			for (int y = 0; y <= colours2D.GetUpperBound(0); y++) {
-				pixelColour = colours2D[y, 0];
-				if (tileFloorColour.Equals(pixelColour) || (y + 1 == ResourceManager.TILE_SIZE)) {
-					badPixelStartY = y;
-					// now find how deep it goes
-					for (int x = 0; x <= colours2D.GetUpperBound(1); x++) {
-						pixelColour = colours2D[y, x];
-						if (tileFloorColour.Equals(pixelColour)) {
-							badPixelStartX = x;
-							break;
-						}
-					}
-					break;
-				}
-			}
-			bboxes.Add(Helper.getBBox(placement.worldPosition, new Vector2(badPixelStartX + placement.worldPosition.X, badPixelStartY + placement.worldPosition.Y)));*/
-			
 			return bboxes;
 		}
 	}
