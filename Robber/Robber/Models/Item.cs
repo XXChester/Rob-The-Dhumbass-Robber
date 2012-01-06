@@ -25,7 +25,7 @@ namespace Robber {
 		#region Constructor
 		public Item(ContentManager content, string textureName, Placement startingPlacement) {
 			StaticDrawable2DParams parms = new StaticDrawable2DParams();
-			parms.Texture = LoadingUtils.loadTexture2D(content, textureName);
+			parms.Texture = LoadingUtils.load<Texture2D>(content, textureName);
 			parms.Origin = new Vector2(ResourceManager.TILE_SIZE / 2f);
 			parms.Position = new Vector2(startingPlacement.worldPosition.X + parms.Origin.X, startingPlacement.worldPosition.Y + parms.Origin.Y);
 			this.image = new StaticDrawable2D(parms);

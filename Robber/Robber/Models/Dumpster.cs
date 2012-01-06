@@ -35,7 +35,7 @@ namespace Robber {
 			: base(content, openDumpsterTextureName, startingPlacement) {
 			this.acceptingOccupants = true;
 			StaticDrawable2DParams parms = new StaticDrawable2DParams();
-			parms.Texture = LoadingUtils.loadTexture2D(content, closedDumpsterTextureName);
+			parms.Texture = LoadingUtils.load<Texture2D>(content, closedDumpsterTextureName);
 			parms.Origin = new Vector2(ResourceManager.TILE_SIZE / 2f);
 			parms.Position = new Vector2(startingPlacement.worldPosition.X + parms.Origin.X, startingPlacement.worldPosition.Y + parms.Origin.Y);
 			this.closedDumpster = new StaticDrawable2D(parms);

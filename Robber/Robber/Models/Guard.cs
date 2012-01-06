@@ -92,8 +92,8 @@ namespace Robber {
 			}
 
 			this.ring = new RadiusRing(content, base.activeSprite.Position);
-			this.openDoorSfx = LoadingUtils.loadSoundEffect(content, "OpenDoor");
-			this.prisonCellSfx = LoadingUtils.loadSoundEffect(content, "CellDoor");
+			this.openDoorSfx = LoadingUtils.load<SoundEffect>(content, "OpenDoor");
+			this.prisonCellSfx = LoadingUtils.load<SoundEffect>(content, "CellDoor");
 		}
 		#endregion Constructor
 

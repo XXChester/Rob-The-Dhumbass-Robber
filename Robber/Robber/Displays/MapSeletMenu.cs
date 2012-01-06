@@ -64,12 +64,12 @@ namespace Robber {
 			// title
 			StaticDrawable2DParams staticParms = new StaticDrawable2DParams();
 			staticParms.Position = new Vector2(0f, 0f);
-			staticParms.Texture = LoadingUtils.loadTexture2D(content, "MapSelection");
+			staticParms.Texture = LoadingUtils.load<Texture2D>(content, "MapSelection");
 			this.title = new StaticDrawable2D(staticParms);
 
 			// no preview image
 			staticParms.Position = new Vector2(20f, 100f);
-			staticParms.Texture = LoadingUtils.loadTexture2D(content, "NoPreview");
+			staticParms.Texture = LoadingUtils.load<Texture2D>(content, "NoPreview");
 			staticParms.Scale = new Vector2(.8f, .8f);
 			staticParms.LightColour = ResourceManager.TEXT_COLOUR;
 			this.noPreviewImage = new StaticDrawable2D(staticParms);

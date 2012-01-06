@@ -33,7 +33,7 @@ namespace Robber {
 		public Player(ContentManager content, Placement startingLocation)
 			: base(content, "Rob", startingLocation, MOVEMENT_SPEED) {
 
-			this.footStepsSfx = LoadingUtils.loadSoundEffect(content, "FootSteps");
+			this.footStepsSfx = LoadingUtils.load<SoundEffect>(content, "FootSteps");
 		}
 		#endregion Constructor
 

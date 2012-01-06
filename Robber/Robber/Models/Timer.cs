@@ -62,7 +62,7 @@ namespace Robber {
 			this.activeTimeColour = HIGH_TIME;
 			
 			//sfxs
-			this.guardsAlertedSfx = LoadingUtils.loadSoundEffect(content, DETECTED_SFX_NAME);
+			this.guardsAlertedSfx = LoadingUtils.load<SoundEffect>(content, DETECTED_SFX_NAME);
 #if WINDOWS
 #if DEBUG
 			ScriptManager.getInstance().registerObject(this.firstPart, "first");

@@ -60,11 +60,11 @@ namespace Robber {
 			// loosing background
 			StaticDrawable2DParams staticParms = new StaticDrawable2DParams();
 			staticParms.Position = new Vector2(-10f, 0f);
-			staticParms.Texture = LoadingUtils.loadTexture2D(content, "BackGround1");
+			staticParms.Texture = LoadingUtils.load<Texture2D>(content, "BackGround1");
 			this.looseBackGround = new StaticDrawable2D(staticParms);
 
 			// winning background
-			staticParms.Texture = LoadingUtils.loadTexture2D(content, "BackGround2");
+			staticParms.Texture = LoadingUtils.load<Texture2D>(content, "BackGround2");
 			this.winBackGround = new StaticDrawable2D(staticParms);
 		}
 		#endregion Constructor

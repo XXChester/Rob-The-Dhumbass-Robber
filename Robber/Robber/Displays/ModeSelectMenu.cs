@@ -62,17 +62,17 @@ namespace Robber {
 			// title
 			StaticDrawable2DParams staticParms = new StaticDrawable2DParams();
 			staticParms.Position = new Vector2(0f, 0f);
-			staticParms.Texture = LoadingUtils.loadTexture2D(content, "ModeSelection");
+			staticParms.Texture = LoadingUtils.load<Texture2D>(content, "ModeSelection");
 			this.title = new StaticDrawable2D(staticParms);
 
 			// background
 			staticParms.Position = new Vector2(15f, 150f);
 			staticParms.Scale = new Vector2(.75f, .75f);
-			staticParms.Texture = LoadingUtils.loadTexture2D(content, "ModeHelp");
+			staticParms.Texture = LoadingUtils.load<Texture2D>(content, "ModeHelp");
 			this.backGround = new StaticDrawable2D(staticParms);
 
 			// sound effects
-			this.outroSfx = LoadingUtils.loadSoundEffect(content, "WhereWeGonnaRob");
+			this.outroSfx = LoadingUtils.load<SoundEffect>(content, "WhereWeGonnaRob");
 		}
 		#endregion Constructor
 

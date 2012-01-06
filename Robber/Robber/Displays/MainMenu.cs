@@ -66,21 +66,21 @@ namespace Robber {
 			// title
 			StaticDrawable2DParams staticParms = new StaticDrawable2DParams();
 			staticParms.Position = new Vector2(0f, -20f);
-			staticParms.Texture = LoadingUtils.loadTexture2D(content, "Title");
+			staticParms.Texture = LoadingUtils.load<Texture2D>(content, "Title");
 			this.title = new StaticDrawable2D(staticParms);
 
 			// background
 			staticParms.Position = new Vector2(0f, 0f);
-			staticParms.Texture = LoadingUtils.loadTexture2D(content, "MainMenu");
+			staticParms.Texture = LoadingUtils.load<Texture2D>(content, "MainMenu");
 			this.backGround = new StaticDrawable2D(staticParms);
 
 			// load sound effects
-			this.introSfx = LoadingUtils.loadSoundEffect(content, "Introduction");
-			this.outroSfx = LoadingUtils.loadSoundEffect(content, "LetsGo");
+			this.introSfx = LoadingUtils.load<SoundEffect>(content, "Introduction");
+			this.outroSfx = LoadingUtils.load<SoundEffect>(content, "LetsGo");
 			this.idleSfxs = new SoundEffect[3];
-			this.idleSfxs[0] = LoadingUtils.loadSoundEffect(content, "Rules");
-			this.idleSfxs[1] = LoadingUtils.loadSoundEffect(content, "HaventGotAllDay");
-			this.idleSfxs[2] = LoadingUtils.loadSoundEffect(content, "LetsRobSomething");
+			this.idleSfxs[0] = LoadingUtils.load<SoundEffect>(content, "Rules");
+			this.idleSfxs[1] = LoadingUtils.load<SoundEffect>(content, "HaventGotAllDay");
+			this.idleSfxs[2] = LoadingUtils.load<SoundEffect>(content, "LetsRobSomething");
 			// tired of hearing this when debugging and not starting in this state
 			if (StateManager.getInstance().CurrentGameState == StateManager.GameState.MainMenu) {
 				SoundManager.getInstance().sfxEngine.playSoundEffect(this.introSfx);

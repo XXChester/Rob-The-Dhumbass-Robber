@@ -43,9 +43,9 @@ namespace Robber {
 		}
 
 		public void init(GraphicsDevice device, ContentManager content) {
-			this.Font = LoadingUtils.loadSpriteFont(content, "Font");
+			this.Font = LoadingUtils.load<SpriteFont>(content, "Font");
 			this.ButtonLineTexture = TextureUtils.create2DColouredTexture(device, 2, 2, Color.White);
-			this.MouseOverSfx = LoadingUtils.loadSoundEffect(content, "MouseOverButton");
+			this.MouseOverSfx = LoadingUtils.load<SoundEffect>(content, "MouseOverButton");
 #if DEBUG
 			this.DebugChip = TextureUtils.create2DColouredTexture(device, 32, 32, Color.White);
 			this.DebugRing = TextureUtils.create2DRingTexture(device, 112, Color.White);

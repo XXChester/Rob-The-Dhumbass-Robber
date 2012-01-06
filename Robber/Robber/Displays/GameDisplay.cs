@@ -92,22 +92,22 @@ namespace Robber {
 			StaticDrawable2DParams staticParms = new StaticDrawable2DParams();
 			staticParms = new StaticDrawable2DParams();
 			staticParms.Position = new Vector2(702f, 148f);
-			staticParms.Texture = LoadingUtils.loadTexture2D(content, "Treasure1");
+			staticParms.Texture = LoadingUtils.load<Texture2D>(content, "Treasure1");
 			this.treasure = new StaticDrawable2D(staticParms);
 
 			//dust particle emitter
 			BaseParticle2DEmitterParams particleEmitterParams = new BaseParticle2DEmitterParams();
-			particleEmitterParams.ParticleTexture = LoadingUtils.loadTexture2D(content, "Dust1");
+			particleEmitterParams.ParticleTexture = LoadingUtils.load<Texture2D>(content, "Dust1");
 			particleEmitterParams.SpawnDelay = DustParticleEmitter.SPAWN_DELAY;
 			this.dustEmitter = new DustParticleEmitter(particleEmitterParams);
 
 			// load sound effects
-			this.introSfx = LoadingUtils.loadSoundEffect(content, LEVEL_ENTRY_SFX_NAME);
-			this.payDaySfx = LoadingUtils.loadSoundEffect(content, "PayDay");
-			this.treasureSfx = LoadingUtils.loadSoundEffect(content, "TreasureCollect");
-			this.guardDetectedSfx = LoadingUtils.loadSoundEffect(content, "GuardDetection");
-			this.dumpsterCrashSfx = LoadingUtils.loadSoundEffect(content, "DumpsterCrash");
-			this.dumpsterCloseSfx = LoadingUtils.loadSoundEffect(content, "DumpsterClose");
+			this.introSfx = LoadingUtils.load<SoundEffect>(content, LEVEL_ENTRY_SFX_NAME);
+			this.payDaySfx = LoadingUtils.load<SoundEffect>(content, "PayDay");
+			this.treasureSfx = LoadingUtils.load<SoundEffect>(content, "TreasureCollect");
+			this.guardDetectedSfx = LoadingUtils.load<SoundEffect>(content, "GuardDetection");
+			this.dumpsterCrashSfx = LoadingUtils.load<SoundEffect>(content, "DumpsterCrash");
+			this.dumpsterCloseSfx = LoadingUtils.load<SoundEffect>(content, "DumpsterClose");
 		}
 		#endregion Constructor
 

@@ -29,7 +29,7 @@ namespace Robber {
 		public RadiusRing(ContentManager content, Vector2 position) {
 			StaticDrawable2DParams ringParams = new StaticDrawable2DParams();
 			ringParams.Position = position;
-			ringParams.Texture = LoadingUtils.loadTexture2D(content, "RadiusRing");
+			ringParams.Texture = LoadingUtils.load<Texture2D>(content, "RadiusRing");
 			TEXTURE_WIDTH = ringParams.Texture.Width;
 			ringParams.LightColour = COLOUR;
 			ringParams.Origin = new Vector2(TEXTURE_WIDTH / 2f);

@@ -55,17 +55,17 @@ namespace Robber {
 			// title
 			StaticDrawable2DParams staticParms = new StaticDrawable2DParams();
 			staticParms.Position = new Vector2(0f, 0f);
-			staticParms.Texture = LoadingUtils.loadTexture2D(content, "Paused");
+			staticParms.Texture = LoadingUtils.load<Texture2D>(content, "Paused");
 			this.title = new StaticDrawable2D(staticParms);
 
 			// background
 			staticParms.Position = new Vector2(-10f, 0f);
-			staticParms.Texture = LoadingUtils.loadTexture2D(content, "InGameMenu");
+			staticParms.Texture = LoadingUtils.load<Texture2D>(content, "InGameMenu");
 			this.backGround = new StaticDrawable2D(staticParms);
 
 			// setup the particle emitter
 			BaseParticle2DEmitterParams particleEmitterParams = new BaseParticle2DEmitterParams();
-			particleEmitterParams.ParticleTexture = LoadingUtils.loadTexture2D(content, "QuestionParticle");
+			particleEmitterParams.ParticleTexture = LoadingUtils.load<Texture2D>(content, "QuestionParticle");
 			particleEmitterParams.SpawnDelay = QuestionMarkEmitter.SPAWN_DELAY;
 			this.particleEmitter = new QuestionMarkEmitter(particleEmitterParams);
 			

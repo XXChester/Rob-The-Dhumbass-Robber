@@ -49,6 +49,11 @@
             SpriteEffects to render the sprite with
             </summary>
         </member>
+        <member name="F:GWNorthEngine.Model.Base2DSpriteDrawable.renderingRectangle">
+            <summary>
+            Rendering rectangle
+            </summary>
+        </member>
         <member name="F:GWNorthEngine.Model.Base2DSpriteDrawable.originalLightColour">
             <summary>
             Original colour the sprite was rendered in
@@ -59,6 +64,12 @@
             Builds a basic SpriteBatch drawable item
             </summary>
             <param name="parms">BaseSpriteDrawableParams object</param>
+        </member>
+        <member name="M:GWNorthEngine.Model.Base2DSpriteDrawable.setRenderingRectByTexture(Microsoft.Xna.Framework.Graphics.Texture2D)">
+            <summary>
+            Sets the rendering rectangle based on the texture's bounds
+            </summary>
+            <param name="texture">Texture to base the Rendering Rectangle on</param>
         </member>
         <member name="M:GWNorthEngine.Model.Base2DSpriteDrawable.scaleAsLifeProgresses(Microsoft.Xna.Framework.Vector2)">
             <summary>
@@ -115,6 +126,16 @@
         <member name="P:GWNorthEngine.Model.Base2DSpriteDrawable.Origin">
             <summary>
             Gets or sets the Origin in which the sprite is rendered around
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Base2DSpriteDrawable.SpriteEffect">
+            <summary>
+            Gets or sets the SpriteEffects to rendering the object under
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Base2DSpriteDrawable.RenderingRectangle">
+            <summary>
+            Gets or sets the Rectangle used for rendering the texture
             </summary>
         </member>
         <member name="T:GWNorthEngine.Model.Line2D">
@@ -175,26 +196,248 @@
             Gets or sets the end position of the line
             </summary>
         </member>
+        <member name="T:GWNorthEngine.AI.AStar.DefaultPathFinder">
+            <summary>
+            Default path finding class
+            </summary>
+        </member>
+        <member name="T:GWNorthEngine.AI.AStar.BasePathFinder">
+            <summary>
+            Abstract class containing the common information for basic A* Pathfinding
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.AI.AStar.BasePathFinder.directions">
+            <summary>
+            Directions we can generate moves in
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.AI.AStar.BasePathFinder.board">
+            <summary>
+            A* readable board representation
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.AI.AStar.BasePathFinder.allowedToCutCorners">
+            <summary>
+            Determines if corner cutting is allowed
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.AI.AStar.BasePathFinder.openList">
+            <summary>
+            List of open nodes
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.AI.AStar.BasePathFinder.closedList">
+            <summary>
+            List of closed nodes
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.AI.AStar.BasePathFinder.path">
+            <summary>
+            Path to the target from the starting position
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.AI.AStar.BasePathFinder.end">
+            <summary>
+            Ending position in the board[,]
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.AI.AStar.BasePathFinder.start">
+            <summary>
+            Starting position in the board[,]
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.AI.AStar.BasePathFinder.tieBreakerRandom">
+            <summary>
+            Random number generator used to break ties in the path
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.AI.AStar.BasePathFinder.directionRestrictionType">
+            <summary>
+            Type of restriction against the board on moves that we can generate
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.AI.AStar.BasePathFinder.costs">
+            <summary>
+            Costs associated with the board's tiles
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.AI.AStar.BasePathFinder.HEIGHT">
+            <summary>
+            Height of the board
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.AI.AStar.BasePathFinder.WIDTH">
+            <summary>
+            Width of the board
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.AI.AStar.BasePathFinder.DIRECTIONS_LENGTH">
+            <summary>
+            Length of directions we have
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.AI.AStar.BasePathFinder.ABSOLUTE_PARENT_POSITION">
+            <summary>
+            Constant that defines the parent at the start of the linked list of path nodes
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.AI.AStar.BasePathFinder.#ctor(GWNorthEngine.AI.AStar.Params.BasePathFinderParams)">
+            <summary>
+            Builds a BasePathFinder
+            </summary>
+            <param name="parms">BasePathFinderParams object containing the data requried to build the pathfinder</param>
+        </member>
+        <member name="M:GWNorthEngine.AI.AStar.BasePathFinder.findPath(GWNorthEngine.AI.AStar.PathNode,System.Int32)">
+            <summary>
+            Finds a path based within the board if one is available
+            </summary>
+            <param name="parent">Parent node of the new nodes to be processed</param>
+            <param name="parentsIndex">Index of the parent in the open list</param>
+        </member>
+        <member name="M:GWNorthEngine.AI.AStar.BasePathFinder.getDistance(Microsoft.Xna.Framework.Point,GWNorthEngine.AI.AStar.PathNode,System.Int32@,System.Int32@)">
+            <summary>
+            Retrieves the start distance and the end distance from the current position
+            </summary>
+            <param name="currentPosition">Current position we are at in the search</param>
+            <param name="parentNode">Node that will be the parent of this position we are determining the distance for</param>
+            <param name="startDistance">Output the distance from the start</param>
+            <param name="endDistance">Output the distance from the end</param>
+        </member>
+        <member name="M:GWNorthEngine.AI.AStar.BasePathFinder.getDistanceToStart(Microsoft.Xna.Framework.Point,GWNorthEngine.AI.AStar.PathNode)">
+            <summary>
+            Gets the distance from the start based on the path we have already found and its associated costs
+            </summary>
+            <param name="currentPosition">Current tile position we are at</param>
+            <param name="parentNode">Node that will be the parent of this position we are determining the distance for</param>
+            <returns>G cost of the A* algorithm (The distance from the start)</returns>
+        </member>
+        <member name="M:GWNorthEngine.AI.AStar.BasePathFinder.getDistance(Microsoft.Xna.Framework.Point,Microsoft.Xna.Framework.Point)">
+            <summary>
+            Retrieves the distance from the current position and the specified position
+            </summary>
+            <param name="currentPosition">Current position we are at</param>
+            <param name="comparePosition">Posiiton we are looking for the distance from</param>
+            <returns></returns>
+        </member>
+        <member name="M:GWNorthEngine.AI.AStar.BasePathFinder.getStartAndEnd">
+            <summary>
+            Figures out the starting and ending positions in the board
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.AI.AStar.BasePathFinder.checkForTieBreakerAndResolvePath(System.Collections.Generic.List{GWNorthEngine.AI.AStar.PathNode}@)">
+            <summary>
+            Determines a path when there are 2 nodes with the same FScore
+            </summary>
+            <param name="surrondingCosts">Surronding nodes that we are looking at</param>
+            <returns>Index of the node to use to carry on the search</returns>
+        </member>
+        <member name="M:GWNorthEngine.AI.AStar.BasePathFinder.findPath">
+            <summary>
+            Finds a path from the starting position to the ending position if one exists
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.AI.AStar.BasePathFinder.findPath(GWNorthEngine.AI.AStar.BasePathFinder.TypeOfSpace[0:,0:])">
+            <summary>
+            Finds a path from the starting position to the ending position if one exists
+            </summary>
+            <param name="board">Board to search through</param>
+        </member>
+        <member name="P:GWNorthEngine.AI.AStar.BasePathFinder.Path">
+            <summary>
+            Gets the path leading from the starting position to the ending position if there is one
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.AI.AStar.BasePathFinder.Costs">
+            <summary>
+            Gets or sets the class used to generate costs of the boards tiles
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.AI.AStar.BasePathFinder.Board">
+            <summary>
+            Gets or sets the A* readable board representation
+            </summary>
+        </member>
+        <member name="T:GWNorthEngine.AI.AStar.BasePathFinder.TypeOfSpace">
+            <summary>
+            Type of spaces the board can contain
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.AI.AStar.BasePathFinder.TypeOfSpace.Start">
+            <summary>
+            Starting position on the board
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.AI.AStar.BasePathFinder.TypeOfSpace.Unwalkable">
+            <summary>
+            Non-moveable piece on the board
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.AI.AStar.BasePathFinder.TypeOfSpace.Walkable">
+            <summary>
+            Moveable piece on the board
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.AI.AStar.BasePathFinder.TypeOfSpace.End">
+            <summary>
+            Goal position on the board
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.AI.AStar.BasePathFinder.TypeOfSpace.VariableTerrainLowCost">
+            <summary>
+            Variable terrain with a higher cost than standard with an extra cost that is low
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.AI.AStar.BasePathFinder.TypeOfSpace.VariableTerrainMediumCost">
+            <summary>
+            Variable terrain with a higher cost than standard with an extra cost that is medium
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.AI.AStar.BasePathFinder.TypeOfSpace.VariableTerrainHighCost">
+            <summary>
+            Variable terrain with a higher cost than standard with an extra cost that is high
+            </summary>
+        </member>
+        <member name="T:GWNorthEngine.AI.AStar.BasePathFinder.RestrictionType">
+            <summary>
+            Restriction type used for searching of the next node
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.AI.AStar.BasePathFinder.RestrictionType.Restricted">
+            <summary>
+            Can only generates moves in a zig zag pattern, cannot cut corners or move diagonally
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.AI.AStar.BasePathFinder.RestrictionType.None">
+            <summary>
+            Can generate moves in any direction
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.AI.AStar.DefaultPathFinder.#ctor(GWNorthEngine.AI.AStar.Params.DefaultPathfinderParams)">
+            <summary>
+            Builds a DefaultPathFinder
+            </summary>
+            <param name="parms">DefaultPathFinderParams object containing the data required to build the PathFinder</param>
+        </member>
+        <member name="M:GWNorthEngine.AI.AStar.DefaultPathFinder.findPath(GWNorthEngine.AI.AStar.PathNode,System.Int32)">
+            <summary>
+            Finds a path based within the board if one is available
+            </summary>
+            <param name="parent">Parent node of the new nodes to be processed</param>
+            <param name="parentsIndex">Index of the parent in the open list</param>
+        </member>
         <member name="T:GWNorthEngine.Utils.LoadingUtils">
             <summary>
             Contains helper methods for loading data from the file system
             </summary>
         </member>
-        <member name="M:GWNorthEngine.Utils.LoadingUtils.setCommonAttributes(Microsoft.Xna.Framework.Graphics.Texture2D,System.String)">
+        <member name="M:GWNorthEngine.Utils.LoadingUtils.load``1(Microsoft.Xna.Framework.Content.ContentManager,System.String)">
             <summary>
-            Sets all of the common data for the Texture2D
+            Generic load which appends the asset name to the assets properties if the field is available
             </summary>
-            <param name="texture">Loaded Texture2D to set the data on</param>
-            <param name="fileName">Name of the file</param>
-            <returns>Texture2D with the custom data appended to it</returns>
-        </member>
-        <member name="M:GWNorthEngine.Utils.LoadingUtils.loadTexture2D(Microsoft.Xna.Framework.Content.ContentManager,System.String)">
-            <summary>
-            Loads a texture via the ContentManager and assigns the texture custom data for debugging purposes
-            </summary>
+            <typeparam name="T">Type of object to load</typeparam>
             <param name="content">ContentManager object</param>
-            <param name="textureName">Name of the texture</param>
-            <returns>Texture2D object</returns>
+            <param name="assetName">Name of the asset to load from the content pipeline</param>
+            <returns>T object</returns>
         </member>
         <member name="M:GWNorthEngine.Utils.LoadingUtils.loadTexture2D(Microsoft.Xna.Framework.Graphics.GraphicsDevice,System.String)">
             <summary>
@@ -204,30 +447,6 @@
             <param name="fileNameWithPathAndExtension">Texute's name we are trying to load with the full path and file extension (Assets\Test.png)</param>
             <returns>Texture2D object</returns>
             <author>Largely based on http://jakepoz.com/jake_poznanski__speeding_up_xna.html </author>
-        </member>
-        <member name="M:GWNorthEngine.Utils.LoadingUtils.loadSpriteFont(Microsoft.Xna.Framework.Content.ContentManager,System.String)">
-            <summary>
-            Loads a SpriteFont via the ContentManager and assigns the font custom data for debugging purposes
-            </summary>
-            <param name="content">ContentManager object</param>
-            <param name="spriteFontName">Name of the sprite font</param>
-            <returns>Texture2D object</returns>
-        </member>
-        <member name="M:GWNorthEngine.Utils.LoadingUtils.loadSoundEffect(Microsoft.Xna.Framework.Content.ContentManager,System.String)">
-            <summary>
-            Loads a SoundEffect via the ContentManager and assigns the sound effect custom data for debugging purposes
-            </summary>
-            <param name="content">ContentManager object</param>
-            <param name="soundEffectName">Name of the sound effect</param>
-            <returns>Texture2D object</returns>
-        </member>
-        <member name="M:GWNorthEngine.Utils.LoadingUtils.loadSong(Microsoft.Xna.Framework.Content.ContentManager,System.String)">
-            <summary>
-            Loads a Song via the ContentManager and assugbs the song custom data for debugging purposes
-            </summary>
-            <param name="content">ContentManager object</param>
-            <param name="songName">Name of the song</param>
-            <returns></returns>
         </member>
         <member name="T:GWNorthEngine.Tools.Translator">
             <summary>
@@ -482,6 +701,44 @@
             Gets or sets the Texts position
             </summary>
         </member>
+        <member name="T:GWNorthEngine.AI.AStar.Params.BasePathFinderParams">
+            <summary>
+            Contains the common data required to build a A* Pathfinder
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.AI.AStar.Params.BasePathFinderParams.#ctor">
+            <summary>
+             Builds the default settings for setting up a PathFinder. The default settings are listed below.
+             AllowCornerCutting:				False
+             DirectionRestrictionType:			Restricted
+             Costs:								new DefaultCosts()
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.AI.AStar.Params.BasePathFinderParams.Height">
+            <summary>
+            Gets or sets the height of the AI representation of the board
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.AI.AStar.Params.BasePathFinderParams.Width">
+            <summary>
+            Gets or sets the width of the AI representation of the board
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.AI.AStar.Params.BasePathFinderParams.AllowCornerCutting">
+            <summary>
+            Gets or sets whether corner cutting is allowed or not
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.AI.AStar.Params.BasePathFinderParams.DirectionRestrictionType">
+            <summary>
+            Gets or sets the Directional Restriction Type on the algorithm
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.AI.AStar.Params.BasePathFinderParams.Costs">
+            <summary>
+            Gets or sets the governing costs object used by the algorithm
+            </summary>
+        </member>
         <member name="T:GWNorthEngine.AI.AStar.DefaultCosts">
             <summary>
             Default Cost implementation for variable terrain
@@ -733,6 +990,31 @@
             Gets whether or not locking on is enabled
             </summary>
         </member>
+        <member name="T:GWNorthEngine.Model.Params.ScrollingBackGround2DParams">
+            <summary>
+            Contains the data required to build a scrolling background
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Params.ScrollingBackGround2DParams.Speed">
+            <summary>
+            Gets or Sets Speed in which the scene should scroll at
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Params.ScrollingBackGround2DParams.BackGrounds">
+            <summary>
+            Gets or sets the List of StaticDrawable2D background objects **NOTE**Positions are set in the scroller, just pass a basic list
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Params.ScrollingBackGround2DParams.ScrollingDirection">
+            <summary>
+            Gets or sets the direction that the scene should scroll in
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Params.ScrollingBackGround2DParams.ViewPort">
+            <summary>
+            Gets or Sets the viewport the background is rendered in
+            </summary>
+        </member>
         <member name="T:GWNorthEngine.Engine.FrameRate">
             <summary>
             Frames per second class
@@ -750,6 +1032,56 @@
             </summary>
             <param name="gameTime">GameTime object</param>
             <returns>Current frames per second (FPS)</returns>
+        </member>
+        <member name="T:GWNorthEngine.Engine.Params.DefaultCameraParams">
+            <summary>
+            Object containing the data required to build a default camera
+            </summary>
+        </member>
+        <member name="T:GWNorthEngine.Engine.Params.CameraParams">
+            <summary>
+            Object containing the data required to build a camera
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Engine.Params.CameraParams.Position">
+            <summary>
+            Gets or Sets the position of the Camera
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Engine.Params.CameraParams.Target">
+            <summary>
+            Gets or sets the cameras target or look at position
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Engine.Params.CameraParams.Up">
+            <summary>
+            Gets or sets the Up vector of the camera
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Engine.Params.CameraParams.Rotation">
+            <summary>
+            Gets or sets the rotation of the camera
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Engine.Params.CameraParams.ViewMatrix">
+            <summary>
+            Gets or sets the view matrix of the camera
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Engine.Params.CameraParams.ProjectionMatrix">
+            <summary>
+            Gets or sets the projection matrix of the camera
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Engine.Params.DefaultCameraParams.#ctor">
+            <summary>
+            Constructs a default camera setup with the following values
+            Position:			Vector3(0f,0f,50f)
+            Target:				Vector3.Zero
+            UpVector:			Vector3.Up
+            ViewMatrix:			Matrix.Identity
+            ProjectionMatrix:	Matrix.createPerspectiveFOV(45f, 16:9, .5f, 5000f)
+            </summary>
         </member>
         <member name="T:GWNorthEngine.AI.AStar.PathNode">
             <summary>
@@ -803,6 +1135,84 @@
             Gets or sets the nodes parent node
             </summary>
         </member>
+        <member name="T:GWNorthEngine.Model.ScrollingBackGround2D">
+            <summary>
+            Class that handles a scrolling background
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Model.ScrollingBackGround2D.backGrounds">
+            <summary>
+            List of StaticDrawable2D objects used as the backgrounds
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Model.ScrollingBackGround2D.viewPort">
+            <summary>
+            Viewport which the background is rendered in
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Model.ScrollingBackGround2D.#ctor(GWNorthEngine.Model.Params.ScrollingBackGround2DParams)">
+            <summary>
+            Constructs the scrolling background
+            </summary>
+            <param name="parms">ScrollingBackGround2dParams object containing the data required to build the scrolling background</param>
+        </member>
+        <member name="M:GWNorthEngine.Model.ScrollingBackGround2D.update(System.Single)">
+            <summary>
+            Updates the scrolling background and handles the wrapping
+            </summary>
+            <param name="elapsed">Elapsed time since the last update call</param>
+        </member>
+        <member name="M:GWNorthEngine.Model.ScrollingBackGround2D.render(Microsoft.Xna.Framework.Graphics.SpriteBatch)">
+            <summary>
+            Renders the scrolling background
+            </summary>
+            <param name="spriteBatch"></param>
+        </member>
+        <member name="M:GWNorthEngine.Model.ScrollingBackGround2D.dispose">
+            <summary>
+            Disposes of the backgrounds used by the scene
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.ScrollingBackGround2D.Speed">
+            <summary>
+            Gets or sets the speed which the scene is scrolling at
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.ScrollingBackGround2D.ScrollDirection">
+            <summary>
+            Gets or sets the direction the scene is scrolling in
+            </summary>
+        </member>
+        <member name="T:GWNorthEngine.Model.ScrollingBackGround2D.ScrollingDirection">
+            <summary>
+            Directions the scene can scroll in
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Model.ScrollingBackGround2D.ScrollingDirection.None">
+            <summary>
+            Not scrolling
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Model.ScrollingBackGround2D.ScrollingDirection.Left">
+            <summary>
+            Scrolls to the left
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Model.ScrollingBackGround2D.ScrollingDirection.Right">
+            <summary>
+            Scrolls to the right
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Model.ScrollingBackGround2D.ScrollingDirection.Up">
+            <summary>
+            Scrolls upwards
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Model.ScrollingBackGround2D.ScrollingDirection.Down">
+            <summary>
+            Scrolls downwards
+            </summary>
+        </member>
         <member name="T:GWNorthEngine.Input.InputManager">
             <summary>
             Manager that handles the states of different input devices
@@ -819,9 +1229,10 @@
             </summary>
             <returns>InputManager</returns>
         </member>
-        <member name="M:GWNorthEngine.Input.InputManager.update">
+        <member name="M:GWNorthEngine.Input.InputManager.update(System.Boolean)">
             <summary>
             Main loop that updates all of the devices
+            <param name="isWindowActive">States whether the window is active or not</param>
             </summary>
         </member>
         <member name="M:GWNorthEngine.Input.InputManager.wasKeyPressed(Microsoft.Xna.Framework.Input.Keys)">
@@ -1160,19 +1571,26 @@
             Params object containing the data required to build a TexturedButton object
             </summary>
         </member>
-        <member name="P:GWNorthEngine.Model.Params.TexturedButtonParams.Content">
+        <member name="M:GWNorthEngine.Model.Params.TexturedButtonParams.#ctor">
             <summary>
-            Gets or sets the ContentManager object used for loading textures
+            Initializes a button with the default values set below
+            
+            LightColour:		Color.White;
             </summary>
         </member>
-        <member name="P:GWNorthEngine.Model.Params.TexturedButtonParams.RegularTextureFileName">
+        <member name="P:GWNorthEngine.Model.Params.TexturedButtonParams.RegularTexture">
             <summary>
-            Gets or sets the regular texture's file name for the button
+            Gets or sets the regular texture for the button
             </summary>
         </member>
-        <member name="P:GWNorthEngine.Model.Params.TexturedButtonParams.MouseOverTextureFileName">
+        <member name="P:GWNorthEngine.Model.Params.TexturedButtonParams.MouseOverTexture">
             <summary>
-            Gets or sets the buttons mouse over texture file name
+            Gets or sets the buttons mouse over texture
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Params.TexturedButtonParams.LightColour">
+            <summary>
+            Gets or sets the Colour in which the button is to be rendered in
             </summary>
         </member>
         <member name="T:GWNorthEngine.Model.Animated2DSprite">
@@ -1201,17 +1619,11 @@
             </summary>
             <param name="parms">SpriteParams object containing all of the data to how this sprite is loaded, its position, colour, etc,etc</param>
         </member>
-        <member name="M:GWNorthEngine.Model.Animated2DSprite.initSprite(Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Vector2,System.Single,Microsoft.Xna.Framework.Vector2,System.Single,Microsoft.Xna.Framework.Graphics.Texture2D,Microsoft.Xna.Framework.Color,GWNorthEngine.Model.Animated2DSprite.LoadingType,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,GWNorthEngine.Model.Params.BaseAnimationManagerParams)">
+        <member name="M:GWNorthEngine.Model.Animated2DSprite.initSprite(Microsoft.Xna.Framework.Graphics.Texture2D,GWNorthEngine.Model.Animated2DSprite.LoadingType,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,GWNorthEngine.Model.Params.BaseAnimationManagerParams)">
             <summary>
             Actual building of the sprite
             </summary>
-            <param name="position">Starting position of the sprite</param>
-            <param name="origin">Sprites orign; important for rotating the sprite</param>
-            <param name="rotation">Rotation of  the sprite</param>
-            <param name="scale">X,Y scale of the sprite</param>
-            <param name="depth">Layer to draw the sprite at</param>
             <param name="texture">Texture2D use to render the sprite</param>
-            <param name="lightColour">Colour to render to the sprite in</param>
             <param name="loadingType">Way to load the sprite</param>
             <param name="framesStartWidth">Starting x point of the sprite in the sprite sheet</param>
             <param name="framesStartHeight">Starting y point of the sprite in the sprite sheet</param>
@@ -1243,13 +1655,6 @@
             </summary>
             <param name="spriteBatch">SpriteBatch object used to render the sprite</param>
         </member>
-        <member name="M:GWNorthEngine.Model.Animated2DSprite.render(Microsoft.Xna.Framework.Graphics.SpriteBatch,System.Int32)">
-            <summary>
-            Renders the sprite to the screen at a specific frame
-            </summary>
-            <param name="spriteBatch">SpriteBatch object used to render the sprite</param>
-            <param name="frame">Specific frame to render the sprite at</param>
-        </member>
         <member name="M:GWNorthEngine.Model.Animated2DSprite.dispose">
             <summary>
             Releases the portions of the sprite that cause memory leaks
@@ -1263,6 +1668,11 @@
         <member name="P:GWNorthEngine.Model.Animated2DSprite.Texture">
             <summary>
             Gets or sets the texture of an animated sprite
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Animated2DSprite.Frames">
+            <summary>
+            Gets or sets the animation frames
             </summary>
         </member>
         <member name="T:GWNorthEngine.Model.Animated2DSprite.LoadingType">
@@ -1293,6 +1703,62 @@
         <member name="F:GWNorthEngine.Engine.RunningMode.Debug">
             <summary>
             Front end application is in debug mode
+            </summary>
+        </member>
+        <member name="T:GWNorthEngine.Engine.Camera">
+            <summary>
+            Models the data required for a camera to be used in 3D space
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Engine.Camera.#ctor(GWNorthEngine.Engine.Params.CameraParams)">
+            <summary>
+            Creates a Camera based on the data parameter object
+            </summary>
+            <param name="parms">CameraParams object</param>
+        </member>
+        <member name="M:GWNorthEngine.Engine.Camera.updateViewMatrix">
+            <summary>
+            Updates the view matrix based on the cameras current position, target and up vector
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Engine.Camera.updateRotationMatrix">
+            <summary>
+            Updates the rotation matrix and applies it to the cameras position, target and up vector (Yaw, Pitch and Roll)
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Engine.Camera.update">
+            <summary>
+            Updates the camera
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Engine.Camera.Position">
+            <summary>
+            Gets or Sets the position of the Camera
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Engine.Camera.Target">
+            <summary>
+            Gets or sets the cameras target or look at position
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Engine.Camera.Up">
+            <summary>
+            Gets or sets the Up vector of the camera
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Engine.Camera.Rotation">
+            <summary>
+            Gets or sets the rotation of the camera
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Engine.Camera.ViewMatrix">
+            <summary>
+            Gets or sets the view matrix of the camera
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Engine.Camera.ProjectionMatrix">
+            <summary>
+            Gets or sets the projection matrix of the camera
             </summary>
         </member>
         <member name="T:GWNorthEngine.Audio.Params.SFXEngineParams">
@@ -1362,6 +1828,25 @@
             <param name="radius">Radius of the circle</param>
             /// <param name="colour">Colour of the texture</param>
             <returns>Newly created Texture2D object</returns>
+        </member>
+        <member name="M:GWNorthEngine.Utils.TextureUtils.getColourData(Microsoft.Xna.Framework.Graphics.Texture2D)">
+            <summary>
+            Retrieves the texures colour information
+            </summary>
+            <param name="texture">Texture to retrieve the colour array from</param>
+            <returns>Colour[] of the texture</returns>
+        </member>
+        <member name="M:GWNorthEngine.Utils.TextureUtils.getColourData2D(Microsoft.Xna.Framework.Graphics.Texture2D,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Retrieves the Texture's colour data in a 2D array
+            </summary>
+            <remarks>The texture data is in x,y format not y,x format at this time</remarks>
+            <param name="texture">Texture that we want to analyze</param>
+            <param name="startX">Optional parameter of where to start on the X axis in the texture</param>
+            <param name="startY">Optional parameter of where to start on the Y axis in the texture</param>
+            <param name="width">Optional parameter of where to stop analyzing on the X axis</param>
+            <param name="height">Optional parameter of where to stop analyzing on the Y axis</param>
+            <returns>Color[,] of the texture</returns>
         </member>
         <member name="T:GWNorthEngine.Utils.DebugUtils">
             <summary>
@@ -1526,6 +2011,11 @@
             Gets or sets the SpriteEffect technique used for rendering the sprite
             </summary>
         </member>
+        <member name="P:GWNorthEngine.Model.Params.Base2DSpriteDrawableParams.RenderingRectangle">
+            <summary>
+            Gets or sets the Rectangle used to render portions of the Texture
+            </summary>
+        </member>
         <member name="P:GWNorthEngine.Model.Params.StaticDrawable2DParams.Texture">
             <summary>
             Gets or sets the texture to be drawn to the screen
@@ -1554,6 +2044,11 @@
         <member name="F:GWNorthEngine.Tools.TilePlacer.Constants.XML_WIDTH">
             <summary>
             Width of the map
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Tools.TilePlacer.Constants.XML_TILE_SIZE">
+            <summary>
+            Size of the tiles on the layer
             </summary>
         </member>
         <member name="F:GWNorthEngine.Tools.TilePlacer.Constants.XML_HEADER_LAYER">
@@ -1862,10 +2357,37 @@
             Gets or sets the volume of the engine
             </summary>
         </member>
+        <member name="T:GWNorthEngine.AI.AStar.Params.DefaultPathfinderParams">
+            <summary>
+            Contains data required to build a A* PathFinder
+            </summary>
+        </member>
         <member name="T:GWNorthEngine.Utils.CollisionUtils">
             <summary>
             Helper methods for determining collision between objects
             </summary>
+        </member>
+        <member name="M:GWNorthEngine.Utils.CollisionUtils.doPixelsIntersect(Microsoft.Xna.Framework.Color[0:,0:],Microsoft.Xna.Framework.Matrix,Microsoft.Xna.Framework.Color[0:,0:],Microsoft.Xna.Framework.Matrix)">
+            <summary>
+            Determines if two textures pixels intersect
+            </summary>
+            <param name="texture1Data">Texture1's colour data</param>
+            <param name="texture1Matrix">The matrix used to render Texture1</param>
+            <param name="texture2Data">Texture2's colour data</param>
+            <param name="texture2Matrix">The matrix used to render Texture2</param>
+            <returns>True if a collision was detected, otherwise false</returns>
+        </member>
+        <member name="M:GWNorthEngine.Utils.CollisionUtils.doPixelsIntersect(Microsoft.Xna.Framework.Color[0:,0:],Microsoft.Xna.Framework.Matrix,Microsoft.Xna.Framework.Color[0:,0:],Microsoft.Xna.Framework.Matrix,Microsoft.Xna.Framework.Vector2@)">
+            <summary>
+            Determines if two textures pixels intersect and at which point
+            </summary>
+            <remarks>The collision is based on data in x,y format not y,x format at this time</remarks>
+            <param name="texture1Data">Texture1's colour data</param>
+            <param name="texture1Matrix">The matrix used to render Texture1</param>
+            <param name="texture2Data">Texture2's colour data</param>
+            <param name="texture2Matrix">The matrix used to render Texture2</param>
+            <param name="collisionPoint">Out the Vector2 in which a collision occurred if at all</param>
+            <returns>True if a collision was detected, otherwise false</returns>
         </member>
         <member name="T:GWNorthEngine.Model.Params.Animated2DSpriteParams">
             <summary>
@@ -2077,6 +2599,11 @@
             Releases the portions of the button that cause memory leaks
             </summary>
         </member>
+        <member name="P:GWNorthEngine.Model.TexturedButton.LightColour">
+            <summary>
+            Gets or sets the Colour in which the button is to be rendered in
+            </summary>
+        </member>
         <member name="T:GWNorthEngine.Utils.EnumUtils">
             <summary>
             Helpful methods for performing operations on enums
@@ -2215,6 +2742,42 @@
             <param name="value">Value to scrub</param>
             <param name="paramType">Type of the value</param>
             <returns>Clean parameter</returns>
+        </member>
+        <member name="T:GWNorthEngine.Model.Params.BaseModelParams">
+            <summary>
+            Object containing the data required to build a 3D model
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Model.Params.BaseModelParams.#ctor">
+            <summary>
+            Builds the default settings for the ModelParams. The default settings are below;
+            Scale:		new Vector3(1f)
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Params.BaseModelParams.Model">
+            <summary>
+            Gets or sets the core XNA Model used for rendering
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Params.BaseModelParams.Position">
+            <summary>
+            Gets or sets the position of the model
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Params.BaseModelParams.Rotation">
+            <summary>
+            Gets or sets the rotation of the model
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Params.BaseModelParams.Scale">
+            <summary>
+            Gets or sets the scale of the model
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Params.BaseModelParams.Visible">
+            <summary>
+            Gets or sets whether the model is to be drawn
+            </summary>
         </member>
         <member name="T:GWNorthEngine.Audio.Params.MusicEngineParams">
             <summary>
@@ -2414,6 +2977,48 @@
             Animation plays through forward 1 time
             </summary>
         </member>
+        <member name="T:GWNorthEngine.Model.BaseModel">
+            <summary>
+            Basic 3D model class
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Model.BaseModel.model">
+            <summary>
+            Internal XNA Model object
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Model.BaseModel.#ctor(GWNorthEngine.Model.Params.BaseModelParams)">
+            <summary>
+            Builds a Model based on the parms specified
+            </summary>
+            <param name="parms"></param>
+        </member>
+        <member name="M:GWNorthEngine.Model.BaseModel.render(GWNorthEngine.Engine.Camera)">
+            <summary>
+            Renders the model
+            <param name="camera">Camera the model uses to render with</param>
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.BaseModel.Position">
+            <summary>
+            Gets or sets the position of the model
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.BaseModel.Rotation">
+            <summary>
+            Gets or sets the rotation of the model
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.BaseModel.Scale">
+            <summary>
+            Gets or sets the scale of the model
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.BaseModel.Visible">
+            <summary>
+            Gets or sets whether the model is to be drawn
+            </summary>
+        </member>
         <member name="T:GWNorthEngine.Model.StaticDrawable2D">
             <summary>
             Text class for writing text to the screen
@@ -2470,273 +3075,6 @@
         <member name="F:GWNorthEngine.Input.MouseButton.Middle">
             <summary>
             Middle mouse button
-            </summary>
-        </member>
-        <member name="T:GWNorthEngine.AI.AStar.Params.BasePathFinderParams">
-            <summary>
-            Contains the common data required to build a A* Pathfinder
-            </summary>
-        </member>
-        <member name="M:GWNorthEngine.AI.AStar.Params.BasePathFinderParams.#ctor">
-            <summary>
-             Builds the default settings for setting up a PathFinder. The default settings are listed below.
-             AllowCornerCutting:				False
-             DirectionRestrictionType:			Restricted
-             Costs:								new DefaultCosts()
-            </summary>
-        </member>
-        <member name="P:GWNorthEngine.AI.AStar.Params.BasePathFinderParams.Height">
-            <summary>
-            Gets or sets the height of the AI representation of the board
-            </summary>
-        </member>
-        <member name="P:GWNorthEngine.AI.AStar.Params.BasePathFinderParams.Width">
-            <summary>
-            Gets or sets the width of the AI representation of the board
-            </summary>
-        </member>
-        <member name="P:GWNorthEngine.AI.AStar.Params.BasePathFinderParams.AllowCornerCutting">
-            <summary>
-            Gets or sets whether corner cutting is allowed or not
-            </summary>
-        </member>
-        <member name="P:GWNorthEngine.AI.AStar.Params.BasePathFinderParams.DirectionRestrictionType">
-            <summary>
-            Gets or sets the Directional Restriction Type on the algorithm
-            </summary>
-        </member>
-        <member name="P:GWNorthEngine.AI.AStar.Params.BasePathFinderParams.Costs">
-            <summary>
-            Gets or sets the governing costs object used by the algorithm
-            </summary>
-        </member>
-        <member name="T:GWNorthEngine.AI.AStar.DefaultPathFinder">
-            <summary>
-            Default path finding class
-            </summary>
-        </member>
-        <member name="T:GWNorthEngine.AI.AStar.BasePathFinder">
-            <summary>
-            Abstract class containing the common information for basic A* Pathfinding
-            </summary>
-        </member>
-        <member name="F:GWNorthEngine.AI.AStar.BasePathFinder.directions">
-            <summary>
-            Directions we can generate moves in
-            </summary>
-        </member>
-        <member name="F:GWNorthEngine.AI.AStar.BasePathFinder.board">
-            <summary>
-            A* readable board representation
-            </summary>
-        </member>
-        <member name="F:GWNorthEngine.AI.AStar.BasePathFinder.allowedToCutCorners">
-            <summary>
-            Determines if corner cutting is allowed
-            </summary>
-        </member>
-        <member name="F:GWNorthEngine.AI.AStar.BasePathFinder.openList">
-            <summary>
-            List of open nodes
-            </summary>
-        </member>
-        <member name="F:GWNorthEngine.AI.AStar.BasePathFinder.closedList">
-            <summary>
-            List of closed nodes
-            </summary>
-        </member>
-        <member name="F:GWNorthEngine.AI.AStar.BasePathFinder.path">
-            <summary>
-            Path to the target from the starting position
-            </summary>
-        </member>
-        <member name="F:GWNorthEngine.AI.AStar.BasePathFinder.end">
-            <summary>
-            Ending position in the board[,]
-            </summary>
-        </member>
-        <member name="F:GWNorthEngine.AI.AStar.BasePathFinder.start">
-            <summary>
-            Starting position in the board[,]
-            </summary>
-        </member>
-        <member name="F:GWNorthEngine.AI.AStar.BasePathFinder.tieBreakerRandom">
-            <summary>
-            Random number generator used to break ties in the path
-            </summary>
-        </member>
-        <member name="F:GWNorthEngine.AI.AStar.BasePathFinder.directionRestrictionType">
-            <summary>
-            Type of restriction against the board on moves that we can generate
-            </summary>
-        </member>
-        <member name="F:GWNorthEngine.AI.AStar.BasePathFinder.costs">
-            <summary>
-            Costs associated with the board's tiles
-            </summary>
-        </member>
-        <member name="F:GWNorthEngine.AI.AStar.BasePathFinder.HEIGHT">
-            <summary>
-            Height of the board
-            </summary>
-        </member>
-        <member name="F:GWNorthEngine.AI.AStar.BasePathFinder.WIDTH">
-            <summary>
-            Width of the board
-            </summary>
-        </member>
-        <member name="F:GWNorthEngine.AI.AStar.BasePathFinder.DIRECTIONS_LENGTH">
-            <summary>
-            Length of directions we have
-            </summary>
-        </member>
-        <member name="F:GWNorthEngine.AI.AStar.BasePathFinder.ABSOLUTE_PARENT_POSITION">
-            <summary>
-            Constant that defines the parent at the start of the linked list of path nodes
-            </summary>
-        </member>
-        <member name="M:GWNorthEngine.AI.AStar.BasePathFinder.#ctor(GWNorthEngine.AI.AStar.Params.BasePathFinderParams)">
-            <summary>
-            Builds a BasePathFinder
-            </summary>
-            <param name="parms">BasePathFinderParams object containing the data requried to build the pathfinder</param>
-        </member>
-        <member name="M:GWNorthEngine.AI.AStar.BasePathFinder.findPath(GWNorthEngine.AI.AStar.PathNode,System.Int32)">
-            <summary>
-            Finds a path based within the board if one is available
-            </summary>
-            <param name="parent">Parent node of the new nodes to be processed</param>
-            <param name="parentsIndex">Index of the parent in the open list</param>
-        </member>
-        <member name="M:GWNorthEngine.AI.AStar.BasePathFinder.getDistance(Microsoft.Xna.Framework.Point,GWNorthEngine.AI.AStar.PathNode,System.Int32@,System.Int32@)">
-            <summary>
-            Retrieves the start distance and the end distance from the current position
-            </summary>
-            <param name="currentPosition">Current position we are at in the search</param>
-            <param name="parentNode">Node that will be the parent of this position we are determining the distance for</param>
-            <param name="startDistance">Output the distance from the start</param>
-            <param name="endDistance">Output the distance from the end</param>
-        </member>
-        <member name="M:GWNorthEngine.AI.AStar.BasePathFinder.getDistanceToStart(Microsoft.Xna.Framework.Point,GWNorthEngine.AI.AStar.PathNode)">
-            <summary>
-            Gets the distance from the start based on the path we have already found and its associated costs
-            </summary>
-            <param name="currentPosition">Current tile position we are at</param>
-            <param name="parentNode">Node that will be the parent of this position we are determining the distance for</param>
-            <returns>G cost of the A* algorithm (The distance from the start)</returns>
-        </member>
-        <member name="M:GWNorthEngine.AI.AStar.BasePathFinder.getDistance(Microsoft.Xna.Framework.Point,Microsoft.Xna.Framework.Point)">
-            <summary>
-            Retrieves the distance from the current position and the specified position
-            </summary>
-            <param name="currentPosition">Current position we are at</param>
-            <param name="comparePosition">Posiiton we are looking for the distance from</param>
-            <returns></returns>
-        </member>
-        <member name="M:GWNorthEngine.AI.AStar.BasePathFinder.getStartAndEnd">
-            <summary>
-            Figures out the starting and ending positions in the board
-            </summary>
-        </member>
-        <member name="M:GWNorthEngine.AI.AStar.BasePathFinder.checkForTieBreakerAndResolvePath(System.Collections.Generic.List{GWNorthEngine.AI.AStar.PathNode}@)">
-            <summary>
-            Determines a path when there are 2 nodes with the same FScore
-            </summary>
-            <param name="surrondingCosts">Surronding nodes that we are looking at</param>
-            <returns>Index of the node to use to carry on the search</returns>
-        </member>
-        <member name="M:GWNorthEngine.AI.AStar.BasePathFinder.findPath">
-            <summary>
-            Finds a path from the starting position to the ending position if one exists
-            </summary>
-        </member>
-        <member name="M:GWNorthEngine.AI.AStar.BasePathFinder.findPath(GWNorthEngine.AI.AStar.BasePathFinder.TypeOfSpace[0:,0:])">
-            <summary>
-            Finds a path from the starting position to the ending position if one exists
-            </summary>
-            <param name="board">Board to search through</param>
-        </member>
-        <member name="P:GWNorthEngine.AI.AStar.BasePathFinder.Path">
-            <summary>
-            Gets the path leading from the starting position to the ending position if there is one
-            </summary>
-        </member>
-        <member name="P:GWNorthEngine.AI.AStar.BasePathFinder.Costs">
-            <summary>
-            Gets or sets the class used to generate costs of the boards tiles
-            </summary>
-        </member>
-        <member name="T:GWNorthEngine.AI.AStar.BasePathFinder.TypeOfSpace">
-            <summary>
-            Type of spaces the board can contain
-            </summary>
-        </member>
-        <member name="F:GWNorthEngine.AI.AStar.BasePathFinder.TypeOfSpace.Start">
-            <summary>
-            Starting position on the board
-            </summary>
-        </member>
-        <member name="F:GWNorthEngine.AI.AStar.BasePathFinder.TypeOfSpace.Unwalkable">
-            <summary>
-            Non-moveable piece on the board
-            </summary>
-        </member>
-        <member name="F:GWNorthEngine.AI.AStar.BasePathFinder.TypeOfSpace.Walkable">
-            <summary>
-            Moveable piece on the board
-            </summary>
-        </member>
-        <member name="F:GWNorthEngine.AI.AStar.BasePathFinder.TypeOfSpace.End">
-            <summary>
-            Goal position on the board
-            </summary>
-        </member>
-        <member name="F:GWNorthEngine.AI.AStar.BasePathFinder.TypeOfSpace.VariableTerrainLowCost">
-            <summary>
-            Variable terrain with a higher cost than standard with an extra cost that is low
-            </summary>
-        </member>
-        <member name="F:GWNorthEngine.AI.AStar.BasePathFinder.TypeOfSpace.VariableTerrainMediumCost">
-            <summary>
-            Variable terrain with a higher cost than standard with an extra cost that is medium
-            </summary>
-        </member>
-        <member name="F:GWNorthEngine.AI.AStar.BasePathFinder.TypeOfSpace.VariableTerrainHighCost">
-            <summary>
-            Variable terrain with a higher cost than standard with an extra cost that is high
-            </summary>
-        </member>
-        <member name="T:GWNorthEngine.AI.AStar.BasePathFinder.RestrictionType">
-            <summary>
-            Restriction type used for searching of the next node
-            </summary>
-        </member>
-        <member name="F:GWNorthEngine.AI.AStar.BasePathFinder.RestrictionType.Restricted">
-            <summary>
-            Can only generates moves in a zig zag pattern, cannot cut corners or move diagonally
-            </summary>
-        </member>
-        <member name="F:GWNorthEngine.AI.AStar.BasePathFinder.RestrictionType.None">
-            <summary>
-            Can generate moves in any direction
-            </summary>
-        </member>
-        <member name="M:GWNorthEngine.AI.AStar.DefaultPathFinder.#ctor(GWNorthEngine.AI.AStar.Params.DefaultPathfinderParams)">
-            <summary>
-            Builds a DefaultPathFinder
-            </summary>
-            <param name="parms">DefaultPathFinderParams object containing the data required to build the PathFinder</param>
-        </member>
-        <member name="M:GWNorthEngine.AI.AStar.DefaultPathFinder.findPath(GWNorthEngine.AI.AStar.PathNode,System.Int32)">
-            <summary>
-            Finds a path based within the board if one is available
-            </summary>
-            <param name="parent">Parent node of the new nodes to be processed</param>
-            <param name="parentsIndex">Index of the parent in the open list</param>
-        </member>
-        <member name="T:GWNorthEngine.AI.AStar.Params.DefaultPathfinderParams">
-            <summary>
-            Contains data required to build a A* PathFinder
             </summary>
         </member>
     </members>
