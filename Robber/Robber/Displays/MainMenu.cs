@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using GWNorthEngine.Model;
 using GWNorthEngine.Model.Params;
@@ -110,7 +111,8 @@ namespace Robber {
 				base.previousMouseOverButton = false;
 			}
 			if (StateManager.getInstance().CurrentTransitionState == StateManager.TransitionState.None) {
-				if (InputManager.getInstance().wasLeftButtonPressed()) {
+				if (InputManager.getInstance().wasLeftButtonPressed() || 
+					InputManager.getInstance().wasButtonPressed(PlayerIndex.One, Buttons.A)) {
 					if (this.playButton.isActorOver(mousePos)) {
 						StateManager.getInstance().CurrentTransitionState = StateManager.TransitionState.TransitionOut;
 						StateManager.getInstance().CurrentGameState = StateManager.GameState.ModeSelect;

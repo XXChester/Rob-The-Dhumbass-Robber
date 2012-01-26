@@ -40,13 +40,18 @@ namespace Robber {
 		#region Support methods
 		protected override void updateDirection(float elapsed) {
 			if (!this.Hiding) {
-				if (InputManager.getInstance().isKeyDown(Keys.Left)) {
+				Vector2 stickValue;
+				if (InputManager.getInstance().isKeyDown(Keys.Left) || 
+					(InputManager.getInstance().isLeftStickMoved(PlayerIndex.One, out stickValue) && stickValue.X == -1)) {
 					base.direction = Person.Direction.Left;
-				} else if (InputManager.getInstance().isKeyDown(Keys.Up)) {
+				} else if (InputManager.getInstance().isKeyDown(Keys.Up) ||
+					(InputManager.getInstance().isLeftStickMoved(PlayerIndex.One, out stickValue) && stickValue.Y == 1)) {
 					base.direction = Person.Direction.Up;
-				} else if (InputManager.getInstance().isKeyDown(Keys.Right)) {
+				} else if (InputManager.getInstance().isKeyDown(Keys.Right) ||
+					(InputManager.getInstance().isLeftStickMoved(PlayerIndex.One, out stickValue) && stickValue.X == 1)) {
 					base.direction = Person.Direction.Right;
-				} else if (InputManager.getInstance().isKeyDown(Keys.Down)) {
+				} else if (InputManager.getInstance().isKeyDown(Keys.Down) ||
+					(InputManager.getInstance().isLeftStickMoved(PlayerIndex.One, out stickValue) && stickValue.Y == -1)) {
 					base.direction = Person.Direction.Down;
 				} else {
 					// if none of our direction keys are down than we are not moving

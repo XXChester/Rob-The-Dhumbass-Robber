@@ -106,7 +106,8 @@ namespace Robber {
 				}
 			}
 			if (StateManager.getInstance().CurrentTransitionState == StateManager.TransitionState.None) {
-				if (InputManager.getInstance().wasLeftButtonPressed()) {
+				if (InputManager.getInstance().wasLeftButtonPressed() ||
+					InputManager.getInstance().wasButtonPressed(PlayerIndex.One, Buttons.A)) {
 					if (this.returnToModeSelectButton.isActorOver(mousePos)) {
 						StateManager.getInstance().CurrentGameState = StateManager.GameState.ModeSelect;
 						StateManager.getInstance().CurrentTransitionState = StateManager.TransitionState.TransitionOut;
@@ -162,7 +163,8 @@ namespace Robber {
 				}
 			}
 			if (StateManager.getInstance().CurrentTransitionState == StateManager.TransitionState.None) {
-				if (InputManager.getInstance().wasKeyPressed(Keys.Escape)) {
+				if (InputManager.getInstance().wasKeyPressed(Keys.Escape) ||
+						InputManager.getInstance().wasButtonPressed(PlayerIndex.One, Buttons.B)) {
 					StateManager.getInstance().CurrentGameState = StateManager.GameState.ModeSelect;
 					StateManager.getInstance().CurrentTransitionState = StateManager.TransitionState.TransitionOut;
 				}

@@ -99,7 +99,8 @@ namespace Robber {
 
 			// Allows the game to exit
 			if (StateManager.getInstance().CurrentGameState == StateManager.GameState.MainMenu) {
-				if (InputManager.getInstance().wasKeyPressed(Keys.Escape)) {
+				if (InputManager.getInstance().wasKeyPressed(Keys.Escape) ||
+						InputManager.getInstance().wasButtonPressed(PlayerIndex.One, Buttons.B)) {
 					this.Exit();
 				}
 			} else if (StateManager.getInstance().CurrentGameState == StateManager.GameState.Exit) {

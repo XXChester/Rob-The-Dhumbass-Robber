@@ -217,7 +217,8 @@ namespace Robber {
 				} else {
 					base.previousMouseOverButton = false;
 				}
-				if (InputManager.getInstance().wasLeftButtonPressed()) {
+				if (InputManager.getInstance().wasLeftButtonPressed() ||
+						InputManager.getInstance().wasButtonPressed(PlayerIndex.One, Buttons.A)) {
 					if (this.startButton.isActorOver(mousePos)) {
 						StateManager.getInstance().CurrentGameState = StateManager.GameState.Active;
 					}
@@ -260,7 +261,8 @@ namespace Robber {
 				}
 				
 				// are we trying to enter a dumpster
-				if (InputManager.getInstance().wasKeyPressed(Keys.Space)) {
+				if (InputManager.getInstance().wasKeyPressed(Keys.Space)  ||
+						InputManager.getInstance().wasButtonPressed(PlayerIndex.One, Buttons.A)) {
 					// check if we are close to a dumpster
 					foreach (Dumpster dumpster in dumpsters) {
 						if (dumpster.BoundingBox.Intersects(this.player.BoundingBox) && dumpster.AcceptingOccupants) {
@@ -362,7 +364,8 @@ namespace Robber {
 			if (StateManager.getInstance().CurrentTransitionState == StateManager.TransitionState.None &&
 				StateManager.getInstance().CurrentGameState == StateManager.GameState.Waiting ||
 				StateManager.getInstance().CurrentGameState == StateManager.GameState.Active) {
-				if (InputManager.getInstance().wasKeyPressed(Keys.Escape)) {
+					if (InputManager.getInstance().wasKeyPressed(Keys.Escape) ||
+						InputManager.getInstance().wasButtonPressed(PlayerIndex.One, Buttons.Start)) {
 					StateManager.getInstance().CurrentGameState = StateManager.GameState.InGameMenu;
 					StateManager.getInstance().CurrentTransitionState = StateManager.TransitionState.TransitionOut;
 				}

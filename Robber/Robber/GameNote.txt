@@ -101,6 +101,7 @@ Replace the programmer art with less crappy programmer art and make the game not
 [*]Instead of a visual cinematic do the following
 	[*]Alter intro SFX to include wood breaking etc at the beginning
 	[*]On transition in have a particle emitter emit a couple dust particles
+[*]XBOX controller support
 
 ===========================
 		ISSUES
@@ -170,7 +171,7 @@ Most of these features were due to scope creep anyway
 		Time
 ============================
 Planning: 2 hours		
-Programming:	70.5 hours
+Programming:	71 hours
 Level Design(Including creating editor via scripting engine):	15 hours	
 Art: 10.5 hours	
 Sound:	5.25 hours	

@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using GWNorthEngine.Model;
 using GWNorthEngine.Model.Params;
@@ -84,7 +85,8 @@ namespace Robber {
 				} else {
 					base.previousMouseOverButton = false;
 				}
-				if (InputManager.getInstance().wasLeftButtonPressed()) {
+				if (InputManager.getInstance().wasLeftButtonPressed() ||
+					InputManager.getInstance().wasButtonPressed(PlayerIndex.One, Buttons.A)) {
 					if (this.replayButton.isActorOver(mousePos)) {
 						StateManager.getInstance().CurrentGameState = StateManager.GameState.Reset;
 						StateManager.getInstance().CurrentTransitionState = StateManager.TransitionState.TransitionOut;

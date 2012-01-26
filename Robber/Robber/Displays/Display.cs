@@ -61,6 +61,15 @@ namespace Robber {
 				this.currentTransitionTime += elapsed;
 			}
 			StateManager.getInstance().PreviousTransitionState = StateManager.getInstance().CurrentTransitionState;
+
+			// XBox controller support
+			if (StateManager.getInstance().CurrentGameState != StateManager.GameState.Active) {
+				Vector2 stickValue;
+				if (InputManager.getInstance().isLeftStickMoved(PlayerIndex.One, out stickValue)) {
+					int multiplier = 10;
+					InputManager.getInstance().updateMousePosition((int)stickValue.X * multiplier, (int)stickValue.Y * multiplier);
+				}
+			}
 		}
 
 		public abstract void render(SpriteBatch spriteBatch);
