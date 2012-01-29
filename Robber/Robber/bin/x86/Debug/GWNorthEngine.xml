@@ -1208,6 +1208,93 @@
             Scrolls downwards
             </summary>
         </member>
+        <member name="T:GWNorthEngine.Model.Params.BaseAnimated2DSpriteParams">
+            <summary>
+            Object containing the data required to build a sprite
+            </summary>
+        </member>
+        <member name="T:GWNorthEngine.Model.Params.Base2DSpriteDrawableParams">
+            <summary>
+            Object containing the required data for the basis to build any SpriteBatch drawable object
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Model.Params.Base2DSpriteDrawableParams.#ctor">
+            <summary>
+            Defines a new Base2DSpriteDrawableParams object with the defaults set. The defaults are listed below;
+            LightColour:	Colour.White
+            Origin:			Vector2(0f,0f)
+            Scale:			Vector2(1f,1f)
+            Rotation:		0f
+            Layer:			0f
+            SpriteEffect:	None
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Params.Base2DSpriteDrawableParams.Position">
+            <summary>
+            Gets or sets the starting position of the sprite
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Params.Base2DSpriteDrawableParams.Origin">
+            <summary>
+            Gets or sets the starting origin of the sprite
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Params.Base2DSpriteDrawableParams.Scale">
+            <summary>
+            Gets or Sets the startign scale of the sprite
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Params.Base2DSpriteDrawableParams.Rotation">
+            <summary>
+            Gets or sets the starting rotation of the sprite
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Params.Base2DSpriteDrawableParams.Layer">
+            <summary>
+            Gets or sets the starting layer to render the sprite at
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Params.Base2DSpriteDrawableParams.LightColour">
+            <summary>
+            Gets or sets the starting colour in which to render the sprite in
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Params.Base2DSpriteDrawableParams.SpriteEffect">
+            <summary>
+            Gets or sets the SpriteEffect technique used for rendering the sprite
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Params.Base2DSpriteDrawableParams.RenderingRectangle">
+            <summary>
+            Gets or sets the Rectangle used to render portions of the Texture
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Model.Params.BaseAnimated2DSpriteParams.#ctor">
+            <summary>
+            Defines a new SpriteParams object with the defaults set. The defaults are listed below;
+            AnimationState: AnimationState.Paused
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Params.BaseAnimated2DSpriteParams.Texture2D">
+            <summary>
+            Gets or sets the texture for a sprite for externally loaded sprites
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Params.BaseAnimated2DSpriteParams.FramesWidth">
+            <summary>
+            Gets or sets the sprites width for the frame loading.
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Params.BaseAnimated2DSpriteParams.FramesHeight">
+            <summary>
+            Gets or sets the sprites height for the frame loading.
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Params.BaseAnimated2DSpriteParams.AnimationParams">
+            <summary>
+            Gets or sets the BaseAnimationManagerParams object for the sprite
+            </summary>
+        </member>
         <member name="T:GWNorthEngine.Input.InputManager">
             <summary>
             Manager that handles the states of different input devices
@@ -1601,62 +1688,6 @@
             Models the data required to draw a static texture to the screen
             </summary>
         </member>
-        <member name="T:GWNorthEngine.Model.Params.Base2DSpriteDrawableParams">
-            <summary>
-            Object containing the required data for the basis to build any SpriteBatch drawable object
-            </summary>
-        </member>
-        <member name="M:GWNorthEngine.Model.Params.Base2DSpriteDrawableParams.#ctor">
-            <summary>
-            Defines a new Base2DSpriteDrawableParams object with the defaults set. The defaults are listed below;
-            LightColour:	Colour.White
-            Origin:			Vector2(0f,0f)
-            Scale:			Vector2(1f,1f)
-            Rotation:		0f
-            Layer:			0f
-            SpriteEffect:	None
-            </summary>
-        </member>
-        <member name="P:GWNorthEngine.Model.Params.Base2DSpriteDrawableParams.Position">
-            <summary>
-            Gets or sets the starting position of the sprite
-            </summary>
-        </member>
-        <member name="P:GWNorthEngine.Model.Params.Base2DSpriteDrawableParams.Origin">
-            <summary>
-            Gets or sets the starting origin of the sprite
-            </summary>
-        </member>
-        <member name="P:GWNorthEngine.Model.Params.Base2DSpriteDrawableParams.Scale">
-            <summary>
-            Gets or Sets the startign scale of the sprite
-            </summary>
-        </member>
-        <member name="P:GWNorthEngine.Model.Params.Base2DSpriteDrawableParams.Rotation">
-            <summary>
-            Gets or sets the starting rotation of the sprite
-            </summary>
-        </member>
-        <member name="P:GWNorthEngine.Model.Params.Base2DSpriteDrawableParams.Layer">
-            <summary>
-            Gets or sets the starting layer to render the sprite at
-            </summary>
-        </member>
-        <member name="P:GWNorthEngine.Model.Params.Base2DSpriteDrawableParams.LightColour">
-            <summary>
-            Gets or sets the starting colour in which to render the sprite in
-            </summary>
-        </member>
-        <member name="P:GWNorthEngine.Model.Params.Base2DSpriteDrawableParams.SpriteEffect">
-            <summary>
-            Gets or sets the SpriteEffect technique used for rendering the sprite
-            </summary>
-        </member>
-        <member name="P:GWNorthEngine.Model.Params.Base2DSpriteDrawableParams.RenderingRectangle">
-            <summary>
-            Gets or sets the Rectangle used to render portions of the Texture
-            </summary>
-        </member>
         <member name="P:GWNorthEngine.Model.Params.StaticDrawable2DParams.Texture">
             <summary>
             Gets or sets the texture to be drawn to the screen
@@ -1704,18 +1735,17 @@
             All the frames from the sprite sheet for the sprite
             </summary>
         </member>
-        <member name="M:GWNorthEngine.Model.Animated2DSprite.#ctor(GWNorthEngine.Model.Params.Animated2DSpriteParams)">
+        <member name="M:GWNorthEngine.Model.Animated2DSprite.#ctor(GWNorthEngine.Model.Params.BaseAnimated2DSpriteParams)">
             <summary>
             Builds a sprite based off of the parms specified
             </summary>
             <param name="parms">SpriteParams object containing all of the data to how this sprite is loaded, its position, colour, etc,etc</param>
         </member>
-        <member name="M:GWNorthEngine.Model.Animated2DSprite.initSprite(Microsoft.Xna.Framework.Graphics.Texture2D,GWNorthEngine.Model.Animated2DSprite.LoadingType,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,GWNorthEngine.Model.Params.BaseAnimationManagerParams)">
+        <member name="M:GWNorthEngine.Model.Animated2DSprite.initSprite(Microsoft.Xna.Framework.Graphics.Texture2D,GWNorthEngine.Model.Params.BaseAnimationManagerParams,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
             <summary>
             Actual building of the sprite
             </summary>
             <param name="texture">Texture2D use to render the sprite</param>
-            <param name="loadingType">Way to load the sprite</param>
             <param name="framesStartWidth">Starting x point of the sprite in the sprite sheet</param>
             <param name="framesStartHeight">Starting y point of the sprite in the sprite sheet</param>
             <param name="frameWidth">X size of a sprites single frame</param>
@@ -1764,21 +1794,6 @@
         <member name="P:GWNorthEngine.Model.Animated2DSprite.Frames">
             <summary>
             Gets or sets the animation frames
-            </summary>
-        </member>
-        <member name="T:GWNorthEngine.Model.Animated2DSprite.LoadingType">
-            <summary>
-            Determines how the sprite sheet is loaded
-            </summary>
-        </member>
-        <member name="F:GWNorthEngine.Model.Animated2DSprite.LoadingType.WholeSheetReadFramesFromFile">
-            <summary>
-            Loads the entire sprite sheet and determines the frames based on the Textures width / the total frames passed in
-            </summary>
-        </member>
-        <member name="F:GWNorthEngine.Model.Animated2DSprite.LoadingType.CustomizedSheetDefineFrames">
-            <summary>
-            Loads the sprite sheet based on the framesStartWidth, framesStartHeight, framesHeight, framesWidth, and the space between the frames
             </summary>
         </member>
         <member name="T:GWNorthEngine.Engine.RunningMode">
@@ -2415,66 +2430,19 @@
             <param name="collisionPoint">Out the Vector2 in which a collision occurred if at all</param>
             <returns>True if a collision was detected, otherwise false</returns>
         </member>
-        <member name="T:GWNorthEngine.Model.Params.Animated2DSpriteParams">
+        <member name="P:GWNorthEngine.Model.Params.Animated2DSpriteLoadSingleCustomRow.FramesStartWidth">
             <summary>
-            Object containing the data required to build a sprite
+            Gets or sets where in the sprite sheet the starting width is.
             </summary>
         </member>
-        <member name="M:GWNorthEngine.Model.Params.Animated2DSpriteParams.#ctor">
+        <member name="P:GWNorthEngine.Model.Params.Animated2DSpriteLoadSingleCustomRow.FramesStartHeight">
             <summary>
-            Defines a new SpriteParams object with the defaults set. The defaults are listed below;
-            AnimationState: AnimationState.Paused
-            LoadingType:	LoadingType.WholeSheetReadFramesFromFile (Internal loaded sprite)
+            Gets or sets where in the sprite sheet the starting height is.
             </summary>
         </member>
-        <member name="P:GWNorthEngine.Model.Params.Animated2DSpriteParams.Content">
+        <member name="P:GWNorthEngine.Model.Params.Animated2DSpriteLoadSingleCustomRow.SpaceBetweenFrames">
             <summary>
-            Gets or sets the ContentManager used when loading a sprites texture internally
-            </summary>
-        </member>
-        <member name="P:GWNorthEngine.Model.Params.Animated2DSpriteParams.TexturesName">
-            <summary>
-            Gets or sets the textures name to load for an internal loading sprite
-            </summary>
-        </member>
-        <member name="P:GWNorthEngine.Model.Params.Animated2DSpriteParams.Texture2D">
-            <summary>
-            Gets or sets the texture for a sprite for externally loaded sprites
-            </summary>
-        </member>
-        <member name="P:GWNorthEngine.Model.Params.Animated2DSpriteParams.LoadingType">
-            <summary>
-            Gets or sets the loading type of the sprite
-            </summary>
-        </member>
-        <member name="P:GWNorthEngine.Model.Params.Animated2DSpriteParams.FramesStartWidth">
-            <summary>
-            Gets or sets where in the sprite sheet the starting width is. ***NOT REQUIRED FOR INTERNALLY LOADED SPRITES***
-            </summary>
-        </member>
-        <member name="P:GWNorthEngine.Model.Params.Animated2DSpriteParams.FramesStartHeight">
-            <summary>
-            Gets or sets where in the sprite sheet the starting height is. ***NOT REQUIRED FOR INTERNALLY LOADED SPRITES***
-            </summary>
-        </member>
-        <member name="P:GWNorthEngine.Model.Params.Animated2DSpriteParams.FramesWidth">
-            <summary>
-            Gets or sets the sprites width for the frame loading. ***NOT REQUIRED FOR INTERNALLY LOADED SPRITES***
-            </summary>
-        </member>
-        <member name="P:GWNorthEngine.Model.Params.Animated2DSpriteParams.FramesHeight">
-            <summary>
-            Gets or sets the sprites height for the frame loading. ***NOT REQUIRED FOR INTERNALLY LOADED SPRITES***
-            </summary>
-        </member>
-        <member name="P:GWNorthEngine.Model.Params.Animated2DSpriteParams.SpaceBetweenFrames">
-            <summary>
-            Gets or Sets the distance between the frames in the sprite sheet to load.  ***NOT REQUIRED FOR INTERNALLY LOADED SPRITES***
-            </summary>
-        </member>
-        <member name="P:GWNorthEngine.Model.Params.Animated2DSpriteParams.AnimationParams">
-            <summary>
-            Gets or sets the BaseAnimationManagerParams object for the sprite
+            Gets or Sets the distance between the frames in the sprite sheet to load.
             </summary>
         </member>
         <member name="T:GWNorthEngine.Model.BaseParticle2DEmitter">
