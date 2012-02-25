@@ -10,6 +10,8 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Media;
 using GWNorthEngine.Model;
 using GWNorthEngine.Model.Params;
+using GWNorthEngine.Logic;
+using GWNorthEngine.Logic.Params;
 using GWNorthEngine.Scripting;
 using GWNorthEngine.Utils;
 using GWNorthEngine.AI.AStar;
@@ -44,7 +46,7 @@ namespace Robber {
 		#region Constructor
 		public Person(ContentManager content, string fileStartsWith, Placement startingLocation, float movementSpeed) {
 			BaseAnimationManagerParams animationParams = new BaseAnimationManagerParams();
-			animationParams.AnimationState = AnimationManager.AnimationState.PlayForward;
+			animationParams.AnimationState = AnimationState.PlayForward;
 			animationParams.FrameRate = FRAME_RATE;
 			animationParams.TotalFrameCount = 4;
 			BaseAnimated2DSpriteParams spriteParams = new Animated2DSpriteLoadSingleRowBasedOnTexture();
@@ -75,7 +77,7 @@ namespace Robber {
 					// we are no longer moving so stop our sprite
 					this.activeSprite.reset(true);
 				} else {
-					this.activeSprite.AnimationManager.State = AnimationManager.AnimationState.PlayForward;
+					this.activeSprite.AnimationManager.State = AnimationState.PlayForward;
 				}
 			}
 			if (this.direction != Direction.None) {
