@@ -76,9 +76,9 @@ namespace Robber {
 			//this.CurrentGameState = GameState.InGameMenu;
 			//this.CurrentGameState = GameState.GameOver;
 			//this.CurrentGameState = GameState.MapSelection;
-			this.GameMode = Mode.TimeAttack;
-			this.CurrentGameState = GameState.InitGame;
-			this.MapInformation = "Map9";
+			//this.GameMode = Mode.TimeAttack;
+			//this.CurrentGameState = GameState.InitGame;
+			//this.MapInformation = "Map1";
 		}
 		#endregion Constructor
 

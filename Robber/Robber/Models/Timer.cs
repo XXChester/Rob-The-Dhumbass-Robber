@@ -129,7 +129,7 @@ namespace Robber {
 			this.time = MathHelper.Clamp(this.time - elapsed, 0f, this.time);// add the elapsed to the timer but ensure we do not negate past 0
 			if (this.time <= 0f) {
 				if (!AIManager.getInstance().PlayerDetected) {
-					SoundManager.getInstance().sfxEngine.playSoundEffect(this.guardsAlertedSfx, true);
+					SoundManager.getInstance().sfxEngine.playSoundEffect(this.guardsAlertedSfx, loop:true);
 				}
 				//Alert the authorities
 				AIManager.getInstance().PlayerDetected = true;

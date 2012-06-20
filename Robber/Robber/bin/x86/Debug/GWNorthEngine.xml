@@ -103,6 +103,13 @@
             </summary>
             <param name="spriteBatch">SpriteBatch object</param>
         </member>
+        <member name="M:GWNorthEngine.Model.Base2DSpriteDrawable.render(Microsoft.Xna.Framework.Graphics.SpriteBatch,Microsoft.Xna.Framework.Vector2)">
+            <summary>
+            Abstract method that forces the children objects to implement render
+            </summary>
+            <param name="spriteBatch">SpriteBatch object</param>
+            <param name="positionOffset">Offset to render the object at</param>
+        </member>
         <member name="P:GWNorthEngine.Model.Base2DSpriteDrawable.Rotation">
             <summary>
             Gets or sets the rotational value for the sprite
@@ -175,11 +182,12 @@
             </summary>
             <param name="elapsed">Time passed sense the last time the method was called</param>
         </member>
-        <member name="M:GWNorthEngine.Model.Line2D.render(Microsoft.Xna.Framework.Graphics.SpriteBatch)">
+        <member name="M:GWNorthEngine.Model.Line2D.render(Microsoft.Xna.Framework.Graphics.SpriteBatch,Microsoft.Xna.Framework.Vector2)">
             <summary>
-            Rendering of the line
+            Renders the sprite to the screen
             </summary>
-            <param name="spriteBatch">SpriteBatch object</param>
+            <param name="spriteBatch">SpriteBatch object used to render the sprite</param>
+            <param name="positionOffset">Offset to render the object at</param>
         </member>
         <member name="M:GWNorthEngine.Model.Line2D.dispose">
             <summary>
@@ -194,6 +202,31 @@
         <member name="P:GWNorthEngine.Model.Line2D.EndPosition">
             <summary>
             Gets or sets the end position of the line
+            </summary>
+        </member>
+        <member name="T:GWNorthEngine.Logic.Params.ClampableCamera2DParams">
+            <summary>
+            Models the data required to build a ClampableCamera2D object
+            </summary>
+        </member>
+        <member name="T:GWNorthEngine.Logic.Params.Camera2DParams">
+            <summary>
+            Models the data required to build a Camera2D object
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Logic.Params.Camera2DParams.StartingPosition">
+            <summary>
+            Gets or sets the starting position of the camera
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Logic.Params.ClampableCamera2DParams.MaxClamp">
+            <summary>
+            Gets or sets the Maximum values to clamp the camera at
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Logic.Params.ClampableCamera2DParams.MinClamp">
+            <summary>
+            Gets or sets the Minimum values to clamp the camera at
             </summary>
         </member>
         <member name="T:GWNorthEngine.AI.AStar.DefaultPathFinder">
@@ -467,6 +500,36 @@
             <param name="value">Tile placer value</param>
             <returns>AStar representation of the value passed in</returns>
         </member>
+        <member name="T:GWNorthEngine.Logic.AnimationState">
+            <summary>
+            Animation state of the object
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Logic.AnimationState.Paused">
+            <summary>
+            Animation is paused
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Logic.AnimationState.PlayForward">
+            <summary>
+            Animation is playing forawrd
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Logic.AnimationState.PlayReversed">
+            <summary>
+            Animation is playing in reverse
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Logic.AnimationState.PlayForwardOnce">
+            <summary>
+            Animation plays through forward 1 time
+            </summary>
+        </member>
+        <member name="T:GWNorthEngine.Audio.SFXEngine">
+            <summary>
+            Sound effect engine, properly plays sound effects
+            </summary>
+        </member>
         <member name="T:GWNorthEngine.Audio.BaseSoundEngine">
             <summary>
             Base implementation of a sound engine
@@ -498,44 +561,11 @@
             Gets or sets whether to play audio or not
             </summary>
         </member>
-        <member name="T:GWNorthEngine.Audio.SFXEngine">
-            <summary>
-            Sound effect engine, properly plays sound effects
-            </summary>
-        </member>
         <member name="M:GWNorthEngine.Audio.SFXEngine.#ctor(GWNorthEngine.Audio.Params.SFXEngineParams)">
             <summary>
             Builds a SFXEngine based on the parameter objects data
             </summary>
             <param name="parms">SFXEngineParams object containing the data required to build the SFXEngine</param>
-        </member>
-        <member name="M:GWNorthEngine.Audio.SFXEngine.playSoundEffect(Microsoft.Xna.Framework.Audio.SoundEffect)">
-            <summary>
-            Plays a sound effect with the generic data of the SFXEngine such as volume, etc
-            </summary>
-            <param name="sfx">SoundEffect to play</param>
-        </member>
-        <member name="M:GWNorthEngine.Audio.SFXEngine.playSoundEffect(Microsoft.Xna.Framework.Audio.SoundEffect,System.Boolean)">
-            <summary>
-            Plays a sound effect with the generic data of the SFXEngine such as volume, etc
-            </summary>
-            <param name="sfx">SoundEffect to play</param>
-            <param name="loop">Determines whether to loop the sound effect</param>
-        </member>
-        <member name="M:GWNorthEngine.Audio.SFXEngine.playSoundEffect(Microsoft.Xna.Framework.Audio.SoundEffect,System.Single)">
-            <summary>
-            Plays a sound effect with a specific volume
-            </summary>
-            <param name="sfx">SoundEffect to play</param>
-            <param name="volume">Volume to play the sound effect at</param>
-        </member>
-        <member name="M:GWNorthEngine.Audio.SFXEngine.playSoundEffect(Microsoft.Xna.Framework.Audio.SoundEffect,System.Single,System.Boolean)">
-            <summary>
-            Plays a sound effect with a specific volume
-            </summary>
-            <param name="sfx">SoundEffect to play</param>
-            <param name="volume">Volume to play the sound effect at</param>
-            <param name="loop">Determines whether to loop the sound effect</param>
         </member>
         <member name="M:GWNorthEngine.Audio.SFXEngine.playSoundEffect(Microsoft.Xna.Framework.Audio.SoundEffect,System.Single,System.Single,System.Single,System.Boolean)">
             <summary>
@@ -563,11 +593,6 @@
         <member name="M:GWNorthEngine.Audio.SFXEngine.update">
             <summary>
             Monitors current SoundEffectInstances and flags them for cleanup if they have finished playing
-            </summary>
-        </member>
-        <member name="M:GWNorthEngine.Audio.SFXEngine.Finalize">
-            <summary>
-            Cleans up the SFXEngines resources
             </summary>
         </member>
         <member name="M:GWNorthEngine.Audio.SFXEngine.dispose">
@@ -694,6 +719,52 @@
         <member name="P:GWNorthEngine.Model.Params.ColouredButtonParams.TextsPosition">
             <summary>
             Gets or sets the Texts position
+            </summary>
+        </member>
+        <member name="T:GWNorthEngine.Logic.KeyFrameData">
+            <summary>
+            Models the data required for Key Frame Animation
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Logic.KeyFrameData.#ctor(System.Int32,System.Int32,System.Single,System.String,System.Boolean)">
+            <summary>
+            Constructs a KeyFrameData object
+            </summary>
+            <param name="startingKeyFrame">Frame the animation starts at</param>
+            <param name="endingKeyFrame">Frame the animation ends at</param>
+            <param name="frameRate">Frame rate to run the animation set at</param>
+            <param name="name">Name of the KeyFrameData</param>
+            <param name="resetAnimationOnSet">Determines whether we want to rest the animation when we activate this object</param>
+        </member>
+        <member name="M:GWNorthEngine.Logic.KeyFrameData.Clone">
+            <summary>
+            Clones the KeyFrameData object
+            </summary>
+            <returns>Cloned KeyFrameData object</returns>
+        </member>
+        <member name="P:GWNorthEngine.Logic.KeyFrameData.StartingKeyFrame">
+            <summary>
+            Gets or sets the frame we start animating from
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Logic.KeyFrameData.EndingKeyFrame">
+            <summary>
+            Gets or sets the frame we are to end with
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Logic.KeyFrameData.FrameRate">
+            <summary>
+            Gets or sets the Frame Rate for the animation set
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Logic.KeyFrameData.Name">
+            <summary>
+            Gets or sets the Name of the KeyFrameData
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Logic.KeyFrameData.ResetAnimationOnSet">
+            <summary>
+            Gets or sets whether we want to reset the animation when we activate this KeyFrameData object
             </summary>
         </member>
         <member name="T:GWNorthEngine.AI.AStar.Params.BasePathFinderParams">
@@ -1028,54 +1099,26 @@
             <param name="gameTime">GameTime object</param>
             <returns>Current frames per second (FPS)</returns>
         </member>
-        <member name="T:GWNorthEngine.Engine.Params.DefaultCameraParams">
+        <member name="T:GWNorthEngine.Logic.Camera2D">
             <summary>
-            Object containing the data required to build a default camera
+            Models the data required for a camera to be used in 2D space
             </summary>
         </member>
-        <member name="T:GWNorthEngine.Engine.Params.CameraParams">
+        <member name="M:GWNorthEngine.Logic.Camera2D.#ctor(GWNorthEngine.Logic.Params.Camera2DParams)">
             <summary>
-            Object containing the data required to build a camera
+            Builds a Camer2D object based on the Camera2DParams object passed in
             </summary>
+            <param name="parms">Camera2DParams object containing the data required to build the camera</param>
         </member>
-        <member name="P:GWNorthEngine.Engine.Params.CameraParams.Position">
+        <member name="M:GWNorthEngine.Logic.Camera2D.update(Microsoft.Xna.Framework.Vector2)">
             <summary>
-            Gets or Sets the position of the Camera
+            Updates the cameras position by the amount pass in
             </summary>
+            <param name="moveBy">Amount to move the camera by</param>
         </member>
-        <member name="P:GWNorthEngine.Engine.Params.CameraParams.Target">
+        <member name="P:GWNorthEngine.Logic.Camera2D.Position">
             <summary>
-            Gets or sets the cameras target or look at position
-            </summary>
-        </member>
-        <member name="P:GWNorthEngine.Engine.Params.CameraParams.Up">
-            <summary>
-            Gets or sets the Up vector of the camera
-            </summary>
-        </member>
-        <member name="P:GWNorthEngine.Engine.Params.CameraParams.Rotation">
-            <summary>
-            Gets or sets the rotation of the camera
-            </summary>
-        </member>
-        <member name="P:GWNorthEngine.Engine.Params.CameraParams.ViewMatrix">
-            <summary>
-            Gets or sets the view matrix of the camera
-            </summary>
-        </member>
-        <member name="P:GWNorthEngine.Engine.Params.CameraParams.ProjectionMatrix">
-            <summary>
-            Gets or sets the projection matrix of the camera
-            </summary>
-        </member>
-        <member name="M:GWNorthEngine.Engine.Params.DefaultCameraParams.#ctor">
-            <summary>
-            Constructs a default camera setup with the following values
-            Position:			Vector3(0f,0f,50f)
-            Target:				Vector3.Zero
-            UpVector:			Vector3.Up
-            ViewMatrix:			Matrix.Identity
-            ProjectionMatrix:	Matrix.createPerspectiveFOV(45f, 16:9, .5f, 5000f)
+            Gets the position of the camera
             </summary>
         </member>
         <member name="T:GWNorthEngine.AI.AStar.PathNode">
@@ -1512,6 +1555,62 @@
             Returns a Vector2 of the mouses position
             </summary>
         </member>
+        <member name="T:GWNorthEngine.Logic.Camera3D">
+            <summary>
+            Models the data required for a camera to be used in 3D space
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Logic.Camera3D.#ctor(GWNorthEngine.Logic.Params.Camera3DParams)">
+            <summary>
+            Creates a Camera based on the data parameter object
+            </summary>
+            <param name="parms">CameraParams object</param>
+        </member>
+        <member name="M:GWNorthEngine.Logic.Camera3D.updateViewMatrix">
+            <summary>
+            Updates the view matrix based on the cameras current position, target and up vector
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Logic.Camera3D.updateRotationMatrix">
+            <summary>
+            Updates the rotation matrix and applies it to the cameras position, target and up vector (Yaw, Pitch and Roll)
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Logic.Camera3D.update">
+            <summary>
+            Updates the camera
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Logic.Camera3D.Position">
+            <summary>
+            Gets or Sets the position of the Camera
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Logic.Camera3D.Target">
+            <summary>
+            Gets or sets the cameras target or look at position
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Logic.Camera3D.Up">
+            <summary>
+            Gets or sets the Up vector of the camera
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Logic.Camera3D.Rotation">
+            <summary>
+            Gets or sets the rotation of the camera
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Logic.Camera3D.ViewMatrix">
+            <summary>
+            Gets or sets the view matrix of the camera
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Logic.Camera3D.ProjectionMatrix">
+            <summary>
+            Gets or sets the projection matrix of the camera
+            </summary>
+        </member>
         <member name="T:GWNorthEngine.Model.BaseParticle2D">
             <summary>
             Models the basis of every particle
@@ -1564,11 +1663,12 @@
             </summary>
             <param name="elapsed">Time since the last time the method was called</param>
         </member>
-        <member name="M:GWNorthEngine.Model.BaseParticle2D.render(Microsoft.Xna.Framework.Graphics.SpriteBatch)">
+        <member name="M:GWNorthEngine.Model.BaseParticle2D.render(Microsoft.Xna.Framework.Graphics.SpriteBatch,Microsoft.Xna.Framework.Vector2)">
             <summary>
-            Renders the particle to screen
+            Renders the sprite to the screen
             </summary>
-            <param name="spriteBatch">SpriteBatch object used to render the particle</param>
+            <param name="spriteBatch">SpriteBatch object used to render the sprite</param>
+            <param name="positionOffset">Offset to render the object at</param>
         </member>
         <member name="P:GWNorthEngine.Model.BaseParticle2D.TimeAlive">
             <summary>
@@ -1758,11 +1858,6 @@
             <param name="animationParams">BaseAnimationManagerParams object containing the animation information for the sprite</param>
             <param name="maxColumnsToARow">Maximum columns to a row in the sprite sheet</param>
         </member>
-        <member name="M:GWNorthEngine.Model.Animated2DSprite.reset">
-            <summary>
-            Resets the sprite
-            </summary>
-        </member>
         <member name="M:GWNorthEngine.Model.Animated2DSprite.reset(System.Boolean)">
             <summary>
             Resets the sprite with the option to make the animation sequence fire as soon as a "Play" state is entered
@@ -1775,11 +1870,12 @@
             </summary>
             <param name="elapsed"></param>
         </member>
-        <member name="M:GWNorthEngine.Model.Animated2DSprite.render(Microsoft.Xna.Framework.Graphics.SpriteBatch)">
+        <member name="M:GWNorthEngine.Model.Animated2DSprite.render(Microsoft.Xna.Framework.Graphics.SpriteBatch,Microsoft.Xna.Framework.Vector2)">
             <summary>
             Renders the sprite to the screen
             </summary>
             <param name="spriteBatch">SpriteBatch object used to render the sprite</param>
+            <param name="positionOffset">Offset to render the object at</param>
         </member>
         <member name="M:GWNorthEngine.Model.Animated2DSprite.dispose">
             <summary>
@@ -1814,62 +1910,6 @@
         <member name="F:GWNorthEngine.Engine.RunningMode.Debug">
             <summary>
             Front end application is in debug mode
-            </summary>
-        </member>
-        <member name="T:GWNorthEngine.Engine.Camera">
-            <summary>
-            Models the data required for a camera to be used in 3D space
-            </summary>
-        </member>
-        <member name="M:GWNorthEngine.Engine.Camera.#ctor(GWNorthEngine.Engine.Params.CameraParams)">
-            <summary>
-            Creates a Camera based on the data parameter object
-            </summary>
-            <param name="parms">CameraParams object</param>
-        </member>
-        <member name="M:GWNorthEngine.Engine.Camera.updateViewMatrix">
-            <summary>
-            Updates the view matrix based on the cameras current position, target and up vector
-            </summary>
-        </member>
-        <member name="M:GWNorthEngine.Engine.Camera.updateRotationMatrix">
-            <summary>
-            Updates the rotation matrix and applies it to the cameras position, target and up vector (Yaw, Pitch and Roll)
-            </summary>
-        </member>
-        <member name="M:GWNorthEngine.Engine.Camera.update">
-            <summary>
-            Updates the camera
-            </summary>
-        </member>
-        <member name="P:GWNorthEngine.Engine.Camera.Position">
-            <summary>
-            Gets or Sets the position of the Camera
-            </summary>
-        </member>
-        <member name="P:GWNorthEngine.Engine.Camera.Target">
-            <summary>
-            Gets or sets the cameras target or look at position
-            </summary>
-        </member>
-        <member name="P:GWNorthEngine.Engine.Camera.Up">
-            <summary>
-            Gets or sets the Up vector of the camera
-            </summary>
-        </member>
-        <member name="P:GWNorthEngine.Engine.Camera.Rotation">
-            <summary>
-            Gets or sets the rotation of the camera
-            </summary>
-        </member>
-        <member name="P:GWNorthEngine.Engine.Camera.ViewMatrix">
-            <summary>
-            Gets or sets the view matrix of the camera
-            </summary>
-        </member>
-        <member name="P:GWNorthEngine.Engine.Camera.ProjectionMatrix">
-            <summary>
-            Gets or sets the projection matrix of the camera
             </summary>
         </member>
         <member name="T:GWNorthEngine.Audio.Params.SFXEngineParams">
@@ -1983,6 +2023,15 @@
             <param name="boundingBox">BoundingBox object to draw</param>
             <param name="debugColour">Colour to draw the box in</param>
         </member>
+        <member name="M:GWNorthEngine.Utils.DebugUtils.drawBoundingBox(Microsoft.Xna.Framework.Graphics.SpriteBatch,Microsoft.Xna.Framework.BoundingBox,Microsoft.Xna.Framework.Color,Microsoft.Xna.Framework.Vector2)">
+            <summary>
+            Draws a bounding box using Line2D's
+            </summary>
+            <param name="spriteBatch">SpriteBatch object used to draw the bounding box</param>
+            <param name="boundingBox">BoundingBox object to draw</param>
+            <param name="debugColour">Colour to draw the box in</param>
+            <param name="positionOffset">Offset to render the object at</param>
+        </member>
         <member name="M:GWNorthEngine.Utils.DebugUtils.drawBoundingBox(Microsoft.Xna.Framework.Graphics.SpriteBatch,Microsoft.Xna.Framework.BoundingBox,Microsoft.Xna.Framework.Color,Microsoft.Xna.Framework.Graphics.Texture2D)">
             <summary>
             Draws a bounding box using Line2D's
@@ -1991,6 +2040,16 @@
             <param name="boundingBox">BoundingBox object to draw</param>
             <param name="debugColour">Colour to draw the box in</param>
             <param name="lineTexture">Texture2D used for drawing the bounding box</param>
+        </member>
+        <member name="M:GWNorthEngine.Utils.DebugUtils.drawBoundingBox(Microsoft.Xna.Framework.Graphics.SpriteBatch,Microsoft.Xna.Framework.BoundingBox,Microsoft.Xna.Framework.Color,Microsoft.Xna.Framework.Graphics.Texture2D,Microsoft.Xna.Framework.Vector2)">
+            <summary>
+            Draws a bounding box using Line2D's
+            </summary>
+            <param name="spriteBatch">SpriteBatch object used to draw the bounding box</param>
+            <param name="boundingBox">BoundingBox object to draw</param>
+            <param name="debugColour">Colour to draw the box in</param>
+            <param name="lineTexture">Texture2D used for drawing the bounding box</param>
+            <param name="positionOffset">Offset to render the object at</param>
         </member>
         <member name="M:GWNorthEngine.Utils.DebugUtils.drawBoundingSphere(Microsoft.Xna.Framework.Graphics.SpriteBatch,Microsoft.Xna.Framework.BoundingSphere,Microsoft.Xna.Framework.Color)">
             <summary>
@@ -2028,6 +2087,17 @@
             <param name="debugColour">Colour to draw the Vectors in</param>
             <param name="lineTexture">Texture2D used for drawing the vectors</param>
         </member>
+        <member name="M:GWNorthEngine.Utils.DebugUtils.drawVector3s(Microsoft.Xna.Framework.Graphics.SpriteBatch,Microsoft.Xna.Framework.Vector3,Microsoft.Xna.Framework.Vector3,Microsoft.Xna.Framework.Color,Microsoft.Xna.Framework.Graphics.Texture2D,Microsoft.Xna.Framework.Vector2)">
+            <summary>
+            Draws a set of vector 3s
+            </summary>
+            <param name="spriteBatch">SpriteBatch object used to draw the vectors</param>
+            <param name="max">Max position to draw</param>
+            <param name="min">Min position to draw</param>
+            <param name="debugColour">Colour to draw the Vectors in</param>
+            <param name="lineTexture">Texture2D used for drawing the vectors</param>
+            <param name="positionOffset">Offset to render the object at</param>
+        </member>
         <member name="T:GWNorthEngine.Model.Text2D">
             <summary>
             Text class for writing text to the screen
@@ -2055,11 +2125,12 @@
             </summary>
             <param name="elapsed">time elapsed sense the last method call</param>
         </member>
-        <member name="M:GWNorthEngine.Model.Text2D.render(Microsoft.Xna.Framework.Graphics.SpriteBatch)">
+        <member name="M:GWNorthEngine.Model.Text2D.render(Microsoft.Xna.Framework.Graphics.SpriteBatch,Microsoft.Xna.Framework.Vector2)">
             <summary>
-            Renders the text to the screen
+            Renders the sprite to the screen
             </summary>
-            <param name="spriteBatch">SpriteBatch object used to render the text</param>
+            <param name="spriteBatch">SpriteBatch object used to render the sprite</param>
+            <param name="positionOffset">Offset to render the object at</param>
         </member>
         <member name="P:GWNorthEngine.Model.Text2D.WrittenText">
             <summary>
@@ -2325,6 +2396,75 @@
             Gets or sets the ID of the button
             </summary>
         </member>
+        <member name="T:GWNorthEngine.Logic.Params.DefaultCamera3DParams">
+            <summary>
+            Object containing the data required to build a default camera
+            </summary>
+        </member>
+        <member name="T:GWNorthEngine.Logic.Params.Camera3DParams">
+            <summary>
+            Object containing the data required to build a camera
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Logic.Params.Camera3DParams.Position">
+            <summary>
+            Gets or Sets the position of the Camera
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Logic.Params.Camera3DParams.Target">
+            <summary>
+            Gets or sets the cameras target or look at position
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Logic.Params.Camera3DParams.Up">
+            <summary>
+            Gets or sets the Up vector of the camera
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Logic.Params.Camera3DParams.Rotation">
+            <summary>
+            Gets or sets the rotation of the camera
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Logic.Params.Camera3DParams.ViewMatrix">
+            <summary>
+            Gets or sets the view matrix of the camera
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Logic.Params.Camera3DParams.ProjectionMatrix">
+            <summary>
+            Gets or sets the projection matrix of the camera
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Logic.Params.DefaultCamera3DParams.#ctor">
+            <summary>
+            Constructs a default camera setup with the following values
+            Position:			Vector3(0f,0f,50f)
+            Target:				Vector3.Zero
+            UpVector:			Vector3.Up
+            ViewMatrix:			Matrix.Identity
+            ProjectionMatrix:	Matrix.createPerspectiveFOV(45f, 16:9, .5f, 5000f)
+            </summary>
+        </member>
+        <member name="T:GWNorthEngine.Logic.ClampableCamera2D">
+            <summary>
+            Models the data required for a clampable(confined to a certain space) camera to be used in 2D space
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Logic.ClampableCamera2D.#ctor(GWNorthEngine.Logic.Params.ClampableCamera2DParams)">
+            <summary>
+            Builds a ClampableCamera2D object based on the ClampableCamera2DParams object passed in
+            </summary>
+            <param name="parms">ClampableCamera2DParams object containing the data required to build the camera</param>
+        </member>
+        <member name="M:GWNorthEngine.Logic.ClampableCamera2D.update(Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Vector2,System.Single)">
+            <summary>
+            Updates the cameras position based on the amount passed in but taking into account the cameras clamping restrictions
+            </summary>
+            <param name="moveBy">Amount to move the camera by</param>
+            <param name="fromPosition">Position the clamping is to be based on</param>
+            <param name="divisionFactor">Amount the position should be divided by to account for clamping</param>
+        </member>
         <member name="T:GWNorthEngine.Audio.MusicEngine">
             <summary>
             Music engine, handles playing a play list
@@ -2413,6 +2553,32 @@
             Gets or sets the volume of the engine
             </summary>
         </member>
+        <member name="T:GWNorthEngine.Logic.Params.BaseAnimationManagerParams">
+            <summary>
+            Object containing the required data to build the AnimationManager object
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Logic.Params.BaseAnimationManagerParams.#ctor">
+            <summary>
+            Builds the default settings for setting up the AnimationManager object. The default settings are below;
+            AnimationState:		Paused
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Logic.Params.BaseAnimationManagerParams.FrameRate">
+            <summary>
+            Gets or sets the rate in which the object animates at
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Logic.Params.BaseAnimationManagerParams.TotalFrameCount">
+            <summary>
+            Gets or sets the total animation frame count
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Logic.Params.BaseAnimationManagerParams.AnimationState">
+            <summary>
+            Gets or sets the AnimationState of the object
+            </summary>
+        </member>
         <member name="T:GWNorthEngine.AI.AStar.Params.DefaultPathfinderParams">
             <summary>
             Contains data required to build a A* PathFinder
@@ -2453,6 +2619,85 @@
             <param name="checkWith">Single bounding box to check against</param>
             <returns>True if a collision was found, otherwise false</returns>
         </member>
+        <member name="T:GWNorthEngine.Logic.AnimationManager">
+            <summary>
+            Animation manager class which handles the animation steps for anything animated
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Logic.AnimationManager.animationState">
+            <summary>
+            Animation state for the animation sequence
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Logic.AnimationManager.frameRate">
+            <summary>
+            Frame rate at which the object is animated
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Logic.AnimationManager.totalElapsed">
+            <summary>
+            Time elapsed sense we last animated the object
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Logic.AnimationManager.currentFrame">
+            <summary>
+            Current frame we are at in the animation line
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Logic.AnimationManager.#ctor(GWNorthEngine.Logic.Params.BaseAnimationManagerParams)">
+            <summary>
+            Builds an AnimationManager based on the AnimationManagerParams object passed in
+            </summary>
+            <param name="parms">BaseAnimationManagerParams object containing the data required to load the Animation Manager object</param>
+        </member>
+        <member name="M:GWNorthEngine.Logic.AnimationManager.setNextFrame(System.Int32)">
+            <summary>
+            Handles incrementing the animation steps
+            </summary>
+            <param name="maxFrameCount">Max frames used to reset reverse sprites</param>
+        </member>
+        <member name="M:GWNorthEngine.Logic.AnimationManager.step(System.Int32)">
+            <summary>
+            Steps the animation frame ignoring timing
+            </summary>
+            <param name="maxFrameCount">Max frames used to reset reverse sprites</param>
+        </member>
+        <member name="M:GWNorthEngine.Logic.AnimationManager.resetAnimation(System.Int32,System.Boolean)">
+            <summary>
+            Resets the animation sequence that the AnimationManager is controlling and has an option to set the animation so that it will
+            fire as soon the state is changed to a "play" state
+            </summary>
+            <param name="maxFrameCount">Max frames used to reset reverse sprites</param>
+            <param name="cockAnimation">Determines if we are setting the animation up to fire right away as soon as a "Play" state is entered or whether
+            we want it set to replay the whole wait time</param>
+        </member>
+        <member name="M:GWNorthEngine.Logic.AnimationManager.update(System.Single,System.Int32)">
+            <summary>
+            Handles whether it is time to update the animation step or not
+            </summary>
+            <param name="elapsed">Time elapsed sense the last call</param>
+            <param name="maxFrameCount">Maximum frames of the object</param>
+        </member>
+        <member name="P:GWNorthEngine.Logic.AnimationManager.State">
+            <summary>
+            Gets or sets the animation state for the animation manager
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Logic.AnimationManager.TotalElapsed">
+            <summary>
+            Gets or sets the total elapsed time
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Logic.AnimationManager.FrameRate">
+            <summary>
+            Gets or sets the frame rate in which the sprite animates
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Logic.AnimationManager.CurrentFrame">
+            <summary>
+            Gets the current frame of the object
+            </summary>
+        </member>
         <member name="T:GWNorthEngine.Model.Params.Animated2DSpriteLoadSingleCustomRow">
             <summary>
             Object used to load an Animated2DSprite object that is a custom single row in a sprite sheet
@@ -2471,6 +2716,16 @@
         <member name="P:GWNorthEngine.Model.Params.Animated2DSpriteLoadSingleCustomRow.SpaceBetweenFrames">
             <summary>
             Gets or Sets the distance between the frames in the sprite sheet to load.
+            </summary>
+        </member>
+        <member name="T:GWNorthEngine.Logic.Params.KeyFrameAnimationManagerParams">
+            <summary>
+            Models the data required to build a KeyFrameAnimationManager object
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Logic.Params.KeyFrameAnimationManagerParams.KeyFrameData">
+            <summary>
+            Gets or sets the KeyFrameData object and also the bases frame rate
             </summary>
         </member>
         <member name="T:GWNorthEngine.Model.BaseParticle2DEmitter">
@@ -2620,11 +2875,12 @@
             </summary>
             <param name="elapsed">time elapsed sense the last method call</param>
         </member>
-        <member name="M:GWNorthEngine.Model.StaticDrawable2D.render(Microsoft.Xna.Framework.Graphics.SpriteBatch)">
+        <member name="M:GWNorthEngine.Model.StaticDrawable2D.render(Microsoft.Xna.Framework.Graphics.SpriteBatch,Microsoft.Xna.Framework.Vector2)">
             <summary>
-            Renders the texture to the screen
+            Renders the sprite to the screen
             </summary>
-            <param name="spriteBatch">SpriteBatch object used to render the etxture</param>
+            <param name="spriteBatch">SpriteBatch object used to render the sprite</param>
+            <param name="positionOffset">Offset to render the object at</param>
         </member>
         <member name="M:GWNorthEngine.Model.StaticDrawable2D.dispose">
             <summary>
@@ -2804,6 +3060,43 @@
             <param name="paramType">Type of the value</param>
             <returns>Clean parameter</returns>
         </member>
+        <member name="T:GWNorthEngine.Logic.KeyFrameAnimationManager">
+            <summary>
+            Animation manager class which handles the animation steps for anything animated between a defined set of frames
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Logic.KeyFrameAnimationManager.#ctor(GWNorthEngine.Logic.Params.KeyFrameAnimationManagerParams)">
+            <summary>
+            Constructs a KeyFrameAnimationManager object based on the KeyFrameAnimationManagerParms object passed in
+            </summary>
+            <param name="parms"></param>
+        </member>
+        <member name="M:GWNorthEngine.Logic.KeyFrameAnimationManager.setNextFrame(System.Int32)">
+            <summary>
+            Handles incrementing the animation steps within the KeyFrameData object
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Logic.KeyFrameAnimationManager.resetAnimation(System.Boolean)">
+            <summary>
+            Resets the animation sequence that the KeyFrameAnimationManager is controlling
+            </summary>
+            <param name="cockAnimation">Determines if we are setting the animation up to fire right away as soon as a "Play" state is
+            entered or whether we want it set to replay the whole wait time</param>
+        </member>
+        <member name="M:GWNorthEngine.Logic.KeyFrameAnimationManager.resetAnimation(System.Int32,System.Boolean)">
+            <summary>
+            Resets the animation sequence that the KeyFrameAnimationManager is controlling and has an option to set the animation so 
+            that it will fire as soon the state is changed to a "play" state
+            </summary>
+            <param name="maxFrameCount">NOT USED BUT required as we are overloading the base</param>
+            <param name="cockAnimation">Determines if we are setting the animation up to fire right away as soon as a "Play" state is
+            entered or whether we want it set to replay the whole wait time</param>
+        </member>
+        <member name="P:GWNorthEngine.Logic.KeyFrameAnimationManager.KeyFrameData">
+            <summary>
+            Gets or sets the KeyFrameData object as well as sets the parents current frame, and frame rate
+            </summary>
+        </member>
         <member name="T:GWNorthEngine.Model.Params.BaseModelParams">
             <summary>
             Object containing the data required to build a 3D model
@@ -2956,7 +3249,7 @@
             </summary>
             <param name="parms"></param>
         </member>
-        <member name="M:GWNorthEngine.Model.BaseModel.render(GWNorthEngine.Engine.Camera)">
+        <member name="M:GWNorthEngine.Model.BaseModel.render(GWNorthEngine.Logic.Camera3D)">
             <summary>
             Renders the model
             <param name="camera">Camera the model uses to render with</param>
@@ -3000,216 +3293,6 @@
         <member name="F:GWNorthEngine.Input.MouseButton.Middle">
             <summary>
             Middle mouse button
-            </summary>
-        </member>
-        <member name="T:GWNorthEngine.Logic.AnimationState">
-            <summary>
-            Animation state of the object
-            </summary>
-        </member>
-        <member name="F:GWNorthEngine.Logic.AnimationState.Paused">
-            <summary>
-            Animation is paused
-            </summary>
-        </member>
-        <member name="F:GWNorthEngine.Logic.AnimationState.PlayForward">
-            <summary>
-            Animation is playing forawrd
-            </summary>
-        </member>
-        <member name="F:GWNorthEngine.Logic.AnimationState.PlayReversed">
-            <summary>
-            Animation is playing in reverse
-            </summary>
-        </member>
-        <member name="F:GWNorthEngine.Logic.AnimationState.PlayForwardOnce">
-            <summary>
-            Animation plays through forward 1 time
-            </summary>
-        </member>
-        <member name="T:GWNorthEngine.Logic.Params.BaseAnimationManagerParams">
-            <summary>
-            Object containing the required data to build the AnimationManager object
-            </summary>
-        </member>
-        <member name="M:GWNorthEngine.Logic.Params.BaseAnimationManagerParams.#ctor">
-            <summary>
-            Builds the default settings for setting up the AnimationManager object. The default settings are below;
-            AnimationState:		Paused
-            </summary>
-        </member>
-        <member name="P:GWNorthEngine.Logic.Params.BaseAnimationManagerParams.FrameRate">
-            <summary>
-            Gets or sets the rate in which the object animates at
-            </summary>
-        </member>
-        <member name="P:GWNorthEngine.Logic.Params.BaseAnimationManagerParams.TotalFrameCount">
-            <summary>
-            Gets or sets the total animation frame count
-            </summary>
-        </member>
-        <member name="P:GWNorthEngine.Logic.Params.BaseAnimationManagerParams.AnimationState">
-            <summary>
-            Gets or sets the AnimationState of the object
-            </summary>
-        </member>
-        <member name="T:GWNorthEngine.Logic.Params.KeyFrameAnimationManagerParams">
-            <summary>
-            Models the data required to build a KeyFrameAnimationManager object
-            </summary>
-        </member>
-        <member name="P:GWNorthEngine.Logic.Params.KeyFrameAnimationManagerParams.KeyFrameData">
-            <summary>
-            Gets or sets the KeyFrameData object and also the bases frame rate
-            </summary>
-        </member>
-        <member name="T:GWNorthEngine.Logic.AnimationManager">
-            <summary>
-            Animation manager class which handles the animation steps for anything animated
-            </summary>
-        </member>
-        <member name="F:GWNorthEngine.Logic.AnimationManager.animationState">
-            <summary>
-            Animation state for the animation sequence
-            </summary>
-        </member>
-        <member name="F:GWNorthEngine.Logic.AnimationManager.frameRate">
-            <summary>
-            Frame rate at which the object is animated
-            </summary>
-        </member>
-        <member name="F:GWNorthEngine.Logic.AnimationManager.totalElapsed">
-            <summary>
-            Time elapsed sense we last animated the object
-            </summary>
-        </member>
-        <member name="F:GWNorthEngine.Logic.AnimationManager.currentFrame">
-            <summary>
-            Current frame we are at in the animation line
-            </summary>
-        </member>
-        <member name="M:GWNorthEngine.Logic.AnimationManager.#ctor(GWNorthEngine.Logic.Params.BaseAnimationManagerParams)">
-            <summary>
-            Builds an AnimationManager based on the AnimationManagerParams object passed in
-            </summary>
-            <param name="parms">BaseAnimationManagerParams object containing the data required to load the Animation Manager object</param>
-        </member>
-        <member name="M:GWNorthEngine.Logic.AnimationManager.setNextFrame(System.Int32)">
-            <summary>
-            Handles incrementing the animation steps
-            </summary>
-        </member>
-        <member name="M:GWNorthEngine.Logic.AnimationManager.resetAnimation(System.Int32)">
-            <summary>
-            Resets the animation sequence that the AnimationManager is controlling
-            </summary>
-            <param name="maxFrameCount">Max frames used to reset reverse sprites</param>
-        </member>
-        <member name="M:GWNorthEngine.Logic.AnimationManager.resetAnimation(System.Int32,System.Boolean)">
-            <summary>
-            Resets the animation sequence that the AnimationManager is controlling and has an option to set the animation so that it will
-            fire as soon the state is changed to a "play" state
-            </summary>
-            <param name="maxFrameCount">Max frames used to reset reverse sprites</param>
-            <param name="cockAnimation">Determines if we are setting the animation up to fire right away as soon as a "Play" state is entered or whether
-            we want it set to replay the whole wait time</param>
-        </member>
-        <member name="M:GWNorthEngine.Logic.AnimationManager.update(System.Single,System.Int32)">
-            <summary>
-            Handles whether it is time to update the animation step or not
-            </summary>
-            <param name="elapsed">Time elapsed sense the last call</param>
-            <param name="maxFrameCount">Maximum frames of the object</param>
-        </member>
-        <member name="P:GWNorthEngine.Logic.AnimationManager.State">
-            <summary>
-            Gets or sets the animation state for the animation manager
-            </summary>
-        </member>
-        <member name="P:GWNorthEngine.Logic.AnimationManager.TotalElapsed">
-            <summary>
-            Gets or sets the total elapsed time
-            </summary>
-        </member>
-        <member name="P:GWNorthEngine.Logic.AnimationManager.FrameRate">
-            <summary>
-            Gets or sets the frame rate in which the sprite animates
-            </summary>
-        </member>
-        <member name="P:GWNorthEngine.Logic.AnimationManager.CurrentFrame">
-            <summary>
-            Gets the current frame of the object
-            </summary>
-        </member>
-        <member name="T:GWNorthEngine.Logic.KeyFrameAnimationManager">
-            <summary>
-            Animation manager class which handles the animation steps for anything animated between a defined set of frames
-            </summary>
-        </member>
-        <member name="M:GWNorthEngine.Logic.KeyFrameAnimationManager.#ctor(GWNorthEngine.Logic.Params.KeyFrameAnimationManagerParams)">
-            <summary>
-            Constructs a KeyFrameAnimationManager object based on the KeyFrameAnimationManagerParms object passed in
-            </summary>
-            <param name="parms"></param>
-        </member>
-        <member name="M:GWNorthEngine.Logic.KeyFrameAnimationManager.setNextFrame(System.Int32)">
-            <summary>
-            Handles incrementing the animation steps within the KeyFrameData object
-            </summary>
-        </member>
-        <member name="M:GWNorthEngine.Logic.KeyFrameAnimationManager.resetAnimation(System.Boolean)">
-            <summary>
-            Resets the animation sequence that the KeyFrameAnimationManager is controlling
-            </summary>
-            <param name="cockAnimation">Determines if we are setting the animation up to fire right away as soon as a "Play" state is
-            entered or whether we want it set to replay the whole wait time</param>
-        </member>
-        <member name="M:GWNorthEngine.Logic.KeyFrameAnimationManager.resetAnimation(System.Int32,System.Boolean)">
-            <summary>
-            Resets the animation sequence that the KeyFrameAnimationManager is controlling and has an option to set the animation so 
-            that it will fire as soon the state is changed to a "play" state
-            </summary>
-            <param name="maxFrameCount">NOT USED BUT required as we are overloading the base</param>
-            <param name="cockAnimation">Determines if we are setting the animation up to fire right away as soon as a "Play" state is
-            entered or whether we want it set to replay the whole wait time</param>
-        </member>
-        <member name="P:GWNorthEngine.Logic.KeyFrameAnimationManager.KeyFrameData">
-            <summary>
-            Gets or sets the KeyFrameData object as well as sets the parents current frame, and frame rate
-            </summary>
-        </member>
-        <member name="T:GWNorthEngine.Logic.KeyFrameData">
-            <summary>
-            Models the data required for Key Frame Animation
-            </summary>
-        </member>
-        <member name="M:GWNorthEngine.Logic.KeyFrameData.#ctor(System.Int32,System.Int32,System.Single)">
-            <summary>
-            Constructs a KeyFrameData object
-            </summary>
-            <param name="startingKeyFrame">Frame the animation starts at</param>
-            <param name="endingKeyFrame">Frame the animation ends at</param>
-            <param name="frameRate">Frame rate to run the animation set at</param>
-        </member>
-        <member name="M:GWNorthEngine.Logic.KeyFrameData.Clone">
-            <summary>
-            Clones teh KeyFrameData object
-            </summary>
-            <returns>Cloned KeyFrameData object</returns>
-        </member>
-        <member name="P:GWNorthEngine.Logic.KeyFrameData.StartingKeyFrame">
-            <summary>
-            Gets or sets the frame we start animating from
-            </summary>
-        </member>
-        <member name="P:GWNorthEngine.Logic.KeyFrameData.EndingKeyFrame">
-            <summary>
-            Gets or sets the frame we are to end with
-            </summary>
-        </member>
-        <member name="P:GWNorthEngine.Logic.KeyFrameData.FrameRate">
-            <summary>
-            Gets or sets the Frame Rate for the animation set
             </summary>
         </member>
     </members>
