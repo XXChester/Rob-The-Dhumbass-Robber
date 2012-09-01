@@ -1,7 +1,7 @@
 ﻿============================
 	Objectives	V1
 ============================
-Entry into my first ever dev competition and it is the GameDev.net community weekend challenge starting May 12th, 2011 at noon to May 16th, 2011 at Noon. My plan is to get something in a playable
+Entry into my first ever dev competition and it is the GameDev.net community weekend challenge starting May 13th, 2011 at noon to May 15th, 2011 at Noon. My plan is to get something in a playable
 state by the end of the competition. I do not intend to place but rather just use this as a learning opportunity.
 
 Placed 4th in the competition (Yes I am considering 4th a place because there were 4 prizes). There was a total of 12 submissions and many that did not make the deadline and failed
