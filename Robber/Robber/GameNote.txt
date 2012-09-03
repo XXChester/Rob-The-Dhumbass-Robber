@@ -162,8 +162,7 @@ Most of these features were due to scope creep anyway
 []When the player walks into a tile that is a wall the AI will walk right through it (on chase mode), implement one or the other or both of the below
 	[]Make it so if the player walks against a wall the Tile that the player is on (from an AI perspective) will not update, so the AI will know there is a wall there
 	[]Tile smasher...smash each tile into 9 tiles from an AI perspective
-	-Had the tile smasher 75% implemented and the code with the guard movement etc became a disaster so removed all of the tile breaker and will
-		let this bug remain in the game. This will be a watching point in my next game.
+	-Had the tile smasher 75% implemented and the code with the guard movement etc became a disaster so removed all of the tile breaker and will let this bug remain in the game. This will be a watching point in my next game.
 []Cinematic of Rob falling through the roof
 	-Not interested in making an animation for this
 
