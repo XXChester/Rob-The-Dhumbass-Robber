@@ -5,6 +5,8 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using GWNorthEngine.Model;
 using GWNorthEngine.Model.Params;
+using GWNorthEngine.Model.Effects;
+using GWNorthEngine.Model.Effects.Params;
 using GWNorthEngine.Utils;
 namespace Robber {
 	public class QuestionMarkEmitter : BaseParticle2DEmitter {
@@ -12,7 +14,7 @@ namespace Robber {
 		private int lastUsedIndex;
 		private const float TIME_TO_LIVE = 2500f;
 		private readonly Color COLOUR = Color.LightGreen;
-		private readonly Vector2 MOVEMENT_SPEED = new Vector2(0f, -20f / 1000);//speed per second
+		private readonly Vector2 MOVEMENT_SPEED = new Vector2(0f, -20f);//speed per second
 		private readonly Vector2[] SPAWN_LOCATIONS = new Vector2[] {
 			new Vector2(348f, 122f),
 			new Vector2(390f, 125f),
@@ -35,6 +37,7 @@ namespace Robber {
 			particleParams.LightColour = COLOUR;
 			particleParams.TimeToLive = TIME_TO_LIVE;
 			particleParams.Direction = MOVEMENT_SPEED;
+			particleParams.Acceleration = new Vector2(1f);
 			base.particleParams = particleParams;
 		}
 		#endregion Constructor
@@ -47,7 +50,26 @@ namespace Robber {
 			} while (this.lastUsedIndex == nextIndex);
 			this.lastUsedIndex = nextIndex;
 			base.particleParams.Position = this.SPAWN_LOCATIONS[this.lastUsedIndex];
-			base.particles.Add(new QuestionMarkParticle(base.particleParams));
+			ConstantSpeedParticle particle = new ConstantSpeedParticle(base.particleParams);
+			ScaleOverTimeEffectParams effectParms = new ScaleOverTimeEffectParams {
+				Reference = particle,
+				ScaleBy = new Vector2(1f / 1000f)
+			};
+			particle.addEffect(new ScaleOverTimeEffect(effectParms));
+			RotateOverTimeEffectParams rotateEffectParms = new RotateOverTimeEffectParams {
+				Reference = particle,
+				RotateBy = 20f / 1000f
+			};
+			particle.addEffect(new RotateOverTimeEffect(rotateEffectParms));
+			FadeEffectParams fadeEffectParms = new FadeEffectParams {
+				Reference = particle,
+				State = FadeEffect.FadeState.Out,
+				TotalTransitionTime = TIME_TO_LIVE,
+				OriginalColour = COLOUR
+			};
+			particle.addEffect(new FadeEffect(fadeEffectParms));
+
+			base.particles.Add(particle);
 			base.createParticle();
 		}
 

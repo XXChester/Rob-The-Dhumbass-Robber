@@ -93,26 +93,26 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="GWNorthEngine.dll" size="83968">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="GWNorthEngine.dll" size="93184">
       <assemblyIdentity name="GWNorthEngine" version="1.0.0.2" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>E33jJCKuVBkUUMJxU75Sc6Q5uxA=</dsig:DigestValue>
+        <dsig:DigestValue>OyN+vZzV9Kfo2/xZONbRlEdA9AY=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Robber.exe" size="78848">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Robber.exe" size="79360">
       <assemblyIdentity name="Robber" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>xx1E4rAlym891Q0YVvnSA+xSLS0=</dsig:DigestValue>
+        <dsig:DigestValue>uGHGFqNlflJESg4nsMv9sPswIDk=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

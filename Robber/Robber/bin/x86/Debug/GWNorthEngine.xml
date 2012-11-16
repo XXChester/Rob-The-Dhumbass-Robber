@@ -9,11 +9,6 @@
             Models the basis of every SpriteBatch drawable object
             </summary>
         </member>
-        <member name="F:GWNorthEngine.Model.Base2DSpriteDrawable.positivePulse">
-            <summary>
-            Used by the scalingPulse(...) effect to determine which way it is scaling
-            </summary>
-        </member>
         <member name="F:GWNorthEngine.Model.Base2DSpriteDrawable.position">
             <summary>
             Position of the sprite
@@ -71,29 +66,15 @@
             </summary>
             <param name="texture">Texture to base the Rendering Rectangle on</param>
         </member>
-        <member name="M:GWNorthEngine.Model.Base2DSpriteDrawable.scaleAsLifeProgresses(Microsoft.Xna.Framework.Vector2)">
+        <member name="M:GWNorthEngine.Model.Base2DSpriteDrawable.addEffect(GWNorthEngine.Model.Effects.BaseEffect)">
             <summary>
-            Scales the object over time
+            Adds an effect to the list of effects
             </summary>
-            <param name="scaleBy"></param>
-        </member>
-        <member name="M:GWNorthEngine.Model.Base2DSpriteDrawable.rotateAsLifeProgresses(System.Single)">
-            <summary>
-            Rotates the object over time
-            </summary>
-            <param name="rotationSpeed"></param>
-        </member>
-        <member name="M:GWNorthEngine.Model.Base2DSpriteDrawable.scalingPulse(System.Single,System.Single,Microsoft.Xna.Framework.Vector2)">
-            <summary>
-            Pulse effect by scaling the object between to pre-defined scales
-            </summary>
-            <param name="startScale">Lowest scale value we want to shrink too</param>
-            <param name="endScale">Highest scale value we want to grow to</param>
-            <param name="scaleSpeed">Speed in which we want to pulse at</param>
+            <param name="effect">Effect object to add</param>
         </member>
         <member name="M:GWNorthEngine.Model.Base2DSpriteDrawable.update(System.Single)">
             <summary>
-            Abstract method that forces the children objects to implement update
+            Runs the Effects applied to the object
             </summary>
             <param name="elapsed">Time elapsed sense the last call</param>
         </member>
@@ -145,6 +126,11 @@
             Gets or sets the Rectangle used for rendering the texture
             </summary>
         </member>
+        <member name="P:GWNorthEngine.Model.Base2DSpriteDrawable.Effects">
+            <summary>
+            Effects applied to this object
+            </summary>
+        </member>
         <member name="T:GWNorthEngine.Model.Line2D">
             <summary>
             Line class that simply draws a line to the screen
@@ -176,12 +162,6 @@
             Recalculates the scale based on the current starting and end positions of the line
             </summary>
         </member>
-        <member name="M:GWNorthEngine.Model.Line2D.update(System.Single)">
-            <summary>
-            NOT IMPLEMENTED
-            </summary>
-            <param name="elapsed">Time passed sense the last time the method was called</param>
-        </member>
         <member name="M:GWNorthEngine.Model.Line2D.render(Microsoft.Xna.Framework.Graphics.SpriteBatch,Microsoft.Xna.Framework.Vector2)">
             <summary>
             Renders the sprite to the screen
@@ -202,6 +182,21 @@
         <member name="P:GWNorthEngine.Model.Line2D.EndPosition">
             <summary>
             Gets or sets the end position of the line
+            </summary>
+        </member>
+        <member name="T:GWNorthEngine.Logic.PulseDirection">
+            <summary>
+            Direction we are pulsing in
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Logic.PulseDirection.Up">
+            <summary>
+            Pulse up
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Logic.PulseDirection.Down">
+            <summary>
+            Pulse down
             </summary>
         </member>
         <member name="T:GWNorthEngine.Logic.Params.ClampableCamera2DParams">
@@ -525,6 +520,43 @@
             Animation plays through forward 1 time
             </summary>
         </member>
+        <member name="T:GWNorthEngine.Audio.Params.SoundEmitterParams">
+            <summary>
+            Models the data required to create a Sound Emitter
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Audio.Params.SoundEmitterParams.#ctor">
+            <summary>
+            Builds a default SoundEmitterParams object with the following values\n
+            Pan:		0f(Centered)
+            Pitch:		0f(Unity)
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Audio.Params.SoundEmitterParams.Position">
+            <summary>
+            Position the emitter is to be located at
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Audio.Params.SoundEmitterParams.Pan">
+            <summary>
+            Pan of the emitter
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Audio.Params.SoundEmitterParams.Pitch">
+            <summary>
+            Pitch of the emitter
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Audio.Params.SoundEmitterParams.EmittRadius">
+            <summary>
+            Emission raidus
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Audio.Params.SoundEmitterParams.SFXEngine">
+            <summary>
+            Reference to the SFXEngine that will be used to emitt the sounds
+            </summary>
+        </member>
         <member name="T:GWNorthEngine.Audio.SFXEngine">
             <summary>
             Sound effect engine, properly plays sound effects
@@ -646,9 +678,55 @@
             <param name="value">string version of the data</param>
             <returns>Object translated to</returns>
         </member>
+        <member name="T:GWNorthEngine.Model.Effects.PulseEffect">
+            <summary>
+            Models the data required for a pulse effect
+            </summary>
+        </member>
+        <member name="T:GWNorthEngine.Model.Effects.BaseEffect">
+            <summary>
+            Models the manditory fields for an effect
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Model.Effects.BaseEffect.update(System.Single)">
+            <summary>
+            Every effect must implement the update method
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Model.Effects.PulseEffect.#ctor(GWNorthEngine.Model.Effects.Params.PulseEffectParams)">
+            <summary>
+            Constructs a PulseEffect object
+            </summary>
+            <param name="parms">PulseEffectParams object</param>
+        </member>
+        <member name="M:GWNorthEngine.Model.Effects.PulseEffect.update(System.Single)">
+            <summary>
+            Runs the effect
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Effects.PulseEffect.ScaleDownTo">
+            <summary>
+            Amount to scale down to
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Effects.PulseEffect.ScaleUpTo">
+            <summary>
+            Amount to scale up to
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Effects.PulseEffect.ScaleBy">
+            <summary>
+            Amount to scale by
+            </summary>
+        </member>
         <member name="T:GWNorthEngine.Model.Params.BaseParticle2DEmitterParams">
             <summary>
             Object containing the data required to build a BaseParticle2DEmitter object
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Model.Params.BaseParticle2DEmitterParams.#ctor">
+            <summary>
+            Constructs a basic BaseParticle2DEmitterParams object
             </summary>
         </member>
         <member name="P:GWNorthEngine.Model.Params.BaseParticle2DEmitterParams.SpawnDelay">
@@ -660,6 +738,102 @@
             <summary>
             Gets or sets the texture used for particle generation
             </summary>
+        </member>
+        <member name="T:GWNorthEngine.Model.DeacceleratingParticle">
+            <summary>
+            Models a particle that deaccelerates as its life progresses
+            </summary>
+        </member>
+        <member name="T:GWNorthEngine.Model.BaseParticle2D">
+            <summary>
+            Models the basis of every particle
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Model.BaseParticle2D.timeAlive">
+            <summary>
+            Time the particle is alive
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Model.BaseParticle2D.timeToLive">
+            <summary>
+            Time the particle dies at
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Model.BaseParticle2D.acceleration">
+            <summary>
+            Acceleration of the particle
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Model.BaseParticle2D.direction">
+            <summary>
+            Direction the particle is headed in
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Model.BaseParticle2D.texture">
+            <summary>
+            Texture of the particle
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Model.BaseParticle2D.originalPosition">
+            <summary>
+            Original position of the particle
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Model.BaseParticle2D.#ctor(GWNorthEngine.Model.Params.BaseParticle2DParams)">
+            <summary>
+            Builds the base particle
+            </summary>
+            <param name="parms">BaseParticle2DParams object containing the data required to build the particle</param>
+        </member>
+        <member name="M:GWNorthEngine.Model.BaseParticle2D.update(System.Single)">
+            <summary>
+            Updates the particle. Be default it just updates the particles life
+            </summary>
+            <param name="elapsed">Time since the last time the method was called</param>
+        </member>
+        <member name="M:GWNorthEngine.Model.BaseParticle2D.render(Microsoft.Xna.Framework.Graphics.SpriteBatch,Microsoft.Xna.Framework.Vector2)">
+            <summary>
+            Renders the sprite to the screen
+            </summary>
+            <param name="spriteBatch">SpriteBatch object used to render the sprite</param>
+            <param name="positionOffset">Offset to render the object at</param>
+        </member>
+        <member name="P:GWNorthEngine.Model.BaseParticle2D.TimeAlive">
+            <summary>
+            Gets or sets the time the particle is alive
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.BaseParticle2D.TimeToLive">
+            <summary>
+            Gets or sets the maximum time the particle can live for
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.BaseParticle2D.Acceleration">
+            <summary>
+            Gets or sets the acceleration of the particle
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.BaseParticle2D.Direction">
+            <summary>
+            Gets or sets the directional value of the particle
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.BaseParticle2D.Texture">
+            <summary>
+            Gets or sets the texture for the particle
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Model.DeacceleratingParticle.#ctor(GWNorthEngine.Model.Params.BaseParticle2DParams)">
+            <summary>
+            Constructs an Deaccelerating particle
+            </summary>
+            <param name="parms">BaseParticle2DParms object</param>
+        </member>
+        <member name="M:GWNorthEngine.Model.DeacceleratingParticle.update(System.Single)">
+            <summary>
+            Updates the particles position, loosing speed as its life progresses
+            </summary>
+            <param name="elapsed">Elapsed time</param>
         </member>
         <member name="T:GWNorthEngine.Model.Params.ColouredButtonParams">
             <summary>
@@ -1121,6 +1295,42 @@
             Gets the position of the camera
             </summary>
         </member>
+        <member name="T:GWNorthEngine.Audio.SoundEmitter">
+            <summary>
+            Models a SoundEmitter that plays sounds dynamic to a position
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Audio.SoundEmitter.#ctor(GWNorthEngine.Audio.Params.SoundEmitterParams)">
+            <summary>
+            Creates a SoundEmitter object based on the params
+            </summary>
+            <param name="parms">SoundEmitterParams object</param>
+        </member>
+        <member name="M:GWNorthEngine.Audio.SoundEmitter.playSoundEffect(Microsoft.Xna.Framework.Audio.SoundEffect,Microsoft.Xna.Framework.Vector2,System.Single,System.Boolean)">
+            <summary>
+            Plays a sound effect in relation to a listening position
+            </summary>
+            <param name="sfx">SoundEffect to play</param>
+            <param name="listenersPosition">Position the listener is currently at</param>
+            <param name="pitch">Pitch of the sound effect</param>
+            <param name="loop">Whether we are looping the sound effect or not</param>
+        </member>
+        <member name="M:GWNorthEngine.Audio.SoundEmitter.update(Microsoft.Xna.Framework.Vector2)">
+            <summary>
+            Updates the emitter based on the listeners position
+            </summary>
+            <param name="listenersPosition"></param>
+        </member>
+        <member name="P:GWNorthEngine.Audio.SoundEmitter.Position">
+            <summary>
+            Position of the Sound Emitter
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Audio.SoundEmitter.EmittRadius">
+            <summary>
+            Emission radius
+            </summary>
+        </member>
         <member name="T:GWNorthEngine.AI.AStar.PathNode">
             <summary>
             A* node of each moveable space
@@ -1348,7 +1558,7 @@
             AnimationState: AnimationState.Paused
             </summary>
         </member>
-        <member name="P:GWNorthEngine.Model.Params.BaseAnimated2DSpriteParams.Texture2D">
+        <member name="P:GWNorthEngine.Model.Params.BaseAnimated2DSpriteParams.Texture">
             <summary>
             Gets or sets the texture for a sprite for externally loaded sprites
             </summary>
@@ -1609,90 +1819,6 @@
         <member name="P:GWNorthEngine.Logic.Camera3D.ProjectionMatrix">
             <summary>
             Gets or sets the projection matrix of the camera
-            </summary>
-        </member>
-        <member name="T:GWNorthEngine.Model.BaseParticle2D">
-            <summary>
-            Models the basis of every particle
-            </summary>
-        </member>
-        <member name="F:GWNorthEngine.Model.BaseParticle2D.timeAlive">
-            <summary>
-            Time the particle is alive
-            </summary>
-        </member>
-        <member name="F:GWNorthEngine.Model.BaseParticle2D.timeToLive">
-            <summary>
-            Time the particle dies at
-            </summary>
-        </member>
-        <member name="F:GWNorthEngine.Model.BaseParticle2D.acceleration">
-            <summary>
-            Acceleration of the particle
-            </summary>
-        </member>
-        <member name="F:GWNorthEngine.Model.BaseParticle2D.direction">
-            <summary>
-            Direction the particle is headed in
-            </summary>
-        </member>
-        <member name="F:GWNorthEngine.Model.BaseParticle2D.texture">
-            <summary>
-            Texture of the particle
-            </summary>
-        </member>
-        <member name="F:GWNorthEngine.Model.BaseParticle2D.originalPosition">
-            <summary>
-            Original position of the particle
-            </summary>
-        </member>
-        <member name="M:GWNorthEngine.Model.BaseParticle2D.#ctor(GWNorthEngine.Model.Params.BaseParticle2DParams)">
-            <summary>
-            Builds the base particle
-            </summary>
-            <param name="parms">BaseParticle2DParams object containing the data required to build the particle</param>
-        </member>
-        <member name="M:GWNorthEngine.Model.BaseParticle2D.fadeOutAsLifeProgresses">
-            <summary>
-            Fades the particle out over its life time to eventually invisible
-            </summary>
-        </member>
-        <member name="M:GWNorthEngine.Model.BaseParticle2D.update(System.Single)">
-            <summary>
-            Updates the particle. Be default it just updates the particles life
-            </summary>
-            <param name="elapsed">Time since the last time the method was called</param>
-        </member>
-        <member name="M:GWNorthEngine.Model.BaseParticle2D.render(Microsoft.Xna.Framework.Graphics.SpriteBatch,Microsoft.Xna.Framework.Vector2)">
-            <summary>
-            Renders the sprite to the screen
-            </summary>
-            <param name="spriteBatch">SpriteBatch object used to render the sprite</param>
-            <param name="positionOffset">Offset to render the object at</param>
-        </member>
-        <member name="P:GWNorthEngine.Model.BaseParticle2D.TimeAlive">
-            <summary>
-            Gets or sets the time the particle is alive
-            </summary>
-        </member>
-        <member name="P:GWNorthEngine.Model.BaseParticle2D.TimeToLive">
-            <summary>
-            Gets or sets the maximum time the particle can live for
-            </summary>
-        </member>
-        <member name="P:GWNorthEngine.Model.BaseParticle2D.Acceleration">
-            <summary>
-            Gets or sets the acceleration of the particle
-            </summary>
-        </member>
-        <member name="P:GWNorthEngine.Model.BaseParticle2D.Direction">
-            <summary>
-            Gets or sets the directional value of the particle
-            </summary>
-        </member>
-        <member name="P:GWNorthEngine.Model.BaseParticle2D.Texture">
-            <summary>
-            Gets or sets the texture for the particle
             </summary>
         </member>
         <member name="T:GWNorthEngine.Utils.PickingUtils">
@@ -2098,6 +2224,15 @@
             <param name="lineTexture">Texture2D used for drawing the vectors</param>
             <param name="positionOffset">Offset to render the object at</param>
         </member>
+        <member name="M:GWNorthEngine.Utils.DebugUtils.drawRadius(Microsoft.Xna.Framework.Graphics.SpriteBatch,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Graphics.Texture2D,Microsoft.Xna.Framework.Color)">
+            <summary>
+            Draws a radius using a SpriteDrawable2D
+            </summary>
+            <param name="spriteBatch">SpriteBatch object used to draw</param>
+            <param name="position">Position to draw the radius around</param>
+            <param name="debugColour">Colour to draw the rectangle in</param>
+            <param name="radiusSpecificTexture">Texture2D used for drawing the radius</param>
+        </member>
         <member name="T:GWNorthEngine.Model.Text2D">
             <summary>
             Text class for writing text to the screen
@@ -2118,12 +2253,6 @@
             Builds an object that can write text to the screen
             </summary>
             <param name="parms">TextParams object</param>
-        </member>
-        <member name="M:GWNorthEngine.Model.Text2D.update(System.Single)">
-            <summary>
-            Updates the text
-            </summary>
-            <param name="elapsed">time elapsed sense the last method call</param>
         </member>
         <member name="M:GWNorthEngine.Model.Text2D.render(Microsoft.Xna.Framework.Graphics.SpriteBatch,Microsoft.Xna.Framework.Vector2)">
             <summary>
@@ -2284,6 +2413,37 @@
         <member name="P:GWNorthEngine.Scripting.Model.RegisteredObject.Reference">
             <summary>
             Gets the actual reference object of the registered object
+            </summary>
+        </member>
+        <member name="T:GWNorthEngine.Model.Effects.ColorLerpEffect">
+            <summary>
+            Models the data required for a Color lerping effect
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Model.Effects.ColorLerpEffect.#ctor(GWNorthEngine.Model.Effects.Params.ColourLerpEffectParams)">
+            <summary>
+            Constructs a PulseEffect object
+            </summary>
+            <param name="parms">ColourLerpEffectParms object used to build the effect</param>
+        </member>
+        <member name="M:GWNorthEngine.Model.Effects.ColorLerpEffect.update(System.Single)">
+            <summary>
+            Runs the effect
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Effects.ColorLerpEffect.LerpUpTo">
+            <summary>
+            Color to lerp down to
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Effects.ColorLerpEffect.LerpDownTo">
+            <summary>
+            Color to lerp up to
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Effects.ColorLerpEffect.LerpBy">
+            <summary>
+            Amount to lerp by
             </summary>
         </member>
         <member name="T:GWNorthEngine.Model.Params.Line2DParams">
@@ -2869,12 +3029,6 @@
             </summary>
             <param name="parms">StaticDrawable2DParams object</param>
         </member>
-        <member name="M:GWNorthEngine.Model.StaticDrawable2D.update(System.Single)">
-            <summary>
-            Updates the texture
-            </summary>
-            <param name="elapsed">time elapsed sense the last method call</param>
-        </member>
         <member name="M:GWNorthEngine.Model.StaticDrawable2D.render(Microsoft.Xna.Framework.Graphics.SpriteBatch,Microsoft.Xna.Framework.Vector2)">
             <summary>
             Renders the sprite to the screen
@@ -3133,6 +3287,23 @@
             Gets or sets whether the model is to be drawn
             </summary>
         </member>
+        <member name="T:GWNorthEngine.Model.AcceleratingParticle">
+            <summary>
+            Models a particle that accelerates as its life progresses
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Model.AcceleratingParticle.#ctor(GWNorthEngine.Model.Params.BaseParticle2DParams)">
+            <summary>
+            Constructs an Accelerating particle
+            </summary>
+            <param name="parms">BaseParticle2DParms object</param>
+        </member>
+        <member name="M:GWNorthEngine.Model.AcceleratingParticle.update(System.Single)">
+            <summary>
+            Updates the particles position, gaining speed as its life progresses
+            </summary>
+            <param name="elapsed">Elapsed time</param>
+        </member>
         <member name="T:GWNorthEngine.Audio.Params.MusicEngineParams">
             <summary>
             Object containing the required data to build a MusicEngine instance
@@ -3293,6 +3464,269 @@
         <member name="F:GWNorthEngine.Input.MouseButton.Middle">
             <summary>
             Middle mouse button
+            </summary>
+        </member>
+        <member name="T:GWNorthEngine.Model.Effects.SwayEffect">
+            <summary>
+            Models the data required for a Sway effect
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Model.Effects.SwayEffect.#ctor(GWNorthEngine.Model.Effects.Params.SwayEffectParms)">
+            <summary>
+            Constructs a SwayEffect
+            </summary>
+            <param name="parms">SwayEffectParams object</param>
+        </member>
+        <member name="M:GWNorthEngine.Model.Effects.SwayEffect.update(System.Single)">
+            <summary>
+            Runs the effect
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Effects.SwayEffect.SwayBy">
+            <summary>
+            Amount to sway by
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Effects.SwayEffect.SwayUpTo">
+            <summary>
+            Amount to sway up to
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Effects.SwayEffect.SwayDownTo">
+            <summary>
+            Amount to sway down to
+            </summary>
+        </member>
+        <member name="T:GWNorthEngine.Model.Effects.ScaleOverTimeEffect">
+            <summary>
+            Models the data required for a scale over time effect
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Model.Effects.ScaleOverTimeEffect.#ctor(GWNorthEngine.Model.Effects.Params.ScaleOverTimeEffectParams)">
+            <summary>
+            Constructs a ScaleOverTimeEffect
+            </summary>
+            <param name="parms">ScaleOverTimeEffectParams object</param>
+        </member>
+        <member name="M:GWNorthEngine.Model.Effects.ScaleOverTimeEffect.update(System.Single)">
+            <summary>
+            Runs the effect
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Effects.ScaleOverTimeEffect.ScaleBy">
+            <summary>
+            Amount to scale by
+            </summary>
+        </member>
+        <member name="T:GWNorthEngine.Model.ConstantSpeedParticle">
+            <summary>
+            Models the data required to build a ConstantSpeedParticle
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Model.ConstantSpeedParticle.#ctor(GWNorthEngine.Model.Params.BaseParticle2DParams)">
+            <summary>
+            Constructs a particle that moves in a constant speed
+            </summary>
+            <param name="parms"></param>
+        </member>
+        <member name="M:GWNorthEngine.Model.ConstantSpeedParticle.update(System.Single)">
+            <summary>
+            Moves the particle in the constant direction
+            </summary>
+            <param name="elapsed">Time elapsed since the last frame</param>
+        </member>
+        <member name="T:GWNorthEngine.Model.Effects.Params.BaseEffectParams">
+            <summary>
+            Models the common data between effects
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Effects.Params.BaseEffectParams.Reference">
+            <summary>
+            Reference object LightColour that the effect is to apply to
+            </summary>
+        </member>
+        <member name="T:GWNorthEngine.Model.Effects.Params.PulseEffectParams">
+            <summary>
+            Models the data required for a pulse effect
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Effects.Params.PulseEffectParams.ScaleDownTo">
+            <summary>
+            Amount to scale down to
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Effects.Params.PulseEffectParams.ScaleUpTo">
+            <summary>
+            Amount to scale up to
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Effects.Params.PulseEffectParams.ScaleBy">
+            <summary>
+            Amount to scale by
+            </summary>
+        </member>
+        <member name="T:GWNorthEngine.Model.Effects.Params.ScaleOverTimeEffectParams">
+            <summary>
+            Models the data required for a scale over time effect
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Effects.Params.ScaleOverTimeEffectParams.ScaleBy">
+            <summary>
+            Amount to scale by
+            </summary>
+        </member>
+        <member name="T:GWNorthEngine.Model.Effects.Params.SwayEffectParms">
+            <summary>
+            Models the data required for a Sway effect
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Effects.Params.SwayEffectParms.SwayBy">
+            <summary>
+            Amount to sway by
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Effects.Params.SwayEffectParms.SwayUpTo">
+            <summary>
+            Amount to sway up to
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Effects.Params.SwayEffectParms.SwayDownTo">
+            <summary>
+            Amount to sway down to
+            </summary>
+        </member>
+        <member name="T:GWNorthEngine.Model.AutoParticle2DEmitter">
+            <summary>
+            Models the basis of an automatic particle emitter
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Model.AutoParticle2DEmitter.#ctor(GWNorthEngine.Model.Params.BaseParticle2DEmitterParams)">
+            <summary>
+            Builds the auto particle emitter
+            </summary>
+            <param name="parms">BaseParticle2DEmitterParams object containing the data required to build the particle emitter</param>
+        </member>
+        <member name="M:GWNorthEngine.Model.AutoParticle2DEmitter.update(System.Single)">
+            <summary>
+            Updates the particle emitter and its particles, and creates new particles, also handles the removal of old particles
+            </summary>
+            <param name="elapsed"></param>
+        </member>
+        <member name="T:GWNorthEngine.Model.Effects.RotateOverTimeEffect">
+            <summary>
+            Models the data required for a rotate over time effect
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Model.Effects.RotateOverTimeEffect.#ctor(GWNorthEngine.Model.Effects.Params.RotateOverTimeEffectParams)">
+            <summary>
+            Constructs a ScaleOverTimeEffect
+            </summary>
+            <param name="parms">RotateOverTimeEffectParams object</param>
+        </member>
+        <member name="M:GWNorthEngine.Model.Effects.RotateOverTimeEffect.update(System.Single)">
+            <summary>
+            Runs the effect
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Effects.RotateOverTimeEffect.RotateBy">
+            <summary>
+            Amount to rotate by
+            </summary>
+        </member>
+        <member name="T:GWNorthEngine.Model.Effects.Params.RotateOverTimeEffectParams">
+            <summary>
+            Models the data required for a scale over time effect
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Effects.Params.RotateOverTimeEffectParams.RotateBy">
+            <summary>
+            Amount to rotate by
+            </summary>
+        </member>
+        <member name="T:GWNorthEngine.Model.Effects.FadeEffect">
+            <summary>
+            Models the data required for a fade effect
+            </summary>
+        </member>
+        <member name="M:GWNorthEngine.Model.Effects.FadeEffect.#ctor(GWNorthEngine.Model.Effects.Params.FadeEffectParams)">
+            <summary>
+            Constructs a FadeEffect object
+            </summary>
+            <param name="parms">FadeEffectParms object</param>
+        </member>
+        <member name="M:GWNorthEngine.Model.Effects.FadeEffect.update(System.Single)">
+            <summary>
+            Runs the effect
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Effects.FadeEffect.State">
+            <summary>
+            State of the effect
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Effects.FadeEffect.TotalTransitionTime">
+            <summary>
+            Total time the fade should take
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Effects.FadeEffect.ElapsedTransitionTime">
+            <summary>
+            Elapsed time the fade has taken
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Effects.FadeEffect.OriginalColour">
+            <summary>
+            Original colour to base the effect off of
+            </summary>
+        </member>
+        <member name="T:GWNorthEngine.Model.Effects.FadeEffect.FadeState">
+            <summary>
+            Fade State
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Model.Effects.FadeEffect.FadeState.In">
+            <summary>
+            Fade In
+            </summary>
+        </member>
+        <member name="F:GWNorthEngine.Model.Effects.FadeEffect.FadeState.Out">
+            <summary>
+            Fade out
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Effects.Params.ColourLerpEffectParams.LerpUpTo">
+            <summary>
+            Color to lerp down to
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Effects.Params.ColourLerpEffectParams.LerpDownTo">
+            <summary>
+            Color to lerp up to
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Effects.Params.ColourLerpEffectParams.LerpBy">
+            <summary>
+            Amount to lerp by
+            </summary>
+        </member>
+        <member name="T:GWNorthEngine.Model.Effects.Params.FadeEffectParams">
+            <summary>
+            Models the data required to build a fade effect
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Effects.Params.FadeEffectParams.State">
+            <summary>
+            State of the effect
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Effects.Params.FadeEffectParams.TotalTransitionTime">
+            <summary>
+            Total time the fade should take
+            </summary>
+        </member>
+        <member name="P:GWNorthEngine.Model.Effects.Params.FadeEffectParams.OriginalColour">
+            <summary>
+            Original colour to base the effect off of
             </summary>
         </member>
     </members>

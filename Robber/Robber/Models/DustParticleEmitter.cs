@@ -5,11 +5,13 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using GWNorthEngine.Model;
 using GWNorthEngine.Model.Params;
+using GWNorthEngine.Model.Effects;
+using GWNorthEngine.Model.Effects.Params;
 using GWNorthEngine.Utils;
 namespace Robber {
 	public class DustParticleEmitter : BaseParticle2DEmitter {
 		#region Class variables
-		private const float TIME_TO_LIVE = 4000f;
+		private const float TIME_TO_LIVE = 2000f;
 		private const int MAX_RANGE_FROM_EMITTER = 32;
 		public const float SPAWN_DELAY = 10f;
 		public static Color COLOUR = new Color(210, 200, 190);
@@ -60,7 +62,25 @@ namespace Robber {
 			}
 
 			base.particleParams.Position = new Vector2(x, y);
-			base.particles.Add(new QuestionMarkParticle(base.particleParams));
+			BaseParticle2D particle = new BaseParticle2D(base.particleParams);
+			ScaleOverTimeEffectParams effectParms = new ScaleOverTimeEffectParams {
+				Reference = particle,
+				ScaleBy = new Vector2(5f / 1000f)
+			};
+			particle.addEffect(new ScaleOverTimeEffect(effectParms));
+			RotateOverTimeEffectParams rotateEffectParms = new RotateOverTimeEffectParams {
+				Reference = particle,
+				RotateBy = 50f / 1000f
+			};
+			particle.addEffect(new RotateOverTimeEffect(rotateEffectParms));
+			FadeEffectParams fadeEffectParms = new FadeEffectParams {
+				Reference = particle,
+				State = FadeEffect.FadeState.Out,
+				TotalTransitionTime = TIME_TO_LIVE,
+				OriginalColour = COLOUR
+			};
+			particle.addEffect(new FadeEffect(fadeEffectParms));
+			base.particles.Add(particle);
 			base.createParticle();
 		}
 		#endregion Support methods

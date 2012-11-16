@@ -144,7 +144,6 @@
     <Compile Include="Managers\CollisionManager.cs" />
     <Compile Include="Managers\SoundManager.cs" />
     <Compile Include="Models\DustParticleEmitter.cs" />
-    <Compile Include="Models\DustParticle.cs" />
     <Compile Include="Models\Dumpster.cs" />
     <Compile Include="Models\MapFloor.cs" />
     <Compile Include="Displays\GameDisplay.cs" />
@@ -162,7 +161,6 @@
     <Compile Include="Helpers\Placement.cs" />
     <Compile Include="Models\Player.cs" />
     <Compile Include="Models\QuestionMarkParticleEmitter.cs" />
-    <Compile Include="Models\QuestionMarkParticle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Models\RadiusRing.cs" />

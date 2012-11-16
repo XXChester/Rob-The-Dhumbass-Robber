@@ -51,7 +51,7 @@ namespace Robber {
 			animationParams.TotalFrameCount = 4;
 			BaseAnimated2DSpriteParams spriteParams = new Animated2DSpriteLoadSingleRowBasedOnTexture();
 			spriteParams.Origin = new Vector2(ResourceManager.TILE_SIZE / 2, ResourceManager.TILE_SIZE / 2);
-			spriteParams.Texture2D = LoadingUtils.load<Texture2D>(content, fileStartsWith + "Right");
+			spriteParams.Texture = LoadingUtils.load<Texture2D>(content, fileStartsWith + "Right");
 			spriteParams.AnimationParams = animationParams; ;
 			// we actually want his feet in the middle, not his chest which is where the origin is
 			spriteParams.Position = new Vector2(startingLocation.worldPosition.X + spriteParams.Origin.X, startingLocation.worldPosition.Y);

@@ -289,7 +289,7 @@ namespace Robber {
 					StateManager.getInstance().CurrentGameState = StateManager.GameState.Waiting;
 					SoundManager.getInstance().sfxEngine.playSoundEffect(this.introSfx);
 					// initially create some particles
-					for (int i = 0; i < 100; i++) {
+					for (int i = 0; i < 40; i++) {
 						this.dustEmitter.createParticle();
 					}
 				}
