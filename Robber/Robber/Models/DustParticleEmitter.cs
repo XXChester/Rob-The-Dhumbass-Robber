@@ -65,12 +65,12 @@ namespace Robber {
 			BaseParticle2D particle = new BaseParticle2D(base.particleParams);
 			ScaleOverTimeEffectParams effectParms = new ScaleOverTimeEffectParams {
 				Reference = particle,
-				ScaleBy = new Vector2(5f / 1000f)
+				ScaleBy = new Vector2(.5f)
 			};
 			particle.addEffect(new ScaleOverTimeEffect(effectParms));
 			RotateOverTimeEffectParams rotateEffectParms = new RotateOverTimeEffectParams {
 				Reference = particle,
-				RotateBy = 50f / 1000f
+				RotateBy = 2f
 			};
 			particle.addEffect(new RotateOverTimeEffect(rotateEffectParms));
 			FadeEffectParams fadeEffectParms = new FadeEffectParams {
